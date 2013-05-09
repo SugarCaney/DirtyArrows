@@ -1,4 +1,5 @@
-SweetPvP
+DirtyArrows
 ==================
-Easy PVP-Arena management
+Have some fun bein' Archer!
+Get'm with ya Bastard!
 Made by MrSugarCaney
