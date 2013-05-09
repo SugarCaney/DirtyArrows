@@ -1,0 +1,12 @@
+name: DirtyArrows
+main: nl.SugCube.DirtyArrows.DirtyArrows
+version: '1'
+description: >
+             DirtyArrows, just dirty
+commands:
+  da:
+    description: DirtyArrows
+    permission: dirtyarrows
+  dirtyarrows:
+    description: DirtyArrows
+    permission: dirtyarrows

@@ -1,0 +1,37 @@
+arrow-recipe-amount: 16
+exploding:
+  enabled: true
+lightning:
+  enabled: true
+clucky:
+  enabled: true
+ender:
+  enabled: true
+oak:
+  enabled: true
+birch:
+  enabled: true
+spruce:
+  enabled: true
+jungle:
+  enabled: true
+batty:
+  enabled: true
+nuclear:
+  enabled: true
+enlightened:
+  enabled: true
+ranged:
+  enabled: true
+machine:
+  enabled: true
+poisonous:
+  enabled: true
+disorienting:
+  enabled: true
+swap:
+  enabled: true
+draining:
+  enabled: true
+flintand:
+  enabled: true
