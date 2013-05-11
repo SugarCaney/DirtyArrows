@@ -105,7 +105,7 @@ public class ArrowListener implements Listener {
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
-		if (player.getInventory().getItemInHand() != null) {
+		if (player.getItemInHand().hasItemMeta()) {
 			if (player.getInventory().getItemInHand().getItemMeta().hasDisplayName()) {
 				if (player.getInventory().getItemInHand().getType().getId() == 261) {
 					if (player.getInventory().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("Machine Bastard")) {
