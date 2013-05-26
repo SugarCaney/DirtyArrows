@@ -5,6 +5,18 @@ import org.bukkit.entity.Player;
 
 public class Error {
 	
+	public static void noLevel(Player player) {
+		player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
+	} 
+	
+	public static void noSlow(Player player) {
+		player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
+	} 
+	
+	public static void noDisarm(Player player) {
+		player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
+	} 
+	
 	public static void noDraining(Player player) {
 		player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 	} 
@@ -24,6 +36,33 @@ public class Error {
 	public static void noRanged(Player player) {
 		player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 	} 
+	
+	public static void noUndead(Player player, String reason) {
+		if (reason == "permissions") {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
+		} else if (reason == "item") {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have enough resources to use this bow. Needed:");
+			player.sendMessage(ChatColor.RED + "[!!] Rotten Flesh (64x)");
+		}
+	}
+	
+	public static void noFirey(Player player, String reason) {
+		if (reason == "permissions") {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
+		} else if (reason == "item") {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have enough resources to use this bow. Needed:");
+			player.sendMessage(ChatColor.RED + "[!!] Fire Charge (1x)");
+		}
+	}
+	
+	public static void noWither(Player player, String reason) {
+		if (reason == "permissions") {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
+		} else if (reason == "item") {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have enough resources to use this bow. Needed:");
+			player.sendMessage(ChatColor.RED + "[!!] Soul Sand (1x)");
+		}
+	}
 	
 	public static void noFlintAnd(Player player, String reason) {
 		if (reason == "permissions") {

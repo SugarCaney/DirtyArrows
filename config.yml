@@ -1,37 +1,75 @@
 arrow-recipe-amount: 16
+headshot: true
+headshot-multiplier: 1.8
 exploding:
+  name: 'Exploding Bastard'
   enabled: true
 lightning:
+  name: 'Ligtning Bastard'
   enabled: true
 clucky:
+  name: 'Clucky Bastard'
   enabled: true
 ender:
+  name: 'Ender Bastard'
   enabled: true
 oak:
+  name: 'Oak Bastard'
   enabled: true
 birch:
+  name: 'Birch Bastard'
   enabled: true
 spruce:
+  name: 'Spruce Bastard'
   enabled: true
 jungle:
+  name: 'Jungle Bastard'
   enabled: true
 batty:
+  name: 'Batty Bastard'
   enabled: true
 nuclear:
+  name: 'Nuclear Bastard'
   enabled: true
 enlightened:
+  name: 'Enlightened Bastard'
   enabled: true
 ranged:
+  name: 'Ranged Bastard'
   enabled: true
 machine:
+  name: 'Machine Bastard'
   enabled: true
 poisonous:
+  name: 'Poisonous Bastard'
   enabled: true
 disorienting:
+  name: 'Disorienting Bastard'
   enabled: true
 swap:
+  name: 'Swap Bastard'
   enabled: true
 draining:
+  name: 'Draining Bastard'
   enabled: true
 flintand:
+  name: 'Flint and Bastard'
+  enabled: true
+disarming:
+  name: 'Disarming Bastard'
+  enabled: true
+wither:
+  name: 'Wither Bastard'
+  enabled: true
+firey:
+  name: 'Firey Bastard'
+  enabled: true
+slow:
+  name: 'Slow Bastard'
+  enabled: true
+level:
+  name: 'Level Bastard'
+  enabled: true
+undead:
+  name: 'Undead Bastard'
   enabled: true

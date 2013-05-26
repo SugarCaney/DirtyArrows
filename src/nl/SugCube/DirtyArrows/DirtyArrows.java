@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.PluginManager;
@@ -22,8 +22,12 @@ public class DirtyArrows extends JavaPlugin {
 	File file = new File(getDataFolder() + File.separator + "config.yml");
 	
 	public ArrowListener al = new ArrowListener(this);
+	public EnchantmentListener el = new EnchantmentListener(this);
+	public EntityListener enl = new EntityListener();
+	public Help help = new Help(this);
 	
 	public List<Player> activated = new ArrayList<Player>();
+	public List<Projectile> slow = new ArrayList<Projectile>();
 	
 	@Override
 	public void onEnable() {
@@ -35,6 +39,8 @@ public class DirtyArrows extends JavaPlugin {
 		
 		PluginManager pm = this.getServer().getPluginManager();
 		pm.registerEvents(al, this);
+		pm.registerEvents(el, this);
+		pm.registerEvents(enl, this);
 		
 		ShapedRecipe arrow = new ShapedRecipe(new ItemStack(Material.ARROW, getConfig().getInt("arrow-recipe-amount"))).shape(" * "," # "," % ").setIngredient('*', Material.FLINT).setIngredient('#', Material.STICK).setIngredient('%', Material.FEATHER);
 		ShapedRecipe arrow2 = new ShapedRecipe(new ItemStack(Material.ARROW, getConfig().getInt("arrow-recipe-amount"))).shape("*  ","#  ","%  ").setIngredient('*', Material.FLINT).setIngredient('#', Material.STICK).setIngredient('%', Material.FEATHER);
@@ -42,8 +48,9 @@ public class DirtyArrows extends JavaPlugin {
 		getServer().addRecipe(arrow);
 		getServer().addRecipe(arrow2);
 		getServer().addRecipe(arrow3);
+		getServer().getScheduler().scheduleSyncRepeatingTask(this, new Timer(this), 0, 1L);
 		
-		log.info("[DirtyArrows] 18 Bastards have been loaded");
+		log.info("[DirtyArrows] 20 Bastards have been loaded");
 		log.info("[DirtyArrows] 3 recipes have been loaded");
 	}
 	
@@ -86,6 +93,8 @@ public class DirtyArrows extends JavaPlugin {
 							Help.showMainHelpPage2(player);
 						} else if (args[1].equalsIgnoreCase("3")){
 							Help.showMainHelpPage3(player);
+						} else if (args[1].equalsIgnoreCase("4")) {
+							Help.showMainHelpPage4(player);
 						} else {
 							Help.showMainHelpPage1(player);
 						}
@@ -103,7 +112,7 @@ public class DirtyArrows extends JavaPlugin {
 	
 	public void reloadConfiguration() {
 		reloadConfig();
-		getServer().clearRecipes();
+		getServer().resetRecipes();
 		ShapedRecipe arrow = new ShapedRecipe(new ItemStack(Material.ARROW, getConfig().getInt("arrow-recipe-amount"))).shape(" * "," # "," % ").setIngredient('*', Material.FLINT).setIngredient('#', Material.STICK).setIngredient('%', Material.FEATHER);
 		ShapedRecipe arrow2 = new ShapedRecipe(new ItemStack(Material.ARROW, getConfig().getInt("arrow-recipe-amount"))).shape("*  ","#  ","%  ").setIngredient('*', Material.FLINT).setIngredient('#', Material.STICK).setIngredient('%', Material.FEATHER);
 		ShapedRecipe arrow3 = new ShapedRecipe(new ItemStack(Material.ARROW, getConfig().getInt("arrow-recipe-amount"))).shape("  *","  #","  %").setIngredient('*', Material.FLINT).setIngredient('#', Material.STICK).setIngredient('%', Material.FEATHER);
