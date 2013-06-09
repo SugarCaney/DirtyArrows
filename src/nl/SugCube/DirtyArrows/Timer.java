@@ -13,7 +13,7 @@ public class Timer implements Runnable {
 	@Override
 	public void run() {
 		for (Projectile proj : plugin.slow) {
-			proj.setVelocity(proj.getVelocity().setY(proj.getVelocity().getY() + 0.043));
+			proj.setVelocity(plugin.slowVec.get(plugin.slow.indexOf(proj)));
 		}
 	}
 

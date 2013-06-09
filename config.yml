@@ -1,6 +1,7 @@
 arrow-recipe-amount: 16
 headshot: true
 headshot-multiplier: 1.8
+zombie-flint: true
 exploding:
   name: 'Exploding Bastard'
   enabled: true
@@ -72,4 +73,13 @@ level:
   enabled: true
 undead:
   name: 'Undead Bastard'
+  enabled: true
+woodsman:
+  name: "Woodman's Bastard"
+  enabled: true
+starvation:
+  name: 'Bastard of Starvation'
+  enabled: true
+multi:
+  name: 'Multi Bastard'
   enabled: true

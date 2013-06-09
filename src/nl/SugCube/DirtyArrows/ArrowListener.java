@@ -5,10 +5,13 @@ import java.util.List;
 import java.util.Random;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.TreeType;
+import org.bukkit.block.Block;
+import org.bukkit.craftbukkit.v1_5_R3.entity.CraftArrow;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
@@ -60,6 +63,8 @@ public class ArrowListener implements Listener {
 	private List<Player> canBrick = new ArrayList<Player>();
 	private List<Player> canLevel = new ArrayList<Player>();
 	private List<Player> canSwarm = new ArrayList<Player>();
+	private List<Player> canWoodsman = new ArrayList<Player>();
+	private List<Player> canFood = new ArrayList<Player>();
 	
 	public ArrowListener(DirtyArrows instance) {
 		plugin = instance;
@@ -98,6 +103,7 @@ public class ArrowListener implements Listener {
 						if (target.getLevel() > 0) {
 							target.setLevel(target.getLevel() - 1);
 							player.setLevel(player.getLevel() + 1);
+							player.getWorld().playEffect(target.getLocation(), Effect.SMOKE, 0);
 							player.playSound(player.getLocation(), Sound.ORB_PICKUP, 10, 0);
 						}
 					} else if (canPoison.contains(player)) {
@@ -120,6 +126,16 @@ public class ArrowListener implements Listener {
 							event.getEntity().teleport(loc);
 							canDisorient.remove(player);
 						}
+					} else if (canFood.contains(player)) {
+						if (entity instanceof Player) {
+							Player target = (Player) entity;
+							if (event.getDamage() <= target.getFoodLevel()) {
+								target.setFoodLevel(target.getFoodLevel() - event.getDamage());
+							} else {
+								target.setFoodLevel(0);
+							}
+						}
+						canFood.remove(player);
 					} else if (canDrain.contains(player)) {
 						newamount = player.getHealth() + (int) (event.getDamage() / 3);
 						if (newamount >= 20) {
@@ -230,7 +246,7 @@ public class ArrowListener implements Listener {
 										}
 									}
 									arrow.setShooter(player);
-									player.playSound(player.getLocation(), Sound.ARROW_HIT, 5, 5);
+									player.playEffect(player.getLocation(), Effect.BOW_FIRE, 0);
 									arrow.setVelocity(player.getEyeLocation().getDirection().multiply(3));
 									event.setCancelled(true);
 								}
@@ -476,6 +492,15 @@ public class ArrowListener implements Listener {
 								Error.noDisorienting(player);
 							}
 						}
+					} else if (name.equalsIgnoreCase(plugin.getConfig().getString("starvation.name")) && plugin.activated.contains(player)) {
+						removeSwap(player);
+						if (!(canFood.contains(player))) {
+							if (player.hasPermission("dirtyarrows.starvation") && plugin.getConfig().getBoolean("starvation.enabled")) {
+								canFood.add(player);
+							} else {
+								Error.noDisorienting(player);
+							}
+						}
 					} else if (name.equalsIgnoreCase(plugin.getConfig().getString("draining.name")) && plugin.activated.contains(player)) {
 						removeSwap(player);
 						if (!(canDrain.contains(player))) {
@@ -483,6 +508,15 @@ public class ArrowListener implements Listener {
 								canDrain.add(player);
 							} else {
 								Error.noDraining(player);
+							}
+						}
+					} else if (name.equalsIgnoreCase(plugin.getConfig().getString("woodsman.name")) && plugin.activated.contains(player)) {
+						removeSwap(player);
+						if (!(canWoodsman.contains(player))) {
+							if (player.hasPermission("dirtyarrows.woodsman") && plugin.getConfig().getBoolean("woodsman.enabled")) {
+								canWoodsman.add(player);
+							} else {
+								Error.noWoodsman(player);
 							}
 						}
 					} else if (name.equalsIgnoreCase(plugin.getConfig().getString("swap.name")) && plugin.activated.contains(player)) {
@@ -567,8 +601,9 @@ public class ArrowListener implements Listener {
 							if (player.hasPermission("dirtyarrows.slow") && plugin.getConfig().getBoolean("slow.enabled")) {
 								if (event.getEntity() instanceof Projectile) {
 									Projectile proj = event.getEntity();
-									proj.setVelocity(proj.getVelocity().multiply(0.23));
+									proj.setVelocity(proj.getVelocity().multiply(0.18));
 									plugin.slow.add(proj);
+									plugin.slowVec.add(proj.getVelocity());
 								}
 							} else {
 								Error.noSlow(player);
@@ -600,6 +635,34 @@ public class ArrowListener implements Listener {
 								Error.noUndead(player, "permissions");
 							}
 						}
+					} else if (name.equalsIgnoreCase(plugin.getConfig().getString("multi.name")) && plugin.activated.contains(player)) {
+						removeSwap(player);
+						if (player.hasPermission("dirtyarrows.multi")) {
+							if (player.getInventory().contains(Material.ARROW, 8) || player.getGameMode().getValue() == 1) {
+								if (player.getGameMode().getValue() != 1) {
+									if (!(player.getItemInHand().containsEnchantment(Enchantment.ARROW_INFINITE))) {
+										player.getInventory().removeItem(new ItemStack(Material.ARROW, 7));
+									}
+								}
+								Projectile proj = event.getEntity();
+								CraftArrow arrow;
+								for (int i = 1; i <= 7; i++) {
+									arrow = player.getWorld().spawn(proj.getLocation(), CraftArrow.class);
+									arrow.setShooter(player);
+									arrow.setVelocity(proj.getVelocity()
+											.setX(proj.getVelocity().getX() + ran.nextDouble() / 2 - 0.25)
+											.setY(proj.getVelocity().getY() + ran.nextDouble() / 2 - 0.25)
+											.setZ(proj.getVelocity().getZ() + ran.nextDouble() / 2 - 0.25));
+									if (player.getItemInHand().containsEnchantment(Enchantment.ARROW_FIRE)) {
+										arrow.setFireTicks(1200);
+									}
+								}
+							} else {
+								Error.noMulti(player, "notenough");
+							}
+						} else {
+							Error.noMulti(player, "permissions");
+						}
 					}
 				}
 			}
@@ -621,6 +684,12 @@ public class ArrowListener implements Listener {
 						if (player.getGameMode().getValue() == 0)
 							player.getInventory().removeItem(new ItemStack(Material.TNT, 1));
 						canExplode.remove(player);
+					} else if (canWoodsman.contains(player)) {
+						Block block = arrow.getLocation().add(arrow.getVelocity().multiply(0.632)).getBlock();
+						if (TreeCut.cutDownTree(block.getLocation(), block, player)) {
+							arrow.remove();
+						}
+			            canWoodsman.remove(player);
 					} else if (canStrikeLightning.contains(player)) {
 						player.getWorld().strikeLightning(arrow.getLocation());
 						arrow.remove();
@@ -764,6 +833,10 @@ public class ArrowListener implements Listener {
 			canLevel.remove(player);
 		if (canSwarm.contains(player))
 			canSwarm.remove(player);
+		if (canWoodsman.contains(player))
+			canWoodsman.remove(player);
+		if (canFood.contains(player))
+			canFood.remove(player);
 	}
 	
 }

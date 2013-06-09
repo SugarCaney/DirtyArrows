@@ -11,8 +11,22 @@ public class Help {
 		plugin = instance;
 	}
 	
+	public static void showMainHelpPage5(Player player) {
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v2.1" + 
+				ChatColor.RED + " MrSugarCaney" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
+		player.sendMessage(ChatColor.YELLOW + "Use /da to " + ChatColor.GREEN + "enable" + ChatColor.YELLOW + " or " +
+				ChatColor.RED + "disable " + ChatColor.YELLOW + "the plugin.");
+		player.sendMessage(ChatColor.YELLOW + "Rename your bow in an anvil to unlock their powers:");
+		player.sendMessage(ChatColor.GOLD + "25 " + plugin.getConfig().getString("woodsman.name") + ChatColor.WHITE + " Cut down trees like hell");
+		player.sendMessage(ChatColor.GOLD + "26 " + plugin.getConfig().getString("starvation.name") + ChatColor.WHITE + " Let your enemy starve");
+		player.sendMessage(ChatColor.GOLD + "27 " + plugin.getConfig().getString("multi.name") + ChatColor.WHITE + " Let it rain arrows! " +
+				ChatColor.AQUA + "Arrow(8)");
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "Page 5/5" + 
+				ChatColor.RED + " /da help #" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
+	}
+	
 	public static void showMainHelpPage4(Player player) {
-		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v1" + 
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v2.1" + 
 				ChatColor.RED + " MrSugarCaney" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 		player.sendMessage(ChatColor.YELLOW + "Use /da to " + ChatColor.GREEN + "enable" + ChatColor.YELLOW + " or " +
 				ChatColor.RED + "disable " + ChatColor.YELLOW + "the plugin.");
@@ -26,12 +40,12 @@ public class Help {
 		player.sendMessage(ChatColor.GOLD + "23 " + plugin.getConfig().getString("level.name") + ChatColor.WHITE + " Steals a level from a player");
 		player.sendMessage(ChatColor.GOLD + "24 " + plugin.getConfig().getString("undead.name") + ChatColor.WHITE + " Summons the undead " +
 				ChatColor.AQUA + "RottenFlesh(64)");
-		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "Page 4/4" + 
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "Page 4/5" + 
 				ChatColor.RED + " /da help #" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 	}
 	
 	public static void showMainHelpPage3(Player player) {
-		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v1" + 
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v2.1" + 
 				ChatColor.RED + " MrSugarCaney" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 		player.sendMessage(ChatColor.YELLOW + "Use /da to " + ChatColor.GREEN + "enable" + ChatColor.YELLOW + " or " +
 				ChatColor.RED + "disable " + ChatColor.YELLOW + "the plugin.");
@@ -44,12 +58,12 @@ public class Help {
 		player.sendMessage(ChatColor.GOLD + "17 " + plugin.getConfig().getString("draining.name") + ChatColor.WHITE + " Heal for 1/3 of your dealt damage");
 		player.sendMessage(ChatColor.GOLD + "18 " + plugin.getConfig().getString("flintand.name") + ChatColor.WHITE + " Set stuff on fire " +
 				ChatColor.AQUA + "FlintAndSteel(dura)");
-		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "Page 3/4" + 
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "Page 3/5" + 
 				ChatColor.RED + " /da help #" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 	}
 	
 	public static void showMainHelpPage2(Player player) {
-		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v1" + 
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v2.1" + 
 				ChatColor.RED + " MrSugarCaney" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 		player.sendMessage(ChatColor.YELLOW + "Use /da to " + ChatColor.GREEN + "enable" + ChatColor.YELLOW + " or " +
 				ChatColor.RED + "disable " + ChatColor.YELLOW + "the plugin.");
@@ -65,12 +79,12 @@ public class Help {
 		player.sendMessage(ChatColor.GOLD + "11 " + plugin.getConfig().getString("enlightened.name") + ChatColor.WHITE + " Places Torches " +
 				ChatColor.AQUA + "Torch(1)");
 		player.sendMessage(ChatColor.GOLD + "12 " + plugin.getConfig().getString("ranged.name") + ChatColor.WHITE + " Long ranged power shots");
-		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "Page 2/4" + 
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "Page 2/5" + 
 				ChatColor.RED + " /da help #" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 	}
 
 	public static void showMainHelpPage1(Player player) {	
-		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v1" + 
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v2.1" + 
 					ChatColor.RED + " MrSugarCaney" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 		player.sendMessage(ChatColor.YELLOW + "Use /da to " + ChatColor.GREEN + "enable" + ChatColor.YELLOW + " or " +
 					ChatColor.RED + "disable " + ChatColor.YELLOW + "the plugin.");
@@ -87,7 +101,7 @@ public class Help {
 					ChatColor.AQUA + "OakSapling(1) BoneMeal(1)");
 		player.sendMessage(ChatColor.GOLD + "06 " + plugin.getConfig().getString("birch.name") + ChatColor.WHITE + " Spawns a Birch " +
 					ChatColor.AQUA + "BirchSapling(1) BoneMeal(1)");
-		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "Page 1/4" + 
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "Page 1/5" + 
 					ChatColor.RED + " /da help #" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 	}
 	

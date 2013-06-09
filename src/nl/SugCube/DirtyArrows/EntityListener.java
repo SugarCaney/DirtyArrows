@@ -3,11 +3,14 @@ package nl.SugCube.DirtyArrows;
 import java.util.List;
 import java.util.Random;
 
+import org.bukkit.EntityEffect;
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -41,6 +44,15 @@ public class EntityListener implements Listener {
 	@EventHandler
 	public void onEntityDeath(EntityDeathEvent event) {
 		try {
+			if (event.getEntity() instanceof Zombie) {
+				if (ran.nextInt(8) == 0) {
+					event.getEntity().getWorld().dropItem(event.getEntity().getLocation(),
+							new ItemStack(Material.FLINT, ran.nextInt(2) + 1));
+				}
+			}
+			if (event.getEntity() instanceof LivingEntity) {
+				event.getEntity().playEffect(EntityEffect.WOLF_SMOKE);
+			}
 			if (player.getItemInHand().containsEnchantment(Enchantment.LOOT_BONUS_MOBS) && event.getDrops() != null) {
 				ItemStack i = player.getItemInHand();
 				if (i.getEnchantmentLevel(Enchantment.LOOT_BONUS_MOBS) == 1) {
@@ -63,8 +75,10 @@ public class EntityListener implements Listener {
 						int amount;
 						if (ran.nextInt(3) != 0) {
 							amount = i.getEnchantmentLevel(Enchantment.LOOT_BONUS_MOBS) - 1;
-						} else {
+						} else if (ran.nextInt(3) != 0) {
 							amount = i.getEnchantmentLevel(Enchantment.LOOT_BONUS_MOBS);
+						} else {
+							amount = i.getEnchantmentLevel(Enchantment.LOOT_BONUS_MOBS) + 1;
 						}
 						drop.setAmount(drop.getAmount() + amount);
 					}
@@ -74,10 +88,11 @@ public class EntityListener implements Listener {
 						drop.setAmount(drop.getAmount() + 1);
 					}
 				}
+				if (ran.nextInt(i.getEnchantmentLevel(Enchantment.LOOT_BONUS_MOBS)) != 0) {
+					event.setDroppedExp(event.getDroppedExp() + i.getEnchantmentLevel(Enchantment.LOOT_BONUS_MOBS));
+				}
 			}
-		} catch (Exception e) {
-			System.out.println("Something went wrong with the Looting enchantment (Bow)");
-		}
+		} catch (Exception e) { }
 	}
 
 }

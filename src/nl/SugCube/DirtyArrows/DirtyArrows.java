@@ -15,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.Vector;
 
 public class DirtyArrows extends JavaPlugin {
 	
@@ -28,6 +29,7 @@ public class DirtyArrows extends JavaPlugin {
 	
 	public List<Player> activated = new ArrayList<Player>();
 	public List<Projectile> slow = new ArrayList<Projectile>();
+	public List<Vector> slowVec = new ArrayList<Vector>();
 	
 	@Override
 	public void onEnable() {
@@ -95,6 +97,8 @@ public class DirtyArrows extends JavaPlugin {
 							Help.showMainHelpPage3(player);
 						} else if (args[1].equalsIgnoreCase("4")) {
 							Help.showMainHelpPage4(player);
+						} else if (args[1].equalsIgnoreCase("5")) {
+							Help.showMainHelpPage5(player);
 						} else {
 							Help.showMainHelpPage1(player);
 						}

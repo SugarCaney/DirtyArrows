@@ -5,6 +5,19 @@ import org.bukkit.entity.Player;
 
 public class Error {
 	
+	public static void noMulti(Player player, String string) {
+		if (string.equalsIgnoreCase("permissions")) {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
+		} else {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have enough resources to use this bow. Needed:");
+			player.sendMessage(ChatColor.RED + "[!!] Arrow (8x)");
+		}
+	} 
+	
+	public static void noWoodsman(Player player) {
+		player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
+	} 
+	
 	public static void noLevel(Player player) {
 		player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 	} 
