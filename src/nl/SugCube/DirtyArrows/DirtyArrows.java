@@ -9,6 +9,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.inventory.ItemStack;
@@ -24,12 +25,19 @@ public class DirtyArrows extends JavaPlugin {
 	
 	public ArrowListener al = new ArrowListener(this);
 	public EnchantmentListener el = new EnchantmentListener(this);
+	public PlayerJoinListener pjl = new PlayerJoinListener(this);
 	public EntityListener enl = new EntityListener();
 	public Help help = new Help(this);
 	
 	public List<Player> activated = new ArrayList<Player>();
 	public List<Projectile> slow = new ArrayList<Projectile>();
+	public List<Projectile> airstrike = new ArrayList<Projectile>();
 	public List<Vector> slowVec = new ArrayList<Vector>();
+	
+	public List<Projectile> particleExploding = new ArrayList<Projectile>();
+	public List<Projectile> particleFire = new ArrayList<Projectile>();
+	public List<FallingBlock> particleLava = new ArrayList<FallingBlock>();
+	public List<FallingBlock> particleWater = new ArrayList<FallingBlock>();
 	
 	@Override
 	public void onEnable() {
@@ -43,6 +51,7 @@ public class DirtyArrows extends JavaPlugin {
 		pm.registerEvents(al, this);
 		pm.registerEvents(el, this);
 		pm.registerEvents(enl, this);
+		pm.registerEvents(pjl, this);
 		
 		ShapedRecipe arrow = new ShapedRecipe(new ItemStack(Material.ARROW, getConfig().getInt("arrow-recipe-amount"))).shape(" * "," # "," % ").setIngredient('*', Material.FLINT).setIngredient('#', Material.STICK).setIngredient('%', Material.FEATHER);
 		ShapedRecipe arrow2 = new ShapedRecipe(new ItemStack(Material.ARROW, getConfig().getInt("arrow-recipe-amount"))).shape("*  ","#  ","%  ").setIngredient('*', Material.FLINT).setIngredient('#', Material.STICK).setIngredient('%', Material.FEATHER);
@@ -50,9 +59,11 @@ public class DirtyArrows extends JavaPlugin {
 		getServer().addRecipe(arrow);
 		getServer().addRecipe(arrow2);
 		getServer().addRecipe(arrow3);
-		getServer().getScheduler().scheduleSyncRepeatingTask(this, new Timer(this), 0, 1L);
+		getServer().getScheduler().scheduleSyncRepeatingTask(this, new Timer(this), 0, 1);
+		getServer().getScheduler().scheduleSyncRepeatingTask(this, new Airstrike(this), 5, 5);
+		getServer().getScheduler().scheduleSyncRepeatingTask(this, new Particles(this), 2, 2);
 		
-		log.info("[DirtyArrows] 20 Bastards have been loaded");
+		log.info("[DirtyArrows] 33 Bastards have been loaded");
 		log.info("[DirtyArrows] 3 recipes have been loaded");
 	}
 	
@@ -99,6 +110,8 @@ public class DirtyArrows extends JavaPlugin {
 							Help.showMainHelpPage4(player);
 						} else if (args[1].equalsIgnoreCase("5")) {
 							Help.showMainHelpPage5(player);
+						} else if (args[1].equalsIgnoreCase("6")) {
+							Help.showMainHelpPage6(player);
 						} else {
 							Help.showMainHelpPage1(player);
 						}

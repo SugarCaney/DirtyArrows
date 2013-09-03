@@ -1,12 +1,14 @@
 arrow-recipe-amount: 16
 headshot: true
-headshot-multiplier: 1.8
+headshot-multiplier: 1.5
 zombie-flint: true
+blood: true
+auto-enable: false
 exploding:
   name: 'Exploding Bastard'
   enabled: true
 lightning:
-  name: 'Ligtning Bastard'
+  name: 'Lightning Bastard'
   enabled: true
 clucky:
   name: 'Clucky Bastard'
@@ -82,4 +84,22 @@ starvation:
   enabled: true
 multi:
   name: 'Multi Bastard'
+  enabled: true
+bomb:
+  name: 'Bomb Bastard'
+  enabled: true
+drop:
+  name: 'Drop Bastard'
+  enabled: true
+airstrike:
+  name: 'Airstrike Bastard'
+  enabled: true
+magmatic:
+  name: 'Magmatic Bastard'
+  enabled: true
+aquatic:
+  name: 'Aquatic Bastard'
+  enabled: true
+pull:
+  name: 'Pull Bastard'
   enabled: true

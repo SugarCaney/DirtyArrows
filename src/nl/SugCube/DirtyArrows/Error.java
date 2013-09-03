@@ -5,12 +5,48 @@ import org.bukkit.entity.Player;
 
 public class Error {
 	
+	public static void noAquatic(Player player, String string) {
+		if (string.equalsIgnoreCase("permissions")) {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
+		} else {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have enough resources to use this bow. Needed:");
+			player.sendMessage(ChatColor.RED + "[!!] Water Bucket (1x)");
+		}
+	} 
+	
+	public static void noMagmatic(Player player, String string) {
+		if (string.equalsIgnoreCase("permissions")) {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
+		} else {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have enough resources to use this bow. Needed:");
+			player.sendMessage(ChatColor.RED + "[!!] Lava Bucket (1x)");
+		}
+	} 
+	
+	public static void noAirstrike(Player player, String string) {
+		if (string.equalsIgnoreCase("permissions")) {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
+		} else {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have enough resources to use this bow. Needed:");
+			player.sendMessage(ChatColor.RED + "[!!] TNT");
+		}
+	} 
+	
 	public static void noMulti(Player player, String string) {
 		if (string.equalsIgnoreCase("permissions")) {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have enough resources to use this bow. Needed:");
 			player.sendMessage(ChatColor.RED + "[!!] Arrow (8x)");
+		}
+	} 
+	
+	public static void noBomb(Player player, String string) {
+		if (string.equalsIgnoreCase("permissions")) {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
+		} else {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have enough resources to use this bow. Needed:");
+			player.sendMessage(ChatColor.RED + "[!!] TNT (3x)");
 		}
 	} 
 	
@@ -27,6 +63,10 @@ public class Error {
 	} 
 	
 	public static void noDisarm(Player player) {
+		player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
+	} 
+	
+	public static void noPull(Player player) {
 		player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 	} 
 	

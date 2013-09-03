@@ -10,12 +10,13 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.TreeType;
+import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.v1_5_R3.entity.CraftArrow;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -37,7 +38,6 @@ import org.bukkit.potion.PotionEffectType;
 public class ArrowListener implements Listener {
 
 	public static DirtyArrows plugin;
-	private int newamount;
 	Random ran = new Random();
 	int e = 0;
 	boolean hasUnbreaking = false;
@@ -65,6 +65,9 @@ public class ArrowListener implements Listener {
 	private List<Player> canSwarm = new ArrayList<Player>();
 	private List<Player> canWoodsman = new ArrayList<Player>();
 	private List<Player> canFood = new ArrayList<Player>();
+	private List<Player> canBomb = new ArrayList<Player>();
+	private List<Player> canDrop = new ArrayList<Player>();
+	private List<Player> canPull = new ArrayList<Player>();
 	
 	public ArrowListener(DirtyArrows instance) {
 		plugin = instance;
@@ -72,6 +75,9 @@ public class ArrowListener implements Listener {
 	
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+		if (plugin.getConfig().getBoolean("blood") && event.getEntity() instanceof LivingEntity) {
+			event.getEntity().getWorld().playEffect(event.getEntity().getLocation().add(0, 1.5, 0), Effect.STEP_SOUND, Material.REDSTONE_BLOCK);
+		}
 		if (plugin.slow.contains(event.getDamager())) {
 			event.setDamage(event.getDamage() * 40);
 		}
@@ -84,10 +90,12 @@ public class ArrowListener implements Listener {
 				double shotY = shot.getLocation().getY();
 				boolean headshot = y - shotY > 1.35d;
 				if (headshot) {
-					event.setDamage((int) (event.getDamage() * plugin.getConfig().getDouble("headshot-multiplier")));
+					event.setDamage(event.getDamage() * plugin.getConfig().getDouble("headshot-multiplier"));
 					if (shot instanceof Player) {
 						((Player) event.getEntity()).sendMessage(ChatColor.YELLOW + "Headshot by " + ChatColor.RED +
 								((Player) proj.getShooter()).getDisplayName());
+						((Player) proj.getShooter()).sendMessage(ChatColor.YELLOW + "You made a headshot on " + ChatColor.GREEN +
+								((Player) event.getEntity()).getName());
 					}
 				}
 			}
@@ -130,16 +138,16 @@ public class ArrowListener implements Listener {
 						if (entity instanceof Player) {
 							Player target = (Player) entity;
 							if (event.getDamage() <= target.getFoodLevel()) {
-								target.setFoodLevel(target.getFoodLevel() - event.getDamage());
+								target.setFoodLevel((int) (target.getFoodLevel() - event.getDamage()));
 							} else {
 								target.setFoodLevel(0);
 							}
 						}
 						canFood.remove(player);
 					} else if (canDrain.contains(player)) {
-						newamount = player.getHealth() + (int) (event.getDamage() / 3);
+						double newamount = player.getHealth() + 2;
 						if (newamount >= 20) {
-							player.setHealth(20);
+							player.setHealth(20.0);
 						} else {
 							player.setHealth(newamount);
 						}
@@ -196,6 +204,39 @@ public class ArrowListener implements Listener {
 								}
 							}
 						}
+						canDisarm.remove(player);
+					} else if (canDrop.contains(player)) {
+						Location loc = entity.getLocation();
+						loc.add(0.5, 0.5, 0.5);
+						boolean check = true;
+						while (check) {
+							if (loc.getBlock().getType() == Material.AIR) {
+								loc.add(0, 1, 0);
+								if (loc.getBlock().getType() == Material.AIR) {
+									loc.add(0, -1, 0);
+									
+									for (int i = 1; i <= 8; i++) {
+										if (loc.add(0, 1, 0).getBlock().getType() != Material.AIR) {
+											check = true;
+											break;
+										}
+										if (i == 8) {
+											entity.teleport(loc);
+											check = false;
+											break;
+										}
+									}
+									
+								} else {
+									loc.add(0, -1, 0);
+								}
+							}
+							loc.add(0, 1, 0);
+						}
+						canDrop.remove(player);
+					} else if (canPull.contains(player)) {
+						entity.setVelocity(player.getLocation().getDirection().multiply(-5));
+						canPull.remove(player);
 					}
 				}
 			}
@@ -272,10 +313,12 @@ public class ArrowListener implements Listener {
 						if (!(canExplode.contains(player))) {
 							if (player.hasPermission("dirtyarrows.exploding") && plugin.getConfig().getBoolean("exploding.enabled")) {
 								if (player.getGameMode().getValue() == 1) {
+									plugin.particleExploding.add(event.getEntity());
 									canExplode.add(player);
 									return;
 								}
 								if (player.getInventory().contains(Material.TNT, 1)) {
+									plugin.particleExploding.add(event.getEntity());
 									canExplode.add(player);
 								} else {
 									Error.noExploding(player, "item");
@@ -317,7 +360,7 @@ public class ArrowListener implements Listener {
 							} else {
 								Error.noClucky(player, "permissions");
 							}
-						}
+						}						
 					} else if (name.equalsIgnoreCase(plugin.getConfig().getString("ender.name")) && plugin.activated.contains(player)) {
 						removeSwap(player);
 						if (!(canTeleport.contains(player))) {
@@ -430,9 +473,11 @@ public class ArrowListener implements Listener {
 							if (player.hasPermission("dirtyarrows.nuclear") && plugin.getConfig().getBoolean("nuclear.enabled")) {
 								if (player.getGameMode().getValue() == 1) {
 									canNuke.add(player);
+									plugin.particleExploding.add(event.getEntity());
 									return;
 								}
 								if (player.getInventory().contains(Material.TNT, 64)) {
+									plugin.particleExploding.add(event.getEntity());
 									canNuke.add(player);
 								} else {
 									Error.noNuclear(player, "item");
@@ -528,16 +573,18 @@ public class ArrowListener implements Listener {
 								Error.noDisorienting(player);
 							}
 						}
-					} else if (name.equalsIgnoreCase(plugin.getConfig().getString("fintand.name")) && plugin.activated.contains(player)) {
+					} else if (name.equalsIgnoreCase(plugin.getConfig().getString("flintand.name")) && plugin.activated.contains(player)) {
 						removeSwap(player);
 						if (!(canFlint.contains(player))) {
 							if (player.hasPermission("dirtyarrows.flintand") && plugin.getConfig().getBoolean("flintand.enabled")) {
 								if (player.getGameMode().getValue() == 1) {
 									canFlint.add(player);
+									plugin.particleFire.add(event.getEntity());
 									return;
 								}
 								if (player.getInventory().contains(Material.FLINT_AND_STEEL, 1)){
 									canFlint.add(player);
+									plugin.particleFire.add(event.getEntity());
 								} else {
 									Error.noFlintAnd(player, "item");
 								}
@@ -645,9 +692,8 @@ public class ArrowListener implements Listener {
 									}
 								}
 								Projectile proj = event.getEntity();
-								CraftArrow arrow;
 								for (int i = 1; i <= 7; i++) {
-									arrow = player.getWorld().spawn(proj.getLocation(), CraftArrow.class);
+									Arrow arrow = player.getWorld().spawn(proj.getLocation(), Arrow.class);
 									arrow.setShooter(player);
 									arrow.setVelocity(proj.getVelocity()
 											.setX(proj.getVelocity().getX() + ran.nextDouble() / 2 - 0.25)
@@ -663,7 +709,117 @@ public class ArrowListener implements Listener {
 						} else {
 							Error.noMulti(player, "permissions");
 						}
-					}
+					} else if (name.equalsIgnoreCase(plugin.getConfig().getString("bomb.name")) && plugin.activated.contains(player)) {
+						removeSwap(player);
+						if (!(canBomb.contains(player))) {
+							if (player.hasPermission("dirtyarrows.bomb") && plugin.getConfig().getBoolean("bomb.enabled")) {
+								if (player.getGameMode().getValue() != 1) {
+									if (player.getInventory().contains(Material.TNT, 3)){
+										player.getInventory().removeItem(new ItemStack(Material.TNT, 3));
+									} else {
+										Error.noBomb(player, "item");
+										return;
+									}
+								}
+								canBomb.add(player);
+								plugin.particleExploding.add(event.getEntity());
+							} else {
+								Error.noLevel(player);
+							}
+						}
+					} else if (name.equalsIgnoreCase(plugin.getConfig().getString("drop.name")) && plugin.activated.contains(player)) {
+						removeSwap(player);
+						if (!(canDrop.contains(player))) {
+							if (player.hasPermission("dirtyarrows.drop") && plugin.getConfig().getBoolean("drop.enabled")) {
+								canDrop.add(player);
+							} else {
+								Error.noDisorienting(player);
+							}
+						}
+					} else if (name.equalsIgnoreCase(plugin.getConfig().getString("airstrike.name")) && plugin.activated.contains(player)) {
+						removeSwap(player);
+						if (player.hasPermission("dirtyarrows.airstrike") && plugin.getConfig().getBoolean("airstrike.enabled")) {
+							if (player.getGameMode().getValue() != 1) {
+								if (player.getInventory().contains(Material.TNT, 1)){
+									plugin.airstrike.add(event.getEntity());
+									plugin.particleExploding.add(event.getEntity());
+								} else {
+									Error.noAirstrike(player, "item");
+									return;
+								}
+							} else {
+								plugin.airstrike.add(event.getEntity());
+								plugin.particleExploding.add(event.getEntity());
+							}
+						} else {
+							Error.noAirstrike(player, "permissions");
+						}
+					} else if (name.equalsIgnoreCase(plugin.getConfig().getString("magmatic.name")) && plugin.activated.contains(player)) {
+						removeSwap(player);
+						if (player.hasPermission("dirtyarrows.magmatic") && plugin.getConfig().getBoolean("magmatic.enabled")) {
+							if (player.getGameMode().getValue() != 1) {
+								if (player.getInventory().contains(Material.LAVA_BUCKET, 1)){
+									player.getInventory().remove(new ItemStack(Material.LAVA_BUCKET, 1));
+									player.getInventory().addItem(new ItemStack(Material.BUCKET, 1));
+									FallingBlock fb = (FallingBlock) player.getWorld().spawnFallingBlock(
+											player.getLocation().add(0, 1, 0), Material.LAVA, (byte) 0);
+									fb.setVelocity(event.getEntity().getVelocity());
+									fb.setDropItem(false);
+									plugin.particleLava.add(fb);
+									event.getEntity().remove();
+								} else {
+									Error.noMagmatic(player, "item");
+									return;
+								}
+							} else {
+								FallingBlock fb = (FallingBlock) player.getWorld().spawnFallingBlock(
+										player.getLocation().add(0, 1, 0), Material.LAVA, (byte) 0);
+								fb.setVelocity(event.getEntity().getVelocity());
+								fb.setDropItem(false);
+								plugin.particleLava.add(fb);
+								event.getEntity().remove();
+							}
+						} else {
+							Error.noMagmatic(player, "permissions");
+						}
+					} else if (name.equalsIgnoreCase(plugin.getConfig().getString("aquatic.name")) && plugin.activated.contains(player)) {
+						removeSwap(player);
+						if (player.hasPermission("dirtyarrows.aquatic") && plugin.getConfig().getBoolean("aquatic.enabled")) {
+							if (player.getGameMode().getValue() != 1) {
+								if (player.getInventory().contains(Material.WATER_BUCKET, 1)){
+									player.getInventory().remove(new ItemStack(Material.WATER_BUCKET, 1));
+									player.getInventory().addItem(new ItemStack(Material.BUCKET, 1));
+									FallingBlock fb = (FallingBlock) player.getWorld().spawnFallingBlock(
+											player.getLocation().add(0, 1, 0), Material.WATER, (byte) 0);
+									fb.setVelocity(event.getEntity().getVelocity());
+									fb.setDropItem(false);
+									plugin.particleWater.add(fb);
+									event.getEntity().remove();
+								} else {
+									Error.noAquatic(player, "item");
+									return;
+								}
+							} else {
+								FallingBlock fb = (FallingBlock) player.getWorld().spawnFallingBlock(
+										player.getLocation().add(0, 1, 0), Material.WATER, (byte) 0);
+								fb.setVelocity(event.getEntity().getVelocity());
+								fb.setDropItem(false);
+								plugin.particleWater.add(fb);
+								event.getEntity().remove();
+							}
+						} else {
+							Error.noAquatic(player, "permissions");
+						}
+					} else if (name.equalsIgnoreCase(plugin.getConfig().getString("pull.name")) && plugin.activated.contains(player)) {
+						removeSwap(player);
+						if (!(canPull.contains(player))) {
+							if (player.hasPermission("dirtyarrows.pull") && plugin.getConfig().getBoolean("pull.enabled")) {
+								canPull.add(player);
+							} else {
+								Error.noPull(player);
+							}
+						}
+					} 
 				}
 			}
 		}
@@ -673,6 +829,15 @@ public class ArrowListener implements Listener {
 	public void onProjectileHit(ProjectileHitEvent event) {
 		if (event.getEntity() instanceof Arrow) {
 			Arrow arrow = (Arrow) event.getEntity();
+			if (plugin.airstrike.contains(event.getEntity())) {
+				plugin.airstrike.remove(event.getEntity());
+			}
+			if (plugin.particleExploding.contains(event.getEntity())) {
+				plugin.particleExploding.remove(event.getEntity());
+			}
+			if (plugin.particleFire.contains(event.getEntity())) {
+				plugin.particleFire.remove(event.getEntity());
+			}
 			if (arrow.getShooter() instanceof Player) {
 				Player player = (Player) arrow.getShooter();
 				if (plugin.activated.contains(player)) {
@@ -775,40 +940,100 @@ public class ArrowListener implements Listener {
 					} else if (canFlint.contains(player)) {
 						int fintuses = 0;
 						Location loc = arrow.getLocation();
-						boolean check = (loc.getBlock().getType() == Material.AIR ||
-										 loc.getBlock().getType() == Material.SNOW ||
-										 loc.getBlock().getType() == Material.VINE ||
-										 loc.getBlock().getType() == Material.DEAD_BUSH);
-						if (check) {
+						if (loc.getBlock().getType() == Material.AIR ||
+								 loc.getBlock().getType() == Material.SNOW ||
+								 loc.getBlock().getType() == Material.VINE ||
+								 loc.getBlock().getType() == Material.DEAD_BUSH) {
 							loc.getBlock().setType(Material.FIRE);
 							fintuses++;
+						} else {
+							loc.add(0, 1, 0);
+							if (loc.getBlock().getType() == Material.AIR ||
+									 loc.getBlock().getType() == Material.SNOW ||
+									 loc.getBlock().getType() == Material.VINE ||
+									 loc.getBlock().getType() == Material.DEAD_BUSH) {
+								loc.getBlock().setType(Material.FIRE);
+								fintuses++;
+							}
+							loc.add(0, -1, 0);
 						}
 						loc.add(1, 0, 0);
-						if (check) {
+						if (loc.getBlock().getType() == Material.AIR ||
+								 loc.getBlock().getType() == Material.SNOW ||
+								 loc.getBlock().getType() == Material.VINE ||
+								 loc.getBlock().getType() == Material.DEAD_BUSH) {
 							loc.getBlock().setType(Material.FIRE);
 							fintuses++;
+						} else {
+							loc.add(0, 1, 0);
+							if (loc.getBlock().getType() == Material.AIR ||
+									 loc.getBlock().getType() == Material.SNOW ||
+									 loc.getBlock().getType() == Material.VINE ||
+									 loc.getBlock().getType() == Material.DEAD_BUSH) {
+								loc.getBlock().setType(Material.FIRE);
+								fintuses++;
+							}
+							loc.add(0, -1, 0);
 						}
 						loc.add(-2, 0, 0);
-						if (check) {
+						if (loc.getBlock().getType() == Material.AIR ||
+								 loc.getBlock().getType() == Material.SNOW ||
+								 loc.getBlock().getType() == Material.VINE ||
+								 loc.getBlock().getType() == Material.DEAD_BUSH) {
 							loc.getBlock().setType(Material.FIRE);
 							fintuses++;
+						} else {
+							loc.add(0, 1, 0);
+							if (loc.getBlock().getType() == Material.AIR ||
+									 loc.getBlock().getType() == Material.SNOW ||
+									 loc.getBlock().getType() == Material.VINE ||
+									 loc.getBlock().getType() == Material.DEAD_BUSH) {
+								loc.getBlock().setType(Material.FIRE);
+								fintuses++;
+							}
+							loc.add(0, -1, 0);
 						}
 						loc.add(1, 0, 1);
-						if (check) {
+						if (loc.getBlock().getType() == Material.AIR ||
+								 loc.getBlock().getType() == Material.SNOW ||
+								 loc.getBlock().getType() == Material.VINE ||
+								 loc.getBlock().getType() == Material.DEAD_BUSH) {
 							loc.getBlock().setType(Material.FIRE);
 							fintuses++;
+						} else {
+							loc.add(0, 1, 0);
+							if (loc.getBlock().getType() == Material.AIR ||
+									 loc.getBlock().getType() == Material.SNOW ||
+									 loc.getBlock().getType() == Material.VINE ||
+									 loc.getBlock().getType() == Material.DEAD_BUSH) {
+								loc.getBlock().setType(Material.FIRE);
+								fintuses++;
+							}
+							loc.add(0, -1, 0);
 						}
 						loc.add(0, 0, -2);
-						if (check) {
+						if (loc.getBlock().getType() == Material.AIR ||
+								 loc.getBlock().getType() == Material.SNOW ||
+								 loc.getBlock().getType() == Material.VINE ||
+								 loc.getBlock().getType() == Material.DEAD_BUSH) {
 							loc.getBlock().setType(Material.FIRE);
 							fintuses++;
+						} else {
+							loc.add(0, 1, 0);
+							if (loc.getBlock().getType() == Material.AIR ||
+									 loc.getBlock().getType() == Material.SNOW ||
+									 loc.getBlock().getType() == Material.VINE ||
+									 loc.getBlock().getType() == Material.DEAD_BUSH) {
+								loc.getBlock().setType(Material.FIRE);
+								fintuses++;
+							}
+							loc.add(0, -1, 0);
 						}
 						if (player.getGameMode().getValue() == 0) {
 							for (ItemStack is : player.getInventory().getContents()) {
 								if (is.getType() == Material.FLINT_AND_STEEL) {
-									if (is.getDurability() <= 64) {
-										is.setDurability((short) (is.getDurability() + fintuses));
-									} else {
+									is.setDurability((short) (is.getDurability() + fintuses));
+									if (is.getDurability() > 64) {
 										player.getInventory().remove(is);
 										player.playSound(player.getLocation(), Sound.ITEM_BREAK, 10, 10);
 									}
@@ -818,6 +1043,15 @@ public class ArrowListener implements Listener {
 						}
 						arrow.remove();
 						canFlint.remove(player);
+					} else if (canBomb.contains(player)) {
+						arrow.remove();
+						World world = arrow.getLocation().getWorld();
+						for (int i = 0; i < 3; i++) {
+							Location loc = arrow.getLocation();
+							loc.add(ran.nextInt(9) - 4, 32, ran.nextInt(9) - 4);
+							world.spawnEntity(loc, EntityType.PRIMED_TNT);
+						}
+						canBomb.remove(player);
 					}
 				}
 			}
@@ -837,6 +1071,12 @@ public class ArrowListener implements Listener {
 			canWoodsman.remove(player);
 		if (canFood.contains(player))
 			canFood.remove(player);
+		if (canBomb.contains(player))
+			canBomb.remove(player);
+		if (canDrop.contains(player))
+			canDrop.remove(player);
+		if (canPull.contains(player))
+			canPull.remove(player);
 	}
 	
 }
