@@ -76,7 +76,7 @@ level:
 undead:
   name: 'Undead Bastard'
   enabled: true
-woodsman:
+woodman:
   name: "Woodman's Bastard"
   enabled: true
 starvation:
@@ -102,4 +102,7 @@ aquatic:
   enabled: true
 pull:
   name: 'Pull Bastard'
+  enabled: true
+paralyze:
+  name: 'Paralyze Bastard'
   enabled: true

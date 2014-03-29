@@ -1,5 +1,6 @@
 package nl.SugCube.DirtyArrows;
 
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -19,7 +20,8 @@ public class Airstrike implements Runnable {
 		for (Projectile proj : plugin.airstrike) {
 			if (proj.getShooter() instanceof Player) {
 				Player player = (Player) proj.getShooter();
-				if (player.getGameMode().getValue() == 1) {
+				
+				if (player.getGameMode() == GameMode.CREATIVE) {
 					player.getWorld().spawnEntity(proj.getLocation().add(0, 2, 0), EntityType.PRIMED_TNT);
 				} else {
 					if (player.getInventory().contains(Material.TNT)) {

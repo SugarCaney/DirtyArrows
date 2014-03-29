@@ -12,16 +12,17 @@ public class TreeCut {
 	
 	public static boolean returnValue;
 
+	@SuppressWarnings("deprecation")
 	public static boolean cutDownTree(Location loc, Block block, Player player) {
 		
 		Location location = new Location(loc.getWorld(), loc.getX(), loc.getY(), loc.getZ());
 		
-		if (block.getTypeId() == 17) {
+		if (block.getType() == Material.LOG) {
 			
 			boolean isLog = true;
 			
 			while (isLog) {
-				if (location.getBlock().getTypeId() == 17) {
+				if (location.getBlock().getType() == Material.LOG) {
 					location.setY(location.getY() - 1);
 				} else {
 					location.setY(location.getY() + 1);
@@ -32,7 +33,7 @@ public class TreeCut {
 			boolean isLogs = true;
 			
 			while (isLogs) {
-				if (location.getBlock().getTypeId() == 17) {
+				if (location.getBlock().getType() == Material.LOG) {
 					dropWood(loc, location.getBlock().getData(), player);
 					location.getBlock().setType(Material.AIR);
 					location.setY(location.getY() + 1);

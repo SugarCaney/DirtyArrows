@@ -1,4 +1,11 @@
-                    GNU GENERAL PUBLIC LICENSE
+						GPLv3 SugCube Edition
+							January 2014
+				Just the normal GPLv3 version, as long as
+				you give me (MrSugarCaney) credit when you modify
+				and/or distribute the code. Modified code will
+				also require having the GPLv3 SugCube Edition licence.
+
+					  GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>

@@ -3,27 +3,67 @@ package nl.SugCube.DirtyArrows;
 import java.util.List;
 import java.util.Random;
 
+import org.bukkit.Effect;
 import org.bukkit.EntityEffect;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Fireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.WitherSkull;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class EntityListener implements Listener {
 	
+	public static DirtyArrows plugin;
+	
+	public EntityListener(DirtyArrows instance) {
+		plugin = instance;
+	}
+	
 	Random ran = new Random();
 	boolean extra = false;
 	Player player;
+	
+	@EventHandler
+	public void onEntityExplode(EntityExplodeEvent event) {
+		Entity entity = event.getEntity();
+		if (entity instanceof WitherSkull) {
+			event.setCancelled(true);
+			if (((WitherSkull) entity).getShooter() instanceof Player) {
+				Player player = (Player) ((WitherSkull) entity).getShooter();
+				if (player.getGameMode() != GameMode.CREATIVE)
+					player.getInventory().addItem(new ItemStack(Material.SOUL_SAND, 3));
+			}
+		} else if (entity instanceof Fireball) {
+			event.setCancelled(true);
+			if (((Fireball) entity).getShooter() instanceof Player) {
+				Player player = (Player) ((Fireball) entity).getShooter();
+				if (player.getGameMode() != GameMode.CREATIVE)
+					player.getInventory().addItem(new ItemStack(Material.FIREBALL, 1));
+			}
+		}
+	}
+	
+	@EventHandler
+	public void onEntityDamage(EntityDamageEvent event) {
+		if (plugin.getConfig().getBoolean("blood") && event.getEntity() instanceof LivingEntity) {
+			event.getEntity().getWorld().playEffect(event.getEntity().getLocation().add(0, 1.5, 0), Effect.STEP_SOUND, Material.REDSTONE_BLOCK);
+		}
+	}
 	
 	@EventHandler
 	public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
@@ -45,9 +85,11 @@ public class EntityListener implements Listener {
 	public void onEntityDeath(EntityDeathEvent event) {
 		try {
 			if (event.getEntity() instanceof Zombie) {
-				if (ran.nextInt(8) == 0) {
-					event.getEntity().getWorld().dropItem(event.getEntity().getLocation(),
-							new ItemStack(Material.FLINT, ran.nextInt(2) + 1));
+				if (plugin.getConfig().getBoolean("zombie-flint")) {
+					if (ran.nextInt(10) == 0) {
+						event.getEntity().getWorld().dropItem(event.getEntity().getLocation(),
+								new ItemStack(Material.FLINT, ran.nextInt(2) + 1));
+					}
 				}
 			}
 			if (event.getEntity() instanceof LivingEntity) {

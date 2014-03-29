@@ -5,6 +5,15 @@ import org.bukkit.entity.Player;
 
 public class Error {
 	
+	public static void noParalyze(Player player, String string) {
+		if (string.equalsIgnoreCase("permissions")) {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
+		} else {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have enough resources to use this bow. Needed:");
+			player.sendMessage(ChatColor.RED + "[!!] Nether Wart (1x)");
+		}
+	} 
+	
 	public static void noAquatic(Player player, String string) {
 		if (string.equalsIgnoreCase("permissions")) {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
@@ -113,7 +122,7 @@ public class Error {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else if (reason == "item") {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have enough resources to use this bow. Needed:");
-			player.sendMessage(ChatColor.RED + "[!!] Soul Sand (1x)");
+			player.sendMessage(ChatColor.RED + "[!!] Soul Sand (3x)");
 		}
 	}
 	
