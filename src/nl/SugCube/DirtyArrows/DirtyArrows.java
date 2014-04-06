@@ -1,16 +1,21 @@
 package nl.SugCube.DirtyArrows;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
@@ -32,8 +37,9 @@ public class DirtyArrows extends JavaPlugin {
 	public PlayerJoinListener pjl = new PlayerJoinListener(this);
 	public EntityListener enl = new EntityListener(this);
 	public Help help = new Help(this);
+	public RegionManager rm = new RegionManager(this);
 	
-	public List<Player> activated = new ArrayList<Player>();
+	public List<String> activated = new ArrayList<String>();
 	public List<Projectile> slow = new ArrayList<Projectile>();
 	public List<Projectile> airstrike = new ArrayList<Projectile>();
 	public List<Vector> slowVec = new ArrayList<Vector>();
@@ -45,11 +51,30 @@ public class DirtyArrows extends JavaPlugin {
 	
 	@Override
 	public void onEnable() {
+		/*
+		 * Load config.yml and data.yml
+		 */
+		File file = new File(getDataFolder() + File.separator + "config.yml");
 		if (!file.exists()) {
-			getConfig().options().copyDefaults(true);
-			saveConfig();
+			try {
+				getConfig().options().copyDefaults(true);
+				saveConfig();
+				this.getLogger().info("Generated config.yml succesfully!");
+			} catch (Exception e) {
+				this.getLogger().info("Failed to generate config.yml!");
+			}
 		}
-		log.info("[DirtyArrows] DirtyArrows has been enabled!");
+
+		File df = new File(getDataFolder() + File.separator + "data.yml");
+		if (!df.exists()) {
+			try {
+				reloadData();
+				saveData();
+				this.getLogger().info("Generated data.yml succesfully!");
+			} catch (Exception e) {
+				this.getLogger().info("Failed to generate data.yml!");
+			}
+		}
 		
 		PluginManager pm = this.getServer().getPluginManager();
 		pm.registerEvents(al, this);
@@ -67,12 +92,17 @@ public class DirtyArrows extends JavaPlugin {
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new Airstrike(this), 5, 5);
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new Particles(this), 2, 2);
 		
-		log.info("[DirtyArrows] 33 Bastards have been loaded");
+		rm.loadRegions();
+		
+		log.info("[DirtyArrows] DirtyArrows has been enabled!");
+		log.info("[DirtyArrows] 36 Bastards have been loaded");
 		log.info("[DirtyArrows] 3 recipes have been loaded");
 	}
 	
 	@Override
 	public void onDisable() {
+		rm.saveRegions();
+		
 		log.info("[DirtyArrows] DirtyArrows has been disabled!");
 	}
 	
@@ -84,11 +114,11 @@ public class DirtyArrows extends JavaPlugin {
 				if (player.hasPermission("dirtyarrows")) {
 					if (args.length == 0) {
 						if (player.hasPermission("dirtyarrows")) {
-							if (activated.contains(player)) {
-								activated.remove(player);
+							if (activated.contains(player.getUniqueId().toString())) {
+								activated.remove(player.getUniqueId().toString());
 								player.sendMessage(ChatColor.YELLOW + "Dirty Arrows have been" + ChatColor.RED + " disabled!");
 							} else {
-								activated.add(player);
+								activated.add(player.getUniqueId().toString());
 								player.sendMessage(ChatColor.YELLOW + "Dirty Arrows have been " + ChatColor.GREEN + "enabled!");
 							}
 						} else {
@@ -149,16 +179,118 @@ public class DirtyArrows extends JavaPlugin {
 						} else {
 							player.sendMessage(ChatColor.RED + "[!!] You don't have permission to perform this command!");
 						}
-					} else if (args.length == 1) {
+					}
+					/*
+					 * REGISTER
+					 */
+					else if (args[0].equalsIgnoreCase("register")) {
 						if (player.hasPermission("dirtyarrows.admin")) {
+							if (args.length >= 2) {
+								Region region = rm.createRegion(args[1]);
+								if (region != null) {
+									player.sendMessage(ChatColor.YELLOW + "Region " + ChatColor.GREEN + args[1] +
+											ChatColor.YELLOW + " has been created!");
+								} else {
+									player.sendMessage(ChatColor.RED + "[!!] Could not create the region!");
+								}
+							} else {
+								player.sendMessage(ChatColor.RED + "[!!] Usage: /da register <regionName>");
+							}
+						} else {
+							player.sendMessage(ChatColor.RED + "[!!] You don't have permission to perform this command!");
+						}
+					}
+					/*
+					 * REMOVE
+					 */
+					else if (args[0].equalsIgnoreCase("remove")) {
+						if (player.hasPermission("dirtyarrows.admin")) {
+							if (args.length >= 2) {
+								Region region = rm.getRegionByName(args[1]);
+								if (region != null) {
+									rm.removeRegion(region.getName());
+									player.sendMessage(ChatColor.YELLOW + "Region " + ChatColor.GREEN + region.getName() +
+											ChatColor.YELLOW + " has been removed!");
+								} else {
+									player.sendMessage(ChatColor.RED + "[!!] Could not remove the region!");
+								}
+							} else {
+								player.sendMessage(ChatColor.RED + "[!!] Usage: /da remove <regionName>");
+							}
+						} else {
+							player.sendMessage(ChatColor.RED + "[!!] You don't have permission to perform this command!");
+						}
+					}
+					/*
+					 * ONLY 1 ARGUMENT
+					 */
+					else if (args.length == 1) {
+						if (player.hasPermission("dirtyarrows.admin")) {
+							/*
+							 * RELOAD
+							 */
 							if (args[0].equalsIgnoreCase("reload")) {
 								try {
 									reloadConfiguration();
-									player.sendMessage(ChatColor.GREEN + "[DirtyArows] Reloaded config.yml");
+									player.sendMessage(ChatColor.GREEN + "[DirtyArows]" + ChatColor.YELLOW +
+											" Reloaded config.yml");
 								} catch (Exception e) {
-									player.sendMessage(ChatColor.RED + "[DirtyArows] Reload failed");
+									player.sendMessage(ChatColor.RED + "[DirtyArows] " + ChatColor.YELLOW + "Reload failed");
 								}
-							} else {
+							}
+							/*
+							 * POS1
+							 */
+							else if (args[0].equalsIgnoreCase("pos1")) {
+								Location loc = player.getLocation();
+								rm.setSelection(1, loc);
+								player.sendMessage(ChatColor.GREEN + "Position 1" + ChatColor.YELLOW + " has been set" +
+										" to " + ChatColor.GREEN + "[x:" + Math.floor(loc.getX()) + ",y:" + 
+										Math.ceil(loc.getY()) + ",z:" + Math.ceil(loc.getZ()) + "]");
+							}
+							/*
+							 * POS2
+							 */
+							else if (args[0].equalsIgnoreCase("pos2")) {
+								Location loc = player.getLocation();
+								rm.setSelection(2, loc);
+								player.sendMessage(ChatColor.GREEN + "Position 2" + ChatColor.YELLOW + " has been set" +
+										" to " + ChatColor.GREEN + "[x:" + Math.floor(loc.getX()) + ",y:" + 
+										Math.ceil(loc.getY()) + ",z:" + Math.ceil(loc.getZ()) + "]");
+							}
+							/*
+							 * LIST
+							 */
+							else if (args[0].equalsIgnoreCase("list")) {
+								List<String> regions = rm.getAllNames();
+								String chat = ChatColor.YELLOW + "Regions (" + regions.size() + "): ";
+								for (int i = 0; i < regions.size(); i++) {
+									String name = regions.get(i);
+									if (i == regions.size() - 1) {
+										chat += ChatColor.GREEN + name;
+									} else {
+										chat += ChatColor.GREEN + name + ChatColor.YELLOW + ", "; 
+									}
+								}
+								player.sendMessage(chat);
+							}
+							/*
+							 * CHECK
+							 */
+							else if (args[0].equalsIgnoreCase("check")) {
+								Region region = rm.isWithinARegionMargin(player.getLocation(), 1);
+								if (region == null) {
+									player.sendMessage(ChatColor.YELLOW + "You are currently " + ChatColor.RED + "not" +
+											ChatColor.YELLOW + " in a region.");
+								} else {
+									player.sendMessage(ChatColor.YELLOW + "You are currently in region " + ChatColor.GREEN +
+											region.getName());
+								}
+							}
+							/*
+							 * HELP PAGE
+							 */
+							else {
 								Help.showMainHelpPage1(player);
 							}
 						} else {
@@ -175,6 +307,29 @@ public class DirtyArrows extends JavaPlugin {
 							Help.showMainHelpPage5(player);
 						} else if (args[1].equalsIgnoreCase("6")) {
 							Help.showMainHelpPage6(player);
+						} else if (args[1].equalsIgnoreCase("admin")) {
+							if (player.hasPermission("dirtyarrows.admin")) {
+								player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v2.7" + 
+										ChatColor.RED + " MrSugarCaney" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
+								player.sendMessage(ChatColor.GOLD + "/da give <player|@a|@r> <ID|baseName> [ench] " + ChatColor.WHITE +
+										"Gives someone a bow.");
+								player.sendMessage(ChatColor.GOLD + "/da list " + ChatColor.WHITE + "Shows a list of all " +
+										"registered regions.");
+								player.sendMessage(ChatColor.GOLD + "/da check " + ChatColor.WHITE + "Check in which " +
+										"region you are.");
+								player.sendMessage(ChatColor.GOLD + "/da pos1 " + ChatColor.WHITE + "Set position 1.");
+								player.sendMessage(ChatColor.GOLD + "/da pos2 " + ChatColor.WHITE + "Set position 2.");
+								player.sendMessage(ChatColor.GOLD + "/da register <name> " + ChatColor.WHITE +
+										"Register a region.");
+								player.sendMessage(ChatColor.GOLD + "/da remove <name> " + ChatColor.WHITE +
+										"Remove a region.");
+								player.sendMessage(ChatColor.GOLD + "/da reload " + ChatColor.WHITE +
+										"Reloads the config.yml");
+								player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "Page ADMIN" + 
+										ChatColor.RED + " /da help <#|admin>" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
+							} else {
+								Help.showMainHelpPage1(player);
+							}
 						} else {
 							Help.showMainHelpPage1(player);
 						}
@@ -274,6 +429,10 @@ public class DirtyArrows extends JavaPlugin {
 			givePlayerBastard("pull.name", im, is, p, spec); break;
 		case "paralyze":
 			givePlayerBastard("paralyze.name", im, is, p, spec); break;
+		case "acacia":
+			givePlayerBastard("acacia.name", im, is, p, spec); break;
+		case "darkoak":
+			givePlayerBastard("darkoak.name", im, is, p, spec); break;
 		}
 	}
 	
@@ -350,6 +509,10 @@ public class DirtyArrows extends JavaPlugin {
 			givePlayerBastard("pull.name", im, is, p, spec); break;
 		case 34:
 			givePlayerBastard("paralyze.name", im, is, p, spec); break;
+		case 35:
+			givePlayerBastard("acacia.name", im, is, p, spec); break;
+		case 36:
+			givePlayerBastard("darkoak.name", im, is, p, spec); break;
 		}
 	}
 	
@@ -363,6 +526,40 @@ public class DirtyArrows extends JavaPlugin {
 		}
 		
 		p.getInventory().addItem(is);
+	}
+	
+	private FileConfiguration data = null;
+	private File dataFile = null;
+	
+	public void reloadData() {
+	    if (dataFile == null) {
+	    	dataFile = new File(getDataFolder(), "data.yml");
+	    }
+	    data = YamlConfiguration.loadConfiguration(dataFile);
+	 
+	    InputStream defStream = this.getResource("data.yml");
+	    if (defStream != null) {
+	        YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defStream);
+	        data.setDefaults(defConfig);
+	    }
+	}
+	
+	public FileConfiguration getData() {
+	    if (data == null) {
+	        this.reloadData();
+	    }
+	    return data;
+	}
+	
+	public void saveData() {
+	    if (data == null || dataFile == null) {
+	    	return;
+	    }
+	    try {
+	        getData().save(dataFile);
+	    } catch (Exception ex) {
+	        this.getLogger().log(Level.SEVERE, "Could not save config to " + dataFile, ex);
+	    }
 	}
 	
 }

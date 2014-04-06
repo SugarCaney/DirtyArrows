@@ -106,3 +106,9 @@ pull:
 paralyze:
   name: 'Paralyze Bastard'
   enabled: true
+acacia:
+  name: 'Acacia Bastard'
+  enabled: true
+darkoak:
+  name: 'Dark Oak Bastard'
+  enabled: true

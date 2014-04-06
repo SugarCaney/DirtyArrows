@@ -3,6 +3,7 @@ package nl.SugCube.DirtyArrows;
 import java.util.List;
 import java.util.Random;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.EntityEffect;
 import org.bukkit.GameMode;
@@ -18,6 +19,7 @@ import org.bukkit.entity.WitherSkull;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -42,18 +44,24 @@ public class EntityListener implements Listener {
 	public void onEntityExplode(EntityExplodeEvent event) {
 		Entity entity = event.getEntity();
 		if (entity instanceof WitherSkull) {
-			event.setCancelled(true);
 			if (((WitherSkull) entity).getShooter() instanceof Player) {
 				Player player = (Player) ((WitherSkull) entity).getShooter();
-				if (player.getGameMode() != GameMode.CREATIVE)
+				if (plugin.rm.isWithinARegionMargin(event.getLocation(), 5) != null) {
+					event.setCancelled(true);
+					if (player.getGameMode() != GameMode.CREATIVE)
 					player.getInventory().addItem(new ItemStack(Material.SOUL_SAND, 3));
+					player.sendMessage(ChatColor.RED + "[!!] Wither skulls can't explode near protected regions!");
+				}
 			}
 		} else if (entity instanceof Fireball) {
-			event.setCancelled(true);
 			if (((Fireball) entity).getShooter() instanceof Player) {
 				Player player = (Player) ((Fireball) entity).getShooter();
-				if (player.getGameMode() != GameMode.CREATIVE)
-					player.getInventory().addItem(new ItemStack(Material.FIREBALL, 1));
+				if (plugin.rm.isWithinARegionMargin(event.getLocation(), 5) != null) {
+					event.setCancelled(true);
+					if (player.getGameMode() != GameMode.CREATIVE)
+						player.getInventory().addItem(new ItemStack(Material.FIREBALL, 1));
+					player.sendMessage(ChatColor.RED + "[!!] Fireballs can't explode near protected regions!");
+				}
 			}
 		}
 	}
@@ -78,6 +86,14 @@ public class EntityListener implements Listener {
 				LivingEntity lentity = (LivingEntity) event.getEntity();
 				lentity.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 180, 1));
 			}
+		}
+	}
+	
+	@EventHandler
+	public void onEntityChangeBlock(EntityChangeBlockEvent event) {
+		if (plugin.rm.isWithinAXZMargin(event.getBlock().getLocation(), 5) != null) {
+			event.setCancelled(true);
+			event.getEntity().remove();
 		}
 	}
 	

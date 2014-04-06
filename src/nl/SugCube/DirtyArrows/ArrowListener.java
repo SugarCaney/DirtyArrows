@@ -46,32 +46,34 @@ public class ArrowListener implements Listener {
 	
 	private String name;
 	private List<Projectile> powerArrows = new ArrayList<Projectile>();
-	private List<Player> canExplode = new ArrayList<Player>();
-	private List<Player> canStrikeLightning = new ArrayList<Player>();
-	private List<Player> canCluck = new ArrayList<Player>();
-	private List<Player> canTeleport = new ArrayList<Player>();
-	private List<Player> canSpawnOak = new ArrayList<Player>();
-	private List<Player> canSpawnBirch = new ArrayList<Player>();
-	private List<Player> canSpawnSpruce = new ArrayList<Player>();
-	private List<Player> canSpawnJungle = new ArrayList<Player>();
-	private List<Player> canSpawnBats = new ArrayList<Player>();
-	private List<Player> canNuke = new ArrayList<Player>();
-	private List<Player> canLight = new ArrayList<Player>();
-	private List<Player> canPoison = new ArrayList<Player>();
-	private List<Player> canDisorient = new ArrayList<Player>();
-	private List<Player> canDrain = new ArrayList<Player>();
-	private List<Player> canSwap = new ArrayList<Player>();
-	private List<Player> canFlint = new ArrayList<Player>();
-	private List<Player> canDisarm = new ArrayList<Player>();
-	private List<Player> canBrick = new ArrayList<Player>();
-	private List<Player> canLevel = new ArrayList<Player>();
-	private List<Player> canSwarm = new ArrayList<Player>();
-	private List<Player> canwoodman = new ArrayList<Player>();
-	private List<Player> canFood = new ArrayList<Player>();
-	private List<Player> canBomb = new ArrayList<Player>();
-	private List<Player> canDrop = new ArrayList<Player>();
-	private List<Player> canPull = new ArrayList<Player>();
-	private List<Player> canParalyze = new ArrayList<Player>();
+	private List<String> canExplode = new ArrayList<String>();
+	private List<String> canStrikeLightning = new ArrayList<String>();
+	private List<String> canCluck = new ArrayList<String>();
+	private List<String> canTeleport = new ArrayList<String>();
+	private List<String> canSpawnOak = new ArrayList<String>();
+	private List<String> canSpawnBirch = new ArrayList<String>();
+	private List<String> canSpawnSpruce = new ArrayList<String>();
+	private List<String> canSpawnJungle = new ArrayList<String>();
+	private List<String> canSpawnBats = new ArrayList<String>();
+	private List<String> canNuke = new ArrayList<String>();
+	private List<String> canLight = new ArrayList<String>();
+	private List<String> canPoison = new ArrayList<String>();
+	private List<String> canDisorient = new ArrayList<String>();
+	private List<String> canDrain = new ArrayList<String>();
+	private List<String> canSwap = new ArrayList<String>();
+	private List<String> canFlint = new ArrayList<String>();
+	private List<String> canDisarm = new ArrayList<String>();
+	private List<String> canBrick = new ArrayList<String>();
+	private List<String> canLevel = new ArrayList<String>();
+	private List<String> canSwarm = new ArrayList<String>();
+	private List<String> canwoodman = new ArrayList<String>();
+	private List<String> canFood = new ArrayList<String>();
+	private List<String> canBomb = new ArrayList<String>();
+	private List<String> canDrop = new ArrayList<String>();
+	private List<String> canPull = new ArrayList<String>();
+	private List<String> canParalyze = new ArrayList<String>();
+	private List<String> canSpawnAcacia = new ArrayList<String>();
+	private List<String> canSpawnDarkOak = new ArrayList<String>();
 	
 	public ArrowListener(DirtyArrows instance) {
 		plugin = instance;
@@ -114,7 +116,7 @@ public class ArrowListener implements Listener {
 				}
 				if (event.getEntity() instanceof LivingEntity) {
 					LivingEntity entity = (LivingEntity) event.getEntity();
-					if (canLevel.contains(player) && entity instanceof Player) {
+					if (canLevel.contains(player.getUniqueId().toString()) && entity instanceof Player) {
 						Player target = (Player) event.getEntity();
 						if (target.getLevel() > 0) {
 							target.setLevel(target.getLevel() - 1);
@@ -122,27 +124,27 @@ public class ArrowListener implements Listener {
 							player.getWorld().playEffect(target.getLocation(), Effect.SMOKE, 0);
 							player.playSound(player.getLocation(), Sound.ORB_PICKUP, 10, 0);
 						}
-					} else if (canPoison.contains(player)) {
+					} else if (canPoison.contains(player.getUniqueId().toString())) {
 						entity.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 200, 1));
 						if (player.getGameMode() == GameMode.SURVIVAL) {
 							player.getInventory().removeItem(new ItemStack(Material.SPIDER_EYE, 1));
 						}
-						canPoison.remove(player);
-					} else if (canDisorient.contains(player)) {
+						canPoison.remove(player.getUniqueId().toString());
+					} else if (canDisorient.contains(player.getUniqueId().toString())) {
 						if (!(event.getEntity() instanceof Player)) {
 							Location loc = entity.getLocation();
 							loc.setYaw(loc.getYaw() + 180);
 							loc.setPitch(loc.getPitch() + 180);
 							entity.teleport(loc);
-							canDisorient.remove(player);
+							canDisorient.remove(player.getUniqueId().toString());
 						} else {
 							Location loc = event.getEntity().getLocation();
 							loc.setYaw(loc.getYaw() + 180);
 							loc.setPitch(loc.getPitch() + 180);
 							event.getEntity().teleport(loc);
-							canDisorient.remove(player);
+							canDisorient.remove(player.getUniqueId().toString());
 						}
-					} else if (canFood.contains(player)) {
+					} else if (canFood.contains(player.getUniqueId().toString())) {
 						if (entity instanceof Player) {
 							Player target = (Player) entity;
 							if (event.getDamage() <= target.getFoodLevel()) {
@@ -151,24 +153,24 @@ public class ArrowListener implements Listener {
 								target.setFoodLevel(0);
 							}
 						}
-						canFood.remove(player);
-					} else if (canDrain.contains(player)) {
+						canFood.remove(player.getUniqueId().toString());
+					} else if (canDrain.contains(player.getUniqueId().toString())) {
 						double newamount = player.getHealth() + 2;
 						if (newamount >= 20) {
 							player.setHealth(20.0);
 						} else {
 							player.setHealth(newamount);
 						}
-						canDrain.remove(player);
-					} else if (canSwap.contains(player)) {
+						canDrain.remove(player.getUniqueId().toString());
+					} else if (canSwap.contains(player.getUniqueId().toString())) {
 						if (event.getDamage() > 0) {
 							Location locEnt = entity.getLocation();
 							Location locDam = player.getLocation();
 							player.teleport(locEnt);
 							entity.teleport(locDam);
 						}
-						canSwap.remove(player);
-					} else if (canDisarm.contains(player)) {
+						canSwap.remove(player.getUniqueId().toString());
+					} else if (canDisarm.contains(player.getUniqueId().toString())) {
 						if (ran.nextInt(3) > 0) {
 							if (event.getEntity() instanceof LivingEntity) {
 								Location loc = entity.getLocation();
@@ -216,8 +218,8 @@ public class ArrowListener implements Listener {
 								}
 							}
 						}
-						canDisarm.remove(player);
-					} else if (canDrop.contains(player)) {
+						canDisarm.remove(player.getUniqueId().toString());
+					} else if (canDrop.contains(player.getUniqueId().toString())) {
 						Location loc = entity.getLocation();
 						loc.add(0.5, 0.5, 0.5);
 						boolean check = true;
@@ -245,11 +247,11 @@ public class ArrowListener implements Listener {
 							}
 							loc.add(0, 1, 0);
 						}
-						canDrop.remove(player);
-					} else if (canPull.contains(player)) {
+						canDrop.remove(player.getUniqueId().toString());
+					} else if (canPull.contains(player.getUniqueId().toString())) {
 						entity.setVelocity(player.getLocation().getDirection().multiply(-5));
-						canPull.remove(player);
-					} else if (canParalyze.contains(player)) {
+						canPull.remove(player.getUniqueId().toString());
+					} else if (canParalyze.contains(player.getUniqueId().toString())) {
 						int time = 100 + ran.nextInt(200);
 						if (ran.nextInt(2) == 0) {
 							entity.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, time + 100, 0));
@@ -266,7 +268,7 @@ public class ArrowListener implements Listener {
 						if (player.getGameMode() == GameMode.SURVIVAL) {
 							player.getInventory().removeItem(new ItemStack(Material.NETHER_STALK, 1));
 						}
-						canParalyze.remove(player);
+						canParalyze.remove(player.getUniqueId().toString());
 					}
 				}
 			}
@@ -282,7 +284,7 @@ public class ArrowListener implements Listener {
 					if (player.getInventory().getItemInHand().getItemMeta().getDisplayName()
 							.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("machine.name")))) {
 						if (player.hasPermission("dirtyarrows.machine") && plugin.getConfig().getBoolean("machine.enabled")) {
-							if (plugin.activated.contains(player) && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
+							if (plugin.activated.contains(player.getUniqueId().toString()) && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
 								if (player.getInventory().contains(Material.ARROW) || player.getGameMode() == GameMode.CREATIVE) {
 									if (player.getInventory().getItemInHand().containsEnchantment(Enchantment.DURABILITY)) {
 										e = player.getInventory().getItemInHand().getEnchantmentLevel(Enchantment.DURABILITY);
@@ -299,7 +301,7 @@ public class ArrowListener implements Listener {
 									}
 									
 									Location loc = player.getEyeLocation().toVector().add(player.getLocation().getDirection().multiply(3)).toLocation(player.getWorld(), player.getLocation().getYaw(), player.getLocation().getPitch());
-									removeSwap(player);
+									removeSwap(player.getUniqueId().toString());
 									Arrow arrow = player.getWorld().spawn(loc, Arrow.class);
 									if (player.getItemInHand().containsEnchantment(Enchantment.ARROW_FIRE)) {
 										arrow.setFireTicks(2000);
@@ -339,68 +341,100 @@ public class ArrowListener implements Listener {
 				Player player = (Player) event.getEntity().getShooter();
 				if (player.getInventory().getItemInHand().getItemMeta().hasDisplayName()) {
 					name = player.getInventory().getItemInHand().getItemMeta().getDisplayName();
-					if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("exploding.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
-						if (!(canExplode.contains(player))) {
+					/*
+					 * EXPLODING
+					 */
+					if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("exploding.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canExplode.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.exploding") && plugin.getConfig().getBoolean("exploding.enabled")) {
-								if (player.getGameMode() == GameMode.CREATIVE) {
-									plugin.particleExploding.add(event.getEntity());
-									canExplode.add(player);
-									return;
-								}
-								if (player.getInventory().contains(Material.TNT, 1)) {
-									plugin.particleExploding.add(event.getEntity());
-									canExplode.add(player);
+								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+									if (player.getGameMode() == GameMode.CREATIVE) {
+										plugin.particleExploding.add(event.getEntity());
+										canExplode.add(player.getUniqueId().toString());
+										return;
+									}
+									if (player.getInventory().contains(Material.TNT, 1)) {
+										plugin.particleExploding.add(event.getEntity());
+										canExplode.add(player.getUniqueId().toString());
+									} else {
+										Error.noExploding(player, "item");
+									}
 								} else {
-									Error.noExploding(player, "item");
+									event.setCancelled(true);
+									player.sendMessage(ChatColor.RED + "[!!] You can't shoot exploding arrows in a " +
+											"protected region!");
 								}
 							} else {
 								Error.noExploding(player, "permissions");
 							}
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("lightning.name"))) && plugin.activated.contains(player)) {
-						if (!(canStrikeLightning.contains(player))) {
+					}
+					/*
+					 * LIGHTNING
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("lightning.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						if (!(canStrikeLightning.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.lightning") && plugin.getConfig().getBoolean("lightning.enabled")) {
-								if (player.getGameMode() == GameMode.CREATIVE) {
-									canStrikeLightning.add(player);
-									return;
-								}
-								if (player.getInventory().contains(Material.GLOWSTONE_DUST, 1)) {
-									canStrikeLightning.add(player);
+								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+									if (player.getGameMode() == GameMode.CREATIVE) {
+										canStrikeLightning.add(player.getUniqueId().toString());
+										return;
+									}
+									if (player.getInventory().contains(Material.GLOWSTONE_DUST, 1)) {
+										canStrikeLightning.add(player.getUniqueId().toString());
+									} else {
+										Error.noLightning(player, "item");
+									}
 								} else {
-									Error.noLightning(player, "item");
+									event.setCancelled(true);
+									player.sendMessage(ChatColor.RED + "[!!] You can't shoot lightning arrows in a " +
+											"protected region!");
 								}
 							} else {
 								Error.noLightning(player, "permissions");
 							}
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("clucky.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
-						if (!(canCluck.contains(player))) {
+					}
+					/*
+					 * CLUCKY
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("clucky.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canCluck.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.clucky") && plugin.getConfig().getBoolean("clucky.enabled")) {
-								if (player.getGameMode() == GameMode.CREATIVE) {
-									canCluck.add(player);
-									return;
-								}
-								if (player.getInventory().contains(Material.EGG, 1)) {
-									canCluck.add(player);
+								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+									if (player.getGameMode() == GameMode.CREATIVE) {
+										canCluck.add(player.getUniqueId().toString());
+										return;
+									}
+									if (player.getInventory().contains(Material.EGG, 1)) {
+										canCluck.add(player.getUniqueId().toString());
+									} else {
+										Error.noClucky(player, "item");
+									}
 								} else {
-									Error.noClucky(player, "item");
+									event.setCancelled(true);
+									player.sendMessage(ChatColor.RED + "[!!] You can't shoot chickens in protected regions!");
 								}
 							} else {
 								Error.noClucky(player, "permissions");
 							}
 						}						
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("ender.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
-						if (!(canTeleport.contains(player))) {
+					}
+					/*
+					 * ENDER
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("ender.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canTeleport.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.ender") && plugin.getConfig().getBoolean("ender.enabled")) {
 								if (player.getGameMode() == GameMode.CREATIVE) {
-									canTeleport.add(player);
+									canTeleport.add(player.getUniqueId().toString());
 									return;
 								}
 								if (player.getInventory().contains(Material.ENDER_PEARL, 1)) {
-									canTeleport.add(player);
+									canTeleport.add(player.getUniqueId().toString());
 								} else {
 									Error.noEnder(player, "item");
 								}
@@ -408,149 +442,220 @@ public class ArrowListener implements Listener {
 								Error.noEnder(player, "permissions");
 							}
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("oak.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
-						if (!(canSpawnOak.contains(player))) {
+					}
+					/*
+					 * OAK
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("oak.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canSpawnOak.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.oak") && plugin.getConfig().getBoolean("oak.enabled")) {
-								if (player.getGameMode() == GameMode.CREATIVE) {
-									canSpawnOak.add(player);
-									return;
-								}
-								if (player.getInventory().containsAtLeast(new ItemStack(Material.SAPLING, (short) 1, (short) 0), 1) &&
-										player.getInventory().containsAtLeast(new ItemStack(Material.INK_SACK, (short) 1, (short) 15), 1)) {
-									canSpawnOak.add(player);
+								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+									if (player.getGameMode() == GameMode.CREATIVE) {
+										canSpawnOak.add(player.getUniqueId().toString());
+										return;
+									}
+									if (player.getInventory().containsAtLeast(new ItemStack(Material.SAPLING, (short) 1, (short) 0), 1) &&
+											player.getInventory().containsAtLeast(new ItemStack(Material.INK_SACK, (short) 1, (short) 15), 1)) {
+										canSpawnOak.add(player.getUniqueId().toString());
+									} else {
+										Error.noOak(player, "item");
+									}
 								} else {
-									Error.noOak(player, "item");
+									event.setCancelled(true);
+									player.sendMessage(ChatColor.RED + "[!!] You can't shoot oak arrows in a protected region!");
 								}
 							} else {
 								Error.noOak(player, "permissions");
 							}
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("birch.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
-						if (!(canSpawnBirch.contains(player))) {
+					}
+					/*
+					 * BIRCH
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("birch.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canSpawnBirch.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.birch") && plugin.getConfig().getBoolean("birch.enabled")) {
-								if (player.getGameMode() == GameMode.CREATIVE) {
-									canSpawnBirch.add(player);
-									return;
-								}
-								if (player.getInventory().containsAtLeast(new ItemStack(Material.SAPLING, (short) 1, (short) 2), 1) &&
-										player.getInventory().containsAtLeast(new ItemStack(Material.INK_SACK, (short) 1, (short) 15), 1)) {
-									canSpawnBirch.add(player);
+								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+									if (player.getGameMode() == GameMode.CREATIVE) {
+										canSpawnBirch.add(player.getUniqueId().toString());
+										return;
+									}
+									if (player.getInventory().containsAtLeast(new ItemStack(Material.SAPLING, (short) 1, (short) 2), 1) &&
+											player.getInventory().containsAtLeast(new ItemStack(Material.INK_SACK, (short) 1, (short) 15), 1)) {
+										canSpawnBirch.add(player.getUniqueId().toString());
+									} else {
+										Error.noBirch(player, "item");
+									}
 								} else {
-									Error.noBirch(player, "item");
+									event.setCancelled(true);
+									player.sendMessage(ChatColor.RED + "[!!] You can't shoot birch arrows in a protected region!");
 								}
 							} else {
 								Error.noBirch(player, "permissions");
 							}
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("spruce.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
-						if (!(canSpawnSpruce.contains(player))) {
+					}
+					/*
+					 * SPRUCE
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("spruce.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canSpawnSpruce.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.spruce") && plugin.getConfig().getBoolean("spruce.enabled")) {
-								if (player.getGameMode() == GameMode.CREATIVE) {
-									canSpawnSpruce.add(player);
-									return;
-								}
-								if (player.getInventory().containsAtLeast(new ItemStack(Material.SAPLING, (short) 1, (short) 1), 1) &&
-										player.getInventory().containsAtLeast(new ItemStack(Material.INK_SACK, (short) 1, (short) 15), 1)) {
-									canSpawnSpruce.add(player);
+								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+									if (player.getGameMode() == GameMode.CREATIVE) {
+										canSpawnSpruce.add(player.getUniqueId().toString());
+										return;
+									}
+									if (player.getInventory().containsAtLeast(new ItemStack(Material.SAPLING, (short) 1, (short) 1), 1) &&
+											player.getInventory().containsAtLeast(new ItemStack(Material.INK_SACK, (short) 1, (short) 15), 1)) {
+										canSpawnSpruce.add(player.getUniqueId().toString());
+									} else {
+										Error.noSpruce(player, "item");
+									}
 								} else {
-									Error.noSpruce(player, "item");
+									event.setCancelled(true);
+									player.sendMessage(ChatColor.RED + "[!!] You can't shoot spruce arrows in a protected region!");
 								}
 							} else {
 								Error.noSpruce(player, "permissions");
 							}
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("jungle.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
-						if (!(canSpawnJungle.contains(player))) {
+					}
+					/*
+					 * JUNGLE
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("jungle.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canSpawnJungle.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.jungle") && plugin.getConfig().getBoolean("jungle.enabled")) {
-								if (player.getGameMode() == GameMode.CREATIVE) {
-									canSpawnJungle.add(player);
-									return;
-								}
-								if (player.getInventory().containsAtLeast(new ItemStack(Material.SAPLING, (short) 1, (short) 3), 1) &&
-										player.getInventory().containsAtLeast(new ItemStack(Material.INK_SACK, (short) 1, (short) 15), 1)) {
-									canSpawnJungle.add(player);
+								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+									if (player.getGameMode() == GameMode.CREATIVE) {
+										canSpawnJungle.add(player.getUniqueId().toString());
+										return;
+									}
+									if (player.getInventory().containsAtLeast(new ItemStack(Material.SAPLING, (short) 1, (short) 3), 1) &&
+											player.getInventory().containsAtLeast(new ItemStack(Material.INK_SACK, (short) 1, (short) 15), 1)) {
+										canSpawnJungle.add(player.getUniqueId().toString());
+									} else {
+										Error.noJungle(player, "item");
+									}
 								} else {
-									Error.noJungle(player, "item");
+									event.setCancelled(true);
+									player.sendMessage(ChatColor.RED + "[!!] You can't shoot jungle arrows in a protected region!");
 								}
 							} else {
 								Error.noJungle(player, "permissions");
 							}
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("batty.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
-						if (!(canSpawnBats.contains(player))) {
+					}
+					/*
+					 * BATTY
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("batty.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canSpawnBats.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.batty") && plugin.getConfig().getBoolean("batty.enabled")) {
-								if (player.getGameMode() == GameMode.CREATIVE) {
-									canSpawnBats.add(player);
-									return;
-								}
-								if (player.getInventory().contains(Material.ROTTEN_FLESH, 3)) {
-									canSpawnBats.add(player);
+								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+									if (player.getGameMode() == GameMode.CREATIVE) {
+										canSpawnBats.add(player.getUniqueId().toString());
+										return;
+									}
+									if (player.getInventory().contains(Material.ROTTEN_FLESH, 3)) {
+										canSpawnBats.add(player.getUniqueId().toString());
+									} else {
+										Error.noBatty(player, "item");
+									}
 								} else {
-									Error.noBatty(player, "item");
+									event.setCancelled(true);
+									player.sendMessage(ChatColor.RED + "[!!] You can't shoot bat arrows in protected regions!");
 								}
 							} else {
 								Error.noBatty(player, "permissions");
 							}
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("nuclear.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
-						if (!(canNuke.contains(player))) {
+					}
+					/*
+					 * NUCLEAR
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("nuclear.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canNuke.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.nuclear") && plugin.getConfig().getBoolean("nuclear.enabled")) {
-								if (player.getGameMode() == GameMode.CREATIVE) {
-									canNuke.add(player);
-									plugin.particleExploding.add(event.getEntity());
-									return;
-								}
-								if (player.getInventory().contains(Material.TNT, 64)) {
-									plugin.particleExploding.add(event.getEntity());
-									canNuke.add(player);
+								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+									if (player.getGameMode() == GameMode.CREATIVE) {
+										canNuke.add(player.getUniqueId().toString());
+										plugin.particleExploding.add(event.getEntity());
+										return;
+									}
+									if (player.getInventory().contains(Material.TNT, 64)) {
+										plugin.particleExploding.add(event.getEntity());
+										canNuke.add(player.getUniqueId().toString());
+									} else {
+										Error.noNuclear(player, "item");
+									}
 								} else {
-									Error.noNuclear(player, "item");
+									event.setCancelled(true);
+									player.sendMessage(ChatColor.RED + "[!!] You can't shoot nukes in protected regions!");
 								}
 							} else {
 								Error.noNuclear(player, "permissions");
 							}
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("enlightened.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
-						if (!(canLight.contains(player))) {
+					}
+					/*
+					 * ENLIGHTENED
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("enlightened.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canLight.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.enlightened") && plugin.getConfig().getBoolean("enlightened.enabled")) {
-								if (player.getGameMode() == GameMode.CREATIVE) {
-									canLight.add(player);
-									return;
-								}
-								if (player.getInventory().contains(Material.TORCH, 1)) {
-									canLight.add(player);
+								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+									if (player.getGameMode() == GameMode.CREATIVE) {
+										canLight.add(player.getUniqueId().toString());
+										return;
+									}
+									if (player.getInventory().contains(Material.TORCH, 1)) {
+										canLight.add(player.getUniqueId().toString());
+									} else {
+										Error.noEnlightened(player, "item");
+									}
 								} else {
-									Error.noEnlightened(player, "item");
+									event.setCancelled(true);
+									player.sendMessage(ChatColor.RED + "[!!] You can't shoot torches in protected regions!");
 								}
 							} else {
 								Error.noEnlightened(player, "permissions");
 							}
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("ranged.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
+					}
+					/*
+					 * RANGED
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("ranged.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
 						if (player.hasPermission("dirtyarrows.ranged") && plugin.getConfig().getBoolean("ranged.enabled")) {
 							Arrow arrow = (Arrow) event.getEntity();
 							arrow.setVelocity(player.getEyeLocation().getDirection().multiply(5));
 						} else {
 							Error.noRanged(player);
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("poisonous.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
-						if (!(canPoison.contains(player))) {
+					}
+					/*
+					 * POISONOUS
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("poisonous.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canPoison.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.poisonous") && plugin.getConfig().getBoolean("poisonous.enabled")) {
 								if (player.getGameMode() == GameMode.CREATIVE) {
-									canPoison.add(player);
+									canPoison.add(player.getUniqueId().toString());
 									return;
 								}
 								if (player.getInventory().contains(Material.SPIDER_EYE, 1)){
-									canPoison.add(player);
+									canPoison.add(player.getUniqueId().toString());
 								} else {
 									Error.noPoisonous(player, "item");
 								}
@@ -558,122 +663,184 @@ public class ArrowListener implements Listener {
 								Error.noPoisonous(player, "permissions");
 							}
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("disorienting.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
-						if (!(canDisorient.contains(player))) {
+					}
+					/*
+					 * DISORIENTING
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("disorienting.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canDisorient.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.disorienting") && plugin.getConfig().getBoolean("disorienting.enabled")) {
-								canDisorient.add(player);
+								canDisorient.add(player.getUniqueId().toString());
 							} else {
 								Error.noDisorienting(player);
 							}
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("starvation.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
-						if (!(canFood.contains(player))) {
+					}
+					/*
+					 * STARVATION
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("starvation.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canFood.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.starvation") && plugin.getConfig().getBoolean("starvation.enabled")) {
-								canFood.add(player);
+								canFood.add(player.getUniqueId().toString());
 							} else {
 								Error.noDisorienting(player);
 							}
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("draining.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
-						if (!(canDrain.contains(player))) {
+					}
+					/*
+					 * DRAINING
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("draining.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canDrain.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.draining") && plugin.getConfig().getBoolean("draining.enabled")) {
-								canDrain.add(player);
+								canDrain.add(player.getUniqueId().toString());
 							} else {
 								Error.noDraining(player);
 							}
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("woodman.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
-						if (!(canwoodman.contains(player))) {
+					}
+					/*
+					 * WOODMAN
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("woodman.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canwoodman.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.woodman") && plugin.getConfig().getBoolean("woodman.enabled")) {
-								canwoodman.add(player);
+								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+									canwoodman.add(player.getUniqueId().toString());
+								} else {
+									event.setCancelled(true);
+									player.sendMessage(ChatColor.RED + "[!!] You can't tear down trees from protected regions!");
+								}
 							} else {
 								Error.noWoodsman(player);
 							}
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("swap.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
-						if (!(canSwap.contains(player))) {
+					}
+					/*
+					 * SWAP
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("swap.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canSwap.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.swap") && plugin.getConfig().getBoolean("swap.enabled")) {
-								canSwap.add(player);
+								canSwap.add(player.getUniqueId().toString());
 							} else {
 								Error.noDisorienting(player);
 							}
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("flintand.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
-						if (!(canFlint.contains(player))) {
+					}
+					/*
+					 * FLINTAND
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("flintand.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canFlint.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.flintand") && plugin.getConfig().getBoolean("flintand.enabled")) {
-								if (player.getGameMode() == GameMode.CREATIVE) {
-									canFlint.add(player);
-									plugin.particleFire.add(event.getEntity());
-									return;
-								}
-								if (player.getInventory().contains(Material.FLINT_AND_STEEL, 1)){
-									canFlint.add(player);
-									plugin.particleFire.add(event.getEntity());
+								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+									if (player.getGameMode() == GameMode.CREATIVE) {
+										canFlint.add(player.getUniqueId().toString());
+										plugin.particleFire.add(event.getEntity());
+										event.getEntity().setFireTicks(1300);
+										return;
+									}
+									if (player.getInventory().contains(Material.FLINT_AND_STEEL, 1)){
+										canFlint.add(player.getUniqueId().toString());
+										plugin.particleFire.add(event.getEntity());
+										event.getEntity().setFireTicks(1300);
+									} else {
+										Error.noFlintAnd(player, "item");
+									}
 								} else {
-									Error.noFlintAnd(player, "item");
+									event.setCancelled(true);
+									player.sendMessage(ChatColor.RED + "[!!] You can't shoot fire in protected regions!");
 								}
 							} else {
 								Error.noFlintAnd(player, "permissions");
 							}
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("disarming.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
-						if (!(canDisarm.contains(player))) {
+					}
+					/*
+					 * DISARMING
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("disarming.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canDisarm.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.disarming") && plugin.getConfig().getBoolean("disarming.enabled")) {
 								if (player.getGameMode() == GameMode.CREATIVE) {
-									canDisarm.add(player);
+									canDisarm.add(player.getUniqueId().toString());
 									return;
 								}
 							} else {
 								Error.noDisarm(player);
 							}
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("wither.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
-						if (!(canBrick.contains(player))) {
+					}
+					/*
+					 * WITHER
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("wither.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canBrick.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.wither") && plugin.getConfig().getBoolean("wither.enabled")) {
-								if (player.getGameMode() != GameMode.CREATIVE) {
-									if (player.getInventory().contains(Material.SOUL_SAND, 3)){
-										player.getInventory().removeItem(new ItemStack(Material.SOUL_SAND, 3));
-									} else {
-										Error.noWither(player, "item");
-										return;
+								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+									if (player.getGameMode() != GameMode.CREATIVE) {
+										if (player.getInventory().contains(Material.SOUL_SAND, 3)){
+											player.getInventory().removeItem(new ItemStack(Material.SOUL_SAND, 3));
+										} else {
+											Error.noWither(player, "item");
+											return;
+										}
 									}
+									Projectile p = event.getEntity();
+									p.remove();
+					                player.launchProjectile(WitherSkull.class).setVelocity(p.getVelocity().multiply(0.4));
+								} else {
+									event.setCancelled(true);
+									player.sendMessage(ChatColor.RED + "[!!] You can't shoot wither skulls in protected regions!");
 								}
-								Projectile p = event.getEntity();
-								p.remove();
-				                player.launchProjectile(WitherSkull.class).setVelocity(p.getVelocity().multiply(0.4));
 							} else {
 								Error.noWither(player, "permissions");
 							}
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("firey.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
-						if (!(canBrick.contains(player))) {
+					}
+					/*
+					 * FIREY
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("firey.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canBrick.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.firey") && plugin.getConfig().getBoolean("firey.enabled")) {
-								if (player.getGameMode() != GameMode.CREATIVE) {
-									if (player.getInventory().contains(Material.FIREBALL, 1)){
-										player.getInventory().removeItem(new ItemStack(Material.FIREBALL, 1));
-									} else {
-										Error.noFirey(player, "item");
-										return;
+								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+									if (player.getGameMode() != GameMode.CREATIVE) {
+										if (player.getInventory().contains(Material.FIREBALL, 1)){
+											player.getInventory().removeItem(new ItemStack(Material.FIREBALL, 1));
+										} else {
+											Error.noFirey(player, "item");
+											return;
+										}
 									}
+									Projectile p = event.getEntity();
+									p.remove();
+						            player.launchProjectile(Fireball.class).setVelocity(p.getVelocity().multiply(1.2));
+								} else {
+									event.setCancelled(true);
+									player.sendMessage(ChatColor.RED + "[!!] You can't shoot fireballs in protected regions!");
 								}
-								Projectile p = event.getEntity();
-								p.remove();
-					            player.launchProjectile(Fireball.class).setVelocity(p.getVelocity().multiply(1.2));
 							} else {
 								Error.noFirey(player, "permissions");
 							}
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("slow.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
+					}
+					/*
+					 * SLOW
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("slow.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
 						if (player.hasPermission("dirtyarrows.slow") && plugin.getConfig().getBoolean("slow.enabled")) {
 							if (event.getEntity() instanceof Projectile) {
 								Projectile proj = event.getEntity();
@@ -684,34 +851,51 @@ public class ArrowListener implements Listener {
 						} else {
 							Error.noSlow(player);
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("level.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
-						if (!(canLevel.contains(player))) {
+					}
+					/*
+					 * LEVEL
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("level.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canLevel.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.level") && plugin.getConfig().getBoolean("level.enabled")) {
-								canLevel.add(player);
+								canLevel.add(player.getUniqueId().toString());
 							} else {
 								Error.noLevel(player);
 							}
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("undead.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
-						if (!(canSwarm.contains(player))) {
+					}
+					/*
+					 * UNDEAD
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("undead.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canSwarm.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.undead") && plugin.getConfig().getBoolean("undead.enabled")) {
-								if (player.getGameMode() != GameMode.CREATIVE) {
-									if (player.getInventory().contains(Material.ROTTEN_FLESH, 64)){
-										player.getInventory().removeItem(new ItemStack(Material.ROTTEN_FLESH, 64));
-									} else {
-										Error.noUndead(player, "item");
-										return;
+								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+									if (player.getGameMode() != GameMode.CREATIVE) {
+										if (player.getInventory().contains(Material.ROTTEN_FLESH, 64)){
+											player.getInventory().removeItem(new ItemStack(Material.ROTTEN_FLESH, 64));
+										} else {
+											Error.noUndead(player, "item");
+											return;
+										}
 									}
+								} else {
+									event.setCancelled(true);
+									player.sendMessage(ChatColor.RED + "[!!] You can't shoot the undead in protected regions!");
 								}
-								canSwarm.add(player);
+								canSwarm.add(player.getUniqueId().toString());
 							} else {
 								Error.noUndead(player, "permissions");
 							}
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("multi.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
+					}
+					/*
+					 * MULTI
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("multi.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
 						if (player.hasPermission("dirtyarrows.multi")) {
 							if (player.getInventory().contains(Material.ARROW, 8) ||
 									player.getItemInHand().containsEnchantment(Enchantment.ARROW_INFINITE) ||
@@ -740,131 +924,233 @@ public class ArrowListener implements Listener {
 						} else {
 							Error.noMulti(player, "permissions");
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("bomb.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
-						if (!(canBomb.contains(player))) {
+					}
+					/*
+					 * BOMB
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("bomb.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canBomb.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.bomb") && plugin.getConfig().getBoolean("bomb.enabled")) {
-								if (player.getGameMode() != GameMode.CREATIVE) {
-									if (player.getInventory().contains(Material.TNT, 3)){
-										player.getInventory().removeItem(new ItemStack(Material.TNT, 3));
-									} else {
-										Error.noBomb(player, "item");
-										return;
+								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+									if (player.getGameMode() != GameMode.CREATIVE) {
+										if (player.getInventory().contains(Material.TNT, 3)){
+											player.getInventory().removeItem(new ItemStack(Material.TNT, 3));
+										} else {
+											Error.noBomb(player, "item");
+											return;
+										}
 									}
+									canBomb.add(player.getUniqueId().toString());
+									plugin.particleExploding.add(event.getEntity());
+								} else {
+									event.setCancelled(true);
+									player.sendMessage(ChatColor.RED + "[!!] You can't shoot bombs in protected regions!");
 								}
-								canBomb.add(player);
-								plugin.particleExploding.add(event.getEntity());
 							} else {
 								Error.noLevel(player);
 							}
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("drop.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
-						if (!(canDrop.contains(player))) {
+					}
+					/*
+					 * DROP
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("drop.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canDrop.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.drop") && plugin.getConfig().getBoolean("drop.enabled")) {
-								canDrop.add(player);
+								canDrop.add(player.getUniqueId().toString());
 							} else {
 								Error.noDisorienting(player);
 							}
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("airstrike.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
+					}
+					/*
+					 * AIRSTRIKE
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("airstrike.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
 						if (player.hasPermission("dirtyarrows.airstrike") && plugin.getConfig().getBoolean("airstrike.enabled")) {
-							if (player.getGameMode() != GameMode.CREATIVE) {
-								if (player.getInventory().contains(Material.TNT, 1)){
+							if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+								if (player.getGameMode() != GameMode.CREATIVE) {
+									if (player.getInventory().contains(Material.TNT, 1)){
+										plugin.airstrike.add(event.getEntity());
+										plugin.particleExploding.add(event.getEntity());
+									} else {
+										Error.noAirstrike(player, "item");
+										return;
+									}
+								} else {
 									plugin.airstrike.add(event.getEntity());
 									plugin.particleExploding.add(event.getEntity());
-								} else {
-									Error.noAirstrike(player, "item");
-									return;
 								}
 							} else {
-								plugin.airstrike.add(event.getEntity());
-								plugin.particleExploding.add(event.getEntity());
+								event.setCancelled(true);
+								player.sendMessage(ChatColor.RED + "[!!] You can't shoot airstrikes in protected regions!");
 							}
 						} else {
 							Error.noAirstrike(player, "permissions");
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("magmatic.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
+					}
+					/*
+					 * MAGMATIC
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("magmatic.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
 						if (player.hasPermission("dirtyarrows.magmatic") && plugin.getConfig().getBoolean("magmatic.enabled")) {
-							if (player.getGameMode() != GameMode.CREATIVE) {
-								if (player.getInventory().contains(Material.LAVA_BUCKET, 1)){
-									player.getInventory().remove(new ItemStack(Material.LAVA_BUCKET, 1));
-									player.getInventory().addItem(new ItemStack(Material.BUCKET, 1));
+							if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+								if (player.getGameMode() != GameMode.CREATIVE) {
+									if (player.getInventory().contains(Material.LAVA_BUCKET, 1)){
+										player.getInventory().remove(new ItemStack(Material.LAVA_BUCKET, 1));
+										player.getInventory().addItem(new ItemStack(Material.BUCKET, 1));
+										FallingBlock fb = (FallingBlock) player.getWorld().spawnFallingBlock(
+												player.getLocation().add(0, 1, 0), Material.LAVA, (byte) 0);
+										fb.setVelocity(event.getEntity().getVelocity());
+										fb.setDropItem(false);
+										plugin.particleLava.add(fb);
+										event.getEntity().remove();
+									} else {
+										Error.noMagmatic(player, "item");
+										return;
+									}
+								} else {
 									FallingBlock fb = (FallingBlock) player.getWorld().spawnFallingBlock(
 											player.getLocation().add(0, 1, 0), Material.LAVA, (byte) 0);
 									fb.setVelocity(event.getEntity().getVelocity());
 									fb.setDropItem(false);
 									plugin.particleLava.add(fb);
 									event.getEntity().remove();
-								} else {
-									Error.noMagmatic(player, "item");
-									return;
 								}
 							} else {
-								FallingBlock fb = (FallingBlock) player.getWorld().spawnFallingBlock(
-										player.getLocation().add(0, 1, 0), Material.LAVA, (byte) 0);
-								fb.setVelocity(event.getEntity().getVelocity());
-								fb.setDropItem(false);
-								plugin.particleLava.add(fb);
-								event.getEntity().remove();
+								event.setCancelled(true);
+								player.sendMessage(ChatColor.RED + "[!!] You can't shoot lava in protected regions!");
 							}
 						} else {
 							Error.noMagmatic(player, "permissions");
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("aquatic.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
+					}
+					/*
+					 * AQUATIC
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("aquatic.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
 						if (player.hasPermission("dirtyarrows.aquatic") && plugin.getConfig().getBoolean("aquatic.enabled")) {
-							if (player.getGameMode() != GameMode.CREATIVE) {
-								if (player.getInventory().contains(Material.WATER_BUCKET, 1)){
-									player.getInventory().remove(new ItemStack(Material.WATER_BUCKET, 1));
-									player.getInventory().addItem(new ItemStack(Material.BUCKET, 1));
+							if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+								if (player.getGameMode() != GameMode.CREATIVE) {
+									if (player.getInventory().contains(Material.WATER_BUCKET, 1)){
+										player.getInventory().remove(new ItemStack(Material.WATER_BUCKET, 1));
+										player.getInventory().addItem(new ItemStack(Material.BUCKET, 1));
+										FallingBlock fb = (FallingBlock) player.getWorld().spawnFallingBlock(
+												player.getLocation().add(0, 1, 0), Material.WATER, (byte) 0);
+										fb.setVelocity(event.getEntity().getVelocity());
+										fb.setDropItem(false);
+										plugin.particleWater.add(fb);
+										event.getEntity().remove();
+									} else {
+										Error.noAquatic(player, "item");
+										return;
+									}
+								} else {
 									FallingBlock fb = (FallingBlock) player.getWorld().spawnFallingBlock(
 											player.getLocation().add(0, 1, 0), Material.WATER, (byte) 0);
 									fb.setVelocity(event.getEntity().getVelocity());
 									fb.setDropItem(false);
 									plugin.particleWater.add(fb);
 									event.getEntity().remove();
-								} else {
-									Error.noAquatic(player, "item");
-									return;
 								}
 							} else {
-								FallingBlock fb = (FallingBlock) player.getWorld().spawnFallingBlock(
-										player.getLocation().add(0, 1, 0), Material.WATER, (byte) 0);
-								fb.setVelocity(event.getEntity().getVelocity());
-								fb.setDropItem(false);
-								plugin.particleWater.add(fb);
-								event.getEntity().remove();
+								event.setCancelled(true);
+								player.sendMessage(ChatColor.RED + "[!!] You can't shoot water in protected regions!");
 							}
 						} else {
 							Error.noAquatic(player, "permissions");
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("pull.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
-						if (!(canPull.contains(player))) {
+					}
+					/*
+					 * PULL
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("pull.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canPull.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.pull") && plugin.getConfig().getBoolean("pull.enabled")) {
-								canPull.add(player);
+								canPull.add(player.getUniqueId().toString());
 							} else {
 								Error.noPull(player);
 							}
 						}
-					} else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("paralyze.name"))) && plugin.activated.contains(player)) {
-						removeSwap(player);
-						if (!(canParalyze.contains(player))) {
+					}
+					/*
+					 * PARALYZE
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("paralyze.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canParalyze.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.paralyze") && plugin.getConfig().getBoolean("paralyze.enabled")) {
 								if (player.getGameMode() == GameMode.CREATIVE) {
-									canParalyze.add(player);
+									canParalyze.add(player.getUniqueId().toString());
 									return;
 								}
 								if (player.getInventory().contains(Material.NETHER_STALK, 1)){
-									canParalyze.add(player);
+									canParalyze.add(player.getUniqueId().toString());
 								} else {
 									Error.noParalyze(player, "item");
 								}
 							} else {
 								Error.noParalyze(player, "permissions");
+							}
+						}
+					}
+					/*
+					 * ACACIA
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("acacia.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canSpawnAcacia.contains(player.getUniqueId().toString()))) {
+							if (player.hasPermission("dirtyarrows.acacia") && plugin.getConfig().getBoolean("acacia.enabled")) {
+								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+									if (player.getGameMode() == GameMode.CREATIVE) {
+										canSpawnAcacia.add(player.getUniqueId().toString());
+										return;
+									}
+									if (player.getInventory().containsAtLeast(new ItemStack(Material.SAPLING, (short) 1, (short) 4), 1) &&
+											player.getInventory().containsAtLeast(new ItemStack(Material.INK_SACK, (short) 1, (short) 15), 1)) {
+										canSpawnAcacia.add(player.getUniqueId().toString());
+									} else {
+										Error.noAcacia(player, "item");
+									}
+								} else {
+									event.setCancelled(true);
+									player.sendMessage(ChatColor.RED + "[!!] You can't shoot acacia arrows in a protected region!");
+								}
+							} else {
+								Error.noAcacia(player, "permissions");
+							}
+						}
+					}
+					/*
+					 * DARKOAK
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("darkoak.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canSpawnDarkOak.contains(player.getUniqueId().toString()))) {
+							if (player.hasPermission("dirtyarrows.darkoak") && plugin.getConfig().getBoolean("darkoak.enabled")) {
+								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+									if (player.getGameMode() == GameMode.CREATIVE) {
+										canSpawnDarkOak.add(player.getUniqueId().toString());
+										return;
+									}
+									if (player.getInventory().containsAtLeast(new ItemStack(Material.SAPLING, (short) 1, (short) 5), 4) &&
+											player.getInventory().containsAtLeast(new ItemStack(Material.INK_SACK, (short) 1, (short) 15), 1)) {
+										canSpawnDarkOak.add(player.getUniqueId().toString());
+									} else {
+										Error.noDarkOak(player, "item");
+									}
+								} else {
+									event.setCancelled(true);
+									player.sendMessage(ChatColor.RED + "[!!] You can't shoot dark oak arrows in a protected region!");
+								}
+							} else {
+								Error.noDarkOak(player, "permissions");
 							}
 						}
 					} 
@@ -888,257 +1174,425 @@ public class ArrowListener implements Listener {
 			}
 			if (arrow.getShooter() instanceof Player) {
 				Player player = (Player) arrow.getShooter();
-				if (plugin.activated.contains(player)) {
-					if (canSwarm.contains(player)) {
-						Swarm.doSwarm(player.getWorld(), arrow.getLocation());
-					} else if (canExplode.contains(player)) {
-						player.getWorld().createExplosion(arrow.getLocation(), 4F);
-						arrow.remove();
-						if (player.getGameMode() == GameMode.SURVIVAL)
-							player.getInventory().removeItem(new ItemStack(Material.TNT, 1));
-						canExplode.remove(player);
-					} else if (canwoodman.contains(player)) {
-						BlockIterator iterator = new BlockIterator(event.getEntity().getWorld(), event.getEntity().getLocation().toVector(),
-			            		event.getEntity().getVelocity().normalize(), 0.0D, 4);
-			            Block hitBlock = null;
-			            hitBlock = iterator.next();
-			            
-			            while (iterator.hasNext()) {
-			                hitBlock = iterator.next();
-			                if (hitBlock.getType() != Material.AIR) {
-			                    break;
-			                }
-			            }
-						if (TreeCut.cutDownTree(hitBlock.getLocation(), hitBlock, player)) {
+				if (plugin.activated.contains(player.getUniqueId().toString())) {
+					/*
+					 * ZOMBIE
+					 */
+					if (canSwarm.contains(player.getUniqueId().toString())) {
+						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 7) == null) {
+							Swarm.doSwarm(player.getWorld(), arrow.getLocation());
+						} else {
 							arrow.remove();
+							if (player.getGameMode() != GameMode.CREATIVE) {
+								player.getInventory().addItem(new ItemStack(Material.ROTTEN_FLESH, 64));
+							}
+							player.sendMessage(ChatColor.RED + "[!!] Arrows can't summon zombies in protected areas!");
 						}
-			            canwoodman.remove(player);
-					} else if (canStrikeLightning.contains(player)) {
-						player.getWorld().strikeLightning(arrow.getLocation());
-						arrow.remove();
-						if (player.getGameMode() == GameMode.SURVIVAL) {
-							player.getInventory().removeItem(new ItemStack(Material.GLOWSTONE_DUST, 1));
+					}
+					/*
+					 * EXPLODING
+					 */
+					else if (canExplode.contains(player.getUniqueId().toString())) {
+						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 5) == null) {
+							player.getWorld().createExplosion(arrow.getLocation(), 4F);
+							arrow.remove();
+							if (player.getGameMode() == GameMode.SURVIVAL)
+								player.getInventory().removeItem(new ItemStack(Material.TNT, 1));
+							canExplode.remove(player.getUniqueId().toString());
+						} else {
+							arrow.remove();
+							player.sendMessage(ChatColor.RED + "[!!] Arrows can't boom stuff near protected regions!");
 						}
-						canStrikeLightning.remove(player);
-					} else if (canCluck.contains(player)) {
-						player.getWorld().spawnEntity(arrow.getLocation(), EntityType.CHICKEN);
-						player.playSound(player.getLocation(), Sound.CHICKEN_HURT, 10, 1);
-						arrow.remove();
-						if (player.getGameMode() == GameMode.SURVIVAL)
-							player.getInventory().removeItem(new ItemStack(Material.EGG, 1));
-						canCluck.remove(player);
-					} else if (canTeleport.contains(player)) {
+					}
+					/*
+					 * WOODMAN
+					 */
+					else if (canwoodman.contains(player.getUniqueId().toString())) {
+						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 4) == null) {
+							BlockIterator iterator = new BlockIterator(event.getEntity().getWorld(), event.getEntity().getLocation().toVector(),
+				            		event.getEntity().getVelocity().normalize(), 0.0D, 4);
+				            Block hitBlock = null;
+				            hitBlock = iterator.next();
+				            
+				            while (iterator.hasNext()) {
+				                hitBlock = iterator.next();
+				                if (hitBlock.getType() != Material.AIR) {
+				                    break;
+				                }
+				            }
+							if (TreeCut.cutDownTree(hitBlock.getLocation(), hitBlock, player)) {
+								arrow.remove();
+							}
+						} else {
+							arrow.remove();
+							player.sendMessage(ChatColor.RED + "[!!] Arrows can't tear down trees in protected regions!");
+						}
+			            canwoodman.remove(player.getUniqueId().toString());
+					}
+					/*
+					 * LIGHTNING
+					 */
+					else if (canStrikeLightning.contains(player.getUniqueId().toString())) {
+						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 3) == null) {
+							player.getWorld().strikeLightning(arrow.getLocation());
+							arrow.remove();
+							canStrikeLightning.remove(player.getUniqueId().toString());
+						} else {
+							arrow.remove();
+							player.sendMessage(ChatColor.RED + "[!!] Arrows can't summon lightning near protected regions!");
+						}
+					}
+					/*
+					 * CLUCKY
+					 */
+					else if (canCluck.contains(player.getUniqueId().toString())) {
+						if (plugin.rm.isWithinAXZMargin(arrow.getLocation(), 2) == null) {
+							player.getWorld().spawnEntity(arrow.getLocation(), EntityType.CHICKEN);
+							player.playSound(player.getLocation(), Sound.CHICKEN_HURT, 10, 1);
+							arrow.remove();
+							if (player.getGameMode() == GameMode.SURVIVAL)
+								player.getInventory().removeItem(new ItemStack(Material.EGG, 1));
+						} else {
+							arrow.remove();
+							player.sendMessage(ChatColor.RED + "[!!] Arrows can't spawn chicken near protected regions!");
+						}
+						canCluck.remove(player.getUniqueId().toString());
+					}
+					/*
+					 * ENDER
+					 */
+					else if (canTeleport.contains(player.getUniqueId().toString())) {
 						player.teleport(arrow.getLocation());
 						player.playSound(player.getLocation(), Sound.ENDERMAN_TELEPORT, 10, 1);
 						arrow.remove();
 						if (player.getGameMode() == GameMode.SURVIVAL)
 							player.getInventory().removeItem(new ItemStack(Material.ENDER_PEARL, 1));
-						canTeleport.remove(player);
-					} else if (canSpawnOak.contains(player)) {
-						if (arrow.getWorld().generateTree(arrow.getLocation(), TreeType.TREE)) {
-							arrow.getWorld().generateTree(arrow.getLocation(), TreeType.TREE);
-							if (player.getGameMode() == GameMode.SURVIVAL) {
-								player.getInventory().removeItem(new ItemStack(Material.SAPLING, 1, (short) 0));
-								player.getInventory().removeItem(new ItemStack(Material.INK_SACK, 1, (short) 15));
+						canTeleport.remove(player.getUniqueId().toString());
+					}
+					/*
+					 * OAK
+					 */
+					else if (canSpawnOak.contains(player.getUniqueId().toString())) {
+						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 5) == null) {
+							if (arrow.getWorld().generateTree(arrow.getLocation(), TreeType.TREE)) {
+								arrow.getWorld().generateTree(arrow.getLocation(), TreeType.TREE);
+								if (player.getGameMode() == GameMode.SURVIVAL) {
+									player.getInventory().removeItem(new ItemStack(Material.SAPLING, 1, (short) 0));
+									player.getInventory().removeItem(new ItemStack(Material.INK_SACK, 1, (short) 15));
+								}
+								arrow.remove();
+							}
+						} else {
+							arrow.remove();
+							player.sendMessage(ChatColor.RED + "[!!] Arrows can't spawn oaks near protected areas!");
+						}
+						canSpawnOak.remove(player.getUniqueId().toString());
+					}
+					/*
+					 * BIRCH
+					 */
+					else if (canSpawnBirch.contains(player.getUniqueId().toString())) {
+						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 5) == null) {
+							if (arrow.getWorld().generateTree(arrow.getLocation(), TreeType.BIRCH)) {
+								arrow.getWorld().generateTree(arrow.getLocation(), TreeType.BIRCH);
+								if (player.getGameMode() == GameMode.SURVIVAL) {
+									player.getInventory().removeItem(new ItemStack(Material.SAPLING, 1, (short) 2));
+									player.getInventory().removeItem(new ItemStack(Material.INK_SACK, 1, (short) 15));
+								}
+								arrow.remove();
+							}
+						} else {
+							arrow.remove();
+							player.sendMessage(ChatColor.RED + "[!!] Arrows can't spawn birch trees near protected areas!");
+						}
+						canSpawnBirch.remove(player.getUniqueId().toString());
+					}
+					/*
+					 * SPRUCE
+					 */
+					else if (canSpawnSpruce.contains(player.getUniqueId().toString())) {
+						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 5) == null) {
+							if (arrow.getWorld().generateTree(arrow.getLocation(), TreeType.REDWOOD)) {
+								arrow.getWorld().generateTree(arrow.getLocation(), TreeType.REDWOOD);
+								if (player.getGameMode() == GameMode.SURVIVAL) {
+									player.getInventory().removeItem(new ItemStack(Material.SAPLING, 1, (short) 1));
+									player.getInventory().removeItem(new ItemStack(Material.INK_SACK, 1, (short) 15));
+								}
+								arrow.remove();
+							}
+						} else {
+							arrow.remove();
+							player.sendMessage(ChatColor.RED + "[!!] Arrows can't spawn spruce trees near protected areas!");
+						}
+						canSpawnSpruce.remove(player.getUniqueId().toString());
+					}
+					/*
+					 * JUNGLE
+					 */
+					else if (canSpawnJungle.contains(player.getUniqueId().toString())) {
+						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 5) == null) {
+							if (arrow.getWorld().generateTree(arrow.getLocation(), TreeType.SMALL_JUNGLE)) {
+								arrow.getWorld().generateTree(arrow.getLocation(), TreeType.SMALL_JUNGLE);
+								if (player.getGameMode() == GameMode.SURVIVAL) {
+									player.getInventory().removeItem(new ItemStack(Material.SAPLING, 1, (short) 3));
+									player.getInventory().removeItem(new ItemStack(Material.INK_SACK, 1, (short) 15));
+								}
+								arrow.remove();
+							}
+						} else {
+							arrow.remove();
+							player.sendMessage(ChatColor.RED + "[!!] Arrows can't spawn jungle trees near protected areas!");
+						}
+						canSpawnJungle.remove(player.getUniqueId().toString());
+					}
+					/*
+					 * ACACIA
+					 */
+					else if (canSpawnAcacia.contains(player.getUniqueId().toString())) {
+						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 10) == null) {
+							if (arrow.getWorld().generateTree(arrow.getLocation(), TreeType.ACACIA)) {
+								arrow.getWorld().generateTree(arrow.getLocation(), TreeType.ACACIA);
+								if (player.getGameMode() == GameMode.SURVIVAL) {
+									player.getInventory().removeItem(new ItemStack(Material.SAPLING, 1, (short) 4));
+									player.getInventory().removeItem(new ItemStack(Material.INK_SACK, 1, (short) 15));
+								}
+								arrow.remove();
+							}
+						} else {
+							arrow.remove();
+							player.sendMessage(ChatColor.RED + "[!!] Arrows can't spawn acacias near protected areas!");
+						}
+						canSpawnAcacia.remove(player.getUniqueId().toString());
+					}
+					/*
+					 * DARKOAK
+					 */
+					else if (canSpawnDarkOak.contains(player.getUniqueId().toString())) {
+						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 10) == null) {
+							if (arrow.getWorld().generateTree(arrow.getLocation(), TreeType.DARK_OAK)) {
+								arrow.getWorld().generateTree(arrow.getLocation(), TreeType.DARK_OAK);
+								if (player.getGameMode() == GameMode.SURVIVAL) {
+									player.getInventory().removeItem(new ItemStack(Material.SAPLING, 4, (short) 5));
+									player.getInventory().removeItem(new ItemStack(Material.INK_SACK, 1, (short) 15));
+								}
+								arrow.remove();
+							}
+						} else {
+							arrow.remove();
+							player.sendMessage(ChatColor.RED + "[!!] Arrows can't spawn dark oaks near protected areas!");
+						}
+						canSpawnDarkOak.remove(player.getUniqueId().toString());
+					}
+					/*
+					 * BATTY
+					 */
+					else if (canSpawnBats.contains(player.getUniqueId().toString())) {
+						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 5) == null) { 
+							for (int i = 1; i <= 10; i++) {
+								arrow.getWorld().spawnEntity(arrow.getLocation(), EntityType.BAT);
 							}
 							arrow.remove();
-						} else {
-							player.sendMessage(ChatColor.RED + "[!!] Sorry, this is an area protected from explosives!");
-						}
-						canSpawnOak.remove(player);
-					} else if (canSpawnBirch.contains(player)) {
-						if (arrow.getWorld().generateTree(arrow.getLocation(), TreeType.BIRCH)) {
-							arrow.getWorld().generateTree(arrow.getLocation(), TreeType.BIRCH);
 							if (player.getGameMode() == GameMode.SURVIVAL) {
-								player.getInventory().removeItem(new ItemStack(Material.SAPLING, 1, (short) 2));
-								player.getInventory().removeItem(new ItemStack(Material.INK_SACK, 1, (short) 15));
+								player.getInventory().removeItem(new ItemStack(Material.ROTTEN_FLESH, 3));
 							}
+						} else {
 							arrow.remove();
+							player.sendMessage(ChatColor.RED + "[!!] Arrows can't spawn bats near protected areas!");
 						}
-						canSpawnBirch.remove(player);
-					} else if (canSpawnSpruce.contains(player)) {
-						if (arrow.getWorld().generateTree(arrow.getLocation(), TreeType.REDWOOD)) {
-							arrow.getWorld().generateTree(arrow.getLocation(), TreeType.REDWOOD);
+						canSpawnBats.remove(player.getUniqueId().toString());
+					}
+					/*
+					 * NUCLEAR
+					 */
+					else if (canNuke.contains(player.getUniqueId().toString())) {
+						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 65) == null) {
+							player.getWorld().createExplosion(arrow.getLocation(), 50F);
+							arrow.remove();
+							if (player.getGameMode() != GameMode.CREATIVE)
+								player.getInventory().removeItem(new ItemStack(Material.TNT, 64));
+						} else {
+							arrow.remove();
+							player.sendMessage(ChatColor.RED + "[!!] Arrows can't explode near protected areas!");
+						}
+						canNuke.remove(player.getUniqueId().toString());
+					}
+					/*
+					 * ENLIGHTED
+					 */
+					else if (canLight.contains(player.getUniqueId().toString())) {
+						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 2) == null) {
+							arrow.getLocation().getBlock().setType(Material.TORCH);
+							arrow.remove();
+							if (player.getGameMode() == GameMode.SURVIVAL)
+								player.getInventory().removeItem(new ItemStack(Material.TORCH, 1));
+						} else {
+							arrow.remove();
+							player.sendMessage(ChatColor.RED + "[!!] Arrows can't place torches in protected areas!");
+						}
+						canLight.remove(player.getUniqueId().toString());
+					}
+					/*
+					 * FLINTAND
+					 */
+					else if (canFlint.contains(player.getUniqueId().toString())) {
+						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 6) == null) {
+							int fintuses = 1;
+							Location loc = arrow.getLocation();
+							if (loc.getBlock().getType() == Material.AIR ||
+									 loc.getBlock().getType() == Material.SNOW ||
+									 loc.getBlock().getType() == Material.VINE ||
+									 loc.getBlock().getType() == Material.DEAD_BUSH) {
+								loc.getBlock().setType(Material.FIRE);
+								fintuses++;
+							} else {
+								loc.add(0, 1, 0);
+								if (loc.getBlock().getType() == Material.AIR ||
+										 loc.getBlock().getType() == Material.SNOW ||
+										 loc.getBlock().getType() == Material.VINE ||
+										 loc.getBlock().getType() == Material.DEAD_BUSH) {
+									loc.getBlock().setType(Material.FIRE);
+									fintuses++;
+								}
+								loc.add(0, -1, 0);
+							}
+							loc.add(1, 0, 0);
+							if (loc.getBlock().getType() == Material.AIR ||
+									 loc.getBlock().getType() == Material.SNOW ||
+									 loc.getBlock().getType() == Material.VINE ||
+									 loc.getBlock().getType() == Material.DEAD_BUSH) {
+								loc.getBlock().setType(Material.FIRE);
+								fintuses++;
+							} else {
+								loc.add(0, 1, 0);
+								if (loc.getBlock().getType() == Material.AIR ||
+										 loc.getBlock().getType() == Material.SNOW ||
+										 loc.getBlock().getType() == Material.VINE ||
+										 loc.getBlock().getType() == Material.DEAD_BUSH) {
+									loc.getBlock().setType(Material.FIRE);
+									fintuses++;
+								}
+								loc.add(0, -1, 0);
+							}
+							loc.add(-2, 0, 0);
+							if (loc.getBlock().getType() == Material.AIR ||
+									 loc.getBlock().getType() == Material.SNOW ||
+									 loc.getBlock().getType() == Material.VINE ||
+									 loc.getBlock().getType() == Material.DEAD_BUSH) {
+								loc.getBlock().setType(Material.FIRE);
+								fintuses++;
+							} else {
+								loc.add(0, 1, 0);
+								if (loc.getBlock().getType() == Material.AIR ||
+										 loc.getBlock().getType() == Material.SNOW ||
+										 loc.getBlock().getType() == Material.VINE ||
+										 loc.getBlock().getType() == Material.DEAD_BUSH) {
+									loc.getBlock().setType(Material.FIRE);
+									fintuses++;
+								}
+								loc.add(0, -1, 0);
+							}
+							loc.add(1, 0, 1);
+							if (loc.getBlock().getType() == Material.AIR ||
+									 loc.getBlock().getType() == Material.SNOW ||
+									 loc.getBlock().getType() == Material.VINE ||
+									 loc.getBlock().getType() == Material.DEAD_BUSH) {
+								loc.getBlock().setType(Material.FIRE);
+								fintuses++;
+							} else {
+								loc.add(0, 1, 0);
+								if (loc.getBlock().getType() == Material.AIR ||
+										 loc.getBlock().getType() == Material.SNOW ||
+										 loc.getBlock().getType() == Material.VINE ||
+										 loc.getBlock().getType() == Material.DEAD_BUSH) {
+									loc.getBlock().setType(Material.FIRE);
+									fintuses++;
+								}
+								loc.add(0, -1, 0);
+							}
+							loc.add(0, 0, -2);
+							if (loc.getBlock().getType() == Material.AIR ||
+									 loc.getBlock().getType() == Material.SNOW ||
+									 loc.getBlock().getType() == Material.VINE ||
+									 loc.getBlock().getType() == Material.DEAD_BUSH) {
+								loc.getBlock().setType(Material.FIRE);
+								fintuses++;
+							} else {
+								loc.add(0, 1, 0);
+								if (loc.getBlock().getType() == Material.AIR ||
+										 loc.getBlock().getType() == Material.SNOW ||
+										 loc.getBlock().getType() == Material.VINE ||
+										 loc.getBlock().getType() == Material.DEAD_BUSH) {
+									loc.getBlock().setType(Material.FIRE);
+									fintuses++;
+								}
+								loc.add(0, -1, 0);
+							}
 							if (player.getGameMode() == GameMode.SURVIVAL) {
-								player.getInventory().removeItem(new ItemStack(Material.SAPLING, 1, (short) 1));
-								player.getInventory().removeItem(new ItemStack(Material.INK_SACK, 1, (short) 15));
-							}
-							arrow.remove();
-						}
-						canSpawnSpruce.remove(player);
-					} else if (canSpawnJungle.contains(player)) {
-						if (arrow.getWorld().generateTree(arrow.getLocation(), TreeType.SMALL_JUNGLE)) {
-							arrow.getWorld().generateTree(arrow.getLocation(), TreeType.SMALL_JUNGLE);
-							if (player.getGameMode() == GameMode.SURVIVAL) {
-								player.getInventory().removeItem(new ItemStack(Material.SAPLING, 1, (short) 3));
-								player.getInventory().removeItem(new ItemStack(Material.INK_SACK, 1, (short) 15));
-							}
-							arrow.remove();
-						}
-						canSpawnJungle.remove(player);
-					} else if (canSpawnBats.contains(player)) {
-						for (int i = 1; i <= 10; i++) {
-							arrow.getWorld().spawnEntity(arrow.getLocation(), EntityType.BAT);
-						}
-						arrow.remove();
-						if (player.getGameMode() == GameMode.SURVIVAL) {
-							player.getInventory().removeItem(new ItemStack(Material.ROTTEN_FLESH, 3));
-						}
-						canSpawnBats.remove(player);
-					} else if (canNuke.contains(player)) {
-						player.getWorld().createExplosion(arrow.getLocation(), 50F);
-						arrow.remove();
-						if (player.getGameMode() == GameMode.SURVIVAL)
-							player.getInventory().removeItem(new ItemStack(Material.TNT, 64));
-						canNuke.remove(player);
-					} else if (canLight.contains(player)) {
-						arrow.getLocation().getBlock().setType(Material.TORCH);
-						arrow.remove();
-						if (player.getGameMode() == GameMode.SURVIVAL)
-							player.getInventory().removeItem(new ItemStack(Material.TORCH, 1));
-						canLight.remove(player);
-					} else if (canFlint.contains(player)) {
-						int fintuses = 0;
-						Location loc = arrow.getLocation();
-						if (loc.getBlock().getType() == Material.AIR ||
-								 loc.getBlock().getType() == Material.SNOW ||
-								 loc.getBlock().getType() == Material.VINE ||
-								 loc.getBlock().getType() == Material.DEAD_BUSH) {
-							loc.getBlock().setType(Material.FIRE);
-							fintuses++;
-						} else {
-							loc.add(0, 1, 0);
-							if (loc.getBlock().getType() == Material.AIR ||
-									 loc.getBlock().getType() == Material.SNOW ||
-									 loc.getBlock().getType() == Material.VINE ||
-									 loc.getBlock().getType() == Material.DEAD_BUSH) {
-								loc.getBlock().setType(Material.FIRE);
-								fintuses++;
-							}
-							loc.add(0, -1, 0);
-						}
-						loc.add(1, 0, 0);
-						if (loc.getBlock().getType() == Material.AIR ||
-								 loc.getBlock().getType() == Material.SNOW ||
-								 loc.getBlock().getType() == Material.VINE ||
-								 loc.getBlock().getType() == Material.DEAD_BUSH) {
-							loc.getBlock().setType(Material.FIRE);
-							fintuses++;
-						} else {
-							loc.add(0, 1, 0);
-							if (loc.getBlock().getType() == Material.AIR ||
-									 loc.getBlock().getType() == Material.SNOW ||
-									 loc.getBlock().getType() == Material.VINE ||
-									 loc.getBlock().getType() == Material.DEAD_BUSH) {
-								loc.getBlock().setType(Material.FIRE);
-								fintuses++;
-							}
-							loc.add(0, -1, 0);
-						}
-						loc.add(-2, 0, 0);
-						if (loc.getBlock().getType() == Material.AIR ||
-								 loc.getBlock().getType() == Material.SNOW ||
-								 loc.getBlock().getType() == Material.VINE ||
-								 loc.getBlock().getType() == Material.DEAD_BUSH) {
-							loc.getBlock().setType(Material.FIRE);
-							fintuses++;
-						} else {
-							loc.add(0, 1, 0);
-							if (loc.getBlock().getType() == Material.AIR ||
-									 loc.getBlock().getType() == Material.SNOW ||
-									 loc.getBlock().getType() == Material.VINE ||
-									 loc.getBlock().getType() == Material.DEAD_BUSH) {
-								loc.getBlock().setType(Material.FIRE);
-								fintuses++;
-							}
-							loc.add(0, -1, 0);
-						}
-						loc.add(1, 0, 1);
-						if (loc.getBlock().getType() == Material.AIR ||
-								 loc.getBlock().getType() == Material.SNOW ||
-								 loc.getBlock().getType() == Material.VINE ||
-								 loc.getBlock().getType() == Material.DEAD_BUSH) {
-							loc.getBlock().setType(Material.FIRE);
-							fintuses++;
-						} else {
-							loc.add(0, 1, 0);
-							if (loc.getBlock().getType() == Material.AIR ||
-									 loc.getBlock().getType() == Material.SNOW ||
-									 loc.getBlock().getType() == Material.VINE ||
-									 loc.getBlock().getType() == Material.DEAD_BUSH) {
-								loc.getBlock().setType(Material.FIRE);
-								fintuses++;
-							}
-							loc.add(0, -1, 0);
-						}
-						loc.add(0, 0, -2);
-						if (loc.getBlock().getType() == Material.AIR ||
-								 loc.getBlock().getType() == Material.SNOW ||
-								 loc.getBlock().getType() == Material.VINE ||
-								 loc.getBlock().getType() == Material.DEAD_BUSH) {
-							loc.getBlock().setType(Material.FIRE);
-							fintuses++;
-						} else {
-							loc.add(0, 1, 0);
-							if (loc.getBlock().getType() == Material.AIR ||
-									 loc.getBlock().getType() == Material.SNOW ||
-									 loc.getBlock().getType() == Material.VINE ||
-									 loc.getBlock().getType() == Material.DEAD_BUSH) {
-								loc.getBlock().setType(Material.FIRE);
-								fintuses++;
-							}
-							loc.add(0, -1, 0);
-						}
-						if (player.getGameMode() == GameMode.SURVIVAL) {
-							for (ItemStack is : player.getInventory().getContents()) {
-								if (is.getType() == Material.FLINT_AND_STEEL) {
-									is.setDurability((short) (is.getDurability() + fintuses));
-									if (is.getDurability() > 64) {
-										player.getInventory().remove(is);
-										player.playSound(player.getLocation(), Sound.ITEM_BREAK, 10, 10);
+								for (ItemStack is : player.getInventory().getContents()) {
+									if (is.getType() == Material.FLINT_AND_STEEL) {
+										is.setDurability((short) (is.getDurability() + fintuses));
+										if (is.getDurability() > 64) {
+											player.getInventory().remove(is);
+											player.playSound(player.getLocation(), Sound.ITEM_BREAK, 10, 10);
+										}
+										break;
 									}
-									break;
 								}
 							}
+							arrow.remove();
+						} else {
+							arrow.remove();
+							player.sendMessage(ChatColor.RED + "[!!] Arrows can't set stuff on fire near protected areas!");
 						}
-						arrow.remove();
-						canFlint.remove(player);
-					} else if (canBomb.contains(player)) {
-						arrow.remove();
-						World world = arrow.getLocation().getWorld();
-						for (int i = 0; i < 3; i++) {
-							Location loc = arrow.getLocation();
-							loc.add(ran.nextInt(9) - 4, 32, ran.nextInt(9) - 4);
-							world.spawnEntity(loc, EntityType.PRIMED_TNT);
+						canFlint.remove(player.getUniqueId().toString());
+					}
+					/*
+					 * BOMB
+					 */
+					else if (canBomb.contains(player.getUniqueId().toString())) {
+						if (plugin.rm.isWithinAXZMargin(arrow.getLocation(), 16) == null) {
+							arrow.remove();
+							World world = arrow.getLocation().getWorld();
+							for (int i = 0; i < 3; i++) {
+								Location loc = arrow.getLocation();
+								loc.add(ran.nextInt(9) - 4, 32, ran.nextInt(9) - 4);
+								world.spawnEntity(loc, EntityType.PRIMED_TNT);
+							}
+							canBomb.remove(player.getUniqueId().toString());
+						} else {
+							arrow.remove();
+							if (player.getGameMode() != GameMode.CREATIVE) {
+								player.getInventory().addItem(new ItemStack(Material.TNT, 3));
+							}
+							player.sendMessage(ChatColor.RED + "[!!] Arrows can't boom stuff near protected areas!");
 						}
-						canBomb.remove(player);
 					}
 				}
 			}
 		}
 	}
 
-	private void removeSwap(Player player) {
-		if (canParalyze.contains(player))
-			canParalyze.remove(player);
-		if (canSwap.contains(player))
-			canSwap.remove(player);
-		if (canDisarm.contains(player))
-			canDisarm.remove(player);
-		if (canLevel.contains(player))
-			canLevel.remove(player);
-		if (canSwarm.contains(player))
-			canSwarm.remove(player);
-		if (canwoodman.contains(player))
-			canwoodman.remove(player);
-		if (canFood.contains(player))
-			canFood.remove(player);
-		if (canBomb.contains(player))
-			canBomb.remove(player);
-		if (canDrop.contains(player))
-			canDrop.remove(player);
-		if (canPull.contains(player))
-			canPull.remove(player);
+	private void removeSwap(String playerUUID) {
+		if (canParalyze.contains(playerUUID))
+			canParalyze.remove(playerUUID);
+		if (canSwap.contains(playerUUID))
+			canSwap.remove(playerUUID);
+		if (canDisarm.contains(playerUUID))
+			canDisarm.remove(playerUUID);
+		if (canLevel.contains(playerUUID))
+			canLevel.remove(playerUUID);
+		if (canSwarm.contains(playerUUID))
+			canSwarm.remove(playerUUID);
+		if (canwoodman.contains(playerUUID))
+			canwoodman.remove(playerUUID);
+		if (canFood.contains(playerUUID))
+			canFood.remove(playerUUID);
+		if (canBomb.contains(playerUUID))
+			canBomb.remove(playerUUID);
+		if (canDrop.contains(playerUUID))
+			canDrop.remove(playerUUID);
+		if (canPull.contains(playerUUID))
+			canPull.remove(playerUUID);
 	}
 	
 }

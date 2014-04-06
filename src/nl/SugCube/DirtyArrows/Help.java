@@ -12,7 +12,7 @@ public class Help {
 	}
 	
 	public static void showMainHelpPage6(Player player) {
-		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v2.5" + 
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v2.7" + 
 				ChatColor.RED + " MrSugarCaney" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 		player.sendMessage(ChatColor.YELLOW + "Use /da to " + ChatColor.GREEN + "enable" + ChatColor.YELLOW + " or " +
 				ChatColor.RED + "disable " + ChatColor.YELLOW + "the plugin.");
@@ -28,21 +28,29 @@ public class Help {
 		if (player.hasPermission("dirtyarrows.pull") && plugin.getConfig().getBoolean("pull.enabled")) {
 			player.sendMessage(ChatColor.GOLD + "33 " + Methods.setColours(plugin.getConfig().getString("pull.name")) + ChatColor.WHITE + " Pull others towards you!");
 		}
-		if (player.hasPermission("dirtyarrows.paralyze") && plugin.getConfig().getBoolean("iron.enabled")) {
+		if (player.hasPermission("dirtyarrows.paralyze") && plugin.getConfig().getBoolean("paralyze.enabled")) {
 			player.sendMessage(ChatColor.GOLD + "34 " + Methods.setColours(plugin.getConfig().getString("paralyze.name")) + ChatColor.WHITE + " Paralyze your opponents!");
+		}
+		if (player.hasPermission("dirtyarrows.acacia") && plugin.getConfig().getBoolean("acacia.enabled")) {
+			player.sendMessage(ChatColor.GOLD + "35 " + Methods.setColours(plugin.getConfig().getString("acacia.name")) + ChatColor.WHITE + " Spawns an Acacia " +
+					ChatColor.AQUA + "AcaciaSapling(1) BoneMeal(1)");
+		}
+		if (player.hasPermission("dirtyarrows.darkoak") && plugin.getConfig().getBoolean("darkoak.enabled")) {
+			player.sendMessage(ChatColor.GOLD + "36 " + Methods.setColours(plugin.getConfig().getString("darkoak.name")) + ChatColor.WHITE + " Spawns an Dark Oak " +
+					ChatColor.AQUA + "DarkOakSapling(4) BoneMeal(1)");
 		}
 		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "Page 6/6" + 
 				ChatColor.RED + " /da help #" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 	}
 	
 	public static void showMainHelpPage5(Player player) {
-		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v2.5" + 
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v2.7" + 
 				ChatColor.RED + " MrSugarCaney" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 		player.sendMessage(ChatColor.YELLOW + "Use /da to " + ChatColor.GREEN + "enable" + ChatColor.YELLOW + " or " +
 				ChatColor.RED + "disable " + ChatColor.YELLOW + "the plugin.");
 		player.sendMessage(ChatColor.YELLOW + "Rename your bow in an anvil to unlock their powers:");
-		if (player.hasPermission("dirtyarrows.woodsman") && plugin.getConfig().getBoolean("woodsman.enabled")) {
-			player.sendMessage(ChatColor.GOLD + "25 " + Methods.setColours(plugin.getConfig().getString("woodsman.name")) + ChatColor.WHITE + " Cut down trees like hell");
+		if (player.hasPermission("dirtyarrows.woodman") && plugin.getConfig().getBoolean("woodman.enabled")) {
+			player.sendMessage(ChatColor.GOLD + "25 " + Methods.setColours(plugin.getConfig().getString("woodman.name")) + ChatColor.WHITE + " Cut down trees like hell");
 		}
 		if (player.hasPermission("dirtyarrows.starvation") && plugin.getConfig().getBoolean("starvation.enabled")) {
 			player.sendMessage(ChatColor.GOLD + "26 " + Methods.setColours(plugin.getConfig().getString("starvation.name")) + ChatColor.WHITE + " Let your enemy starve");
@@ -67,7 +75,7 @@ public class Help {
 	}
 	
 	public static void showMainHelpPage4(Player player) {
-		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v2.5" + 
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v2.7" + 
 				ChatColor.RED + " MrSugarCaney" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 		player.sendMessage(ChatColor.YELLOW + "Use /da to " + ChatColor.GREEN + "enable" + ChatColor.YELLOW + " or " +
 				ChatColor.RED + "disable " + ChatColor.YELLOW + "the plugin.");
@@ -98,7 +106,7 @@ public class Help {
 	}
 	
 	public static void showMainHelpPage3(Player player) {
-		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v2.5" + 
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v2.7" + 
 				ChatColor.RED + " MrSugarCaney" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 		player.sendMessage(ChatColor.YELLOW + "Use /da to " + ChatColor.GREEN + "enable" + ChatColor.YELLOW + " or " +
 				ChatColor.RED + "disable " + ChatColor.YELLOW + "the plugin.");
@@ -128,7 +136,7 @@ public class Help {
 	}
 	
 	public static void showMainHelpPage2(Player player) {
-		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v2.5" + 
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v2.7" + 
 				ChatColor.RED + " MrSugarCaney" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 		player.sendMessage(ChatColor.YELLOW + "Use /da to " + ChatColor.GREEN + "enable" + ChatColor.YELLOW + " or " +
 				ChatColor.RED + "disable " + ChatColor.YELLOW + "the plugin.");
@@ -161,7 +169,7 @@ public class Help {
 	}
 
 	public static void showMainHelpPage1(Player player) {	
-		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v2.5" + 
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v2.7" + 
 					ChatColor.RED + " MrSugarCaney" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 		player.sendMessage(ChatColor.YELLOW + "Use /da to " + ChatColor.GREEN + "enable" + ChatColor.YELLOW + " or " +
 					ChatColor.RED + "disable " + ChatColor.YELLOW + "the plugin.");

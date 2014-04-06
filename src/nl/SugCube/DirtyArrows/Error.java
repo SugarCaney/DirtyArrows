@@ -5,12 +5,32 @@ import org.bukkit.entity.Player;
 
 public class Error {
 	
+	public static void noDarkOak(Player player, String string) {
+		if (string.equalsIgnoreCase("permissions")) {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
+		} else {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have enough resources to use this bow. Needed:");
+			player.sendMessage(ChatColor.RED + "[!!] Dark Oak Sapling (x4)");
+			player.sendMessage(ChatColor.RED + "[!!] Bone Meal (x1)");
+		}
+	} 
+	
+	public static void noAcacia(Player player, String string) {
+		if (string.equalsIgnoreCase("permissions")) {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
+		} else {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have enough resources to use this bow. Needed:");
+			player.sendMessage(ChatColor.RED + "[!!] Acacia Sapling (x1)");
+			player.sendMessage(ChatColor.RED + "[!!] Bone Meal (x1)");
+		}
+	} 
+	
 	public static void noParalyze(Player player, String string) {
 		if (string.equalsIgnoreCase("permissions")) {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have enough resources to use this bow. Needed:");
-			player.sendMessage(ChatColor.RED + "[!!] Nether Wart (1x)");
+			player.sendMessage(ChatColor.RED + "[!!] Nether Wart (x1)");
 		}
 	} 
 	
@@ -19,7 +39,7 @@ public class Error {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have enough resources to use this bow. Needed:");
-			player.sendMessage(ChatColor.RED + "[!!] Water Bucket (1x)");
+			player.sendMessage(ChatColor.RED + "[!!] Water Bucket (x1)");
 		}
 	} 
 	
@@ -28,7 +48,7 @@ public class Error {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have enough resources to use this bow. Needed:");
-			player.sendMessage(ChatColor.RED + "[!!] Lava Bucket (1x)");
+			player.sendMessage(ChatColor.RED + "[!!] Lava Bucket (x1)");
 		}
 	} 
 	
@@ -46,7 +66,7 @@ public class Error {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have enough resources to use this bow. Needed:");
-			player.sendMessage(ChatColor.RED + "[!!] Arrow (8x)");
+			player.sendMessage(ChatColor.RED + "[!!] Arrow (x8)");
 		}
 	} 
 	
@@ -55,7 +75,7 @@ public class Error {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have enough resources to use this bow. Needed:");
-			player.sendMessage(ChatColor.RED + "[!!] TNT (3x)");
+			player.sendMessage(ChatColor.RED + "[!!] TNT (x3)");
 		}
 	} 
 	
@@ -104,7 +124,7 @@ public class Error {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else if (reason == "item") {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have enough resources to use this bow. Needed:");
-			player.sendMessage(ChatColor.RED + "[!!] Rotten Flesh (64x)");
+			player.sendMessage(ChatColor.RED + "[!!] Rotten Flesh (x64)");
 		}
 	}
 	
@@ -113,7 +133,7 @@ public class Error {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else if (reason == "item") {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have enough resources to use this bow. Needed:");
-			player.sendMessage(ChatColor.RED + "[!!] Fire Charge (1x)");
+			player.sendMessage(ChatColor.RED + "[!!] Fire Charge (x1)");
 		}
 	}
 	
@@ -122,7 +142,7 @@ public class Error {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else if (reason == "item") {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have enough resources to use this bow. Needed:");
-			player.sendMessage(ChatColor.RED + "[!!] Soul Sand (3x)");
+			player.sendMessage(ChatColor.RED + "[!!] Soul Sand (x3)");
 		}
 	}
 	
