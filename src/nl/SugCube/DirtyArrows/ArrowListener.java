@@ -1236,6 +1236,8 @@ public class ArrowListener implements Listener {
 						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 3) == null) {
 							player.getWorld().strikeLightning(arrow.getLocation());
 							arrow.remove();
+							if (player.getGameMode() == GameMode.SURVIVAL)
+								player.getInventory().removeItem(new ItemStack(Material.GLOWSTONE_DUST, 1));
 							canStrikeLightning.remove(player.getUniqueId().toString());
 						} else {
 							arrow.remove();
@@ -1529,13 +1531,15 @@ public class ArrowListener implements Listener {
 							}
 							if (player.getGameMode() == GameMode.SURVIVAL) {
 								for (ItemStack is : player.getInventory().getContents()) {
-									if (is.getType() == Material.FLINT_AND_STEEL) {
-										is.setDurability((short) (is.getDurability() + fintuses));
-										if (is.getDurability() > 64) {
-											player.getInventory().remove(is);
-											player.playSound(player.getLocation(), Sound.ITEM_BREAK, 10, 10);
+									if (is != null) {
+										if (is.getType() == Material.FLINT_AND_STEEL) {
+											is.setDurability((short) (is.getDurability() + fintuses));
+											if (is.getDurability() > 64) {
+												player.getInventory().remove(is);
+												player.playSound(player.getLocation(), Sound.ITEM_BREAK, 10, 10);
+											}
+											break;
 										}
-										break;
 									}
 								}
 							}

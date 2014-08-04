@@ -66,12 +66,32 @@ public class RegionManager {
 	 * Saves all the regions to the data.yml
 	 */
 	public void saveRegions() {
+		boolean error = false;
 		for (int i = 0; i < registeredRegions.size(); i++) {
-			Region reg = registeredRegions.get(i);
-			plugin.getData().set("regions." + reg.getName() + ".pos1", SMeth.toLocationString(reg.getLocation(1)));
-			plugin.getData().set("regions." + reg.getName() + ".pos2", SMeth.toLocationString(reg.getLocation(2)));
-			plugin.saveData();
+			try {
+				Region reg = registeredRegions.get(i);
+				
+				if (reg == null) {
+					continue;
+				}
+				
+				if (reg.getName() == "") {
+					continue;
+				}
+	
+				if (reg.getLocation(1) != null) {
+					plugin.getData().set("regions." + reg.getName() + ".pos1", SMeth.toLocationString(reg.getLocation(1)));
+				}
+				
+				if (reg.getLocation(2) != null)
+					plugin.getData().set("regions." + reg.getName() + ".pos2", SMeth.toLocationString(reg.getLocation(2)));
+				
+				plugin.saveData();
+			} catch (Exception e) {
+				error = true;
+			}
 		}
+		plugin.getLogger().info("Could not save locations.");
 	}
 	
 	/**
