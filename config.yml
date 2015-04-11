@@ -1,3 +1,8 @@
+metrics:
+  enabled: true
+updates:
+  check-for-updates: true
+  show-admin: true
 arrow-recipe-amount: 16
 headshot: true
 headshot-multiplier: 1.5
@@ -7,108 +12,168 @@ auto-enable: false
 exploding:
   name: 'Exploding Bastard'
   enabled: true
+  levels: 10
 lightning:
   name: 'Lightning Bastard'
   enabled: true
+  levels: 7
 clucky:
   name: 'Clucky Bastard'
   enabled: true
+  levels: 3
 ender:
   name: 'Ender Bastard'
   enabled: true
+  levels: 5
 oak:
   name: 'Oak Bastard'
   enabled: true
+  levels: 2
 birch:
   name: 'Birch Bastard'
   enabled: true
+  levels: 2
 spruce:
   name: 'Spruce Bastard'
   enabled: true
+  levels: 2
 jungle:
   name: 'Jungle Bastard'
   enabled: true
+  levels: 2
 batty:
   name: 'Batty Bastard'
   enabled: true
+  levels: 7
 nuclear:
   name: 'Nuclear Bastard'
   enabled: true
+  levels: 50
 enlightened:
   name: 'Enlightened Bastard'
   enabled: true
+  levels: 5
 ranged:
   name: 'Ranged Bastard'
   enabled: true
+  levels: 10
 machine:
   name: 'Machine Bastard'
   enabled: true
+  levels: 7
 poisonous:
   name: 'Poisonous Bastard'
   enabled: true
+  levels: 7
 disorienting:
   name: 'Disorienting Bastard'
   enabled: true
+  levels: 7
 swap:
   name: 'Swap Bastard'
   enabled: true
+  levels: 10
 draining:
   name: 'Draining Bastard'
   enabled: true
+  levels: 7
 flintand:
   name: 'Flint and Bastard'
   enabled: true
+  levels: 10
 disarming:
   name: 'Disarming Bastard'
   enabled: true
+  levels: 7
 wither:
   name: 'Wither Bastard'
   enabled: true
+  levels: 7
 firey:
   name: 'Firey Bastard'
   enabled: true
+  levels: 7
 slow:
   name: 'Slow Bastard'
   enabled: true
+  levels: 7
 level:
   name: 'Level Bastard'
   enabled: true
+  levels: 10
 undead:
   name: 'Undead Bastard'
   enabled: true
+  levels: 15
 woodman:
   name: "Woodman's Bastard"
   enabled: true
+  levels: 7
 starvation:
   name: 'Bastard of Starvation'
   enabled: true
+  levels: 7
 multi:
   name: 'Multi Bastard'
   enabled: true
+  levels: 10
 bomb:
   name: 'Bomb Bastard'
   enabled: true
+  levels: 15
 drop:
   name: 'Drop Bastard'
   enabled: true
+  levels: 7
 airstrike:
   name: 'Airstrike Bastard'
   enabled: true
+  levels: 20
 magmatic:
   name: 'Magmatic Bastard'
   enabled: true
+  levels: 10
 aquatic:
   name: 'Aquatic Bastard'
   enabled: true
+  levels: 7
 pull:
   name: 'Pull Bastard'
   enabled: true
+  levels: 7
 paralyze:
   name: 'Paralyze Bastard'
   enabled: true
+  levels: 7
 acacia:
   name: 'Acacia Bastard'
   enabled: true
+  levels: 2
 darkoak:
   name: 'Dark Oak Bastard'
   enabled: true
+  levels: 2
+cluster:
+  name: 'Cluster Bastard'
+  enabled: true
+  levels: 15
+airship:
+  name: 'Airship Bastard'
+  enabled: true
+  levels: 10
+iron:
+  name: 'Iron Bastard'
+  enabled: true
+  levels: 5
+curse:
+  name: 'Curse Bastard'
+  enabled: true
+  levels: 7
+round:
+  name: '360 Bastard'
+  enabled: true
+  levels: 7
+frozen:
+  name: 'Frozen Bastard'
+  enabled: true
+  levels: 7

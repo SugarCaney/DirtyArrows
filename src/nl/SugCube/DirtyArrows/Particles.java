@@ -1,4 +1,4 @@
-package nl.SugCube.DirtyArrows;
+package nl.sugcube.dirtyarrows;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +28,10 @@ public class Particles implements Runnable {
 			proj.getLocation().getWorld().playEffect(proj.getLocation().add(0.5, 0.5, 0.5), Effect.MOBSPAWNER_FLAMES, 0);
 		}
 		
+		for (Projectile proj : plugin.iceParticle) {
+			proj.getLocation().getWorld().playEffect(proj.getLocation().add(0.1, 0.1, 0.1), Effect.STEP_SOUND, Material.SNOW_BLOCK);
+		}
+		
 		for (FallingBlock proj : plugin.particleLava) {
 			proj.getLocation().getWorld().playEffect(proj.getLocation().add(0.5, 0.5, 0.5), Effect.STEP_SOUND, Material.LAVA);
 			if (proj.isOnGround()) {
@@ -43,12 +47,8 @@ public class Particles implements Runnable {
 		}
 		
 		for (FallingBlock fb : toRemove) {
-			if (plugin.particleLava.contains(fb)) {
-				plugin.particleLava.remove(fb);
-			}
-			if (plugin.particleWater.contains(fb)) {
-				plugin.particleWater.remove(fb);
-			}
+			plugin.particleLava.remove(fb);
+			plugin.particleWater.remove(fb);
 		}
 	}
 

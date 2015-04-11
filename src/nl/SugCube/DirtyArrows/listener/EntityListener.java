@@ -1,7 +1,10 @@
-package nl.SugCube.DirtyArrows;
+package nl.sugcube.dirtyarrows.listener;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import nl.sugcube.dirtyarrows.DirtyArrows;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
@@ -24,6 +27,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -31,6 +35,7 @@ import org.bukkit.potion.PotionEffectType;
 public class EntityListener implements Listener {
 	
 	public static DirtyArrows plugin;
+	public static List<Arrow> deadArrows = new ArrayList<Arrow>();
 	
 	public EntityListener(DirtyArrows instance) {
 		plugin = instance;
@@ -39,6 +44,14 @@ public class EntityListener implements Listener {
 	Random ran = new Random();
 	boolean extra = false;
 	Player player;
+	
+	@EventHandler
+	public void onProjectileHit(ProjectileHitEvent event) {
+		if (deadArrows.contains(event.getEntity())) {
+			event.getEntity().remove();
+			deadArrows.remove(event.getEntity());
+		}
+	}
 	
 	@EventHandler
 	public void onEntityExplode(EntityExplodeEvent event) {

@@ -1,4 +1,4 @@
-DirtyArrows v2.8
+DirtyArrows v3.0
 ==================
 Have some fun bein' Archer!
 Get'm with ya Bastard!

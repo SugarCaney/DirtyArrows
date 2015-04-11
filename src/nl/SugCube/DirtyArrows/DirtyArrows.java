@@ -1,12 +1,34 @@
-package nl.SugCube.DirtyArrows;
+package nl.sugcube.dirtyarrows;
 
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import nl.sugcube.dirtyarrows.ability.Airship;
+import nl.sugcube.dirtyarrows.ability.Airstrike;
+import nl.sugcube.dirtyarrows.ability.CurseListener;
+import nl.sugcube.dirtyarrows.ability.FrozenListener;
+import nl.sugcube.dirtyarrows.ability.Iron;
+import nl.sugcube.dirtyarrows.listener.AnvilListener;
+import nl.sugcube.dirtyarrows.listener.ArrowListener;
+import nl.sugcube.dirtyarrows.listener.EnchantmentListener;
+import nl.sugcube.dirtyarrows.listener.EntityListener;
+import nl.sugcube.dirtyarrows.listener.PlayerDamageListener;
+import nl.sugcube.dirtyarrows.listener.PlayerJoinListener;
+import nl.sugcube.dirtyarrows.region.Region;
+import nl.sugcube.dirtyarrows.region.RegionManager;
+import nl.sugcube.dirtyarrows.util.Help;
+import nl.sugcube.dirtyarrows.util.Message;
+import nl.sugcube.dirtyarrows.util.Methods;
+import nl.sugcube.dirtyarrows.util.Metrics;
+import nl.sugcube.dirtyarrows.util.Update;
+import nl.sugcube.dirtyarrows.util.Util;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -17,6 +39,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -29,25 +52,40 @@ import org.bukkit.util.Vector;
 
 public class DirtyArrows extends JavaPlugin {
 	
+	public static final boolean MINIGAME_VERSION = false;
+	
 	private final Logger log = Logger.getLogger("Minecraft");
 	File file = new File(getDataFolder() + File.separator + "config.yml");
 	
 	public ArrowListener al = new ArrowListener(this);
 	public EnchantmentListener el = new EnchantmentListener(this);
 	public PlayerJoinListener pjl = new PlayerJoinListener(this);
+	public PlayerDamageListener pdl = new PlayerDamageListener(this);
 	public EntityListener enl = new EntityListener(this);
 	public Help help = new Help(this);
 	public RegionManager rm = new RegionManager(this);
+	public Iron iron = new Iron(this);
+	public CurseListener curse = new CurseListener(this);
+	public FrozenListener frozenListener = new FrozenListener(this);
+	public AnvilListener anvilListener = new AnvilListener(this);
 	
 	public List<String> activated = new ArrayList<String>();
 	public List<Projectile> slow = new ArrayList<Projectile>();
 	public List<Projectile> airstrike = new ArrayList<Projectile>();
+	public List<Projectile> airship = new ArrayList<Projectile>();
+	public List<UUID> noFallDamage = new ArrayList<UUID>();
 	public List<Vector> slowVec = new ArrayList<Vector>();
+	public ConcurrentHashMap<Entity, Integer> cursed = new ConcurrentHashMap<Entity, Integer>();
+	public ConcurrentHashMap<Entity, Integer> frozen = new ConcurrentHashMap<Entity, Integer>();
+	public List<Player> noInteract = new ArrayList<Player>();
 	
 	public List<Projectile> particleExploding = new ArrayList<Projectile>();
 	public List<Projectile> particleFire = new ArrayList<Projectile>();
 	public List<FallingBlock> particleLava = new ArrayList<FallingBlock>();
 	public List<FallingBlock> particleWater = new ArrayList<FallingBlock>();
+	public List<Integer> ice = new ArrayList<Integer>();
+	public List<Projectile> iceParticle = new ArrayList<Projectile>();
+	public ConcurrentHashMap<FallingBlock, Integer> anvils = new ConcurrentHashMap<FallingBlock, Integer>();
 	
 	@Override
 	public void onEnable() {
@@ -81,6 +119,11 @@ public class DirtyArrows extends JavaPlugin {
 		pm.registerEvents(el, this);
 		pm.registerEvents(enl, this);
 		pm.registerEvents(pjl, this);
+		pm.registerEvents(pdl, this);
+		pm.registerEvents(iron, this);
+		pm.registerEvents(curse, this);
+		pm.registerEvents(frozenListener, this);
+		pm.registerEvents(anvilListener, this);
 		
 		ShapedRecipe arrow = new ShapedRecipe(new ItemStack(Material.ARROW, getConfig().getInt("arrow-recipe-amount"))).shape(" * "," # "," % ").setIngredient('*', Material.FLINT).setIngredient('#', Material.STICK).setIngredient('%', Material.FEATHER);
 		ShapedRecipe arrow2 = new ShapedRecipe(new ItemStack(Material.ARROW, getConfig().getInt("arrow-recipe-amount"))).shape("*  ","#  ","%  ").setIngredient('*', Material.FLINT).setIngredient('#', Material.STICK).setIngredient('%', Material.FEATHER);
@@ -91,12 +134,43 @@ public class DirtyArrows extends JavaPlugin {
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new Timer(this), 0, 1);
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new Airstrike(this), 5, 5);
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new Particles(this), 2, 2);
+		getServer().getScheduler().scheduleSyncRepeatingTask(this, new Airship(this), 2, 2);
+		getServer().getScheduler().scheduleSyncRepeatingTask(this, iron, 5, 5);
+		getServer().getScheduler().scheduleSyncRepeatingTask(this, curse, 20, 20);
+		getServer().getScheduler().scheduleSyncRepeatingTask(this, frozenListener, 20, 20);
 		
 		rm.loadRegions();
 		
 		log.info("[DirtyArrows] DirtyArrows has been enabled!");
-		log.info("[DirtyArrows] 36 Bastards have been loaded");
+		log.info("[DirtyArrows] 42 Bastards have been loaded");
 		log.info("[DirtyArrows] 3 recipes have been loaded");
+		
+		/*
+		 * Check for updatese
+		 */
+		if (this.getConfig().getBoolean("updates.check-for-updates")) {
+			Update uc = new Update(57131 ,this.getDescription().getVersion());
+			if (uc.query()) {
+				Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "[DirtyArrows] A new version of DirtyArrows is " +
+						"avaiable! Get it at the BukkitDev page!");
+			} else {
+				Bukkit.getConsoleSender().sendMessage("[DirtyArrows] DirtyArrows is up-to-date!");
+			}
+		}
+		
+		//Plugin metrics
+		if (this.getConfig().getBoolean("metrics.enabled")) {
+			try {
+			    Metrics metrics = new Metrics(this);
+			    metrics.start();
+			    this.getLogger().info("Started Metrics.");
+			} catch (Exception e) {
+			    this.getLogger().info("Failed starting Metrics.");
+			}
+		}
+		else {
+			this.getLogger().info("Didn't start Metrics (disabled in the configuration).");
+		}
 	}
 	
 	@Override
@@ -116,10 +190,11 @@ public class DirtyArrows extends JavaPlugin {
 						if (player.hasPermission("dirtyarrows")) {
 							if (activated.contains(player.getUniqueId().toString())) {
 								activated.remove(player.getUniqueId().toString());
-								player.sendMessage(ChatColor.YELLOW + "Dirty Arrows have been" + ChatColor.RED + " disabled!");
-							} else {
+								player.sendMessage(Message.getEnabled(false));
+							}
+							else {
 								activated.add(player.getUniqueId().toString());
-								player.sendMessage(ChatColor.YELLOW + "Dirty Arrows have been " + ChatColor.GREEN + "enabled!");
+								player.sendMessage(Message.getEnabled(true));
 							}
 						} else {
 							player.sendMessage(ChatColor.RED + "[!!] You don't have permission to perform this command!");
@@ -150,7 +225,7 @@ public class DirtyArrows extends JavaPlugin {
 										break;
 									case "@r":
 										Random ran = new Random();
-										Player[] players = Bukkit.getOnlinePlayers();
+										Player[] players = Util.getOnlinePlayers();
 										giveBastard(players[ran.nextInt(players.length)], id, spec);
 										break;
 									default:
@@ -166,7 +241,7 @@ public class DirtyArrows extends JavaPlugin {
 										break;
 									case "@r":
 										Random ran = new Random();
-										Player[] players = Bukkit.getOnlinePlayers();
+										Player[] players = Util.getOnlinePlayers();
 										giveBastard(players[ran.nextInt(players.length)], id, spec);
 										break;
 									default:
@@ -307,7 +382,10 @@ public class DirtyArrows extends JavaPlugin {
 							Help.showMainHelpPage5(player);
 						} else if (args[1].equalsIgnoreCase("6")) {
 							Help.showMainHelpPage6(player);
-						} else if (args[1].equalsIgnoreCase("admin")) {
+						} else if (args[1].equalsIgnoreCase("7")) {
+							Help.showMainHelpPage7(player);
+						}
+						else if (args[1].equalsIgnoreCase("admin")) {
 							if (player.hasPermission("dirtyarrows.admin")) {
 								player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v2.7" + 
 										ChatColor.RED + " MrSugarCaney" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
@@ -343,6 +421,15 @@ public class DirtyArrows extends JavaPlugin {
 		}
 		
 		return false;
+	}
+	
+	public boolean isActivated(Player p) {
+		if (MINIGAME_VERSION) {
+			return true;
+		}
+		else {
+			return activated.contains(p.getUniqueId().toString());
+		}
 	}
 	
 	public void reloadConfiguration() {
@@ -433,6 +520,18 @@ public class DirtyArrows extends JavaPlugin {
 			givePlayerBastard("acacia.name", im, is, p, spec); break;
 		case "darkoak":
 			givePlayerBastard("darkoak.name", im, is, p, spec); break;
+		case "cluster":
+			givePlayerBastard("cluster.name", im, is, p, spec); break;
+		case "airship":
+			givePlayerBastard("airship.name", im, is, p, spec); break;
+		case "iron":
+			givePlayerBastard("iron.name", im, is, p, spec); break;
+		case "curse":
+			givePlayerBastard("curse.name", im, is, p, spec); break;
+		case "round":
+			givePlayerBastard("round.name", im, is, p, spec); break;
+		case "frozen":
+			givePlayerBastard("frozen.name", im, is, p, spec); break;
 		}
 	}
 	
@@ -513,6 +612,18 @@ public class DirtyArrows extends JavaPlugin {
 			givePlayerBastard("acacia.name", im, is, p, spec); break;
 		case 36:
 			givePlayerBastard("darkoak.name", im, is, p, spec); break;
+		case 37:
+			givePlayerBastard("cluster.name", im, is, p, spec); break;
+		case 38:
+			givePlayerBastard("airship.name", im, is, p, spec); break;
+		case 39:
+			givePlayerBastard("iron.name", im, is, p, spec); break;
+		case 40:
+			givePlayerBastard("curse.name", im, is, p, spec); break;
+		case 41:
+			givePlayerBastard("round.name", im, is, p, spec); break;
+		case 42:
+			givePlayerBastard("frozen.name", im, is, p, spec); break;
 		}
 	}
 	
@@ -526,6 +637,10 @@ public class DirtyArrows extends JavaPlugin {
 		}
 		
 		p.getInventory().addItem(is);
+	}
+	
+	public String getVersion() {
+		return getDescription().getVersion();
 	}
 	
 	private FileConfiguration data = null;

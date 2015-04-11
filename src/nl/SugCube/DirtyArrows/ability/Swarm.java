@@ -1,4 +1,4 @@
-package nl.SugCube.DirtyArrows;
+package nl.sugcube.dirtyarrows.ability;
 
 import org.bukkit.Effect;
 import org.bukkit.Location;

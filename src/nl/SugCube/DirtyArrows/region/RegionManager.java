@@ -1,7 +1,10 @@
-package nl.SugCube.DirtyArrows;
+package nl.sugcube.dirtyarrows.region;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import nl.sugcube.dirtyarrows.DirtyArrows;
+import nl.sugcube.sba.SMeth;
 
 import org.bukkit.Location;
 
@@ -51,6 +54,9 @@ public class RegionManager {
 	 * Loads all the regions from the data.yml
 	 */
 	public void loadRegions() {
+		if (!plugin.getData().isSet("regions")) {
+			return;
+		}
 		for (String key : plugin.getData().getConfigurationSection("regions").getKeys(false)) {
 			String path = "regions." + key + ".";
 			String pos1string = plugin.getData().getString(path + "pos1");

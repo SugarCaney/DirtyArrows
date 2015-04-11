@@ -1,11 +1,82 @@
-package nl.SugCube.DirtyArrows;
+package nl.sugcube.dirtyarrows.util;
+
+import nl.sugcube.dirtyarrows.DirtyArrows;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class Error {
 	
+	public static void noFrozen(Player player, String string) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
+		if (string.equalsIgnoreCase("permissions")) {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
+		} else {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have enough resources to use this bow. Needed:");
+			player.sendMessage(ChatColor.RED + "[!!] Snowball (x1)");
+		}
+	} 
+	
+	public static void noCurse(Player player, String string) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
+		if (string.equalsIgnoreCase("permissions")) {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
+		} else {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have enough resources to use this bow. Needed:");
+			player.sendMessage(ChatColor.RED + "[!!] Fermented Spider Eye (x1)");
+		}
+	} 
+	
+	public static void noIron(Player player, String string) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
+		if (string.equalsIgnoreCase("permissions")) {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
+		} else {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have enough resources to use this bow. Needed:");
+			player.sendMessage(ChatColor.RED + "[!!] Anvil (x1)");
+		}
+	} 
+	
+	public static void noAirship(Player player, String string) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
+		if (string.equalsIgnoreCase("permissions")) {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
+		} else {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have enough resources to use this bow. Needed:");
+			player.sendMessage(ChatColor.RED + "[!!] Feather (x2)");
+		}
+	} 
+	
+	public static void noSulphur(Player player, String string) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
+		if (string.equalsIgnoreCase("permissions")) {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
+		} else {
+			player.sendMessage(ChatColor.RED + "[!!] You don't have enough resources to use this bow. Needed:");
+			player.sendMessage(ChatColor.RED + "[!!] TNT (x5)");
+		}
+	} 
+	
 	public static void noDarkOak(Player player, String string) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		if (string.equalsIgnoreCase("permissions")) {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else {
@@ -16,6 +87,10 @@ public class Error {
 	} 
 	
 	public static void noAcacia(Player player, String string) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		if (string.equalsIgnoreCase("permissions")) {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else {
@@ -26,6 +101,10 @@ public class Error {
 	} 
 	
 	public static void noParalyze(Player player, String string) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		if (string.equalsIgnoreCase("permissions")) {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else {
@@ -35,6 +114,10 @@ public class Error {
 	} 
 	
 	public static void noAquatic(Player player, String string) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		if (string.equalsIgnoreCase("permissions")) {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else {
@@ -44,6 +127,10 @@ public class Error {
 	} 
 	
 	public static void noMagmatic(Player player, String string) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		if (string.equalsIgnoreCase("permissions")) {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else {
@@ -53,6 +140,10 @@ public class Error {
 	} 
 	
 	public static void noAirstrike(Player player, String string) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		if (string.equalsIgnoreCase("permissions")) {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else {
@@ -62,6 +153,10 @@ public class Error {
 	} 
 	
 	public static void noMulti(Player player, String string) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		if (string.equalsIgnoreCase("permissions")) {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else {
@@ -71,6 +166,10 @@ public class Error {
 	} 
 	
 	public static void noBomb(Player player, String string) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		if (string.equalsIgnoreCase("permissions")) {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else {
@@ -80,46 +179,90 @@ public class Error {
 	} 
 	
 	public static void noWoodsman(Player player) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 	} 
 	
 	public static void noLevel(Player player) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 	} 
 	
 	public static void noSlow(Player player) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 	} 
 	
 	public static void noDisarm(Player player) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 	} 
 	
 	public static void noPull(Player player) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 	} 
 	
 	public static void noDraining(Player player) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 	} 
 	
 	public static void noSwap(Player player) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 	} 
 	
 	public static void noDisorienting(Player player) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 	} 
 	
 	public static void noMachine(Player player) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 	}
 	
 	public static void noRanged(Player player) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 	} 
 	
 	public static void noUndead(Player player, String reason) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		if (reason == "permissions") {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else if (reason == "item") {
@@ -129,6 +272,10 @@ public class Error {
 	}
 	
 	public static void noFirey(Player player, String reason) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		if (reason == "permissions") {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else if (reason == "item") {
@@ -138,6 +285,10 @@ public class Error {
 	}
 	
 	public static void noWither(Player player, String reason) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		if (reason == "permissions") {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else if (reason == "item") {
@@ -147,6 +298,10 @@ public class Error {
 	}
 	
 	public static void noFlintAnd(Player player, String reason) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		if (reason == "permissions") {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else if (reason == "item") {
@@ -156,6 +311,10 @@ public class Error {
 	}
 	
 	public static void noPoisonous(Player player, String reason) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		if (reason == "permissions") {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else if (reason == "item") {
@@ -165,6 +324,10 @@ public class Error {
 	}
 	
 	public static void noEnlightened(Player player, String reason) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		if (reason == "permissions") {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else if (reason == "item") {
@@ -174,6 +337,10 @@ public class Error {
 	}
 	
 	public static void noNuclear(Player player, String reason) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		if (reason == "permissions") {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else if (reason == "item") {
@@ -183,6 +350,10 @@ public class Error {
 	}
 	
 	public static void noBatty(Player player, String reason) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		if (reason == "permissions") {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else if (reason == "item") {
@@ -192,6 +363,10 @@ public class Error {
 	}
 	
 	public static void noJungle(Player player, String reason) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		if (reason == "permissions") {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else if (reason == "item") {
@@ -202,6 +377,10 @@ public class Error {
 	}
 	
 	public static void noSpruce(Player player, String reason) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		if (reason == "permissions") {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else if (reason == "item") {
@@ -212,6 +391,10 @@ public class Error {
 	}
 	
 	public static void noBirch(Player player, String reason) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		if (reason == "permissions") {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else if (reason == "item") {
@@ -222,6 +405,10 @@ public class Error {
 	}
 	
 	public static void noOak(Player player, String reason) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		if (reason == "permissions") {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else if (reason == "item") {
@@ -232,6 +419,10 @@ public class Error {
 	}
 	
 	public static void noEnder(Player player, String reason) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		if (reason == "permissions") {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else if (reason == "item") {
@@ -241,6 +432,10 @@ public class Error {
 	}
 	
 	public static void noClucky(Player player, String reason) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		if (reason == "permissions") {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else if (reason == "item") {
@@ -250,6 +445,10 @@ public class Error {
 	}
 	
 	public static void noLightning(Player player, String reason) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		if (reason == "permissions") {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else if (reason == "item") {
@@ -259,6 +458,10 @@ public class Error {
 	}
 	
 	public static void noExploding(Player player, String reason) {
+		if (DirtyArrows.MINIGAME_VERSION) {
+			return;
+		}
+		
 		if (reason == "permissions") {
 			player.sendMessage(ChatColor.RED + "[!!] You don't have permission to use this bow");
 		} else if (reason == "item") {

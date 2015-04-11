@@ -1,4 +1,6 @@
-package nl.SugCube.DirtyArrows;
+package nl.sugcube.dirtyarrows.util;
+
+import nl.sugcube.dirtyarrows.DirtyArrows;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -11,8 +13,41 @@ public class Help {
 		plugin = instance;
 	}
 	
+	public static void showMainHelpPage7(Player player) {
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows " + plugin.getVersion() + 
+				ChatColor.RED + " MrSugarCaney" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
+		player.sendMessage(ChatColor.YELLOW + "Use /da to " + ChatColor.GREEN + "enable" + ChatColor.YELLOW + " or " +
+				ChatColor.RED + "disable " + ChatColor.YELLOW + "the plugin.");
+		player.sendMessage(ChatColor.YELLOW + "Rename your bow in an anvil to unlock their powers:");
+		if (player.hasPermission("dirtyarrows.cluster") && plugin.getConfig().getBoolean("cluster.enabled")) {
+			player.sendMessage(ChatColor.GOLD + "37 " + Methods.setColours(plugin.getConfig().getString("cluster.name")) + ChatColor.WHITE + " Shoot TNT that spawns TNT! " 
+					+ ChatColor.AQUA + "TNT(5)");
+		}
+		if (player.hasPermission("dirtyarrows.airship") && plugin.getConfig().getBoolean("airship.enabled")) {
+			player.sendMessage(ChatColor.GOLD + "38 " + Methods.setColours(plugin.getConfig().getString("airship.name")) + ChatColor.WHITE + " Fly through the sky! " 
+					+ ChatColor.AQUA + "Feather(2)");
+		}
+		if (player.hasPermission("dirtyarrows.iron") && plugin.getConfig().getBoolean("iron.enabled")) {
+			player.sendMessage(ChatColor.GOLD + "39 " + Methods.setColours(plugin.getConfig().getString("iron.name")) + ChatColor.WHITE + " Shoot flying anvils! " 
+					+ ChatColor.AQUA + "Anvil(1)");
+		}
+		if (player.hasPermission("dirtyarrows.curse") && plugin.getConfig().getBoolean("curse.enabled")) {
+			player.sendMessage(ChatColor.GOLD + "40 " + Methods.setColours(plugin.getConfig().getString("curse.name")) + ChatColor.WHITE + " Curse your opponent. " 
+					+ ChatColor.AQUA + "FermSpiderEye(1)");
+		}
+		if (player.hasPermission("dirtyarrows.round") && plugin.getConfig().getBoolean("round.enabled")) {
+			player.sendMessage(ChatColor.GOLD + "41 " + Methods.setColours(plugin.getConfig().getString("round.name")) + ChatColor.WHITE + " Do the 360!");
+		}
+		if (player.hasPermission("dirtyarrows.frozen") && plugin.getConfig().getBoolean("frozen.enabled")) {
+			player.sendMessage(ChatColor.GOLD + "42 " + Methods.setColours(plugin.getConfig().getString("frozen.name")) + ChatColor.WHITE + " Freeze everything! "
+					+ ChatColor.AQUA + "Snowball(1)");
+		}
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "Page 7/7" + 
+				ChatColor.RED + " /da help #" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
+	}
+	
 	public static void showMainHelpPage6(Player player) {
-		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v2.7" + 
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows " + plugin.getVersion() + 
 				ChatColor.RED + " MrSugarCaney" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 		player.sendMessage(ChatColor.YELLOW + "Use /da to " + ChatColor.GREEN + "enable" + ChatColor.YELLOW + " or " +
 				ChatColor.RED + "disable " + ChatColor.YELLOW + "the plugin.");
@@ -39,12 +74,12 @@ public class Help {
 			player.sendMessage(ChatColor.GOLD + "36 " + Methods.setColours(plugin.getConfig().getString("darkoak.name")) + ChatColor.WHITE + " Spawns an Dark Oak " +
 					ChatColor.AQUA + "DarkOakSapling(4) BoneMeal(1)");
 		}
-		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "Page 6/6" + 
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "Page 6/7" + 
 				ChatColor.RED + " /da help #" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 	}
 	
 	public static void showMainHelpPage5(Player player) {
-		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v2.7" + 
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows " + plugin.getVersion() + 
 				ChatColor.RED + " MrSugarCaney" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 		player.sendMessage(ChatColor.YELLOW + "Use /da to " + ChatColor.GREEN + "enable" + ChatColor.YELLOW + " or " +
 				ChatColor.RED + "disable " + ChatColor.YELLOW + "the plugin.");
@@ -70,12 +105,12 @@ public class Help {
 			player.sendMessage(ChatColor.GOLD + "30 " + Methods.setColours(plugin.getConfig().getString("airstrike.name")) + ChatColor.WHITE + " Shoot a line of TNT " +
 					ChatColor.AQUA + "TNT(X)");
 		}
-		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "Page 5/6" + 
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "Page 5/7" + 
 				ChatColor.RED + " /da help #" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 	}
 	
 	public static void showMainHelpPage4(Player player) {
-		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v2.7" + 
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows " + plugin.getVersion() + 
 				ChatColor.RED + " MrSugarCaney" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 		player.sendMessage(ChatColor.YELLOW + "Use /da to " + ChatColor.GREEN + "enable" + ChatColor.YELLOW + " or " +
 				ChatColor.RED + "disable " + ChatColor.YELLOW + "the plugin.");
@@ -101,12 +136,12 @@ public class Help {
 			player.sendMessage(ChatColor.GOLD + "24 " + Methods.setColours(plugin.getConfig().getString("undead.name")) + ChatColor.WHITE + " Summons the undead " +
 					ChatColor.AQUA + "RottenFlesh(64)");
 		}
-		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "Page 4/6" + 
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "Page 4/7" + 
 				ChatColor.RED + " /da help #" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 	}
 	
 	public static void showMainHelpPage3(Player player) {
-		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v2.7" + 
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows " + plugin.getVersion() + 
 				ChatColor.RED + " MrSugarCaney" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 		player.sendMessage(ChatColor.YELLOW + "Use /da to " + ChatColor.GREEN + "enable" + ChatColor.YELLOW + " or " +
 				ChatColor.RED + "disable " + ChatColor.YELLOW + "the plugin.");
@@ -131,12 +166,12 @@ public class Help {
 			player.sendMessage(ChatColor.GOLD + "18 " + Methods.setColours(plugin.getConfig().getString("flintand.name")) + ChatColor.WHITE + " Set stuff on fire " +
 					ChatColor.AQUA + "FlintAndSteel(dura)");
 		}
-		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "Page 3/6" + 
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "Page 3/7" + 
 				ChatColor.RED + " /da help #" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 	}
 	
 	public static void showMainHelpPage2(Player player) {
-		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v2.7" + 
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows " + plugin.getVersion() + 
 				ChatColor.RED + " MrSugarCaney" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 		player.sendMessage(ChatColor.YELLOW + "Use /da to " + ChatColor.GREEN + "enable" + ChatColor.YELLOW + " or " +
 				ChatColor.RED + "disable " + ChatColor.YELLOW + "the plugin.");
@@ -164,12 +199,12 @@ public class Help {
 		if (player.hasPermission("dirtyarrows.ranged") && plugin.getConfig().getBoolean("ranged.enabled")) {
 			player.sendMessage(ChatColor.GOLD + "12 " + Methods.setColours(plugin.getConfig().getString("ranged.name")) + ChatColor.WHITE + " Long ranged power shots");
 		}
-		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "Page 2/6" + 
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "Page 2/7" + 
 				ChatColor.RED + " /da help #" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 	}
 
 	public static void showMainHelpPage1(Player player) {	
-		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows v2.7" + 
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "DirtyArrows " + plugin.getVersion() + 
 					ChatColor.RED + " MrSugarCaney" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 		player.sendMessage(ChatColor.YELLOW + "Use /da to " + ChatColor.GREEN + "enable" + ChatColor.YELLOW + " or " +
 					ChatColor.RED + "disable " + ChatColor.YELLOW + "the plugin.");
@@ -198,7 +233,7 @@ public class Help {
 			player.sendMessage(ChatColor.GOLD + "06 " + Methods.setColours(plugin.getConfig().getString("spruce.name")) + ChatColor.WHITE + " Spawns a Pine " +
 					ChatColor.AQUA + "SpruceSapl.(1) BoneMeal(1)");
 		}
-		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "Page 1/6" + 
+		player.sendMessage(">>" + ChatColor.GREEN + "----" + ChatColor.WHITE + "> " + ChatColor.YELLOW + "Page 1/7" + 
 					ChatColor.RED + " /da help #" + ChatColor.WHITE + " <" + ChatColor.GREEN + "----" + ChatColor.WHITE + "<<");
 	}
 	

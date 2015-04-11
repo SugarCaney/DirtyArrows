@@ -1,4 +1,6 @@
-package nl.SugCube.DirtyArrows;
+package nl.sugcube.dirtyarrows.ability;
+
+import nl.sugcube.dirtyarrows.DirtyArrows;
 
 import org.bukkit.GameMode;
 import org.bukkit.Material;

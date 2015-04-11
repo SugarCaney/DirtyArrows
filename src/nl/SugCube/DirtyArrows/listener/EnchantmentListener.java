@@ -1,7 +1,9 @@
-package nl.SugCube.DirtyArrows;
+package nl.sugcube.dirtyarrows.listener;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import nl.sugcube.dirtyarrows.DirtyArrows;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -23,18 +25,7 @@ public class EnchantmentListener implements Listener {
 	
 	@EventHandler
 	public void onEnchantItem(EnchantItemEvent event) {
-		if (event.getItem().getType().equals(Material.BOW)) {
-			if (ran.nextInt(4) == 0) {
-				if (event.getExpLevelCost() < 10) {
-					level = 1;
-				} else if (event.getExpLevelCost() < 20) {
-					level = 2;
-				} else {
-					level = 3;
-				}
-				event.getItem().addEnchantment(Enchantment.DURABILITY, level);
-			}
-			
+		if (event.getItem().getType().equals(Material.BOW)) {			
 			if (event.getExpLevelCost() > 10) {
 				if (ran.nextInt(8) == 0) {
 					if (event.getExpLevelCost() < 18) {

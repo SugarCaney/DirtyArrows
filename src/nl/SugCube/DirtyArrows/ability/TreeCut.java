@@ -1,4 +1,4 @@
-package nl.SugCube.DirtyArrows;
+package nl.sugcube.dirtyarrows.ability;
 
 import java.util.Random;
 
@@ -14,7 +14,6 @@ public class TreeCut {
 
 	@SuppressWarnings("deprecation")
 	public static boolean cutDownTree(Location loc, Block block, Player player) {
-		
 		Location location = new Location(loc.getWorld(), loc.getX(), loc.getY(), loc.getZ());
 		
 		if (block.getType() == Material.LOG || block.getType() == Material.LOG_2) {
@@ -49,7 +48,6 @@ public class TreeCut {
 	}
 	
 	public static void dropWood(Location loc, int damage, Player player) {
-		
 		if (new Random().nextInt(5) != 0) {
 			loc.getWorld().dropItem(loc, new ItemStack((loc.getBlock().getType() == Material.LOG ? Material.LOG :
 				Material.LOG_2), 1, (short) damage));
@@ -64,7 +62,6 @@ public class TreeCut {
 				loc.getWorld().dropItem(loc, new ItemStack(Material.STICK, new Random().nextInt(4) + 1));
 			}
 		}
-		
 	}
 	
 }

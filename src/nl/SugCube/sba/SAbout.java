@@ -1,4 +1,4 @@
-package nl.SugCube.DirtyArrows;
+package nl.sugcube.sba;
 
 public class SAbout {
 
@@ -10,9 +10,7 @@ public class SAbout {
 	 */
 	
 	public static String getAuthor() {
-	
 		return "MrSugarCaney";
-		
 	}
 	
 }

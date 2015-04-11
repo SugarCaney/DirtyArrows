@@ -1,9 +1,21 @@
-package nl.SugCube.DirtyArrows;
+package nl.sugcube.dirtyarrows.listener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
+import nl.sugcube.dirtyarrows.DirtyArrows;
+import nl.sugcube.dirtyarrows.ability.Swarm;
+import nl.sugcube.dirtyarrows.ability.TreeCut;
+import nl.sugcube.dirtyarrows.util.Error;
+import nl.sugcube.dirtyarrows.util.Message;
+import nl.sugcube.dirtyarrows.util.Methods;
+import nl.sugcube.dirtyarrows.util.Util;
+import nl.sugcube.dirtyarrows.util.Message.Type;
+
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.GameMode;
@@ -22,6 +34,7 @@ import org.bukkit.entity.Fireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
+import org.bukkit.entity.TNTPrimed;
 import org.bukkit.entity.WitherSkull;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -33,6 +46,7 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.BlockIterator;
@@ -40,6 +54,9 @@ import org.bukkit.util.BlockIterator;
 public class ArrowListener implements Listener {
 
 	public static DirtyArrows plugin;
+	public static final int CURSE_DURATION = 10;
+	public static final int FREEZE_DURATION = 3;
+	
 	Random ran = new Random();
 	int e = 0;
 	boolean hasUnbreaking = false;
@@ -74,6 +91,9 @@ public class ArrowListener implements Listener {
 	private List<String> canParalyze = new ArrayList<String>();
 	private List<String> canSpawnAcacia = new ArrayList<String>();
 	private List<String> canSpawnDarkOak = new ArrayList<String>();
+	private List<String> canCluster = new ArrayList<String>();
+	private List<Integer> canCurse = new ArrayList<Integer>();
+	private List<UUID> round = new ArrayList<UUID>();
 	
 	public ArrowListener(DirtyArrows instance) {
 		plugin = instance;
@@ -98,10 +118,10 @@ public class ArrowListener implements Listener {
 				if (headshot) {
 					event.setDamage(event.getDamage() * plugin.getConfig().getDouble("headshot-multiplier"));
 					if (shot instanceof Player) {
-						((Player) event.getEntity()).sendMessage(ChatColor.YELLOW + "Headshot by " + ChatColor.RED +
-								((Player) proj.getShooter()).getDisplayName());
-						((Player) proj.getShooter()).sendMessage(ChatColor.YELLOW + "You made a headshot on " + ChatColor.GREEN +
-								((Player) event.getEntity()).getName());
+						Player p = (Player) event.getEntity();
+						Player shoot = (Player) proj.getShooter();
+						p.sendMessage(Message.getHeadshot(shoot, Type.HEADSHOT_BY));
+						shoot.sendMessage(Message.getHeadshot(p, Type.HEADSHOT_ON));
 					}
 				}
 			}
@@ -115,6 +135,31 @@ public class ArrowListener implements Listener {
 					event.setDamage(event.getDamage() * 1.5);
 				}
 				if (event.getEntity() instanceof LivingEntity) {
+					if (canCurse.contains(new Integer(proj.getEntityId()))) {
+						canCurse.remove(proj);
+						plugin.cursed.put(event.getEntity(), CURSE_DURATION + ran.nextInt(7));
+						if (event.getEntity() instanceof Player) {
+							((Player) event.getEntity()).sendMessage(Message.getTag() + ChatColor.GRAY + "You have been cursed.");
+						}
+					}
+					if (plugin.ice.contains(new Integer(proj.getEntityId()))) {
+						plugin.ice.remove(new Integer(proj.getEntityId()));
+						plugin.iceParticle.remove(proj);
+						int duration = FREEZE_DURATION + ran.nextInt(5);
+						plugin.frozen.put(event.getEntity(), duration);
+						if (event.getEntity() instanceof Player) {
+							plugin.noInteract.add(((Player) event.getEntity()));
+							((Player) event.getEntity()).sendMessage(Message.getTag() + ChatColor.GRAY + "You are frozen solid.");
+							((Player) event.getEntity()).addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration * 20, 6));
+						}
+						else {
+							if (event.getEntity() instanceof LivingEntity) {
+								LivingEntity len = (LivingEntity) event.getEntity();
+								len.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration * 20, 6));
+							}
+						}
+					}
+					
 					LivingEntity entity = (LivingEntity) event.getEntity();
 					if (canLevel.contains(player.getUniqueId().toString()) && entity instanceof Player) {
 						Player target = (Player) event.getEntity();
@@ -284,7 +329,7 @@ public class ArrowListener implements Listener {
 					if (player.getInventory().getItemInHand().getItemMeta().getDisplayName()
 							.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("machine.name")))) {
 						if (player.hasPermission("dirtyarrows.machine") && plugin.getConfig().getBoolean("machine.enabled")) {
-							if (plugin.activated.contains(player.getUniqueId().toString()) && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
+							if (plugin.isActivated(player) && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
 								if (player.getInventory().contains(Material.ARROW) || player.getGameMode() == GameMode.CREATIVE) {
 									if (player.getInventory().getItemInHand().containsEnchantment(Enchantment.DURABILITY)) {
 										e = player.getInventory().getItemInHand().getEnchantmentLevel(Enchantment.DURABILITY);
@@ -338,13 +383,18 @@ public class ArrowListener implements Listener {
 	public void onProjectileLaunch(ProjectileLaunchEvent event) {
 		if (event.getEntity() instanceof Arrow) {
 			if (event.getEntity().getShooter() instanceof Player) {
-				Player player = (Player) event.getEntity().getShooter();
+				final Player player = (Player) event.getEntity().getShooter();
+				
+				if (round.contains(player.getUniqueId())) {
+					return;
+				}
+				
 				if (player.getInventory().getItemInHand().getItemMeta().hasDisplayName()) {
 					name = player.getInventory().getItemInHand().getItemMeta().getDisplayName();
 					/*
 					 * EXPLODING
 					 */
-					if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("exploding.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("exploding.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canExplode.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.exploding") && plugin.getConfig().getBoolean("exploding.enabled")) {
@@ -373,7 +423,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * LIGHTNING
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("lightning.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("lightning.name"))) && plugin.isActivated(player)) {
 						if (!(canStrikeLightning.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.lightning") && plugin.getConfig().getBoolean("lightning.enabled")) {
 								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
@@ -399,7 +449,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * CLUCKY
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("clucky.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("clucky.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canCluck.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.clucky") && plugin.getConfig().getBoolean("clucky.enabled")) {
@@ -425,7 +475,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * ENDER
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("ender.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("ender.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canTeleport.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.ender") && plugin.getConfig().getBoolean("ender.enabled")) {
@@ -446,7 +496,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * OAK
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("oak.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("oak.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canSpawnOak.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.oak") && plugin.getConfig().getBoolean("oak.enabled")) {
@@ -473,7 +523,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * BIRCH
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("birch.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("birch.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canSpawnBirch.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.birch") && plugin.getConfig().getBoolean("birch.enabled")) {
@@ -500,7 +550,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * SPRUCE
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("spruce.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("spruce.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canSpawnSpruce.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.spruce") && plugin.getConfig().getBoolean("spruce.enabled")) {
@@ -527,7 +577,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * JUNGLE
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("jungle.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("jungle.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canSpawnJungle.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.jungle") && plugin.getConfig().getBoolean("jungle.enabled")) {
@@ -554,7 +604,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * BATTY
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("batty.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("batty.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canSpawnBats.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.batty") && plugin.getConfig().getBoolean("batty.enabled")) {
@@ -580,7 +630,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * NUCLEAR
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("nuclear.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("nuclear.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canNuke.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.nuclear") && plugin.getConfig().getBoolean("nuclear.enabled")) {
@@ -608,7 +658,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * ENLIGHTENED
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("enlightened.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("enlightened.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canLight.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.enlightened") && plugin.getConfig().getBoolean("enlightened.enabled")) {
@@ -634,7 +684,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * RANGED
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("ranged.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("ranged.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (player.hasPermission("dirtyarrows.ranged") && plugin.getConfig().getBoolean("ranged.enabled")) {
 							Arrow arrow = (Arrow) event.getEntity();
@@ -646,7 +696,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * POISONOUS
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("poisonous.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("poisonous.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canPoison.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.poisonous") && plugin.getConfig().getBoolean("poisonous.enabled")) {
@@ -667,7 +717,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * DISORIENTING
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("disorienting.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("disorienting.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canDisorient.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.disorienting") && plugin.getConfig().getBoolean("disorienting.enabled")) {
@@ -680,7 +730,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * STARVATION
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("starvation.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("starvation.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canFood.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.starvation") && plugin.getConfig().getBoolean("starvation.enabled")) {
@@ -693,7 +743,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * DRAINING
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("draining.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("draining.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canDrain.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.draining") && plugin.getConfig().getBoolean("draining.enabled")) {
@@ -706,7 +756,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * WOODMAN
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("woodman.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("woodman.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canwoodman.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.woodman") && plugin.getConfig().getBoolean("woodman.enabled")) {
@@ -724,7 +774,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * SWAP
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("swap.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("swap.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canSwap.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.swap") && plugin.getConfig().getBoolean("swap.enabled")) {
@@ -737,7 +787,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * FLINTAND
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("flintand.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("flintand.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canFlint.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.flintand") && plugin.getConfig().getBoolean("flintand.enabled")) {
@@ -767,7 +817,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * DISARMING
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("disarming.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("disarming.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canDisarm.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.disarming") && plugin.getConfig().getBoolean("disarming.enabled")) {
@@ -783,7 +833,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * WITHER
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("wither.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("wither.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canBrick.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.wither") && plugin.getConfig().getBoolean("wither.enabled")) {
@@ -811,7 +861,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * FIREY
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("firey.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("firey.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canBrick.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.firey") && plugin.getConfig().getBoolean("firey.enabled")) {
@@ -839,7 +889,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * SLOW
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("slow.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("slow.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (player.hasPermission("dirtyarrows.slow") && plugin.getConfig().getBoolean("slow.enabled")) {
 							if (event.getEntity() instanceof Projectile) {
@@ -855,7 +905,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * LEVEL
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("level.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("level.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canLevel.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.level") && plugin.getConfig().getBoolean("level.enabled")) {
@@ -868,7 +918,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * UNDEAD
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("undead.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("undead.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canSwarm.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.undead") && plugin.getConfig().getBoolean("undead.enabled")) {
@@ -894,7 +944,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * MULTI
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("multi.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("multi.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (player.hasPermission("dirtyarrows.multi")) {
 							if (player.getInventory().contains(Material.ARROW, 8) ||
@@ -928,7 +978,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * BOMB
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("bomb.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("bomb.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canBomb.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.bomb") && plugin.getConfig().getBoolean("bomb.enabled")) {
@@ -953,9 +1003,36 @@ public class ArrowListener implements Listener {
 						}
 					}
 					/*
+					 * CLUSTER
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("cluster.name"))) && plugin.isActivated(player)) {
+						removeSwap(player.getUniqueId().toString());
+						if (!(canBomb.contains(player.getUniqueId().toString()))) {
+							if (player.hasPermission("dirtyarrows.cluster") && plugin.getConfig().getBoolean("cluster.enabled")) {
+								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 24) == null) {
+									if (player.getGameMode() != GameMode.CREATIVE) {
+										if (player.getInventory().contains(Material.TNT, 5)){
+											player.getInventory().removeItem(new ItemStack(Material.TNT, 5));
+										} else {
+											Error.noSulphur(player, "item");
+											return;
+										}
+									}
+									canCluster.add(player.getUniqueId().toString());
+									plugin.particleExploding.add(event.getEntity());
+								} else {
+									event.setCancelled(true);
+									player.sendMessage(ChatColor.RED + "[!!] You can't shoot bombs in protected regions!");
+								}
+							} else {
+								Error.noLevel(player);
+							}
+						}
+					}
+					/*
 					 * DROP
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("drop.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("drop.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canDrop.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.drop") && plugin.getConfig().getBoolean("drop.enabled")) {
@@ -968,7 +1045,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * AIRSTRIKE
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("airstrike.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("airstrike.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (player.hasPermission("dirtyarrows.airstrike") && plugin.getConfig().getBoolean("airstrike.enabled")) {
 							if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
@@ -993,9 +1070,33 @@ public class ArrowListener implements Listener {
 						}
 					}
 					/*
+					 * AIRSHIP
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("airship.name"))) && plugin.isActivated(player)) {
+						removeSwap(player.getUniqueId().toString());
+						if (player.hasPermission("dirtyarrows.airship") && plugin.getConfig().getBoolean("airship.enabled")) {
+							if (player.getGameMode() != GameMode.CREATIVE) {
+								if (player.getInventory().contains(Material.FEATHER, 2)){
+									plugin.airship.add(event.getEntity());
+									plugin.noFallDamage.add(player.getUniqueId());
+									player.getInventory().removeItem(new ItemStack(Material.FEATHER, 2));
+								} else {
+									Error.noAirship(player, "item");
+									return;
+								}
+							}
+							else {
+								plugin.airship.add(event.getEntity());
+							}
+						}
+						else {
+							Error.noAirship(player, "permissions");
+						}
+					}
+					/*
 					 * MAGMATIC
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("magmatic.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("magmatic.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (player.hasPermission("dirtyarrows.magmatic") && plugin.getConfig().getBoolean("magmatic.enabled")) {
 							if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
@@ -1032,7 +1133,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * AQUATIC
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("aquatic.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("aquatic.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (player.hasPermission("dirtyarrows.aquatic") && plugin.getConfig().getBoolean("aquatic.enabled")) {
 							if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
@@ -1062,14 +1163,54 @@ public class ArrowListener implements Listener {
 								event.setCancelled(true);
 								player.sendMessage(ChatColor.RED + "[!!] You can't shoot water in protected regions!");
 							}
-						} else {
+						}
+						
+						else {
+							Error.noAquatic(player, "permissions");
+						}
+					}
+					/*
+					 * IRON
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("iron.name"))) && plugin.isActivated(player)) {
+						removeSwap(player.getUniqueId().toString());
+						if (player.hasPermission("dirtyarrows.iron") && plugin.getConfig().getBoolean("iron.enabled")) {
+							if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+								if (player.getGameMode() != GameMode.CREATIVE) {
+									if (player.getInventory().contains(Material.ANVIL, 1)){
+										player.getInventory().removeItem(new ItemStack(Material.ANVIL, 1));
+										FallingBlock fb = (FallingBlock) player.getWorld().spawnFallingBlock(
+												player.getLocation().add(0, 1, 0), Material.ANVIL, (byte) 0);
+										fb.setVelocity(event.getEntity().getVelocity());
+										fb.setDropItem(false);
+										plugin.anvils.put(fb, 8 * 4);
+										event.getEntity().remove();
+									} else {
+										Error.noIron(player, "item");
+										return;
+									}
+								} else {
+									FallingBlock fb = (FallingBlock) player.getWorld().spawnFallingBlock(
+											player.getLocation().add(0, 1, 0), Material.ANVIL, (byte) 0);
+									fb.setVelocity(event.getEntity().getVelocity());
+									fb.setDropItem(false);
+									plugin.anvils.put(fb, 8 * 4);
+									event.getEntity().remove();
+								}
+							} else {
+								event.setCancelled(true);
+								player.sendMessage(ChatColor.RED + "[!!] You can't shoot iron in protected regions!");
+							}
+						}
+						
+						else {
 							Error.noAquatic(player, "permissions");
 						}
 					}
 					/*
 					 * PULL
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("pull.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("pull.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canPull.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.pull") && plugin.getConfig().getBoolean("pull.enabled")) {
@@ -1080,9 +1221,127 @@ public class ArrowListener implements Listener {
 						}
 					}
 					/*
+					 * 360
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("round.name"))) && plugin.isActivated(player)) {
+						removeSwap(player.getUniqueId().toString());
+						if (player.hasPermission("dirtyarrows.round") && plugin.getConfig().getBoolean("round.enabled")) {
+							final float arrows = 30;
+							boolean infinity = false;
+							boolean fire = false;
+							
+							ItemStack item = player.getItemInHand();
+							if (item.hasItemMeta()) {
+								ItemMeta im = item.getItemMeta();
+								if (im.getEnchants().containsKey(Enchantment.ARROW_INFINITE)) {
+									infinity = true;
+								}
+								if (im.getEnchants().containsKey(Enchantment.ARROW_FIRE)) {
+									fire = true;
+								}
+							}
+							
+							final boolean hasInfinity = infinity;
+							final boolean hasFire = fire;
+							
+							round.add(player.getUniqueId());
+							for (float i = 0; i < arrows; i++) {
+								if (player.getGameMode() == GameMode.CREATIVE) {
+									Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+										public void run() {
+											Location loc = player.getLocation().clone(); 
+											loc.setYaw(player.getLocation().getYaw() + (360f / arrows));
+											player.teleport(loc);
+											Arrow a = player.launchProjectile(Arrow.class);
+											a.setVelocity(a.getVelocity().multiply(1.5));
+											if (hasInfinity) {
+												EntityListener.deadArrows.add(a);
+											}
+											if (hasFire) {
+												a.setFireTicks(1000);
+											}
+										}
+									}, 1L * (long)i);
+								}
+								else if (player.getInventory().contains(Material.ARROW, 1)) {
+									Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+										public void run() {
+											if (!hasInfinity) player.getInventory().removeItem(new ItemStack(Material.ARROW, 1));
+											Location loc = player.getLocation().clone(); 
+											loc.setYaw(player.getLocation().getYaw() + (360f / arrows));
+											player.teleport(loc);
+											Arrow a = player.launchProjectile(Arrow.class);
+											a.setVelocity(a.getVelocity().multiply(1.5));
+											if (hasInfinity) {
+												EntityListener.deadArrows.add(a);
+											}
+											if (hasFire) {
+												a.setFireTicks(1000);
+											}
+										}
+									}, 1L * (long)i);
+								}
+							}
+							
+							Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+								public void run() {
+									round.remove(player.getUniqueId());
+								}
+							}, 1L * (long)arrows);
+						} else {
+							Error.noPull(player);
+						}
+					}
+					/*
+					 * CURSE
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("curse.name"))) && plugin.isActivated(player)) {
+						removeSwap(player.getUniqueId().toString());
+						if (player.hasPermission("dirtyarrows.curse") && plugin.getConfig().getBoolean("curse.enabled")) {
+							if (player.getGameMode() != GameMode.CREATIVE) {
+								if (player.getInventory().contains(Material.FERMENTED_SPIDER_EYE, 1)){
+									canCurse.add(event.getEntity().getEntityId());
+									player.getInventory().removeItem(new ItemStack(Material.FERMENTED_SPIDER_EYE, 1));
+								} else {
+									Error.noCurse(player, "item");
+									return;
+								}
+							}
+							else {
+								canCurse.add(event.getEntity().getEntityId());
+							}
+						} else {
+							Error.noPull(player);
+						}
+					}
+					/*
+					 * FROZEN
+					 */
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("frozen.name"))) && plugin.isActivated(player)) {
+						removeSwap(player.getUniqueId().toString());
+						if (player.hasPermission("dirtyarrows.frozen") && plugin.getConfig().getBoolean("frozen.enabled")) {
+							if (player.getGameMode() != GameMode.CREATIVE) {
+								if (player.getInventory().contains(Material.SNOW_BALL, 1)){
+									plugin.ice.add(event.getEntity().getEntityId());
+									plugin.iceParticle.add(event.getEntity());
+									player.getInventory().removeItem(new ItemStack(Material.SNOW_BALL, 1));
+								} else {
+									Error.noFrozen(player, "item");
+									return;
+								}
+							}
+							else {
+								plugin.ice.add(event.getEntity().getEntityId());
+								plugin.iceParticle.add(event.getEntity());
+							}
+						} else {
+							Error.noPull(player);
+						}
+					}
+					/*
 					 * PARALYZE
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("paralyze.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("paralyze.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canParalyze.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.paralyze") && plugin.getConfig().getBoolean("paralyze.enabled")) {
@@ -1103,7 +1362,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * ACACIA
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("acacia.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("acacia.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canSpawnAcacia.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.acacia") && plugin.getConfig().getBoolean("acacia.enabled")) {
@@ -1130,7 +1389,7 @@ public class ArrowListener implements Listener {
 					/*
 					 * DARKOAK
 					 */
-					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("darkoak.name"))) && plugin.activated.contains(player.getUniqueId().toString())) {
+					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("darkoak.name"))) && plugin.isActivated(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canSpawnDarkOak.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.darkoak") && plugin.getConfig().getBoolean("darkoak.enabled")) {
@@ -1159,22 +1418,71 @@ public class ArrowListener implements Listener {
 		}
 	}
 	
+	private List<Material> invalidSnow = Arrays.asList(new Material[] {
+			Material.LONG_GRASS, Material.YELLOW_FLOWER, Material.RED_ROSE, Material.DEAD_BUSH,
+			Material.TORCH, Material.REDSTONE_TORCH_ON, Material.REDSTONE_TORCH_ON, Material.TRAP_DOOR,
+			Material.REDSTONE, Material.IRON_TRAPDOOR, Material.SAPLING, Material.RED_MUSHROOM,
+			Material.BROWN_MUSHROOM, Material.CARPET, Material.STRING, Material.CROPS, Material.BED_BLOCK,
+			Material.MELON_STEM, Material.PUMPKIN_STEM, Material.STONE_PLATE, Material.WOOD_PLATE,
+			Material.IRON_PLATE, Material.GOLD_PLATE, Material.VINE, Material.LAVA, Material.RAILS,
+			Material.ACTIVATOR_RAIL, Material.POWERED_RAIL, Material.DETECTOR_RAIL, Material.DIODE_BLOCK_ON,
+			Material.DIODE_BLOCK_OFF, Material.SNOW, Material.AIR, Material.FLOWER_POT, Material.BANNER,
+			Material.DOUBLE_PLANT, Material.FIRE, Material.STATIONARY_LAVA, Material.STATIONARY_WATER,
+			Material.WATER
+	});
+	
 	@EventHandler(priority = EventPriority.LOWEST)
 	public void onProjectileHit(ProjectileHitEvent event) {
 		if (event.getEntity() instanceof Arrow) {
 			Arrow arrow = (Arrow) event.getEntity();
-			if (plugin.airstrike.contains(event.getEntity())) {
-				plugin.airstrike.remove(event.getEntity());
+			
+			canCurse.remove(arrow);
+			plugin.airstrike.remove(event.getEntity());
+			plugin.airship.remove(event.getEntity());
+			plugin.particleExploding.remove(event.getEntity());
+			plugin.particleFire.remove(event.getEntity());
+			
+			/*
+			 * FROZEN
+			 */
+			if (plugin.iceParticle.contains(arrow)) {
+				plugin.iceParticle.remove(arrow);
+				World w = arrow.getWorld();
+				int x = (int) arrow.getLocation().getX();
+				int y = (int) arrow.getLocation().getY();
+				int z = (int) arrow.getLocation().getZ();
+				for (int i = -2; i <= 2; i++) {
+					for (int j = -2; j <= 2; j++) {
+						for (int k = -2; k <= 2; k++) {
+							final Location loc = new Location(w, x + i, y + k, z + j);
+							if (loc.getBlock().getType() == Material.AIR) {
+								Location below = new Location(w, x + i, y + k - 1, z + j);
+								if (!invalidSnow.contains(below.getBlock().getType())) {
+									if (ran.nextFloat() < 0.74) {
+										loc.getBlock().setType(Material.SNOW);
+										k = y + 3;
+									}
+								}
+							}
+							else if (loc.getBlock().getType() == Material.STATIONARY_WATER) {
+								if (ran.nextFloat() < 0.74) {
+									loc.getBlock().setType(Material.ICE);
+								}
+							}
+							else if (loc.getBlock().getType() == Material.ICE) {
+								if (ran.nextFloat() < 0.18) {
+									loc.getBlock().setType(Material.PACKED_ICE);
+								}
+							}
+						}
+					}
+				}
+				
 			}
-			if (plugin.particleExploding.contains(event.getEntity())) {
-				plugin.particleExploding.remove(event.getEntity());
-			}
-			if (plugin.particleFire.contains(event.getEntity())) {
-				plugin.particleFire.remove(event.getEntity());
-			}
+			
 			if (arrow.getShooter() instanceof Player) {
 				Player player = (Player) arrow.getShooter();
-				if (plugin.activated.contains(player.getUniqueId().toString())) {
+				if (plugin.isActivated(player)) {
 					/*
 					 * ZOMBIE
 					 */
@@ -1571,6 +1879,30 @@ public class ArrowListener implements Listener {
 							player.sendMessage(ChatColor.RED + "[!!] Arrows can't boom stuff near protected areas!");
 						}
 					}
+					/*
+					 * CLUSTER
+					 */
+					else if (canCluster.contains(player.getUniqueId().toString())) {
+						if (plugin.rm.isWithinAXZMargin(arrow.getLocation(), 24) == null) {
+							arrow.remove();
+							World world = arrow.getLocation().getWorld();
+							Location loc = arrow.getLocation();
+							
+							for (int i = 0; i < 5; i++) {
+								TNTPrimed tnt = world.spawn(loc, TNTPrimed.class);
+								tnt.setFuseTicks(40);
+								tnt.setVelocity(Util.ranCluster(ran));
+							}
+							
+							canCluster.remove(player.getUniqueId().toString());
+						} else {
+							arrow.remove();
+							if (player.getGameMode() != GameMode.CREATIVE) {
+								player.getInventory().addItem(new ItemStack(Material.TNT, 5));
+							}
+							player.sendMessage(ChatColor.RED + "[!!] Arrows can't boom stuff near protected areas!");
+						}
+					}
 				}
 			}
 		}
@@ -1597,6 +1929,8 @@ public class ArrowListener implements Listener {
 			canDrop.remove(playerUUID);
 		if (canPull.contains(playerUUID))
 			canPull.remove(playerUUID);
+		if (canCluster.contains(playerUUID))
+			canCluster.remove(playerUUID);
 	}
 	
 }
