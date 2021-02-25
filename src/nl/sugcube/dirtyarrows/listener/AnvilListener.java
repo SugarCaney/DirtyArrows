@@ -55,7 +55,7 @@ public class AnvilListener implements Listener {
 				if (player.getLevel() < required) {
 					player.sendMessage(Message.NOT_ENOUGH_LEVELS_1);
 					player.sendMessage(Message.NOT_ENOUGH_LEVELS_2.replace("%l%", required + ""));
-					player.playSound(player.getLocation(), Sound.BAT_HURT, 1L, 1L);
+					player.playSound(player.getLocation(), Sound.ENTITY_BAT_HURT, 1L, 1L);
 					e.setCancelled(true);
 					return;
 				}
@@ -64,7 +64,7 @@ public class AnvilListener implements Listener {
 				if (player.getGameMode() != GameMode.CREATIVE) {
 					player.getInventory().addItem(e.getCurrentItem());
 					inv.setItem(0, null);
-					player.playSound(player.getLocation(), Sound.ANVIL_USE, 1L, 1L);
+					player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_USE, 1L, 1L);
 					player.closeInventory();
 				}
 			}

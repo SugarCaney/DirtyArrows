@@ -48,7 +48,7 @@ public class Iron implements Runnable, Listener {
 						LivingEntity len = (LivingEntity) ent;
 						if (Util.inRegionOf(len.getLocation(), e.getEntity().getLocation(), 3)) {
 							if (len instanceof Player) {
-								((Player) len).playSound(e.getEntity().getLocation(), Sound.ANVIL_LAND, 1, 1);
+								((Player) len).playSound(e.getEntity().getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
 							}
 							len.damage(10.0f);
 						}
