@@ -126,7 +126,7 @@ public class ArrowListener implements Listener {
 						int duration = FREEZE_DURATION + ran.nextInt(5);
 						plugin.frozen.put(event.getEntity(), duration);
 						if (event.getEntity() instanceof Player) {
-							plugin.noInteract.add(((Player) event.getEntity()));
+							plugin.noInteract.add((Player)event.getEntity());
 							((Player) event.getEntity()).sendMessage(Message.getTag() + ChatColor.GRAY + "You are frozen solid.");
 							((Player) event.getEntity()).addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration * 20, 6));
 						}

@@ -1,7 +1,7 @@
 package nl.sugcube.dirtyarrows.region;
 
-import nl.sugcube.dirtyarrows.DaUtil;
 import nl.sugcube.dirtyarrows.DirtyArrows;
+import nl.sugcube.dirtyarrows.util.DaUtil;
 import org.bukkit.Location;
 
 import java.util.ArrayList;

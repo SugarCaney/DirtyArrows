@@ -1,6 +1,6 @@
 @file:JvmName("DaUtil")
 
-package nl.sugcube.dirtyarrows
+package nl.sugcube.dirtyarrows.util
 
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
