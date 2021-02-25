@@ -6,7 +6,7 @@ When you rename a bow in an anvil to a specific name (possibilities will be show
 With the plugin enabled, the special bows allow you to use their specific powers.
 The uses could vary from PvP, PvE or even aesthetic uses.
 The config.yml allows you to enable or disable certain Bastards to your wishes.
-This is my second plugin made in request for a friend of mine, dirtdeluxe (it definitely was him who chose the term 'Bastar').
+This is my second plugin made in request for a friend of mine, dirtdeluxe (it definitely was him who chose the term 'Bastard').
 I hope you'll enjoy and have a fun time with the plugin!
 If you'd like to check out the source of the plugin, click the button above to see the GitHub page.
 
