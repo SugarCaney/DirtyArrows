@@ -1,41 +1,17 @@
 package nl.sugcube.dirtyarrows.listener;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
-
 import nl.sugcube.dirtyarrows.DirtyArrows;
 import nl.sugcube.dirtyarrows.ability.Swarm;
 import nl.sugcube.dirtyarrows.ability.TreeCut;
 import nl.sugcube.dirtyarrows.util.Error;
 import nl.sugcube.dirtyarrows.util.Message;
+import nl.sugcube.dirtyarrows.util.Message.Type;
 import nl.sugcube.dirtyarrows.util.Methods;
 import nl.sugcube.dirtyarrows.util.Util;
-import nl.sugcube.dirtyarrows.util.Message.Type;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Effect;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.TreeType;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.FallingBlock;
-import org.bukkit.entity.Fireball;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
-import org.bukkit.entity.TNTPrimed;
-import org.bukkit.entity.WitherSkull;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -51,6 +27,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.BlockIterator;
 
+import java.util.*;
+
 public class ArrowListener implements Listener {
 
 	public static DirtyArrows plugin;
@@ -62,38 +40,38 @@ public class ArrowListener implements Listener {
 	boolean hasUnbreaking = false;
 	
 	private String name;
-	private List<Projectile> powerArrows = new ArrayList<Projectile>();
-	private List<String> canExplode = new ArrayList<String>();
-	private List<String> canStrikeLightning = new ArrayList<String>();
-	private List<String> canCluck = new ArrayList<String>();
-	private List<String> canTeleport = new ArrayList<String>();
-	private List<String> canSpawnOak = new ArrayList<String>();
-	private List<String> canSpawnBirch = new ArrayList<String>();
-	private List<String> canSpawnSpruce = new ArrayList<String>();
-	private List<String> canSpawnJungle = new ArrayList<String>();
-	private List<String> canSpawnBats = new ArrayList<String>();
-	private List<String> canNuke = new ArrayList<String>();
-	private List<String> canLight = new ArrayList<String>();
-	private List<String> canPoison = new ArrayList<String>();
-	private List<String> canDisorient = new ArrayList<String>();
-	private List<String> canDrain = new ArrayList<String>();
-	private List<String> canSwap = new ArrayList<String>();
-	private List<String> canFlint = new ArrayList<String>();
-	private List<String> canDisarm = new ArrayList<String>();
-	private List<String> canBrick = new ArrayList<String>();
-	private List<String> canLevel = new ArrayList<String>();
-	private List<String> canSwarm = new ArrayList<String>();
-	private List<String> canwoodman = new ArrayList<String>();
-	private List<String> canFood = new ArrayList<String>();
-	private List<String> canBomb = new ArrayList<String>();
-	private List<String> canDrop = new ArrayList<String>();
-	private List<String> canPull = new ArrayList<String>();
-	private List<String> canParalyze = new ArrayList<String>();
-	private List<String> canSpawnAcacia = new ArrayList<String>();
-	private List<String> canSpawnDarkOak = new ArrayList<String>();
-	private List<String> canCluster = new ArrayList<String>();
-	private List<Integer> canCurse = new ArrayList<Integer>();
-	private List<UUID> round = new ArrayList<UUID>();
+	private final List<Projectile> powerArrows = new ArrayList<>();
+	private final List<String> canExplode = new ArrayList<>();
+	private final List<String> canStrikeLightning = new ArrayList<>();
+	private final List<String> canCluck = new ArrayList<>();
+	private final List<String> canTeleport = new ArrayList<>();
+	private final List<String> canSpawnOak = new ArrayList<>();
+	private final List<String> canSpawnBirch = new ArrayList<>();
+	private final List<String> canSpawnSpruce = new ArrayList<>();
+	private final List<String> canSpawnJungle = new ArrayList<>();
+	private final List<String> canSpawnBats = new ArrayList<>();
+	private final List<String> canNuke = new ArrayList<>();
+	private final List<String> canLight = new ArrayList<>();
+	private final List<String> canPoison = new ArrayList<>();
+	private final List<String> canDisorient = new ArrayList<>();
+	private final List<String> canDrain = new ArrayList<>();
+	private final List<String> canSwap = new ArrayList<>();
+	private final List<String> canFlint = new ArrayList<>();
+	private final List<String> canDisarm = new ArrayList<>();
+	private final List<String> canBrick = new ArrayList<>();
+	private final List<String> canLevel = new ArrayList<>();
+	private final List<String> canSwarm = new ArrayList<>();
+	private final List<String> canwoodman = new ArrayList<>();
+	private final List<String> canFood = new ArrayList<>();
+	private final List<String> canBomb = new ArrayList<>();
+	private final List<String> canDrop = new ArrayList<>();
+	private final List<String> canPull = new ArrayList<>();
+	private final List<String> canParalyze = new ArrayList<>();
+	private final List<String> canSpawnAcacia = new ArrayList<>();
+	private final List<String> canSpawnDarkOak = new ArrayList<>();
+	private final List<String> canCluster = new ArrayList<>();
+	private final List<Integer> canCurse = new ArrayList<>();
+	private final List<UUID> round = new ArrayList<>();
 	
 	public ArrowListener(DirtyArrows instance) {
 		plugin = instance;
@@ -167,7 +145,7 @@ public class ArrowListener implements Listener {
 							target.setLevel(target.getLevel() - 1);
 							player.setLevel(player.getLevel() + 1);
 							player.getWorld().playEffect(target.getLocation(), Effect.SMOKE, 0);
-							player.playSound(player.getLocation(), Sound.ORB_PICKUP, 10, 0);
+							player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10, 0);
 						}
 					} else if (canPoison.contains(player.getUniqueId().toString())) {
 						entity.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 200, 1));
@@ -361,7 +339,7 @@ public class ArrowListener implements Listener {
 											}
 										} else {
 											player.getInventory().remove(player.getInventory().getItemInHand());
-											player.playSound(player.getLocation(), Sound.ITEM_BREAK, 10, 10);
+											player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 10, 10);
 										}
 									}
 									arrow.setShooter(player);
@@ -1418,7 +1396,7 @@ public class ArrowListener implements Listener {
 		}
 	}
 	
-	private List<Material> invalidSnow = Arrays.asList(new Material[] {
+	private final List<Material> invalidSnow = Arrays.asList(new Material[] {
 			Material.LONG_GRASS, Material.YELLOW_FLOWER, Material.RED_ROSE, Material.DEAD_BUSH,
 			Material.TORCH, Material.REDSTONE_TORCH_ON, Material.REDSTONE_TORCH_ON, Material.TRAP_DOOR,
 			Material.REDSTONE, Material.IRON_TRAPDOOR, Material.SAPLING, Material.RED_MUSHROOM,
@@ -1558,7 +1536,7 @@ public class ArrowListener implements Listener {
 					else if (canCluck.contains(player.getUniqueId().toString())) {
 						if (plugin.rm.isWithinAXZMargin(arrow.getLocation(), 2) == null) {
 							player.getWorld().spawnEntity(arrow.getLocation(), EntityType.CHICKEN);
-							player.playSound(player.getLocation(), Sound.CHICKEN_HURT, 10, 1);
+							player.playSound(player.getLocation(), Sound.ENTITY_CHICKEN_HURT, 10, 1);
 							arrow.remove();
 							if (player.getGameMode() == GameMode.SURVIVAL)
 								player.getInventory().removeItem(new ItemStack(Material.EGG, 1));
@@ -1573,7 +1551,7 @@ public class ArrowListener implements Listener {
 					 */
 					else if (canTeleport.contains(player.getUniqueId().toString())) {
 						player.teleport(arrow.getLocation());
-						player.playSound(player.getLocation(), Sound.ENDERMAN_TELEPORT, 10, 1);
+						player.playSound(player.getLocation(), Sound.ENTITY_ENDERMEN_TELEPORT, 10, 1);
 						arrow.remove();
 						if (player.getGameMode() == GameMode.SURVIVAL)
 							player.getInventory().removeItem(new ItemStack(Material.ENDER_PEARL, 1));
@@ -1844,7 +1822,7 @@ public class ArrowListener implements Listener {
 											is.setDurability((short) (is.getDurability() + fintuses));
 											if (is.getDurability() > 64) {
 												player.getInventory().remove(is);
-												player.playSound(player.getLocation(), Sound.ITEM_BREAK, 10, 10);
+												player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 10, 10);
 											}
 											break;
 										}
@@ -1909,28 +1887,16 @@ public class ArrowListener implements Listener {
 	}
 
 	private void removeSwap(String playerUUID) {
-		if (canParalyze.contains(playerUUID))
-			canParalyze.remove(playerUUID);
-		if (canSwap.contains(playerUUID))
-			canSwap.remove(playerUUID);
-		if (canDisarm.contains(playerUUID))
-			canDisarm.remove(playerUUID);
-		if (canLevel.contains(playerUUID))
-			canLevel.remove(playerUUID);
-		if (canSwarm.contains(playerUUID))
-			canSwarm.remove(playerUUID);
-		if (canwoodman.contains(playerUUID))
-			canwoodman.remove(playerUUID);
-		if (canFood.contains(playerUUID))
-			canFood.remove(playerUUID);
-		if (canBomb.contains(playerUUID))
-			canBomb.remove(playerUUID);
-		if (canDrop.contains(playerUUID))
-			canDrop.remove(playerUUID);
-		if (canPull.contains(playerUUID))
-			canPull.remove(playerUUID);
-		if (canCluster.contains(playerUUID))
-			canCluster.remove(playerUUID);
+        canParalyze.remove(playerUUID);
+        canSwap.remove(playerUUID);
+        canDisarm.remove(playerUUID);
+        canLevel.remove(playerUUID);
+        canSwarm.remove(playerUUID);
+        canwoodman.remove(playerUUID);
+        canFood.remove(playerUUID);
+        canBomb.remove(playerUUID);
+        canDrop.remove(playerUUID);
+        canPull.remove(playerUUID);
+        canCluster.remove(playerUUID);
 	}
-	
 }
