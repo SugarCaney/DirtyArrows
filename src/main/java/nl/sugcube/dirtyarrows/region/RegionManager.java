@@ -1,12 +1,11 @@
 package nl.sugcube.dirtyarrows.region;
 
+import nl.sugcube.dirtyarrows.DaUtil;
+import nl.sugcube.dirtyarrows.DirtyArrows;
+import org.bukkit.Location;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import nl.sugcube.dirtyarrows.DirtyArrows;
-import nl.sugcube.sba.SMeth;
-
-import org.bukkit.Location;
 
 public class RegionManager {
 
@@ -61,8 +60,8 @@ public class RegionManager {
 			String path = "regions." + key + ".";
 			String pos1string = plugin.getData().getString(path + "pos1");
 			String pos2string = plugin.getData().getString(path + "pos2");
-			Location loc1 = SMeth.toLocation(pos1string);
-			Location loc2 = SMeth.toLocation(pos2string);
+			Location loc1 = DaUtil.toLocation(pos1string);
+			Location loc2 = DaUtil.toLocation(pos2string);
 			Region region = new Region(loc1, loc2, key);
 			registeredRegions.add(region);
 		}
@@ -86,11 +85,11 @@ public class RegionManager {
 				}
 	
 				if (reg.getLocation(1) != null) {
-					plugin.getData().set("regions." + reg.getName() + ".pos1", SMeth.toLocationString(reg.getLocation(1)));
+					plugin.getData().set("regions." + reg.getName() + ".pos1", DaUtil.toLocationString(reg.getLocation(1)));
 				}
 				
 				if (reg.getLocation(2) != null)
-					plugin.getData().set("regions." + reg.getName() + ".pos2", SMeth.toLocationString(reg.getLocation(2)));
+					plugin.getData().set("regions." + reg.getName() + ".pos2", DaUtil.toLocationString(reg.getLocation(2)));
 				
 				plugin.saveData();
 			} catch (Exception e) {

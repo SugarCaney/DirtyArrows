@@ -1,0 +1,37 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.4.30'
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+}
+
+group 'nl.sugcube.dirtyarrows'
+version '4.0'
+
+repositories {
+    mavenCentral()
+    flatDir {
+        dirs 'lib'
+    }
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile group: 'org.apache.clerezza.ext', name: 'org.json.simple', version: '0.4'
+
+    // Bukkit jar
+    implementation name: 'bukkit-1.11.2'
+//    implementation name: 'bukkit-1.12.2'
+//    implementation name: 'bukkit-1.13.2'
+//    implementation name: 'bukkit-1.14.4'
+//    implementation name: 'bukkit-1.15.2'
+//    implementation name: 'bukkit-1.16.5'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}

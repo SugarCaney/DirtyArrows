@@ -1,6 +1,6 @@
 name: DirtyArrows
 main: nl.sugcube.dirtyarrows.DirtyArrows
-version: '3.0'
+version: '4.0'
 description: >
              DirtyArrows, just dirty
 commands:

@@ -1,35 +1,10 @@
 package nl.sugcube.dirtyarrows;
 
-import java.io.File;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import nl.sugcube.dirtyarrows.ability.Airship;
-import nl.sugcube.dirtyarrows.ability.Airstrike;
-import nl.sugcube.dirtyarrows.ability.CurseListener;
-import nl.sugcube.dirtyarrows.ability.FrozenListener;
-import nl.sugcube.dirtyarrows.ability.Iron;
-import nl.sugcube.dirtyarrows.listener.AnvilListener;
-import nl.sugcube.dirtyarrows.listener.ArrowListener;
-import nl.sugcube.dirtyarrows.listener.EnchantmentListener;
-import nl.sugcube.dirtyarrows.listener.EntityListener;
-import nl.sugcube.dirtyarrows.listener.PlayerDamageListener;
-import nl.sugcube.dirtyarrows.listener.PlayerJoinListener;
+import nl.sugcube.dirtyarrows.ability.*;
+import nl.sugcube.dirtyarrows.listener.*;
 import nl.sugcube.dirtyarrows.region.Region;
 import nl.sugcube.dirtyarrows.region.RegionManager;
-import nl.sugcube.dirtyarrows.util.Help;
-import nl.sugcube.dirtyarrows.util.Message;
-import nl.sugcube.dirtyarrows.util.Methods;
-import nl.sugcube.dirtyarrows.util.Metrics;
-import nl.sugcube.dirtyarrows.util.Update;
-import nl.sugcube.dirtyarrows.util.Util;
-
+import nl.sugcube.dirtyarrows.util.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -49,6 +24,16 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
+
+import java.io.File;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DirtyArrows extends JavaPlugin {
 	
