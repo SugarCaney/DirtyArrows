@@ -16,6 +16,7 @@ How to contact me/ask for support:
 * Email: [sugarcaneydearie@gmail.com](mailto:sugarcaneydearie@gmail.com)
 * Twitter: [@CaneyDearie](https://twitter.com/CaneyDearie)
 * Discord: [SugarCaney server](https://discord.gg/0in4cfBu7fXFjOon) or [ExistenceSMP server](https://discordapp.com/invite/0149hOv271sOMiFJq)
+* BukkitDev: [DirtyArrows](https://dev.bukkit.org/projects/dirtyarrows)
 
 ## Table of Contents
 * [Downloads](https://github.com/SugarCaney/DirtyArrows#downloads)
