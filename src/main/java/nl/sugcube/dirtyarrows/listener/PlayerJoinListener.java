@@ -39,11 +39,11 @@ public class PlayerJoinListener implements Listener {
 			Player player = event.getPlayer();
 			
 			if (player.hasPermission("dirtyarrows")) {
-				if (plugin.activated.contains(player.getUniqueId().toString())) {
-					plugin.activated.remove(player.getUniqueId().toString());
+				if (plugin.activated.contains(player.getUniqueId())) {
+					plugin.activated.remove(player.getUniqueId());
 					player.sendMessage(Message.getEnabled(false));
 				} else {
-					plugin.activated.add(player.getUniqueId().toString());
+					plugin.activated.add(player.getUniqueId());
 					player.sendMessage(Message.getEnabled(true));
 				}
 			}

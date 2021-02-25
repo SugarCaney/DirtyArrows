@@ -7,6 +7,11 @@ import org.bukkit.entity.Player;
 
 public class Message {
 
+    /**
+     * The tag to show up in front of messages.
+     */
+    public static final String ERROR_TAG = ChatColor.RED + "[!!]";
+
 	/**
 	 * The tag to show up in MINIGAME_VERSION.
 	 */
@@ -32,7 +37,42 @@ public class Message {
 	 * DirtyArrows have been disabled.
 	 */
 	public static final String ENABLED = ChatColor.YELLOW + "Dirty Arrows have been " + ChatColor.GREEN + "enabled!";
-	
+
+    /**
+     * Gave bow to player(s).
+     */
+	public static final String GAVE_BOW = ChatColor.YELLOW + "Gave " + ChatColor.GREEN + "%s " + ChatColor.YELLOW + "to " + ChatColor.GREEN + "%s";
+
+    /**
+     * Region position set.
+     */
+	public static final String SET_POSITION = ChatColor.GREEN + "Position %d " + ChatColor.YELLOW + "has been set to " + ChatColor.GREEN + "%s";
+
+    /**
+     * List regions.
+     */
+	public static final String REGIONS = ChatColor.YELLOW + "Regions: " + ChatColor.GREEN + "%s";
+
+    /**
+     * You are in region %s.
+     */
+	public static final String IN_REGION = ChatColor.YELLOW + "You are in region: " + ChatColor.GREEN + "%s";
+
+    /**
+     * You are not in a region.
+     */
+	public static final String NOT_IN_REGION = ChatColor.YELLOW + "You are " + ChatColor.RED + "not " + ChatColor.YELLOW + " in a DirtyArrows region.";
+
+    /**
+     * Removed region %s
+     */
+	public static final String REGION_REMOVED = ChatColor.YELLOW + "Removed region " + ChatColor.GREEN + "%s";
+
+    /**
+     * Created region %s.
+     */
+	public static final String REGION_CREATED = ChatColor.YELLOW + "Created region " + ChatColor.GREEN + "%s";
+
 	/**
 	 * %p% : The name of the shooter.
 	 */

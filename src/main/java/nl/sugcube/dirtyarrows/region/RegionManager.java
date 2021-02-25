@@ -145,7 +145,7 @@ public class RegionManager {
 	/**
 	 * Gets a region by it's name.
 	 * @param name (String) name of the Region.
-	 * @return (Region)
+	 * @return (Region) or `null` when there is no region with the given name.
 	 */
 	public Region getRegionByName(String name) {
 		for (int i = 0; i < registeredRegions.size(); i++) {

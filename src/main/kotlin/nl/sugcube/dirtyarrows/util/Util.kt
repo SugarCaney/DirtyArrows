@@ -5,6 +5,9 @@ package nl.sugcube.dirtyarrows.util
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Location
+import org.bukkit.command.CommandSender
+import kotlin.math.ceil
+import kotlin.math.floor
 
 /**
  * Converts a string to a location.
@@ -44,6 +47,11 @@ fun String.toLocation(): Location? {
 fun Location.toLocationString() = "${world.name}%$x%$y%$z%$pitch%$yaw"
 
 /**
+ * Converts the location to a (x: X, y: Y, z: Z) string.
+ */
+fun Location.toCoordinateString() = "(x: ${floor(x)}, y: ${ceil(y)}, z: ${floor(z)})"
+
+/**
  * Replaces all minecraft colour code macros (&1, &2, etc.) with ChatColors.
  */
 fun String.applyColours() = replace("&0", ChatColor.BLACK.toString())
@@ -68,3 +76,24 @@ fun String.applyColours() = replace("&0", ChatColor.BLACK.toString())
     .replace("&n", ChatColor.UNDERLINE.toString())
     .replace("&o", ChatColor.ITALIC.toString())
     .replace("&r", ChatColor.RESET.toString())
+
+/**
+ * Sends a message to the given command sender where all colour codes (&1, &2, ...) are applied.
+ */
+fun CommandSender.sendFormattedMessage(message: String) = sendMessage(message.applyColours())
+
+/**
+ * Sends a message with the error tag. Supports colour codes (&1, &2, ...).
+ */
+fun CommandSender.sendError(message: String) = sendFormattedMessage(Message.ERROR_TAG + " $message")
+
+/**
+ * Get the online player with the given name.
+ *
+ * @param name
+ *      The name of the online player, or `@r` for a random player.
+ * @return `null` when there is no player with the given name.
+ */
+fun onlinePlayer(name: String) = if (name == "@r") {
+    Bukkit.getOnlinePlayers().random()
+} else Bukkit.getOnlinePlayers().firstOrNull { it.name == name }
