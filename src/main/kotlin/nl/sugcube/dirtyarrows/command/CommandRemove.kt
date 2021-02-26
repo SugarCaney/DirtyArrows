@@ -22,7 +22,7 @@ open class CommandRemove : SubCommand<DirtyArrows>(
 
     override fun executeImpl(plugin: DirtyArrows, sender: CommandSender, vararg arguments: String) {
         val regionName = arguments.firstOrNull() ?: run { sender.sendError("No region name specified."); return }
-        val region = plugin.rm.getRegionByName(regionName) ?: run { sender.sendError("There is no region with name '$regionName'"); return }
+        val region = plugin.rm.regionByName(regionName) ?: run { sender.sendError("There is no region with name '$regionName'"); return }
         plugin.rm.removeRegion(region.name)
         sender.sendMessage(Message.REGION_REMOVED.format(region.name))
     }

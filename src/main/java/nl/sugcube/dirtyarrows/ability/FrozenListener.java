@@ -31,7 +31,7 @@ public class FrozenListener implements Listener, Runnable {
 				if (ent instanceof Player) {
 					Player player = (Player) ent;
 					if (player.isOnline()) {
-						player.sendMessage(Message.getTag() + ChatColor.GRAY + "You defrosted.");
+						player.sendMessage(Message.getTag(plugin) + ChatColor.GRAY + "You defrosted.");
 						player.removePotionEffect(PotionEffectType.SLOW);
 						plugin.noInteract.remove(player);
 					}

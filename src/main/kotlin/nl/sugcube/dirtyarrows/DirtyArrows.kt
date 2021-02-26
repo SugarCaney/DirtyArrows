@@ -3,6 +3,7 @@ package nl.sugcube.dirtyarrows
 import nl.sugcube.dirtyarrows.ability.*
 import nl.sugcube.dirtyarrows.command.DirtyArrowsCommandManager
 import nl.sugcube.dirtyarrows.listener.*
+import nl.sugcube.dirtyarrows.recipe.registerArrowRecipes
 import nl.sugcube.dirtyarrows.region.RegionManager
 import nl.sugcube.dirtyarrows.util.Help
 import nl.sugcube.dirtyarrows.util.Update
@@ -23,16 +24,35 @@ import java.io.File
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import java.util.logging.Level
-import java.util.logging.Logger
-import kotlin.collections.HashSet
 
 /**
  * @author SugarCaney
  */
 class DirtyArrows : JavaPlugin() {
 
-    private val log = Logger.getLogger("Minecraft")
-    var configFile = File(dataFolder.toString() + File.separator + "config.yml")
+    /**
+     * The plugin's version number as defined in plugin.yml
+     */
+    val version: String
+        get() = description.version
+
+    /**
+     * The config file reference.
+     */
+    var configurationFile = File(dataFolder, "config.yml")
+
+    /**
+     * The data file reference.
+     */
+    private var dataFile = File(dataFolder, "data.yml")
+
+    /**
+     * The actual loaded data configuration.
+     *
+     * `null` when the configuration has not been loaded.
+     */
+    private var data: FileConfiguration? = null
+
     var al = ArrowListener(this)
     var el = EnchantmentListener(this)
     var pjl = PlayerJoinListener(this)
@@ -45,10 +65,6 @@ class DirtyArrows : JavaPlugin() {
     var frozenListener = FrozenListener(this)
     var anvilListener = AnvilListener(this)
 
-    /**
-     * Contains the UUID's of all players that activated DirtyArrows.
-     */
-    @JvmField var activated: MutableSet<UUID> = HashSet()
     @JvmField var slow: MutableList<Projectile> = ArrayList()
     @JvmField var airstrike: MutableList<Projectile> = ArrayList()
     @JvmField var airship: MutableList<Projectile> = ArrayList()
@@ -65,10 +81,68 @@ class DirtyArrows : JavaPlugin() {
     @JvmField var iceParticle: MutableList<Projectile> = ArrayList()
     @JvmField var anvils = ConcurrentHashMap<FallingBlock, Int>()
 
-    val version: String
-        get() = description.version
-    private var data: FileConfiguration? = null
-    private var dataFile: File? = null
+    /**
+     * Manages the activation of DA by entities.
+     * DA should only apply the effects of the bows when DA is enabled.
+     */
+    val activationManager = ActivationManager(this::isMinigameVersion)
+
+    /**
+     * Whether the plugin runs in a DirtyArrows minigame.
+     *
+     * @return `true` when part of a minigame, `false` otherwise.
+     */
+    fun isMinigameVersion() = false
+
+    /**
+     * Reloads the plugin configuration.
+     */
+    fun reloadConfiguration() {
+        reloadConfig()
+        setArrowRecipes()
+    }
+
+    /**
+     * Adds the custom arrow recipes to the server (configurable arrow amount per craft).
+     */
+    fun setArrowRecipes() {
+        server.resetRecipes()
+        server.registerArrowRecipes(config.getInt("arrow-recipe-amount"))
+    }
+
+    /**
+     * Get the data configuration. Loads the data when the data configuration is not present.
+     */
+    fun getData(): FileConfiguration? {
+        if (data == null) {
+            reloadData()
+        }
+        return data
+    }
+
+    /**
+     * Reloads the data.yml file.
+     */
+    fun reloadData() {
+        data = YamlConfiguration.loadConfiguration(dataFile)
+        getResource("data.yml")?.let { defaultConfigStream ->
+            val defaultConfig = YamlConfiguration.loadConfiguration(defaultConfigStream.bufferedReader())
+            data!!.defaults = defaultConfig
+        }
+    }
+
+    /**
+     * Saves the data configuration to the data file.
+     */
+    fun saveData() {
+        if (data == null) return
+        try {
+            getData()!!.save(dataFile)
+        }
+        catch (ex: Exception) {
+            logger.log(Level.SEVERE, "Could not save config to $dataFile", ex)
+        }
+    }
 
     override fun onEnable() {
         /*
@@ -139,9 +213,9 @@ class DirtyArrows : JavaPlugin() {
         server.scheduler.scheduleSyncRepeatingTask(this, curse, 20, 20)
         server.scheduler.scheduleSyncRepeatingTask(this, frozenListener, 20, 20)
         rm.loadRegions()
-        log.info("[DirtyArrows] DirtyArrows has been enabled!")
-        log.info("[DirtyArrows] 42 Bastards have been loaded")
-        log.info("[DirtyArrows] 3 recipes have been loaded")
+        logger.info("[DirtyArrows] DirtyArrows has been enabled!")
+        logger.info("[DirtyArrows] 42 Bastards have been loaded")
+        logger.info("[DirtyArrows] 3 recipes have been loaded")
 
         /*
 		 * Check for updatese
@@ -160,69 +234,6 @@ class DirtyArrows : JavaPlugin() {
 
     override fun onDisable() {
         rm.saveRegions()
-        log.info("[DirtyArrows] DirtyArrows has been disabled!")
-    }
-
-    fun isActivated(p: Player): Boolean {
-        return if (MINIGAME_VERSION) {
-            true
-        } else {
-            activated.contains(p.uniqueId)
-        }
-    }
-
-    fun reloadConfiguration() {
-        reloadConfig()
-        server.resetRecipes()
-        val arrow =
-            ShapedRecipe(ItemStack(Material.ARROW, config.getInt("arrow-recipe-amount"))).shape(" * ", " # ", " % ")
-                .setIngredient('*', Material.FLINT).setIngredient('#', Material.STICK)
-                .setIngredient('%', Material.FEATHER)
-        val arrow2 =
-            ShapedRecipe(ItemStack(Material.ARROW, config.getInt("arrow-recipe-amount"))).shape("*  ", "#  ", "%  ")
-                .setIngredient('*', Material.FLINT).setIngredient('#', Material.STICK)
-                .setIngredient('%', Material.FEATHER)
-        val arrow3 =
-            ShapedRecipe(ItemStack(Material.ARROW, config.getInt("arrow-recipe-amount"))).shape("  *", "  #", "  %")
-                .setIngredient('*', Material.FLINT).setIngredient('#', Material.STICK)
-                .setIngredient('%', Material.FEATHER)
-        server.addRecipe(arrow)
-        server.addRecipe(arrow2)
-        server.addRecipe(arrow3)
-    }
-
-    fun reloadData() {
-        if (dataFile == null) {
-            dataFile = File(dataFolder, "data.yml")
-        }
-        data = YamlConfiguration.loadConfiguration(dataFile)
-        val defStream = getResource("data.yml")
-        if (defStream != null) {
-            val defConfig = YamlConfiguration.loadConfiguration(defStream)
-            data!!.defaults = defConfig
-        }
-    }
-
-    fun getData(): FileConfiguration? {
-        if (data == null) {
-            reloadData()
-        }
-        return data
-    }
-
-    fun saveData() {
-        if (data == null || dataFile == null) {
-            return
-        }
-        try {
-            getData()!!.save(dataFile)
-        } catch (ex: Exception) {
-            logger.log(Level.SEVERE, "Could not save config to $dataFile", ex)
-        }
-    }
-
-    companion object {
-
-        const val MINIGAME_VERSION = false
+        logger.info("[DirtyArrows] DirtyArrows has been disabled!")
     }
 }

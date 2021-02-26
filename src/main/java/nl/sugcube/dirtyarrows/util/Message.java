@@ -99,26 +99,25 @@ public class Message {
 	 * @param enabled (boolean) <i>true</i> if enabled, <i>false</i> if disabled.
 	 * @return (String) The message to show to the player.
 	 */
-	public static String getEnabled(boolean enabled) {
-		if (DirtyArrows.MINIGAME_VERSION) {
+	public static String getEnabled(boolean enabled, DirtyArrows plugin) {
+		if (plugin.isMinigameVersion()) {
 			return "";
 		}
-		else {
-			if (enabled) {
-				return ENABLED;
-			}
-			else {
-				return DISABLED;
-			}
-		}
-	}
+
+        if (enabled) {
+            return ENABLED;
+        }
+        else {
+            return DISABLED;
+        }
+    }
 	
 	/**
 	 * Get the tag when MINIGAME_VERSION is true.
 	 * @return MG_TAG in case that MINIGAME_VERSION is true, otherwise it returns an empty string.
 	 */
-	public static String getTag() {
-		if (DirtyArrows.MINIGAME_VERSION) {
+	public static String getTag(DirtyArrows plugin) {
+		if (plugin.isMinigameVersion()) {
 			return MG_TAG;
 		}
 		else {
@@ -132,21 +131,21 @@ public class Message {
 	 * @param headshotType (Type) The type of headshot it is.
 	 * @return (String) The message the be sent.
 	 */
-	public static String getHeadshot(Player p, Type headshotType) {
-		if (DirtyArrows.MINIGAME_VERSION) {
+	public static String getHeadshot(Player player, Type headshotType, DirtyArrows plugin) {
+		if (plugin.isMinigameVersion()) {
 			if (headshotType == Type.HEADSHOT_BY) {
-				return MG_HEADSHOT_BY.replace("%p%", p.getName());
+				return MG_HEADSHOT_BY.replace("%p%", player.getName());
 			}
 			else if (headshotType == Type.HEADSHOT_ON) {
-				return MG_HEADSHOT_ON.replace("%p%", p.getName());
+				return MG_HEADSHOT_ON.replace("%p%", player.getName());
 			}
 		}
 		else {
 			if (headshotType == Type.HEADSHOT_BY) {
-				return HEADSHOT_BY.replace("%p%", p.getName());
+				return HEADSHOT_BY.replace("%p%", player.getName());
 			}
 			else if (headshotType == Type.HEADSHOT_ON) {
-				return HEADSHOT_ON.replace("%p%", p.getName());
+				return HEADSHOT_ON.replace("%p%", player.getName());
 			}
 		}
 		

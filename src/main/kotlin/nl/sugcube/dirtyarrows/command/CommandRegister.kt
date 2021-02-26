@@ -29,7 +29,7 @@ open class CommandRegister : SubCommand<DirtyArrows>(
             return
         }
 
-        if (plugin.rm.getRegionByName(regionName) != null) {
+        if (plugin.rm.regionByName(regionName) != null) {
             sender.sendError("Region '$regionName' already exists.")
             return
         }

@@ -40,14 +40,8 @@ open class DirtyArrowsCommandManager(private val plugin: DirtyArrows) : CommandE
             sender.sendError("You don't have permission to perform this command!")
         }
 
-        if (sender.uniqueId in plugin.activated) {
-            plugin.activated.remove(sender.uniqueId)
-            sender.sendMessage(Message.getEnabled(false))
-        }
-        else {
-            plugin.activated.add(sender.uniqueId)
-            sender.sendMessage(Message.getEnabled(true))
-        }
+        val isActivated = plugin.activationManager.toggleActivation(sender.uniqueId)
+        sender.sendMessage(Message.getEnabled(isActivated, plugin))
     }
 
     override fun onCommand(

@@ -11,7 +11,7 @@ public class RegionManager {
 
 	public static DirtyArrows plugin;
 	
-	private List<Region> registeredRegions = new ArrayList<Region>();
+	private final List<Region> registeredRegions = new ArrayList<>();
 	private Location position1;
 	private Location position2;
 	
@@ -70,33 +70,30 @@ public class RegionManager {
 	/**
 	 * Saves all the regions to the data.yml
 	 */
-	public void saveRegions() {
+	public boolean saveRegions() {
 		boolean error = false;
-		for (int i = 0; i < registeredRegions.size(); i++) {
-			try {
-				Region reg = registeredRegions.get(i);
-				
-				if (reg == null) {
-					continue;
-				}
-				
-				if (reg.getName() == "") {
-					continue;
-				}
-	
-				if (reg.getLocation(1) != null) {
-					plugin.getData().set("regions." + reg.getName() + ".pos1", DaUtil.toLocationString(reg.getLocation(1)));
-				}
-				
-				if (reg.getLocation(2) != null)
-					plugin.getData().set("regions." + reg.getName() + ".pos2", DaUtil.toLocationString(reg.getLocation(2)));
-				
-				plugin.saveData();
-			} catch (Exception e) {
-				error = true;
-			}
-		}
+        for (Region registeredRegion : registeredRegions) {
+            try {
+                if (registeredRegion == null || registeredRegion.getName() == "") {
+                    continue;
+                }
+
+                if (registeredRegion.getLocation(1) != null) {
+                    plugin.getData().set("regions." + registeredRegion.getName() + ".pos1", DaUtil.toLocationString(registeredRegion.getLocation(1)));
+                }
+
+                if (registeredRegion.getLocation(2) != null) {
+                    plugin.getData().set("regions." + registeredRegion.getName() + ".pos2", DaUtil.toLocationString(registeredRegion.getLocation(2)));
+                }
+
+                plugin.saveData();
+            }
+            catch (Exception e) {
+                error = true;
+            }
+        }
 		plugin.getLogger().info("Could not save locations.");
+        return error;
 	}
 	
 	/**
@@ -105,9 +102,9 @@ public class RegionManager {
 	 */
 	public List<String> getAllNames() {
 		List<String> names = new ArrayList<String>();
-		for (int i = 0; i < registeredRegions.size(); i++) {
-			names.add(registeredRegions.get(i).getName());
-		}
+        for (Region registeredRegion : registeredRegions) {
+            names.add(registeredRegion.getName());
+        }
 		
 		return names;
 	}
@@ -118,11 +115,11 @@ public class RegionManager {
 	 * @return (boolean) True if it does exist, false if not.
 	 */
 	public boolean doesExist(String name) {
-		for (int i = 0; i < registeredRegions.size(); i++) {
-			if (registeredRegions.get(i).getName().equalsIgnoreCase(name)) {
-				return true;
-			}
-		}
+        for (Region registeredRegion : registeredRegions) {
+            if (registeredRegion.getName().equalsIgnoreCase(name)) {
+                return true;
+            }
+        }
 		
 		return false;
 	}
@@ -133,11 +130,11 @@ public class RegionManager {
 	 * @return (boolean) True if it does exist, false if not.
 	 */
 	public boolean doesExist(Region reg) {
-		for (int i = 0; i < registeredRegions.size(); i++) {
-			if (registeredRegions.get(i).getName().equalsIgnoreCase(reg.getName())) {
-				return true;
-			}
-		}
+        for (Region registeredRegion : registeredRegions) {
+            if (registeredRegion.getName().equalsIgnoreCase(reg.getName())) {
+                return true;
+            }
+        }
 		
 		return false;
 	}
@@ -147,23 +144,22 @@ public class RegionManager {
 	 * @param name (String) name of the Region.
 	 * @return (Region) or `null` when there is no region with the given name.
 	 */
-	public Region getRegionByName(String name) {
-		for (int i = 0; i < registeredRegions.size(); i++) {
-			if (registeredRegions.get(i).getName().equalsIgnoreCase(name)) {
-				return registeredRegions.get(i);
-			}
-		}
+	public Region regionByName(String name) {
+        for (Region registeredRegion : registeredRegions) {
+            if (registeredRegion.getName().equalsIgnoreCase(name)) {
+                return registeredRegion;
+            }
+        }
 		
 		return null;
 	}
 	
 	public Region isWithinAXZMargin(Location loc, int margin) {
-		for (int i = 0; i < registeredRegions.size(); i++) {
-			Region region = registeredRegions.get(i);
-			if (RegionManager.isWithinXZMargin(region, loc, margin)) {
-				return region;
-			}
-		}
+        for (Region region : registeredRegions) {
+            if (RegionManager.isWithinXZMargin(region, loc, margin)) {
+                return region;
+            }
+        }
 		
 		return null;
 	}
@@ -176,12 +172,11 @@ public class RegionManager {
 	 * @return (Region) null if not in a region.
 	 */
 	public Region isWithinARegionMargin(Location loc, int margin) {
-		for (int i = 0; i < registeredRegions.size(); i++) {
-			Region region = registeredRegions.get(i);
-			if (RegionManager.isWithinRegionMargin(region, loc, margin)) {
-				return region;
-			}
-		}
+        for (Region region : registeredRegions) {
+            if (RegionManager.isWithinRegionMargin(region, loc, margin)) {
+                return region;
+            }
+        }
 		
 		return null;
 	}
@@ -193,12 +188,11 @@ public class RegionManager {
 	 * @return (Region) null if not in a region.
 	 */
 	public Region isWithinARegion(Location loc) {
-		for (int i = 0; i < registeredRegions.size(); i++) {
-			Region region = registeredRegions.get(i);
-			if (RegionManager.isWithinRegion(region, loc)) {
-				return region;
-			}
-		}
+        for (Region region : registeredRegions) {
+            if (RegionManager.isWithinRegion(region, loc)) {
+                return region;
+            }
+        }
 		
 		return null;
 	}
@@ -226,8 +220,7 @@ public class RegionManager {
 	 */
 	public Region createRegion() {
 		if (position1 != null && position2 != null) {
-			Region region = new Region(position1, position2);			
-			return region;
+            return new Region(position1, position2);
 		}
 		
 		return null;

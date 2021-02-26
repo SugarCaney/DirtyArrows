@@ -1,16 +1,15 @@
 package nl.sugcube.dirtyarrows.ability;
 
-import java.util.Random;
-
 import nl.sugcube.dirtyarrows.DirtyArrows;
 import nl.sugcube.dirtyarrows.util.Message;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.util.Vector;
+
+import java.util.Random;
 
 public class CurseListener implements Listener, Runnable {
 	
@@ -33,7 +32,7 @@ public class CurseListener implements Listener, Runnable {
 				if (ent instanceof Player) {
 					Player player = (Player) ent;
 					if (player.isOnline()) {
-						player.sendMessage(Message.getTag() + ChatColor.GRAY + "The curse has been lifted.");
+						player.sendMessage(Message.getTag(plugin) + ChatColor.GRAY + "The curse has been lifted.");
 					}
 				}
 			}

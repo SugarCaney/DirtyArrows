@@ -8,13 +8,16 @@ Changelog
 * **`~`** Tweaked
 * **`~`** Removed feature
 
-## Version 3.1 (Upcoming)
+## Version 4.0 (Upcoming)
 
+* **`i`** Updated for Minecraft 1.11.2.
+* **`i`** Refactored the whole code base.
 * **`!`** Fixed cursed bastard's move-effect not being calculated properly.
 * **`!`** Fixed curse not going away after death.
 * **`!`** Fixed frozen not going away after death.
 * **`!`** Fixed perpetual frozen when you die when you're frozen.
 * **`~`** Buffed cursed bastard.
+* **`-`** Removed metrics.
 
 ## Version 3.0
 
