@@ -33,7 +33,7 @@ enum class AutoCompleteArgument(
     /**
      * Lists all region names.
      */
-    REGIONS({ it.rm.allNames.sorted() }),
+    REGIONS({ it.regionManager.allNames.sorted() }),
 
     /**
      * All page numbers for Help.

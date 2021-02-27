@@ -379,7 +379,7 @@ public class ArrowListener implements Listener {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canExplode.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.exploding") && plugin.getConfig().getBoolean("exploding.enabled")) {
-								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+								if (plugin.getRegionManager().isWithinARegionMargin(player.getLocation(), 1) == null) {
 									if (player.getGameMode() == GameMode.CREATIVE) {
 										plugin.particleExploding.add(event.getEntity());
 										canExplode.add(player.getUniqueId().toString());
@@ -407,7 +407,7 @@ public class ArrowListener implements Listener {
 					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("lightning.name"))) && plugin.getActivationManager().isActivatedFor(player)) {
 						if (!(canStrikeLightning.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.lightning") && plugin.getConfig().getBoolean("lightning.enabled")) {
-								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+								if (plugin.getRegionManager().isWithinARegionMargin(player.getLocation(), 1) == null) {
 									if (player.getGameMode() == GameMode.CREATIVE) {
 										canStrikeLightning.add(player.getUniqueId().toString());
 										return;
@@ -434,7 +434,7 @@ public class ArrowListener implements Listener {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canCluck.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.clucky") && plugin.getConfig().getBoolean("clucky.enabled")) {
-								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+								if (plugin.getRegionManager().isWithinARegionMargin(player.getLocation(), 1) == null) {
 									if (player.getGameMode() == GameMode.CREATIVE) {
 										canCluck.add(player.getUniqueId().toString());
 										return;
@@ -481,7 +481,7 @@ public class ArrowListener implements Listener {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canSpawnOak.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.oak") && plugin.getConfig().getBoolean("oak.enabled")) {
-								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+								if (plugin.getRegionManager().isWithinARegionMargin(player.getLocation(), 1) == null) {
 									if (player.getGameMode() == GameMode.CREATIVE) {
 										canSpawnOak.add(player.getUniqueId().toString());
 										return;
@@ -508,7 +508,7 @@ public class ArrowListener implements Listener {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canSpawnBirch.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.birch") && plugin.getConfig().getBoolean("birch.enabled")) {
-								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+								if (plugin.getRegionManager().isWithinARegionMargin(player.getLocation(), 1) == null) {
 									if (player.getGameMode() == GameMode.CREATIVE) {
 										canSpawnBirch.add(player.getUniqueId().toString());
 										return;
@@ -535,7 +535,7 @@ public class ArrowListener implements Listener {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canSpawnSpruce.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.spruce") && plugin.getConfig().getBoolean("spruce.enabled")) {
-								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+								if (plugin.getRegionManager().isWithinARegionMargin(player.getLocation(), 1) == null) {
 									if (player.getGameMode() == GameMode.CREATIVE) {
 										canSpawnSpruce.add(player.getUniqueId().toString());
 										return;
@@ -562,7 +562,7 @@ public class ArrowListener implements Listener {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canSpawnJungle.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.jungle") && plugin.getConfig().getBoolean("jungle.enabled")) {
-								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+								if (plugin.getRegionManager().isWithinARegionMargin(player.getLocation(), 1) == null) {
 									if (player.getGameMode() == GameMode.CREATIVE) {
 										canSpawnJungle.add(player.getUniqueId().toString());
 										return;
@@ -589,7 +589,7 @@ public class ArrowListener implements Listener {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canSpawnBats.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.batty") && plugin.getConfig().getBoolean("batty.enabled")) {
-								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+								if (plugin.getRegionManager().isWithinARegionMargin(player.getLocation(), 1) == null) {
 									if (player.getGameMode() == GameMode.CREATIVE) {
 										canSpawnBats.add(player.getUniqueId().toString());
 										return;
@@ -615,7 +615,7 @@ public class ArrowListener implements Listener {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canNuke.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.nuclear") && plugin.getConfig().getBoolean("nuclear.enabled")) {
-								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+								if (plugin.getRegionManager().isWithinARegionMargin(player.getLocation(), 1) == null) {
 									if (player.getGameMode() == GameMode.CREATIVE) {
 										canNuke.add(player.getUniqueId().toString());
 										plugin.particleExploding.add(event.getEntity());
@@ -643,7 +643,7 @@ public class ArrowListener implements Listener {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canLight.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.enlightened") && plugin.getConfig().getBoolean("enlightened.enabled")) {
-								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+								if (plugin.getRegionManager().isWithinARegionMargin(player.getLocation(), 1) == null) {
 									if (player.getGameMode() == GameMode.CREATIVE) {
 										canLight.add(player.getUniqueId().toString());
 										return;
@@ -741,7 +741,7 @@ public class ArrowListener implements Listener {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canwoodman.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.woodman") && plugin.getConfig().getBoolean("woodman.enabled")) {
-								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+								if (plugin.getRegionManager().isWithinARegionMargin(player.getLocation(), 1) == null) {
 									canwoodman.add(player.getUniqueId().toString());
 								} else {
 									event.setCancelled(true);
@@ -772,7 +772,7 @@ public class ArrowListener implements Listener {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canFlint.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.flintand") && plugin.getConfig().getBoolean("flintand.enabled")) {
-								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+								if (plugin.getRegionManager().isWithinARegionMargin(player.getLocation(), 1) == null) {
 									if (player.getGameMode() == GameMode.CREATIVE) {
 										canFlint.add(player.getUniqueId().toString());
 										plugin.particleFire.add(event.getEntity());
@@ -818,7 +818,7 @@ public class ArrowListener implements Listener {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canBrick.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.wither") && plugin.getConfig().getBoolean("wither.enabled")) {
-								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+								if (plugin.getRegionManager().isWithinARegionMargin(player.getLocation(), 1) == null) {
 									if (player.getGameMode() != GameMode.CREATIVE) {
 										if (player.getInventory().contains(Material.SOUL_SAND, 3)){
 											player.getInventory().removeItem(new ItemStack(Material.SOUL_SAND, 3));
@@ -846,7 +846,7 @@ public class ArrowListener implements Listener {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canBrick.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.firey") && plugin.getConfig().getBoolean("firey.enabled")) {
-								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+								if (plugin.getRegionManager().isWithinARegionMargin(player.getLocation(), 1) == null) {
 									if (player.getGameMode() != GameMode.CREATIVE) {
 										if (player.getInventory().contains(Material.FIREBALL, 1)){
 											player.getInventory().removeItem(new ItemStack(Material.FIREBALL, 1));
@@ -903,7 +903,7 @@ public class ArrowListener implements Listener {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canSwarm.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.undead") && plugin.getConfig().getBoolean("undead.enabled")) {
-								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+								if (plugin.getRegionManager().isWithinARegionMargin(player.getLocation(), 1) == null) {
 									if (player.getGameMode() != GameMode.CREATIVE) {
 										if (player.getInventory().contains(Material.ROTTEN_FLESH, 64)){
 											player.getInventory().removeItem(new ItemStack(Material.ROTTEN_FLESH, 64));
@@ -963,7 +963,7 @@ public class ArrowListener implements Listener {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canBomb.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.bomb") && plugin.getConfig().getBoolean("bomb.enabled")) {
-								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+								if (plugin.getRegionManager().isWithinARegionMargin(player.getLocation(), 1) == null) {
 									if (player.getGameMode() != GameMode.CREATIVE) {
 										if (player.getInventory().contains(Material.TNT, 3)){
 											player.getInventory().removeItem(new ItemStack(Material.TNT, 3));
@@ -990,7 +990,7 @@ public class ArrowListener implements Listener {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canBomb.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.cluster") && plugin.getConfig().getBoolean("cluster.enabled")) {
-								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 24) == null) {
+								if (plugin.getRegionManager().isWithinARegionMargin(player.getLocation(), 24) == null) {
 									if (player.getGameMode() != GameMode.CREATIVE) {
 										if (player.getInventory().contains(Material.TNT, 5)){
 											player.getInventory().removeItem(new ItemStack(Material.TNT, 5));
@@ -1029,7 +1029,7 @@ public class ArrowListener implements Listener {
 					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("airstrike.name"))) && plugin.getActivationManager().isActivatedFor(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (player.hasPermission("dirtyarrows.airstrike") && plugin.getConfig().getBoolean("airstrike.enabled")) {
-							if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+							if (plugin.getRegionManager().isWithinARegionMargin(player.getLocation(), 1) == null) {
 								if (player.getGameMode() != GameMode.CREATIVE) {
 									if (player.getInventory().contains(Material.TNT, 1)){
 										plugin.airstrike.add(event.getEntity());
@@ -1080,7 +1080,7 @@ public class ArrowListener implements Listener {
 					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("magmatic.name"))) && plugin.getActivationManager().isActivatedFor(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (player.hasPermission("dirtyarrows.magmatic") && plugin.getConfig().getBoolean("magmatic.enabled")) {
-							if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+							if (plugin.getRegionManager().isWithinARegionMargin(player.getLocation(), 1) == null) {
 								if (player.getGameMode() != GameMode.CREATIVE) {
 									if (player.getInventory().contains(Material.LAVA_BUCKET, 1)){
 										player.getInventory().remove(new ItemStack(Material.LAVA_BUCKET, 1));
@@ -1117,7 +1117,7 @@ public class ArrowListener implements Listener {
 					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("aquatic.name"))) && plugin.getActivationManager().isActivatedFor(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (player.hasPermission("dirtyarrows.aquatic") && plugin.getConfig().getBoolean("aquatic.enabled")) {
-							if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+							if (plugin.getRegionManager().isWithinARegionMargin(player.getLocation(), 1) == null) {
 								if (player.getGameMode() != GameMode.CREATIVE) {
 									if (player.getInventory().contains(Material.WATER_BUCKET, 1)){
 										player.getInventory().remove(new ItemStack(Material.WATER_BUCKET, 1));
@@ -1156,7 +1156,7 @@ public class ArrowListener implements Listener {
 					else if (name.equalsIgnoreCase(Methods.setColours(plugin.getConfig().getString("iron.name"))) && plugin.getActivationManager().isActivatedFor(player)) {
 						removeSwap(player.getUniqueId().toString());
 						if (player.hasPermission("dirtyarrows.iron") && plugin.getConfig().getBoolean("iron.enabled")) {
-							if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+							if (plugin.getRegionManager().isWithinARegionMargin(player.getLocation(), 1) == null) {
 								if (player.getGameMode() != GameMode.CREATIVE) {
 									if (player.getInventory().contains(Material.ANVIL, 1)){
 										player.getInventory().removeItem(new ItemStack(Material.ANVIL, 1));
@@ -1347,7 +1347,7 @@ public class ArrowListener implements Listener {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canSpawnAcacia.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.acacia") && plugin.getConfig().getBoolean("acacia.enabled")) {
-								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+								if (plugin.getRegionManager().isWithinARegionMargin(player.getLocation(), 1) == null) {
 									if (player.getGameMode() == GameMode.CREATIVE) {
 										canSpawnAcacia.add(player.getUniqueId().toString());
 										return;
@@ -1374,7 +1374,7 @@ public class ArrowListener implements Listener {
 						removeSwap(player.getUniqueId().toString());
 						if (!(canSpawnDarkOak.contains(player.getUniqueId().toString()))) {
 							if (player.hasPermission("dirtyarrows.darkoak") && plugin.getConfig().getBoolean("darkoak.enabled")) {
-								if (plugin.rm.isWithinARegionMargin(player.getLocation(), 1) == null) {
+								if (plugin.getRegionManager().isWithinARegionMargin(player.getLocation(), 1) == null) {
 									if (player.getGameMode() == GameMode.CREATIVE) {
 										canSpawnDarkOak.add(player.getUniqueId().toString());
 										return;
@@ -1468,7 +1468,7 @@ public class ArrowListener implements Listener {
 					 * ZOMBIE
 					 */
 					if (canSwarm.contains(player.getUniqueId().toString())) {
-						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 7) == null) {
+						if (plugin.getRegionManager().isWithinARegionMargin(arrow.getLocation(), 7) == null) {
 							Swarm.doSwarm(player.getWorld(), arrow.getLocation());
 						} else {
 							arrow.remove();
@@ -1482,7 +1482,7 @@ public class ArrowListener implements Listener {
 					 * EXPLODING
 					 */
 					else if (canExplode.contains(player.getUniqueId().toString())) {
-						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 5) == null) {
+						if (plugin.getRegionManager().isWithinARegionMargin(arrow.getLocation(), 5) == null) {
 							player.getWorld().createExplosion(arrow.getLocation(), 4F);
 							arrow.remove();
 							if (player.getGameMode() == GameMode.SURVIVAL)
@@ -1497,7 +1497,7 @@ public class ArrowListener implements Listener {
 					 * WOODMAN
 					 */
 					else if (canwoodman.contains(player.getUniqueId().toString())) {
-						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 4) == null) {
+						if (plugin.getRegionManager().isWithinARegionMargin(arrow.getLocation(), 4) == null) {
 							BlockIterator iterator = new BlockIterator(event.getEntity().getWorld(), event.getEntity().getLocation().toVector(),
 				            		event.getEntity().getVelocity().normalize(), 0.0D, 4);
 				            Block hitBlock = null;
@@ -1522,7 +1522,7 @@ public class ArrowListener implements Listener {
 					 * LIGHTNING
 					 */
 					else if (canStrikeLightning.contains(player.getUniqueId().toString())) {
-						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 3) == null) {
+						if (plugin.getRegionManager().isWithinARegionMargin(arrow.getLocation(), 3) == null) {
 							player.getWorld().strikeLightning(arrow.getLocation());
 							arrow.remove();
 							if (player.getGameMode() == GameMode.SURVIVAL)
@@ -1537,7 +1537,7 @@ public class ArrowListener implements Listener {
 					 * CLUCKY
 					 */
 					else if (canCluck.contains(player.getUniqueId().toString())) {
-						if (plugin.rm.isWithinAXZMargin(arrow.getLocation(), 2) == null) {
+						if (plugin.getRegionManager().isWithinARegionXZMargin(arrow.getLocation(), 2) == null) {
 							player.getWorld().spawnEntity(arrow.getLocation(), EntityType.CHICKEN);
 							player.playSound(player.getLocation(), Sound.ENTITY_CHICKEN_HURT, 10, 1);
 							arrow.remove();
@@ -1564,7 +1564,7 @@ public class ArrowListener implements Listener {
 					 * OAK
 					 */
 					else if (canSpawnOak.contains(player.getUniqueId().toString())) {
-						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 5) == null) {
+						if (plugin.getRegionManager().isWithinARegionMargin(arrow.getLocation(), 5) == null) {
 							if (arrow.getWorld().generateTree(arrow.getLocation(), TreeType.TREE)) {
 								arrow.getWorld().generateTree(arrow.getLocation(), TreeType.TREE);
 								if (player.getGameMode() == GameMode.SURVIVAL) {
@@ -1583,7 +1583,7 @@ public class ArrowListener implements Listener {
 					 * BIRCH
 					 */
 					else if (canSpawnBirch.contains(player.getUniqueId().toString())) {
-						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 5) == null) {
+						if (plugin.getRegionManager().isWithinARegionMargin(arrow.getLocation(), 5) == null) {
 							if (arrow.getWorld().generateTree(arrow.getLocation(), TreeType.BIRCH)) {
 								arrow.getWorld().generateTree(arrow.getLocation(), TreeType.BIRCH);
 								if (player.getGameMode() == GameMode.SURVIVAL) {
@@ -1602,7 +1602,7 @@ public class ArrowListener implements Listener {
 					 * SPRUCE
 					 */
 					else if (canSpawnSpruce.contains(player.getUniqueId().toString())) {
-						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 5) == null) {
+						if (plugin.getRegionManager().isWithinARegionMargin(arrow.getLocation(), 5) == null) {
 							if (arrow.getWorld().generateTree(arrow.getLocation(), TreeType.REDWOOD)) {
 								arrow.getWorld().generateTree(arrow.getLocation(), TreeType.REDWOOD);
 								if (player.getGameMode() == GameMode.SURVIVAL) {
@@ -1621,7 +1621,7 @@ public class ArrowListener implements Listener {
 					 * JUNGLE
 					 */
 					else if (canSpawnJungle.contains(player.getUniqueId().toString())) {
-						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 5) == null) {
+						if (plugin.getRegionManager().isWithinARegionMargin(arrow.getLocation(), 5) == null) {
 							if (arrow.getWorld().generateTree(arrow.getLocation(), TreeType.SMALL_JUNGLE)) {
 								arrow.getWorld().generateTree(arrow.getLocation(), TreeType.SMALL_JUNGLE);
 								if (player.getGameMode() == GameMode.SURVIVAL) {
@@ -1640,7 +1640,7 @@ public class ArrowListener implements Listener {
 					 * ACACIA
 					 */
 					else if (canSpawnAcacia.contains(player.getUniqueId().toString())) {
-						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 10) == null) {
+						if (plugin.getRegionManager().isWithinARegionMargin(arrow.getLocation(), 10) == null) {
 							if (arrow.getWorld().generateTree(arrow.getLocation(), TreeType.ACACIA)) {
 								arrow.getWorld().generateTree(arrow.getLocation(), TreeType.ACACIA);
 								if (player.getGameMode() == GameMode.SURVIVAL) {
@@ -1659,7 +1659,7 @@ public class ArrowListener implements Listener {
 					 * DARKOAK
 					 */
 					else if (canSpawnDarkOak.contains(player.getUniqueId().toString())) {
-						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 10) == null) {
+						if (plugin.getRegionManager().isWithinARegionMargin(arrow.getLocation(), 10) == null) {
 							if (arrow.getWorld().generateTree(arrow.getLocation(), TreeType.DARK_OAK)) {
 								arrow.getWorld().generateTree(arrow.getLocation(), TreeType.DARK_OAK);
 								if (player.getGameMode() == GameMode.SURVIVAL) {
@@ -1678,7 +1678,7 @@ public class ArrowListener implements Listener {
 					 * BATTY
 					 */
 					else if (canSpawnBats.contains(player.getUniqueId().toString())) {
-						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 5) == null) { 
+						if (plugin.getRegionManager().isWithinARegionMargin(arrow.getLocation(), 5) == null) {
 							for (int i = 1; i <= 10; i++) {
 								arrow.getWorld().spawnEntity(arrow.getLocation(), EntityType.BAT);
 							}
@@ -1696,7 +1696,7 @@ public class ArrowListener implements Listener {
 					 * NUCLEAR
 					 */
 					else if (canNuke.contains(player.getUniqueId().toString())) {
-						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 65) == null) {
+						if (plugin.getRegionManager().isWithinARegionMargin(arrow.getLocation(), 65) == null) {
 							player.getWorld().createExplosion(arrow.getLocation(), 50F);
 							arrow.remove();
 							if (player.getGameMode() != GameMode.CREATIVE)
@@ -1711,7 +1711,7 @@ public class ArrowListener implements Listener {
 					 * ENLIGHTED
 					 */
 					else if (canLight.contains(player.getUniqueId().toString())) {
-						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 2) == null) {
+						if (plugin.getRegionManager().isWithinARegionMargin(arrow.getLocation(), 2) == null) {
 							arrow.getLocation().getBlock().setType(Material.TORCH);
 							arrow.remove();
 							if (player.getGameMode() == GameMode.SURVIVAL)
@@ -1726,7 +1726,7 @@ public class ArrowListener implements Listener {
 					 * FLINTAND
 					 */
 					else if (canFlint.contains(player.getUniqueId().toString())) {
-						if (plugin.rm.isWithinARegionMargin(arrow.getLocation(), 6) == null) {
+						if (plugin.getRegionManager().isWithinARegionMargin(arrow.getLocation(), 6) == null) {
 							int fintuses = 1;
 							Location loc = arrow.getLocation();
 							if (loc.getBlock().getType() == Material.AIR ||
@@ -1843,7 +1843,7 @@ public class ArrowListener implements Listener {
 					 * BOMB
 					 */
 					else if (canBomb.contains(player.getUniqueId().toString())) {
-						if (plugin.rm.isWithinAXZMargin(arrow.getLocation(), 16) == null) {
+						if (plugin.getRegionManager().isWithinARegionXZMargin(arrow.getLocation(), 16) == null) {
 							arrow.remove();
 							World world = arrow.getLocation().getWorld();
 							for (int i = 0; i < 3; i++) {
@@ -1864,7 +1864,7 @@ public class ArrowListener implements Listener {
 					 * CLUSTER
 					 */
 					else if (canCluster.contains(player.getUniqueId().toString())) {
-						if (plugin.rm.isWithinAXZMargin(arrow.getLocation(), 24) == null) {
+						if (plugin.getRegionManager().isWithinARegionXZMargin(arrow.getLocation(), 24) == null) {
 							arrow.remove();
 							World world = arrow.getLocation().getWorld();
 							Location loc = arrow.getLocation();

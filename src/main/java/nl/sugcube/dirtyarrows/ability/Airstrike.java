@@ -22,8 +22,8 @@ public class Airstrike implements Runnable {
 		for (Projectile proj : plugin.airstrike) {
 			if (proj.getShooter() instanceof Player) {
 				Player player = (Player) proj.getShooter();
-				
-				if (plugin.rm.isWithinAXZMargin(proj.getLocation(), 6) == null) {
+
+				if (plugin.getRegionManager().isWithinARegionXZMargin(proj.getLocation(), 6) == null) {
 					if (player.getGameMode() == GameMode.CREATIVE) {
 						player.getWorld().spawnEntity(proj.getLocation().add(0, 2, 0), EntityType.PRIMED_TNT);
 					} else {

@@ -23,7 +23,7 @@ open class CommandPos(val id: Int) : SubCommand<DirtyArrows>(
     override fun executeImpl(plugin: DirtyArrows, sender: CommandSender, vararg arguments: String) {
         val player = sender as? Player ?: error("Sender is not a player.")
         val location = player.location
-        plugin.rm.setSelection(id, location)
+        plugin.regionManager.setSelection(id, location)
         sender.sendFormattedMessage(Message.SET_POSITION.format(id, location.toCoordinateString()))
     }
 

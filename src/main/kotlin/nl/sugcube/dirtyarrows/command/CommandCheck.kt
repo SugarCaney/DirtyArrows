@@ -21,7 +21,7 @@ open class CommandCheck : SubCommand<DirtyArrows>(
 
     override fun executeImpl(plugin: DirtyArrows, sender: CommandSender, vararg arguments: String) {
         val player = sender as? Player ?: error("Sender is not a player.")
-        val region = plugin.rm.isWithinARegion(player.location)
+        val region = plugin.regionManager.isWithinARegion(player.location)
 
         if (region == null) {
             sender.sendMessage(Message.NOT_IN_REGION)

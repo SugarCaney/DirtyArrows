@@ -1,36 +1,19 @@
 package nl.sugcube.dirtyarrows.listener;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import nl.sugcube.dirtyarrows.DirtyArrows;
-
-import org.bukkit.ChatColor;
-import org.bukkit.Effect;
-import org.bukkit.EntityEffect;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Fireball;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.WitherSkull;
-import org.bukkit.entity.Zombie;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityChangeBlockEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.entity.EntityExplodeEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class EntityListener implements Listener {
 	
@@ -59,7 +42,7 @@ public class EntityListener implements Listener {
 		if (entity instanceof WitherSkull) {
 			if (((WitherSkull) entity).getShooter() instanceof Player) {
 				Player player = (Player) ((WitherSkull) entity).getShooter();
-				if (plugin.rm.isWithinARegionMargin(event.getLocation(), 5) != null) {
+				if (plugin.getRegionManager().isWithinARegionMargin(event.getLocation(), 5) != null) {
 					event.setCancelled(true);
 					if (player.getGameMode() != GameMode.CREATIVE)
 					player.getInventory().addItem(new ItemStack(Material.SOUL_SAND, 3));
@@ -69,7 +52,7 @@ public class EntityListener implements Listener {
 		} else if (entity instanceof Fireball) {
 			if (((Fireball) entity).getShooter() instanceof Player) {
 				Player player = (Player) ((Fireball) entity).getShooter();
-				if (plugin.rm.isWithinARegionMargin(event.getLocation(), 5) != null) {
+				if (plugin.getRegionManager().isWithinARegionMargin(event.getLocation(), 5) != null) {
 					event.setCancelled(true);
 					if (player.getGameMode() != GameMode.CREATIVE)
 						player.getInventory().addItem(new ItemStack(Material.FIREBALL, 1));
@@ -104,7 +87,7 @@ public class EntityListener implements Listener {
 	
 	@EventHandler
 	public void onEntityChangeBlock(EntityChangeBlockEvent event) {
-		if (plugin.rm.isWithinAXZMargin(event.getBlock().getLocation(), 5) != null) {
+		if (plugin.getRegionManager().isWithinARegionXZMargin(event.getBlock().getLocation(), 5) != null) {
 			event.setCancelled(true);
 			event.getEntity().remove();
 		}

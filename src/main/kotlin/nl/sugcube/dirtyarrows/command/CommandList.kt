@@ -18,7 +18,7 @@ open class CommandList : SubCommand<DirtyArrows>(
     }
 
     override fun executeImpl(plugin: DirtyArrows, sender: CommandSender, vararg arguments: String) {
-        val regions = plugin.rm.allNames
+        val regions = plugin.regionManager.allNames
         val chat = regions.joinToString("&e, ") { "&a$it" }
         sender.sendFormattedMessage("&eRegions (${regions.size}): &a$chat")
     }

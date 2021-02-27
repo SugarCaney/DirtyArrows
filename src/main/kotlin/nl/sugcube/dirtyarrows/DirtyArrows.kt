@@ -53,13 +53,17 @@ class DirtyArrows : JavaPlugin() {
      */
     private var data: FileConfiguration? = null
 
+    /**
+     * Manages all DA protection regions.
+     */
+    val regionManager = RegionManager(this)
+
     var al = ArrowListener(this)
     var el = EnchantmentListener(this)
     var pjl = PlayerJoinListener(this)
     var pdl = PlayerDamageListener(this)
     var enl = EntityListener(this)
     var help = Help(this)
-    @JvmField var rm = RegionManager(this)
     var iron = Iron(this)
     var curse = CurseListener(this)
     var frozenListener = FrozenListener(this)
@@ -212,7 +216,7 @@ class DirtyArrows : JavaPlugin() {
         server.scheduler.scheduleSyncRepeatingTask(this, iron, 5, 5)
         server.scheduler.scheduleSyncRepeatingTask(this, curse, 20, 20)
         server.scheduler.scheduleSyncRepeatingTask(this, frozenListener, 20, 20)
-        rm.loadRegions()
+        regionManager.loadRegions()
         logger.info("[DirtyArrows] DirtyArrows has been enabled!")
         logger.info("[DirtyArrows] 42 Bastards have been loaded")
         logger.info("[DirtyArrows] 3 recipes have been loaded")
@@ -233,7 +237,7 @@ class DirtyArrows : JavaPlugin() {
     }
 
     override fun onDisable() {
-        rm.saveRegions()
+        regionManager.saveRegions()
         logger.info("[DirtyArrows] DirtyArrows has been disabled!")
     }
 }
