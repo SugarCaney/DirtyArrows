@@ -42,7 +42,9 @@ open class DirtyArrowsCommandManager(private val plugin: DirtyArrows) : CommandE
         }
 
         val isActivated = plugin.activationManager.toggleActivation(sender.uniqueId)
-        sender.sendMessage(Message.getEnabled(isActivated, plugin))
+        if (plugin.config.getBoolean("show-enable-message")) {
+            sender.sendMessage(Message.getEnabled(isActivated, plugin))
+        }
     }
 
     override fun onCommand(

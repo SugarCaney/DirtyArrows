@@ -13,6 +13,7 @@ Changelog
 * **`i`** Updated for Minecraft 1.11.2.
 * **`i`** Refactored the whole code base.
 * **`+`** Added \da visualize to visualize regions and position selection.
+* **`+`** Added option to hide the enabled/disabled message.
 * **`!`** Fixed cursed bastard's move-effect not being calculated properly.
 * **`!`** Fixed curse not going away after death.
 * **`!`** Fixed frozen not going away after death.

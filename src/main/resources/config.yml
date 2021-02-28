@@ -9,6 +9,7 @@ headshot-multiplier: 1.5
 zombie-flint: true
 blood: true
 auto-enable: false
+show-enable-message: true
 exploding:
   name: 'Exploding Bastard'
   enabled: true
