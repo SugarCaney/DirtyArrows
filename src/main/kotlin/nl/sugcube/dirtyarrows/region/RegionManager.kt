@@ -4,6 +4,7 @@ import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.util.toLocation
 import nl.sugcube.dirtyarrows.util.toLocationString
 import org.bukkit.Location
+import java.util.logging.Level
 
 /**
  * @author SugarCaney
@@ -130,6 +131,8 @@ open class RegionManager(private val plugin: DirtyArrows) {
             val region = Region(position1, position2, key)
             registeredRegions[key] = region
         }
+
+        plugin.logger.log(Level.INFO, "Loaded ${registeredRegions.size} regions.")
     }
 
     /**
@@ -146,6 +149,8 @@ open class RegionManager(private val plugin: DirtyArrows) {
         }
 
         plugin.configurationManager.saveData()
+
+        plugin.logger.log(Level.INFO, "Saved ${registeredRegions.size} regions to data.yml.")
     }
 
     /**

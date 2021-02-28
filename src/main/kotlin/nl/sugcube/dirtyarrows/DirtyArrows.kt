@@ -7,8 +7,6 @@ import nl.sugcube.dirtyarrows.recipe.RecipeManager
 import nl.sugcube.dirtyarrows.region.RegionManager
 import nl.sugcube.dirtyarrows.util.Help
 import nl.sugcube.dirtyarrows.util.Update
-import org.bukkit.Bukkit
-import org.bukkit.ChatColor
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.entity.Entity
 import org.bukkit.entity.FallingBlock
@@ -18,6 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.util.Vector
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
+import java.util.logging.Level
 
 /**
  * DirtyArrows (DA) bukkit plugin.
@@ -81,7 +80,7 @@ class DirtyArrows : JavaPlugin() {
     @JvmField var anvils = ConcurrentHashMap<FallingBlock, Int>()
 
     /**
-     * Manages the activation of DA by entities.
+     * Manages if DA is turned on or off for what entities.
      * DA should only apply the effects of the bows when DA is enabled.
      */
     val activationManager = ActivationManager(this::isMinigameVersion)
@@ -91,22 +90,12 @@ class DirtyArrows : JavaPlugin() {
      *
      * @return `true` when part of a minigame, `false` otherwise.
      */
-    fun isMinigameVersion() = false
+    fun isMinigameVersion() = config.getBoolean("minigame-mode")
 
-    override fun onEnable() {
-        configurationManager.initialise()
-
-        val pm = server.pluginManager
-        pm.registerEvents(al, this)
-        pm.registerEvents(el, this)
-        pm.registerEvents(enl, this)
-        pm.registerEvents(pjl, this)
-        pm.registerEvents(pdl, this)
-        pm.registerEvents(iron, this)
-        pm.registerEvents(curse, this)
-        pm.registerEvents(frozenListener, this)
-        pm.registerEvents(anvilListener, this)
-
+    /**
+     * Registers all DA commands.
+     */
+    private fun registerCommands() {
         val commandManager = DirtyArrowsCommandManager(this)
         getCommand("da").apply {
             executor = commandManager
@@ -116,8 +105,44 @@ class DirtyArrows : JavaPlugin() {
             executor = commandManager
             tabCompleter = commandManager
         }
+    }
 
+    /**
+     * Registers all events.
+     */
+    private fun registerEvents() = with(server.pluginManager) {
+        val plugin = this@DirtyArrows
+        registerEvents(al, plugin)
+        registerEvents(el, plugin)
+        registerEvents(enl, plugin)
+        registerEvents(pjl, plugin)
+        registerEvents(pdl, plugin)
+        registerEvents(iron, plugin)
+        registerEvents(curse, plugin)
+        registerEvents(frozenListener, plugin)
+        registerEvents(anvilListener, plugin)
+    }
+
+    /**
+     * Checks if there is an update available, and prints the result of this check to the console.
+     * Does nothing when the 'updates.check-for-updates' setting is set to `false`.
+     */
+    private fun checkForUpdates() {
+        if (config.getBoolean("updates.check-for-updates").not()) return
+
+        val uc = Update(57131, description.version)
+        if (uc.query()) {
+            logger.log(Level.INFO, "A new version of DirtyArrows is available!")
+        }
+        else logger.log(Level.INFO, "DirtyArrows is up-to-date!")
+    }
+
+    override fun onEnable() {
+        configurationManager.initialise()
+        registerCommands()
+        registerEvents()
         recipeManager.reloadRecipes()
+        regionManager.loadRegions()
 
         server.scheduler.scheduleSyncRepeatingTask(this, Timer(this), 0, 1)
         server.scheduler.scheduleSyncRepeatingTask(this, Airstrike(this), 5, 5)
@@ -126,28 +151,14 @@ class DirtyArrows : JavaPlugin() {
         server.scheduler.scheduleSyncRepeatingTask(this, iron, 5, 5)
         server.scheduler.scheduleSyncRepeatingTask(this, curse, 20, 20)
         server.scheduler.scheduleSyncRepeatingTask(this, frozenListener, 20, 20)
-        regionManager.loadRegions()
 
-        /*
-		 * Check for updatese
-		 */
-        if (this.config.getBoolean("updates.check-for-updates")) {
-            val uc = Update(57131, description.version)
-            if (uc.query()) {
-                Bukkit.getConsoleSender().sendMessage(
-                    ChatColor.GREEN.toString() + "[DirtyArrows] A new version of DirtyArrows is " +
-                            "avaiable! Get it at the BukkitDev page!"
-                )
-            } else {
-                Bukkit.getConsoleSender().sendMessage("[DirtyArrows] DirtyArrows is up-to-date!")
-            }
-        }
+        checkForUpdates()
 
-        logger.info("[DirtyArrows] DirtyArrows has been enabled!")
+        logger.info("DirtyArrows has been enabled!")
     }
 
     override fun onDisable() {
         regionManager.saveRegions()
-        logger.info("[DirtyArrows] DirtyArrows has been disabled!")
+        logger.info("DirtyArrows has been disabled!")
     }
 }

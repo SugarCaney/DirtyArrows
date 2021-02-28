@@ -14,6 +14,7 @@ Changelog
 * **`i`** Refactored the whole code base.
 * **`+`** Added \da visualize to visualize regions and position selection.
 * **`+`** Added option to hide the enabled/disabled message.
+* **`+`** Added option to run in minigame/silent mode.
 * **`!`** Fixed anvil costs not updating correctly (and crash).
 * **`!`** Fixed cursed bastard's move-effect not being calculated properly.
 * **`!`** Fixed curse not going away after death.

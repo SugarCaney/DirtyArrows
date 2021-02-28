@@ -3,6 +3,7 @@ metrics:
 updates:
   check-for-updates: true
   show-admin: true
+minigame-mode: false
 arrow-recipe-amount: 16
 headshot: true
 headshot-multiplier: 1.5
