@@ -20,6 +20,9 @@ Changelog
 * **`!`** Fixed curse not going away after death.
 * **`!`** Fixed frozen not going away after death.
 * **`!`** Fixed perpetual frozen when you die when you're frozen.
+* **`~`** Undead bow spawns zombies on the first available Y instead of the highest Y level.
+* **`~`** Decreased the amount of zombies spawned by the undead bow.
+* **`~`** Undead bow spawns zombies in a circle instead of a square.
 * **`~`** Buffed cursed bastard.
 * **`-`** Removed metrics.
 

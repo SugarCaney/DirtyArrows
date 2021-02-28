@@ -9,6 +9,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.inventory.ItemStack;
 
+/**
+ * Handler for the airstrike bastard, to keep firing TNT when the arrow flies.
+ * Runs using a scheduled task.
+ */
 public class Airstrike implements Runnable {
 
 	public static DirtyArrows plugin;

@@ -114,7 +114,6 @@ class DirtyArrows : JavaPlugin() {
         registerEvents(pjl, plugin)
         registerEvents(pdl, plugin)
         registerEvents(iron, plugin)
-        registerEvents(curse, plugin)
         registerEvents(frozenListener, plugin)
         registerEvents(anvilListener, plugin)
     }

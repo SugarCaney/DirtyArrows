@@ -6,12 +6,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 import org.bukkit.util.Vector;
 
 import java.util.Random;
 
-public class CurseListener implements Listener, Runnable {
+/**
+ * Scheduled repeating task : Applies the effects of the cursed bastard.
+ */
+public class CurseListener implements Runnable {
 	
 	public DirtyArrows plugin;
 	

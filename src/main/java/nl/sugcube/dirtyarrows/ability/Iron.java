@@ -12,6 +12,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 
+/**
+ * Handles the iron bow:
+ * - Damages entities in range while flying (done in the scheduled repeating task).
+ * - Damages entities in 3 range of the landing spot (done with event handler).
+ */
 public class Iron implements Runnable, Listener {
 
 	public DirtyArrows plugin;

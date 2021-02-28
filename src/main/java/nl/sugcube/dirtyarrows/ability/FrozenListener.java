@@ -11,6 +11,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffectType;
 
+/**
+ * Handles the frozen bow.
+ *
+ * Cancels events when frozen. Task is used to time the frozen effects.
+ */
 public class FrozenListener implements Listener, Runnable {
 
 	public DirtyArrows plugin;

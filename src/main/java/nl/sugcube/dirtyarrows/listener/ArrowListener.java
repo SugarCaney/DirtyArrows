@@ -1,8 +1,8 @@
 package nl.sugcube.dirtyarrows.listener;
 
 import nl.sugcube.dirtyarrows.DirtyArrows;
-import nl.sugcube.dirtyarrows.ability.Swarm;
 import nl.sugcube.dirtyarrows.ability.TreeCut;
+import nl.sugcube.dirtyarrows.effect.ZombieSwarm;
 import nl.sugcube.dirtyarrows.util.Error;
 import nl.sugcube.dirtyarrows.util.Message;
 import nl.sugcube.dirtyarrows.util.Message.Type;
@@ -1469,7 +1469,7 @@ public class ArrowListener implements Listener {
 					 */
 					if (canSwarm.contains(player.getUniqueId().toString())) {
 						if (plugin.getRegionManager().isWithinARegionMargin(arrow.getLocation(), 7) == null) {
-							Swarm.doSwarm(player.getWorld(), arrow.getLocation());
+                            ZombieSwarm.spawnZombieSwarm(arrow.getLocation(), 16, 5.0);
 						} else {
 							arrow.remove();
 							if (player.getGameMode() != GameMode.CREATIVE) {
