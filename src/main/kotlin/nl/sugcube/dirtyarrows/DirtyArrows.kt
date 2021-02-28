@@ -97,10 +97,6 @@ class DirtyArrows : JavaPlugin() {
      */
     private fun registerCommands() {
         val commandManager = DirtyArrowsCommandManager(this)
-        getCommand("da").apply {
-            executor = commandManager
-            tabCompleter = commandManager
-        }
         getCommand("dirtyarrows").apply {
             executor = commandManager
             tabCompleter = commandManager
@@ -130,8 +126,7 @@ class DirtyArrows : JavaPlugin() {
     private fun checkForUpdates() {
         if (config.getBoolean("updates.check-for-updates").not()) return
 
-        val uc = Update(57131, description.version)
-        if (uc.query()) {
+        if (Update(BUKKIT_DEV_PROJECT_ID, description.version).query()) {
             logger.log(Level.INFO, "A new version of DirtyArrows is available!")
         }
         else logger.log(Level.INFO, "DirtyArrows is up-to-date!")
@@ -159,6 +154,15 @@ class DirtyArrows : JavaPlugin() {
 
     override fun onDisable() {
         regionManager.saveRegions()
+
         logger.info("DirtyArrows has been disabled!")
+    }
+
+    companion object {
+
+        /**
+         * The project ID of the plugin on BukkitDev.
+         */
+        const val BUKKIT_DEV_PROJECT_ID = 57131
     }
 }

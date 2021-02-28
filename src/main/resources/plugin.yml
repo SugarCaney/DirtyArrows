@@ -1,12 +1,13 @@
 name: DirtyArrows
 main: nl.sugcube.dirtyarrows.DirtyArrows
 version: '4.0'
+api-version: 1.11
+author: SugarCaney
+website: 'https://twitter.com/CaneyDearie'
 description: >
-             DirtyArrows, just dirty
+             Adds many new bow abilities, as well as a couple of archery related features.
 commands:
-  da:
-    description: DirtyArrows
-    permission: dirtyarrows
   dirtyarrows:
     description: DirtyArrows
     permission: dirtyarrows
+    aliases: da
