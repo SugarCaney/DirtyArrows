@@ -3,29 +3,25 @@ package nl.sugcube.dirtyarrows
 import nl.sugcube.dirtyarrows.ability.*
 import nl.sugcube.dirtyarrows.command.DirtyArrowsCommandManager
 import nl.sugcube.dirtyarrows.listener.*
-import nl.sugcube.dirtyarrows.recipe.registerArrowRecipes
+import nl.sugcube.dirtyarrows.recipe.RecipeManager
 import nl.sugcube.dirtyarrows.region.RegionManager
 import nl.sugcube.dirtyarrows.util.Help
 import nl.sugcube.dirtyarrows.util.Update
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
-import org.bukkit.Material
 import org.bukkit.configuration.file.FileConfiguration
-import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.entity.Entity
 import org.bukkit.entity.FallingBlock
 import org.bukkit.entity.Player
 import org.bukkit.entity.Projectile
-import org.bukkit.inventory.ItemStack
-import org.bukkit.inventory.ShapedRecipe
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.util.Vector
-import java.io.File
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
-import java.util.logging.Level
 
 /**
+ * DirtyArrows (DA) bukkit plugin.
+ *
  * @author SugarCaney
  */
 class DirtyArrows : JavaPlugin() {
@@ -37,26 +33,25 @@ class DirtyArrows : JavaPlugin() {
         get() = description.version
 
     /**
-     * The config file reference.
+     * Handles all configuration and data files.
      */
-    var configurationFile = File(dataFolder, "config.yml")
+    val configurationManager = ConfigurationManager(this)
 
     /**
-     * The data file reference.
+     * The data file configuration.
      */
-    private var dataFile = File(dataFolder, "data.yml")
-
-    /**
-     * The actual loaded data configuration.
-     *
-     * `null` when the configuration has not been loaded.
-     */
-    private var data: FileConfiguration? = null
+    val data: FileConfiguration
+        get() = configurationManager.data
 
     /**
      * Manages all DA protection regions.
      */
     val regionManager = RegionManager(this)
+
+    /**
+     * Manages all custom recipes of DA.
+     */
+    val recipeManager = RecipeManager(this)
 
     var al = ArrowListener(this)
     var el = EnchantmentListener(this)
@@ -98,80 +93,8 @@ class DirtyArrows : JavaPlugin() {
      */
     fun isMinigameVersion() = false
 
-    /**
-     * Reloads the plugin configuration.
-     */
-    fun reloadConfiguration() {
-        reloadConfig()
-        setArrowRecipes()
-    }
-
-    /**
-     * Adds the custom arrow recipes to the server (configurable arrow amount per craft).
-     */
-    fun setArrowRecipes() {
-        server.resetRecipes()
-        server.registerArrowRecipes(config.getInt("arrow-recipe-amount"))
-    }
-
-    /**
-     * Get the data configuration. Loads the data when the data configuration is not present.
-     */
-    fun getData(): FileConfiguration? {
-        if (data == null) {
-            reloadData()
-        }
-        return data
-    }
-
-    /**
-     * Reloads the data.yml file.
-     */
-    fun reloadData() {
-        data = YamlConfiguration.loadConfiguration(dataFile)
-        getResource("data.yml")?.let { defaultConfigStream ->
-            val defaultConfig = YamlConfiguration.loadConfiguration(defaultConfigStream.bufferedReader())
-            data!!.defaults = defaultConfig
-        }
-    }
-
-    /**
-     * Saves the data configuration to the data file.
-     */
-    fun saveData() {
-        if (data == null) return
-        try {
-            getData()!!.save(dataFile)
-        }
-        catch (ex: Exception) {
-            logger.log(Level.SEVERE, "Could not save config to $dataFile", ex)
-        }
-    }
-
     override fun onEnable() {
-        /*
-		 * Load config.yml and data.yml
-		 */
-        val file = File(dataFolder.toString() + File.separator + "config.yml")
-        if (!file.exists()) {
-            try {
-                config.options().copyDefaults(true)
-                saveConfig()
-                logger.info("Generated config.yml succesfully!")
-            } catch (e: Exception) {
-                logger.info("Failed to generate config.yml!")
-            }
-        }
-        val df = File(dataFolder.toString() + File.separator + "data.yml")
-        if (!df.exists()) {
-            try {
-                reloadData()
-                saveData()
-                logger.info("Generated data.yml succesfully!")
-            } catch (e: Exception) {
-                logger.info("Failed to generate data.yml!")
-            }
-        }
+        configurationManager.initialise()
 
         val pm = server.pluginManager
         pm.registerEvents(al, this)
@@ -194,21 +117,8 @@ class DirtyArrows : JavaPlugin() {
             tabCompleter = commandManager
         }
 
-        val arrow =
-            ShapedRecipe(ItemStack(Material.ARROW, config.getInt("arrow-recipe-amount"))).shape(" * ", " # ", " % ")
-                .setIngredient('*', Material.FLINT).setIngredient('#', Material.STICK)
-                .setIngredient('%', Material.FEATHER)
-        val arrow2 =
-            ShapedRecipe(ItemStack(Material.ARROW, config.getInt("arrow-recipe-amount"))).shape("*  ", "#  ", "%  ")
-                .setIngredient('*', Material.FLINT).setIngredient('#', Material.STICK)
-                .setIngredient('%', Material.FEATHER)
-        val arrow3 =
-            ShapedRecipe(ItemStack(Material.ARROW, config.getInt("arrow-recipe-amount"))).shape("  *", "  #", "  %")
-                .setIngredient('*', Material.FLINT).setIngredient('#', Material.STICK)
-                .setIngredient('%', Material.FEATHER)
-        server.addRecipe(arrow)
-        server.addRecipe(arrow2)
-        server.addRecipe(arrow3)
+        recipeManager.reloadRecipes()
+
         server.scheduler.scheduleSyncRepeatingTask(this, Timer(this), 0, 1)
         server.scheduler.scheduleSyncRepeatingTask(this, Airstrike(this), 5, 5)
         server.scheduler.scheduleSyncRepeatingTask(this, Particles(this), 2, 2)
@@ -217,13 +127,11 @@ class DirtyArrows : JavaPlugin() {
         server.scheduler.scheduleSyncRepeatingTask(this, curse, 20, 20)
         server.scheduler.scheduleSyncRepeatingTask(this, frozenListener, 20, 20)
         regionManager.loadRegions()
-        logger.info("[DirtyArrows] DirtyArrows has been enabled!")
-        logger.info("[DirtyArrows] 42 Bastards have been loaded")
-        logger.info("[DirtyArrows] 3 recipes have been loaded")
 
         /*
 		 * Check for updatese
-		 */if (this.config.getBoolean("updates.check-for-updates")) {
+		 */
+        if (this.config.getBoolean("updates.check-for-updates")) {
             val uc = Update(57131, description.version)
             if (uc.query()) {
                 Bukkit.getConsoleSender().sendMessage(
@@ -234,6 +142,8 @@ class DirtyArrows : JavaPlugin() {
                 Bukkit.getConsoleSender().sendMessage("[DirtyArrows] DirtyArrows is up-to-date!")
             }
         }
+
+        logger.info("[DirtyArrows] DirtyArrows has been enabled!")
     }
 
     override fun onDisable() {

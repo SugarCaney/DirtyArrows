@@ -1,7 +1,6 @@
 package nl.sugcube.dirtyarrows.recipe
 
 import org.bukkit.Material
-import org.bukkit.Server
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.ShapedRecipe
 
@@ -35,16 +34,4 @@ object ArrowRecipe {
             .setIngredient('#', Material.STICK)
             .setIngredient('%', Material.FEATHER)
     }
-}
-
-/**
- * Adds all arrow recipes to the server.
- *
- * @param amount
- *          The amount of arrows to craft per recipe.
- */
-fun Server.registerArrowRecipes(amount: Int) {
-    addRecipe(ArrowRecipe.middle(amount))
-    addRecipe(ArrowRecipe.left(amount))
-    addRecipe(ArrowRecipe.right(amount))
 }

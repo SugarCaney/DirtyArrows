@@ -80,8 +80,8 @@ open class RegionManager(private val plugin: DirtyArrows) {
     fun removeRegion(name: String) {
         if (regionExists(name).not()) return
         registeredRegions.remove(name)
-        plugin.getData()?.set("regions.$name", null) ?: error("No data configuration has been loaded.")
-        plugin.saveData()
+        plugin.data.set("regions.$name", null)
+        plugin.configurationManager.saveData()
     }
 
     /**
@@ -103,7 +103,7 @@ open class RegionManager(private val plugin: DirtyArrows) {
      * Overwrites all current regions.
      */
     fun loadRegions() {
-        val data = plugin.getData() ?: error("No data configuration available.")
+        val data = plugin.data
 
         if (data.isSet("regions").not()) {
             registeredRegions.clear()
@@ -123,7 +123,7 @@ open class RegionManager(private val plugin: DirtyArrows) {
      * Saves all registered regions to the data.yml
      */
     fun saveRegions() {
-        val data = plugin.getData() ?: error("There is no data configuration loaded.")
+        val data = plugin.data
         registeredRegions.forEach { (regionName, region) ->
             val location1 = region.getLocation(1).toLocationString()
             val location2 = region.getLocation(2).toLocationString()
@@ -132,7 +132,7 @@ open class RegionManager(private val plugin: DirtyArrows) {
             data.set("regions.$regionName.pos2", location2)
         }
 
-        plugin.saveData()
+        plugin.configurationManager.saveData()
     }
 
     /**

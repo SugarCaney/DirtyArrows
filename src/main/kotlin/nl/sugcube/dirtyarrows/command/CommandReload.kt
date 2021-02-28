@@ -18,9 +18,11 @@ open class CommandReload : SubCommand<DirtyArrows>(
         addPermissions("dirtyarrows.admin")
     }
 
-    override fun executeImpl(plugin: DirtyArrows, sender: CommandSender, vararg arguments: String) {
+    override fun executeImpl(plugin: DirtyArrows, sender: CommandSender, vararg arguments: String) = with (plugin) {
         try {
-            plugin.reloadConfiguration()
+            configurationManager.loadConfig()
+            recipeManager.reloadRecipes()
+
             sender.sendFormattedMessage("&eReloaded config.yml")
         }
         catch (e: Exception) {
