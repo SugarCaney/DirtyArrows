@@ -1,13 +1,15 @@
 package nl.sugcube.dirtyarrows.region
 
 import org.bukkit.Location
+import kotlin.math.max
+import kotlin.math.min
 
 /**
  * Represents a rectangluar DirtyArrows protection region.
  *
  * @author SugarCaney
  */
-class Region @JvmOverloads constructor(
+class Region constructor(
 
     /**
      * The first corner of the region.
@@ -192,3 +194,27 @@ fun Region.isWithinMargin(location: Location, margin: Double): Boolean {
  * @return `true` if the location lies within the region, `false` otherwise.
  */
 fun Region.isWithinRegion(location: Location) = isWithinMargin(location, margin = 0.0)
+
+/**
+ * @return All 8 corners of the region.
+ */
+fun Region.allCorners(): List<Location> {
+    val world = getLocation(1).world
+    val minX = min(getLocation(1).x, getLocation(2).x)
+    val minY = min(getLocation(1).y, getLocation(2).y)
+    val minZ = min(getLocation(1).z, getLocation(2).z)
+    val maxX = max(getLocation(1).x, getLocation(2).x)
+    val maxY = max(getLocation(1).y, getLocation(2).y)
+    val maxZ = max(getLocation(1).z, getLocation(2).z)
+
+    return listOf(
+        Location(world, minX, minY, minZ),
+        Location(world, maxX, minY, minZ),
+        Location(world, maxX, minY, maxZ),
+        Location(world, minX, minY, maxZ),
+        Location(world, minX, maxY, minZ),
+        Location(world, maxX, maxY, minZ),
+        Location(world, maxX, maxY, maxZ),
+        Location(world, minX, maxY, maxZ),
+    )
+}

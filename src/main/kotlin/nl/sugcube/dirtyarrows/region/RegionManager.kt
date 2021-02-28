@@ -85,6 +85,19 @@ open class RegionManager(private val plugin: DirtyArrows) {
     }
 
     /**
+     * Gets position #`positionNumber`.
+     *
+     * @param positionNumber
+     *          Either 1 or 2 for position 1 and 2 respectively.
+     * @return The set position, or `null` when the position hasn't been set.
+     */
+    fun getSelection(positionNumber: Int) = when (positionNumber) {
+        1 -> position1
+        2 -> position2
+        else -> error("Invalid location number '$positionNumber', only 1|2 allowed.")
+    }
+
+    /**
      * Sets position #`positionNumber` to the given location.
      *
      * @param positionNumber

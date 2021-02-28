@@ -26,6 +26,7 @@ open class DirtyArrowsCommandManager(private val plugin: DirtyArrows) : CommandE
         CommandReload(),
         CommandPos(1),
         CommandPos(2),
+        CommandVisualize(),
         CommandList(),
         CommandCheck(),
         CommandHelp()
