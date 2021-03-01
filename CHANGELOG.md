@@ -24,6 +24,7 @@ Changelog
 * **`~`** Decreased the amount of zombies spawned by the undead bow.
 * **`~`** Undead bow spawns zombies in a circle instead of a square.
 * **`~`** Buffed cursed bastard.
+* **`~`** Tweaked woodman bow drops (12% 1-6 planks, 8% 1-4 planks, 80% log).
 * **`-`** Removed metrics.
 
 ## Version 3.0

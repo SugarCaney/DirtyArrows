@@ -1,7 +1,7 @@
 package nl.sugcube.dirtyarrows.listener;
 
 import nl.sugcube.dirtyarrows.DirtyArrows;
-import nl.sugcube.dirtyarrows.ability.TreeCut;
+import nl.sugcube.dirtyarrows.effect.Lumberjack;
 import nl.sugcube.dirtyarrows.effect.ZombieSwarm;
 import nl.sugcube.dirtyarrows.util.Error;
 import nl.sugcube.dirtyarrows.util.Message;
@@ -1509,9 +1509,9 @@ public class ArrowListener implements Listener {
 				                    break;
 				                }
 				            }
-							if (TreeCut.cutDownTree(hitBlock.getLocation(), hitBlock, player)) {
-								arrow.remove();
-							}
+							if (Lumberjack.cutDownTree(hitBlock.getLocation())) {
+							    arrow.remove();
+                            }
 						} else {
 							arrow.remove();
 							player.sendMessage(ChatColor.RED + "[!!] Arrows can't tear down trees in protected regions!");

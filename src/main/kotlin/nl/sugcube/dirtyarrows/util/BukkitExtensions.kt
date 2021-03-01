@@ -2,7 +2,10 @@ package nl.sugcube.dirtyarrows.util
 
 import org.bukkit.Bukkit
 import org.bukkit.Location
+import org.bukkit.World
 import org.bukkit.entity.Entity
+import org.bukkit.entity.Item
+import org.bukkit.inventory.ItemStack
 import org.bukkit.plugin.java.JavaPlugin
 import kotlin.reflect.KClass
 
@@ -27,3 +30,22 @@ fun <T : Entity> Location.spawn(entity: Class<T>): T = world.spawn(this, entity)
  * Spawns an entity at this location.
  */
 fun <T : Entity> Location.spawn(entity: KClass<T>): T = world.spawn(this, entity.java)
+
+/**
+ * Drops the given item on this location.
+ */
+fun Location.dropItem(item: ItemStack): Item = world.dropItem(this, item)
+
+/**
+ * Makes a copy of this location.
+ */
+fun Location.copyOf(
+    world: World = this.world,
+    x: Double = this.x,
+    y: Double = this.y,
+    z: Double = this.z,
+    yaw: Float = this.yaw,
+    pitch: Float = this.pitch
+): Location {
+    return Location(world, x, y, z, yaw, pitch)
+}

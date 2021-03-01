@@ -92,12 +92,12 @@ open class DirtyArrowsCommandManager(private val plugin: DirtyArrows) : CommandE
         }
 
         // Find the corresponding command.
-        val subCommand = commands.first {
+        val subCommand = commands.firstOrNull() {
             it.name.equals(args.first(), ignoreCase = true)
         }
 
         // Get autocompletion.
-        return subCommand.getAutoComplete(args.size - 2)
+        return subCommand?.getAutoComplete(args.size - 2)
             ?.optionsFromQuery(args.last(), plugin)?.toMutableList()
     }
 }
