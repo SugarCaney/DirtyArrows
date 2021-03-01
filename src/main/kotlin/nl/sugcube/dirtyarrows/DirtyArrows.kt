@@ -138,7 +138,7 @@ class DirtyArrows : JavaPlugin() {
         recipeManager.reloadRecipes()
         regionManager.loadRegions()
 
-        server.scheduler.scheduleSyncRepeatingTask(this, Timer(this), 0, 1)
+        server.scheduler.scheduleSyncRepeatingTask(this, Slow(this), 0, 1)
         server.scheduler.scheduleSyncRepeatingTask(this, Airstrike(this), 5, 5)
         server.scheduler.scheduleSyncRepeatingTask(this, Particles(this), 2, 2)
         server.scheduler.scheduleSyncRepeatingTask(this, Airship(this), 2, 2)

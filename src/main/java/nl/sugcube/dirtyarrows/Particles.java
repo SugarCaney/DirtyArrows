@@ -1,13 +1,16 @@
 package nl.sugcube.dirtyarrows;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Projectile;
 
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Handles all particles as scheduled task.
+ */
 public class Particles implements Runnable {
 
 	public static DirtyArrows plugin;

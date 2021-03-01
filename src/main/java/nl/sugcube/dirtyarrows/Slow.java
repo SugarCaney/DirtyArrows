@@ -2,11 +2,14 @@ package nl.sugcube.dirtyarrows;
 
 import org.bukkit.entity.Projectile;
 
-public class Timer implements Runnable {
+/**
+ * Scheduled ability for the slow bow.
+ */
+public class Slow implements Runnable {
 
 	public static DirtyArrows plugin;
 	
-	public Timer(DirtyArrows instance) {
+	public Slow(DirtyArrows instance) {
 		plugin = instance;
 	}
 	

@@ -1,8 +1,7 @@
 package nl.sugcube.dirtyarrows.ability;
 
 import nl.sugcube.dirtyarrows.DirtyArrows;
-import nl.sugcube.dirtyarrows.util.Util;
-
+import nl.sugcube.dirtyarrows.util.Locations;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.FallingBlock;
@@ -32,7 +31,7 @@ public class Iron implements Runnable, Listener {
 				if (!(en instanceof LivingEntity)) {
 					continue;
 				}
-				if (Util.inRegionOf(fb.getLocation(), en.getLocation(), 1)) {
+				if (Locations.isCloseTo(fb.getLocation(), en.getLocation(), 1)) {
 					((LivingEntity) en).damage(3.0f);
 				}
 			}
@@ -51,7 +50,7 @@ public class Iron implements Runnable, Listener {
 				for (Entity ent : e.getEntity().getWorld().getEntities()) {
 					if (ent instanceof LivingEntity) {
 						LivingEntity len = (LivingEntity) ent;
-						if (Util.inRegionOf(len.getLocation(), e.getEntity().getLocation(), 3)) {
+						if (Locations.isCloseTo(len.getLocation(), e.getEntity().getLocation(), 3)) {
 							if (len instanceof Player) {
 								((Player) len).playSound(e.getEntity().getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
 							}

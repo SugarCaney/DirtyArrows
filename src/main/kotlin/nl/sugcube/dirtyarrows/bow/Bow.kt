@@ -1,5 +1,8 @@
 package nl.sugcube.dirtyarrows.bow
 
+import nl.sugcube.dirtyarrows.util.applyColours
+import org.bukkit.configuration.file.FileConfiguration
+
 /**
  * @author SugarCaney
  */
@@ -67,26 +70,36 @@ enum class Bow(
     val nameNode: String
         get() = "$node.name"
 
+    /**
+     * The configuration node for the anvil level cost of the bow.
+     */
+    val levelsNode: String
+        get() = "$node.levels"
+
     companion object {
 
         /**
          * Get all bows in order of definintion.
          */
+        @JvmStatic
         val ALL = values().toList()
 
         /**
          * Get all node names.
          */
+        @JvmStatic
         val ALL_NODES = ALL.map { it.node }.toSet()
 
         /**
          * Get the bow with the given ID (1-indexed), `null` when there is no bow with id.
          */
+        @JvmStatic
         fun bowById(id: Int): Bow? = ALL.getOrNull(id - 1)
 
         /**
          * Get the bow with the given configuration node, `null` whe nnot exists.
          */
+        @JvmStatic
         fun bowByNode(node: String): Bow? = ALL.firstOrNull() { it.node == node }
 
         /**
@@ -95,11 +108,21 @@ enum class Bow(
          *
          * @return The corresponding Bow or `null` when no bow could be found.
          */
+        @JvmStatic
         fun parseBow(input: String): Bow? {
             // When numeric.
             return input.toIntOrNull()?.let { idNumber ->
                 bowById(idNumber)
             } ?: bowByNode(input.toLowerCase())
+        }
+
+        /**
+         * Get the bow that has the given `itemName` configured.
+         */
+        @JvmStatic
+        fun bowByItemName(itemName: String, config: FileConfiguration): Bow? = ALL.firstOrNull {
+            val candidateName = config.getString(it.nameNode).applyColours()
+            itemName.applyColours() == candidateName
         }
     }
 }

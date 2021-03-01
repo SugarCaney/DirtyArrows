@@ -1,16 +1,17 @@
 package nl.sugcube.dirtyarrows.listener;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 import nl.sugcube.dirtyarrows.DirtyArrows;
-
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.enchantment.EnchantItemEvent;
 
+import java.util.Random;
+
+/**
+ * Event listener that enables looting to be put on bows.
+ */
 public class EnchantmentListener implements Listener {
 	
 	public static DirtyArrows plugin;
@@ -21,9 +22,8 @@ public class EnchantmentListener implements Listener {
 	
 	Random ran = new Random();
 	int level;
-	ArrayList<String> lores = new ArrayList<String>();
-	
-	@EventHandler
+
+    @EventHandler
 	public void onEnchantItem(EnchantItemEvent event) {
 		if (event.getItem().getType().equals(Material.BOW)) {			
 			if (event.getExpLevelCost() > 10) {

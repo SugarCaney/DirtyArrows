@@ -1,7 +1,7 @@
 package nl.sugcube.dirtyarrows.listener;
 
 import nl.sugcube.dirtyarrows.DirtyArrows;
-import nl.sugcube.dirtyarrows.util.Util;
+import nl.sugcube.dirtyarrows.bow.Bow;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -29,13 +29,12 @@ public class AnvilListener implements Listener {
         }
 
         String name = anvil.getRenameText();
-        String node = "";
-
-        if ((node = Util.isBastard(name)) == Util.NONE) {
+        Bow bow = Bow.bowByItemName(name, plugin.getConfig());
+        if (bow == null) {
             return;
         }
 
-        int levels = max(1, plugin.getConfig().getInt(node + ".levels"));
+        int levels = max(1, plugin.getConfig().getInt(bow.getLevelsNode()));
         anvil.setRepairCost(levels);
     }
 }
