@@ -1,15 +1,17 @@
 package nl.sugcube.dirtyarrows.listener;
 
+import nl.sugcube.dirtyarrows.Broadcast;
 import nl.sugcube.dirtyarrows.DirtyArrows;
-import nl.sugcube.dirtyarrows.util.Message;
 import nl.sugcube.dirtyarrows.util.Update;
-
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+/**
+ * Update message on join & Activate on login.
+ */
 public class PlayerJoinListener implements Listener {
 
     public static DirtyArrows plugin;
@@ -41,6 +43,6 @@ public class PlayerJoinListener implements Listener {
 
         Player player = event.getPlayer();
         plugin.getActivationManager().activateFor(player);
-        player.sendMessage(Message.getEnabled(true, plugin));
+        player.sendMessage(Broadcast.INSTANCE.enabledMessage(plugin, true));
     }
 }

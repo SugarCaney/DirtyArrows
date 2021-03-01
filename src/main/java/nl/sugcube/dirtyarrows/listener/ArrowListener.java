@@ -1,11 +1,13 @@
 package nl.sugcube.dirtyarrows.listener;
 
+import nl.sugcube.dirtyarrows.Broadcast;
 import nl.sugcube.dirtyarrows.DirtyArrows;
+import nl.sugcube.dirtyarrows.effect.HeadshotType;
 import nl.sugcube.dirtyarrows.effect.Lumberjack;
 import nl.sugcube.dirtyarrows.effect.ZombieSwarm;
-import nl.sugcube.dirtyarrows.util.*;
+import nl.sugcube.dirtyarrows.util.DaUtil;
 import nl.sugcube.dirtyarrows.util.Error;
-import nl.sugcube.dirtyarrows.util.Message.Type;
+import nl.sugcube.dirtyarrows.util.Util;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
@@ -99,8 +101,8 @@ public class ArrowListener implements Listener {
 					if (shot instanceof Player) {
 						Player p = (Player) event.getEntity();
 						Player shoot = (Player) proj.getShooter();
-						p.sendMessage(Message.getHeadshot(shoot, Type.HEADSHOT_BY, plugin));
-						shoot.sendMessage(Message.getHeadshot(p, Type.HEADSHOT_ON, plugin));
+						p.sendMessage(Broadcast.INSTANCE.headshot(shoot, HeadshotType.BY, plugin));
+						shoot.sendMessage(Broadcast.INSTANCE.headshot(shoot, HeadshotType.ON, plugin));
 					}
 				}
 			}
@@ -114,21 +116,21 @@ public class ArrowListener implements Listener {
 					event.setDamage(event.getDamage() * 1.5);
 				}
 				if (event.getEntity() instanceof LivingEntity) {
-					if (canCurse.contains(new Integer(proj.getEntityId()))) {
+					if (canCurse.contains(proj.getEntityId())) {
 						canCurse.remove(proj);
 						plugin.cursed.put(event.getEntity(), CURSE_DURATION + ran.nextInt(7));
 						if (event.getEntity() instanceof Player) {
-							((Player) event.getEntity()).sendMessage(Message.getTag(plugin) + ChatColor.GRAY + "You have been cursed.");
+							((Player) event.getEntity()).sendMessage(Broadcast.INSTANCE.tag(plugin) + ChatColor.GRAY + "You have been cursed.");
 						}
 					}
-					if (plugin.ice.contains(new Integer(proj.getEntityId()))) {
-						plugin.ice.remove(new Integer(proj.getEntityId()));
+					if (plugin.ice.contains(proj.getEntityId())) {
+						plugin.ice.remove(Integer.valueOf(proj.getEntityId()));
 						plugin.iceParticle.remove(proj);
 						int duration = FREEZE_DURATION + ran.nextInt(5);
 						plugin.frozen.put(event.getEntity(), duration);
 						if (event.getEntity() instanceof Player) {
 							plugin.noInteract.add((Player)event.getEntity());
-							((Player) event.getEntity()).sendMessage(Message.getTag(plugin) + ChatColor.GRAY + "You are frozen solid.");
+							((Player) event.getEntity()).sendMessage(Broadcast.INSTANCE.tag(plugin) + ChatColor.GRAY + "You are frozen solid.");
 							((Player) event.getEntity()).addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration * 20, 6));
 						}
 						else {

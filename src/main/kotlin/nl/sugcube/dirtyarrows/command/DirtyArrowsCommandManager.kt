@@ -1,7 +1,7 @@
 package nl.sugcube.dirtyarrows.command
 
+import nl.sugcube.dirtyarrows.Broadcast
 import nl.sugcube.dirtyarrows.DirtyArrows
-import nl.sugcube.dirtyarrows.util.Message
 import nl.sugcube.dirtyarrows.util.sendError
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -43,7 +43,7 @@ open class DirtyArrowsCommandManager(private val plugin: DirtyArrows) : CommandE
 
         val isActivated = plugin.activationManager.toggleActivation(sender.uniqueId)
         if (plugin.config.getBoolean("show-enable-message")) {
-            sender.sendMessage(Message.getEnabled(isActivated, plugin))
+            sender.sendMessage(Broadcast.enabledMessage(plugin, isActivated))
         }
     }
 

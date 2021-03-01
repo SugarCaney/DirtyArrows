@@ -1,7 +1,7 @@
 package nl.sugcube.dirtyarrows.command
 
+import nl.sugcube.dirtyarrows.Broadcast
 import nl.sugcube.dirtyarrows.DirtyArrows
-import nl.sugcube.dirtyarrows.util.Message
 import nl.sugcube.dirtyarrows.util.sendError
 import org.bukkit.command.CommandSender
 
@@ -24,7 +24,7 @@ open class CommandRemove : SubCommand<DirtyArrows>(
         val regionName = arguments.firstOrNull() ?: run { sender.sendError("No region name specified."); return }
         val region = plugin.regionManager.regionByName(regionName) ?: run { sender.sendError("There is no region with name '$regionName'"); return }
         plugin.regionManager.removeRegion(region.name)
-        sender.sendMessage(Message.REGION_REMOVED.format(region.name))
+        sender.sendMessage(Broadcast.REGION_REMOVED.format(region.name))
     }
 
     override fun assertSender(sender: CommandSender) = true

@@ -9,6 +9,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
+/**
+ * Disables fall damage for airship users.
+ *
+ * @author SugarCaney
+ */
 public class PlayerDamageListener implements Listener {
 
 	public DirtyArrows plugin;

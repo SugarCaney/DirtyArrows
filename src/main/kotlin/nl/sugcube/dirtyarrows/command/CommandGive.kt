@@ -1,9 +1,9 @@
 package nl.sugcube.dirtyarrows.command
 
+import nl.sugcube.dirtyarrows.Broadcast
 import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.Bow
 import nl.sugcube.dirtyarrows.bow.BowDistributor
-import nl.sugcube.dirtyarrows.util.Message
 import nl.sugcube.dirtyarrows.util.onlinePlayer
 import nl.sugcube.dirtyarrows.util.sendError
 import nl.sugcube.dirtyarrows.util.sendFormattedMessage
@@ -45,7 +45,7 @@ open class CommandGive : SubCommand<DirtyArrows>(
 
         // Distribute.
         BowDistributor(plugin.config, players).giveBow(bow, isEnchanted)
-        sender.sendFormattedMessage(Message.GAVE_BOW.format(bowName, players.joinToString(", ") { it.name }))
+        sender.sendFormattedMessage(Broadcast.GAVE_BOW.format(bowName, players.joinToString(", ") { it.name }))
     }
 
     override fun assertSender(sender: CommandSender) = true

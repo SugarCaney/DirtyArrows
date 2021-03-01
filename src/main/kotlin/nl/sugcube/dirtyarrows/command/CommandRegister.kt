@@ -1,8 +1,8 @@
 package nl.sugcube.dirtyarrows.command
 
+import nl.sugcube.dirtyarrows.Broadcast
 import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.region.Region
-import nl.sugcube.dirtyarrows.util.Message
 import nl.sugcube.dirtyarrows.util.sendError
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
@@ -39,7 +39,7 @@ open class CommandRegister : SubCommand<DirtyArrows>(
             sender.sendError("Could not create region '$regionName', check if positions 1 & 2 are set.")
             return
         }
-        sender.sendMessage(Message.REGION_CREATED.format(region.name))
+        sender.sendMessage(Broadcast.REGION_CREATED.format(region.name))
     }
 
     override fun assertSender(sender: CommandSender) = sender is Player

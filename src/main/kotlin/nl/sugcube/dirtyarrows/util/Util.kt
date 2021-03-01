@@ -2,6 +2,7 @@
 
 package nl.sugcube.dirtyarrows.util
 
+import nl.sugcube.dirtyarrows.Broadcast
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Location
@@ -85,7 +86,7 @@ fun CommandSender.sendFormattedMessage(message: String) = sendMessage(message.ap
 /**
  * Sends a message with the error tag. Supports colour codes (&1, &2, ...).
  */
-fun CommandSender.sendError(message: String) = sendFormattedMessage(Message.ERROR_TAG + " $message")
+fun CommandSender.sendError(message: String) = sendFormattedMessage(Broadcast.TAG_ERROR + " $message")
 
 /**
  * Get the online player with the given name.

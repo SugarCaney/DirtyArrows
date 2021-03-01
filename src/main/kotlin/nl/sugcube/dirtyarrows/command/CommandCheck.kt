@@ -1,7 +1,7 @@
 package nl.sugcube.dirtyarrows.command
 
+import nl.sugcube.dirtyarrows.Broadcast
 import nl.sugcube.dirtyarrows.DirtyArrows
-import nl.sugcube.dirtyarrows.util.Message
 import nl.sugcube.dirtyarrows.util.sendFormattedMessage
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
@@ -24,9 +24,9 @@ open class CommandCheck : SubCommand<DirtyArrows>(
         val region = plugin.regionManager.isWithinARegion(player.location)
 
         if (region == null) {
-            sender.sendMessage(Message.NOT_IN_REGION)
+            sender.sendMessage(Broadcast.NOT_IN_REGION)
         }
-        else sender.sendFormattedMessage(Message.IN_REGION.format(region.name))
+        else sender.sendFormattedMessage(Broadcast.IN_REGION.format(region.name))
     }
 
     override fun assertSender(sender: CommandSender) = sender is Player
