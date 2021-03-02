@@ -138,7 +138,10 @@ abstract class BowAbility(
             if (arrow.location.isInProtectedRegion(player)) {
                 player.reimburseBowItems()
             }
-            else land(arrow, player, event)
+            else {
+                land(arrow, player, event)
+                arrow.remove()
+            }
         }
     }
 
@@ -151,11 +154,12 @@ abstract class BowAbility(
         if (player.isDirtyArrowsActivated().not()) return
         if (player.hasBowInHand().not()) return
         if (player.hasPermission().not()) return
-        if (player.location.isInProtectedRegion(player)) return
+        if (canShootInProtectedRegions.not() && player.location.isInProtectedRegion(player)) return
         if (player.meetsResourceRequirements().not()) return
 
         // All is fine, handle event.
         arrows.add(arrow)
+        player.consumeBowItems()
         launch(player, arrow, event)
     }
 

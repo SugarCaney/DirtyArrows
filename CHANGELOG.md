@@ -28,6 +28,10 @@ Changelog
 * **`~`** Tweaked woodman bow drops (12% 1-6 planks, 8% 1-4 planks, 80% log).
 * **`~`** Increased the power of the nuclear bow.
 * **`~`** Effects are now tied to the arrow instead of the player.
+* **`~`** Increased cost of batty bow to 6 rotten flesh (was 3).
+* **`~`** Tree bows spawn trees more easily.
+* **`~`** Tree bows now spawn all possible tree variants (chosen randomly).
+* **`~`** Items get reimbursed when an effect (like the oak bow) fails.
 * **`~`** Improved robustness.
 * **`-`** Removed metrics.
 

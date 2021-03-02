@@ -1,6 +1,7 @@
 package nl.sugcube.dirtyarrows.util
 
 import org.bukkit.Effect
+import org.bukkit.Location
 import org.bukkit.entity.Entity
 
 /**
@@ -15,4 +16,18 @@ fun Entity.showSmokeParticle() = location.clone().add(0.5, 0.5, 0.5).let {
  */
 fun Entity.showFlameParticle() = location.clone().add(0.5, 0.5, 0.5).let {
     location.world.playEffect(location, Effect.MOBSPAWNER_FLAMES, 0)
+}
+
+/**
+ * Shows an ender particle at the location of the entity.
+ */
+fun Entity.showEnderParticle() {
+    location.world.playEffect(location, Effect.ENDER_SIGNAL, 0)
+}
+
+/**
+ * Shows a growth particle at the location.
+ */
+fun Location.showGrowthParticle() {
+    world.playEffect(this, Effect.VILLAGER_PLANT_GROW, 0)
 }

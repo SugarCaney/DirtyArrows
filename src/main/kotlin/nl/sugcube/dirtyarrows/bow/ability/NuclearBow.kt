@@ -10,7 +10,6 @@ import org.bukkit.Material
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.ProjectileHitEvent
-import org.bukkit.event.entity.ProjectileLaunchEvent
 import org.bukkit.inventory.ItemStack
 
 /**
@@ -26,13 +25,8 @@ open class NuclearBow(plugin: DirtyArrows) : BowAbility(
         costRequirements = listOf(ItemStack(Material.TNT, 64)),
 ) {
 
-    override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {
-        player.consumeBowItems()
-    }
-
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
         arrow.location.createExplosion(power = 55f)
-        arrow.remove()
     }
 
     override fun particle(tickNumber: Int) = arrows.forEach {

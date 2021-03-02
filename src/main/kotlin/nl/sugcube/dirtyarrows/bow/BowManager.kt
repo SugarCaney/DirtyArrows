@@ -1,8 +1,7 @@
 package nl.sugcube.dirtyarrows.bow
 
 import nl.sugcube.dirtyarrows.DirtyArrows
-import nl.sugcube.dirtyarrows.bow.ability.ExplodingBow
-import nl.sugcube.dirtyarrows.bow.ability.NuclearBow
+import nl.sugcube.dirtyarrows.bow.ability.*
 import org.bukkit.event.HandlerList
 import java.util.logging.Level
 
@@ -53,16 +52,18 @@ open class BowManager(private val plugin: DirtyArrows): Iterable<BowType> {
      * Adds all enabled bow ability implementations to [bows].
      */
     private fun loadAbilities() {
-        DefaultBow.EXPLODING.loadIfEnabled(ExplodingBow(plugin))
-        // TODO: LIGHTNING
-        // TODO: CLUCKY
-        // TODO: ENDER
-        // TODO: OAK
-        // TODO: SPRUCE
-        // TODO: BIRCH
-        // TODO: JUNGLE
-        // TODO: BATTY
-        DefaultBow.NUCLEAR.loadIfEnabled(NuclearBow(plugin))
+        ExplodingBow(plugin).load()
+        LightningBow(plugin).load()
+        CluckyBow(plugin).load()
+        EnderBow(plugin).load()
+        TreeBow(plugin, TreeBow.Tree.OAK).load()
+        TreeBow(plugin, TreeBow.Tree.SPRUCE).load()
+        TreeBow(plugin, TreeBow.Tree.BIRCH).load()
+        TreeBow(plugin, TreeBow.Tree.JUNGLE).load()
+        TreeBow(plugin, TreeBow.Tree.ACACIA).load()
+        TreeBow(plugin, TreeBow.Tree.DARK_OAK).load()
+        BattyBow(plugin).load()
+        NuclearBow(plugin).load()
         // TODO: ENLIGHTENED
         // TODO: RANGED
         // TODO: MACHINE
@@ -87,8 +88,6 @@ open class BowManager(private val plugin: DirtyArrows): Iterable<BowType> {
         // TODO: AQUATIC
         // TODO: PULL
         // TODO: PARALYZE
-        // TODO: ACACIA
-        // TODO: DARK_OAK
         // TODO: CLUSTER
         // TODO: AIRSHIP
         // TODO: IRON
@@ -100,9 +99,9 @@ open class BowManager(private val plugin: DirtyArrows): Iterable<BowType> {
     /**
      * Adds the given ability for this bow type if it is enabled in the configuration file.
      */
-    private fun BowType.loadIfEnabled(ability: BowAbility) {
-        if (isEnabled(plugin)) {
-            bows[this] = ability
+    private fun BowAbility.load() {
+        if (type.isEnabled(plugin)) {
+            bows[type] = this
         }
     }
 

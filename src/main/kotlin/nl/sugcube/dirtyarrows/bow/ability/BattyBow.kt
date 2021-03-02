@@ -3,32 +3,31 @@ package nl.sugcube.dirtyarrows.bow.ability
 import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
-import nl.sugcube.dirtyarrows.util.createExplosion
-import nl.sugcube.dirtyarrows.util.showSmokeParticle
 import org.bukkit.Material
+import org.bukkit.Sound
 import org.bukkit.entity.Arrow
+import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.inventory.ItemStack
 
 /**
- * Shoots arrows that explode on impact.
+ * Shoots arrows that spawns a swarm of bats at the location of impact.
  *
  * @author SugarCaney
  */
-open class ExplodingBow(plugin: DirtyArrows) : BowAbility(
+open class BattyBow(plugin: DirtyArrows) : BowAbility(
         plugin = plugin,
-        type = DefaultBow.EXPLODING,
+        type = DefaultBow.BATTY,
         canShootInProtectedRegions = false,
         protectionRange = 5.0,
-        costRequirements = listOf(ItemStack(Material.TNT, 1)),
+        costRequirements = listOf(ItemStack(Material.ROTTEN_FLESH, 6)),
 ) {
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
-        arrow.location.createExplosion(power = 4.0f)
-    }
-
-    override fun particle(tickNumber: Int) = arrows.forEach {
-        it.showSmokeParticle()
+        repeat(10) {
+            arrow.world.spawnEntity(arrow.location, EntityType.BAT)
+        }
+        player.playSound(player.location, Sound.ENTITY_BAT_AMBIENT, 10f, 1f)
     }
 }
