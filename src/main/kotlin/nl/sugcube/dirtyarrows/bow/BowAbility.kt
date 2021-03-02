@@ -282,4 +282,20 @@ abstract class BowAbility(
             }
         }
     }
+
+    /**
+     * Get the item of the bow that the player is holding (with this ability).
+     *
+     * @return The applicable bow item, or `null` when the player does not hold a bow.
+     */
+    protected fun Player.bowItem(): ItemStack? {
+        val bowName = bowName()
+        return if (itemInMainHand.itemName == bowName) {
+            itemInMainHand
+        }
+        else if (itemInOffHand.itemName == bowName) {
+            itemInOffHand
+        }
+        else null
+    }
 }

@@ -6,6 +6,7 @@ import nl.sugcube.dirtyarrows.bow.DefaultBow
 import nl.sugcube.dirtyarrows.util.crossBlocks
 import nl.sugcube.dirtyarrows.util.showFlameParticle
 import nl.sugcube.dirtyarrows.util.showSmokeParticle
+import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.entity.Arrow
@@ -43,6 +44,8 @@ open class FlintAndBow(plugin: DirtyArrows) : BowAbility(
     }
 
     override fun Player.consumeBowItems() {
+        if (gameMode == GameMode.CREATIVE) return
+
         inventory.firstOrNull { it?.type == Material.FLINT_AND_STEEL }?.let { flintAndSteel ->
             flintAndSteel.durability = (flintAndSteel.durability + 5).toShort()
 
