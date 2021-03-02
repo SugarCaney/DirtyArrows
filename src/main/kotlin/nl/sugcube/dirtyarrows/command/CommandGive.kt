@@ -2,7 +2,7 @@ package nl.sugcube.dirtyarrows.command
 
 import nl.sugcube.dirtyarrows.Broadcast
 import nl.sugcube.dirtyarrows.DirtyArrows
-import nl.sugcube.dirtyarrows.bow.Bow
+import nl.sugcube.dirtyarrows.bow.DefaultBow
 import nl.sugcube.dirtyarrows.bow.BowDistributor
 import nl.sugcube.dirtyarrows.util.onlinePlayer
 import nl.sugcube.dirtyarrows.util.sendError
@@ -37,7 +37,7 @@ open class CommandGive : SubCommand<DirtyArrows>(
 
         // Which bow to give.
         val bowNode = arguments.getOrNull(1) ?: run { sender.sendError("No bow specified."); return }
-        val bow = Bow.parseBow(bowNode) ?: run { sender.sendError("Unknown bow '$bowNode'."); return }
+        val bow = DefaultBow.parseBow(bowNode) ?: run { sender.sendError("Unknown bow '$bowNode'."); return }
         val bowName = plugin.config.getString(bow.nameNode)
 
         // Whether the bow must have Unbreaking X with Infinity I.

@@ -110,6 +110,27 @@ object Broadcast {
     val MINIGAME_HEADSHOT_ON = "$TAG_MINIGAME You made a headshot on ${Colour.SECONDARY}%s${Colour.PRIMARY}."
 
     /**
+     * No permission to use the bow.
+     *
+     * %s = Name of the bow.
+     */
+    val NO_BOW_PERMISSION = "$TAG_ERROR You don't have permission to use ${Colour.SECONDARY}%s{${Colour.ERROR}."
+
+    /**
+     * Cannot use the bow in a protected region.
+     *
+     * %s = Name of the bow.
+     */
+    val DISABLED_IN_PROTECTED_REGION = "$TAG_ERROR ${Colour.SECONDARY}%s${Colour.ERROR} is disabled in protected regions."
+
+    /**
+     * Message to list all required resources.
+     *
+     * %s = List of required resources.
+     */
+    val NOT_ENOUGH_RESOURCES = "$TAG_ERROR You don't have enough resources, required: ${Colour.SECONDARY}%s${Colour.ERROR}."
+
+    /**
      * Get the message that shows whether DA is enabled or disabled.
      *
      * @param plugin

@@ -26,15 +26,15 @@ open class BowDistributor(
     /**
      * Gives the bow to all players.
      *
-     * @param bow
+     * @param bowType
      *          The bow type to give.
      * @param enchanted
      *          `true` if the bow must be enchanted, `false` otherwise.
      */
-    fun giveBow(bow: Bow, enchanted: Boolean) {
+    fun giveBow(bowType: DefaultBow, enchanted: Boolean) {
         val itemStack = ItemStack(Material.BOW, 1)
         val itemMeta = itemStack.itemMeta
-        itemMeta.displayName = config.getString(bow.nameNode).applyColours()
+        itemMeta.displayName = config.getString(bowType.nameNode).applyColours()
         itemStack.itemMeta = itemMeta
 
         if (enchanted) {

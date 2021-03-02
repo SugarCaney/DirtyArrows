@@ -1,7 +1,7 @@
 package nl.sugcube.dirtyarrows.command
 
 import nl.sugcube.dirtyarrows.DirtyArrows
-import nl.sugcube.dirtyarrows.bow.Bow
+import nl.sugcube.dirtyarrows.bow.DefaultBow
 import org.bukkit.Bukkit
 
 /**
@@ -23,7 +23,7 @@ enum class AutoCompleteArgument(
     /**
      * All technical IDS of the bows.
      */
-    BOWS({ Bow.ALL_NODES.sorted() }),
+    BOWS({ DefaultBow.ALL_NODES.sorted() }),
 
     /**
      * Keyword "ench".

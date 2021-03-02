@@ -9,12 +9,6 @@ import org.bukkit.entity.Player
  */
 class Error(val plugin: DirtyArrows) {
 
-    companion object {
-
-        private const val NO_PERMISSION = "You don't have permission to use this bow."
-        private const val RESOURCES_REQUIRED = "You don't have enough resources to use this bow. Required:"
-    }
-    
     fun noFrozen(player: Player, reason: Reason) {
         player.showBowError(reason, "Snowball (x1)")
     }
@@ -202,5 +196,11 @@ class Error(val plugin: DirtyArrows) {
 
         NO_PERMISSION,
         NOT_ENOUGH_ITEMS
+    }
+
+    companion object {
+
+        private const val NO_PERMISSION = "You don't have permission to use this bow."
+        private const val RESOURCES_REQUIRED = "You don't have enough resources to use this bow. Required:"
     }
 }

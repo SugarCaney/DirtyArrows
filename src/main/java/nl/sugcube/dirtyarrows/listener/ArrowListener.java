@@ -42,7 +42,7 @@ public class ArrowListener implements Listener {
 	private final Error error;
 	
 	private String name;
-	private final List<Projectile> powerArrows = new ArrayList<>();
+	private final List<Projectile> multiBowArrows = new ArrayList<>();
 	private final List<String> canExplode = new ArrayList<>();
 	private final List<String> canStrikeLightning = new ArrayList<>();
 	private final List<String> canCluck = new ArrayList<>();
@@ -85,7 +85,7 @@ public class ArrowListener implements Listener {
 		if (plugin.slow.contains(event.getDamager())) {
 			event.setDamage(event.getDamage() * 200);
 		}
-		if (powerArrows.contains(event.getDamager())) {
+		if (multiBowArrows.contains(event.getDamager())) {
 			event.setDamage(event.getDamage() * 2);
 		}
 		if (event.getCause() == DamageCause.PROJECTILE && plugin.getConfig().getBoolean("headshot")) {
@@ -111,8 +111,8 @@ public class ArrowListener implements Listener {
 			Projectile proj = (Projectile) event.getDamager();
 			if (proj.getShooter() instanceof Player) {
 				Player player = (Player) proj.getShooter();
-				if (powerArrows.contains(proj)) {
-					powerArrows.remove(proj);
+				if (multiBowArrows.contains(proj)) {
+					multiBowArrows.remove(proj);
 					event.setDamage(event.getDamage() * 1.5);
 				}
 				if (event.getEntity() instanceof LivingEntity) {
@@ -939,7 +939,7 @@ public class ArrowListener implements Listener {
 								Projectile proj = event.getEntity();
 								for (int i = 1; i <= 7; i++) {
 									Arrow arrow = player.getWorld().spawn(proj.getLocation(), Arrow.class);
-									powerArrows.add(arrow);
+									multiBowArrows.add(arrow);
 									arrow.setShooter(player);
 									arrow.setVelocity(proj.getVelocity()
 											.setX(proj.getVelocity().getX() + ran.nextDouble() / 2 - 0.254)

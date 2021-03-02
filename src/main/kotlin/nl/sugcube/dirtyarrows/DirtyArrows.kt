@@ -1,10 +1,12 @@
 package nl.sugcube.dirtyarrows
 
 import nl.sugcube.dirtyarrows.ability.*
+import nl.sugcube.dirtyarrows.bow.BowManager
 import nl.sugcube.dirtyarrows.command.DirtyArrowsCommandManager
 import nl.sugcube.dirtyarrows.listener.*
 import nl.sugcube.dirtyarrows.recipe.RecipeManager
 import nl.sugcube.dirtyarrows.region.RegionManager
+import nl.sugcube.dirtyarrows.util.Error
 import nl.sugcube.dirtyarrows.util.Help
 import nl.sugcube.dirtyarrows.util.Update
 import org.bukkit.configuration.file.FileConfiguration
@@ -52,6 +54,11 @@ class DirtyArrows : JavaPlugin() {
      */
     val recipeManager = RecipeManager(this)
 
+    /**
+     * Manages all registered bows.
+     */
+    val bowManager = BowManager(this)
+
     var al = ArrowListener(this)
     var el = EnchantmentListener(this)
     var pjl = PlayerJoinListener(this)
@@ -84,6 +91,11 @@ class DirtyArrows : JavaPlugin() {
      * DA should only apply the effects of the bows when DA is enabled.
      */
     val activationManager = ActivationManager(this::isMinigameVersion)
+
+    /**
+     * Helper for showing error messages.
+     */
+    val error = Error(this)
 
     /**
      * Whether the plugin runs in a DirtyArrows minigame.

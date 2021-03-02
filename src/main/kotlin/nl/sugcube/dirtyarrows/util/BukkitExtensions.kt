@@ -4,6 +4,7 @@ import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.World
 import org.bukkit.entity.Entity
+import org.bukkit.entity.HumanEntity
 import org.bukkit.entity.Item
 import org.bukkit.inventory.ItemStack
 import org.bukkit.plugin.java.JavaPlugin
@@ -49,3 +50,21 @@ fun Location.copyOf(
 ): Location {
     return Location(world, x, y, z, yaw, pitch)
 }
+
+/**
+ * @see org.bukkit.inventory.PlayerInventory.getItemInMainHand
+ */
+val HumanEntity.itemInMainHand: ItemStack
+    get() = inventory.itemInMainHand
+
+/**
+ * @see org.bukkit.inventory.PlayerInventory.getItemInOffHand
+ */
+val HumanEntity.itemInOffHand: ItemStack
+    get() = inventory.itemInOffHand
+
+/**
+ * The display name of the item.
+ */
+val ItemStack.itemName: String
+    get() = itemMeta.displayName
