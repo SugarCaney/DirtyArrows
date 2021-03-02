@@ -45,3 +45,13 @@ fun Location.west() = copyOf(x = x - 1.0)
  * Get the location 1 block east.
  */
 fun Location.east() = copyOf(x = x + 1.0)
+
+/**
+ * Gets the northern, eastern, southern, and western block, in order.
+ */
+fun Location.northEastSouthWest() = listOf(north(), east(), south(), west())
+
+/**
+ * Gets all 5 blocks in a cross form in the horizontal plane.
+ */
+fun Location.crossBlocks() = listOf(this) + northEastSouthWest()

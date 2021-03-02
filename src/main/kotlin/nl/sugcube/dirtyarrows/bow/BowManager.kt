@@ -65,13 +65,13 @@ open class BowManager(private val plugin: DirtyArrows): Iterable<BowType> {
         BattyBow(plugin).load()
         NuclearBow(plugin).load()
         EnlightenedBow(plugin).load()
-        // TODO: RANGED
+        RangedBow(plugin).load()
         // TODO: MACHINE
         // TODO: POISONOUS
         // TODO: DISORIENTING
         // TODO: SWAP
         // TODO: DRAINING
-        // TODO: FLINT
+        FlintAndBow(plugin).load()
         // TODO: DISARMING
         // TODO: WITHER
         // TODO: FIREY

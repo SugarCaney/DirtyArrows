@@ -59,7 +59,12 @@ abstract class BowAbility(
         /**
          * What items are required for a single use.
          */
-        val costRequirements: List<ItemStack> = emptyList()
+        val costRequirements: List<ItemStack> = emptyList(),
+
+        /**
+         * Whether to remove the arrow when it hit.
+         */
+        val removeArrow: Boolean = true
 
 ) : Listener, Runnable {
 
@@ -137,10 +142,11 @@ abstract class BowAbility(
             // Give back the items if it is in a protected region as they have been removed upon launch.
             if (arrow.location.isInProtectedRegion(player)) {
                 player.reimburseBowItems()
-            }
-            else {
+            } else {
                 land(arrow, player, event)
-                arrow.remove()
+                if (removeArrow) {
+                    arrow.remove()
+                }
             }
         }
     }
@@ -211,7 +217,7 @@ abstract class BowAbility(
     protected fun Location.isInProtectedRegion(player: Player, showError: Boolean = true): Boolean {
         val inRegion = plugin.regionManager.isWithinARegionMargin(this, protectionRange) != null
 
-        if (showError && inRegion) {
+        if (showError && inRegion && canShootInProtectedRegions.not()) {
             player.sendMessage(Broadcast.DISABLED_IN_PROTECTED_REGION.format(bowName()))
         }
 
@@ -227,7 +233,9 @@ abstract class BowAbility(
      */
     protected fun Player.meetsResourceRequirements(showError: Boolean = true): Boolean {
         val survival = gameMode == GameMode.SURVIVAL || gameMode == GameMode.ADVENTURE
-        val meetsRequirements = survival.not() || costRequirements.all { inventory.containsAtLeast(it, it.amount) }
+        val meetsRequirements = survival.not() || costRequirements.all {
+            inventory.contains(it.type, it.amount)
+        }
 
         if (showError && meetsRequirements.not()) {
             sendMessage(Broadcast.NOT_ENOUGH_RESOURCES.format(costRequirements.joinToString(", ") {
@@ -253,14 +261,14 @@ abstract class BowAbility(
     /**
      * Removes all resources from the player's inventory that are required for 1 use.
      */
-    protected fun Player.consumeBowItems() = costRequirements.forEach {
+    protected open fun Player.consumeBowItems() = costRequirements.forEach {
         inventory.removeItem(it)
     }
 
     /**
      * Gives back all resources from the player's inventory that are required for 1 use.
      */
-    protected fun Player.reimburseBowItems() {
+    protected open fun Player.reimburseBowItems() {
         if (player.gameMode != GameMode.CREATIVE) {
             costRequirements.forEach {
                 inventory.addItem(it)

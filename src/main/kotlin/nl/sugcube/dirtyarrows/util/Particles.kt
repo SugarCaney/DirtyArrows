@@ -12,6 +12,13 @@ fun Entity.showSmokeParticle() = location.clone().add(0.5, 0.5, 0.5).let {
 }
 
 /**
+ * Shows a smoke particle on this location.
+ */
+fun Location.showSmokeParticle() = clone().add(0.5, 0.5, 0.5).let {
+    world.playEffect(it, Effect.SMOKE, 0)
+}
+
+/**
  * Shows a mobspawner flame particle on the location of the entity.
  */
 fun Entity.showFlameParticle() = location.clone().add(0.5, 0.5, 0.5).let {
