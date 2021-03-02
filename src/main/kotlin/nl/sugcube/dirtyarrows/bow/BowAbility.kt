@@ -7,10 +7,12 @@ import nl.sugcube.dirtyarrows.util.itemInMainHand
 import nl.sugcube.dirtyarrows.util.itemInOffHand
 import nl.sugcube.dirtyarrows.util.itemName
 import org.bukkit.GameMode
+import org.bukkit.Location
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.event.entity.ProjectileLaunchEvent
 import org.bukkit.inventory.ItemStack
 
@@ -19,7 +21,8 @@ import org.bukkit.inventory.ItemStack
  *
  * * Override [effect] to execute a repeating scheduled effect every [handleEveryNTicks] ticks.
  * * Override [particle] to show a particle on every applicable site.
- * * Override [onPlayerShoot] for behaviour when the player shoots arrows.
+ * * Override [land] to handle when arrows shot with this bow land.
+ * * Override [launch] for behaviour when the player shoots arrows.
  *
  * The implementing class should keep track of relevant entities/other data itself.
  *
@@ -30,7 +33,7 @@ abstract class BowAbility(
         /**
          * The main DA plugin instance.
          */
-        val plugin: DirtyArrows,
+        protected val plugin: DirtyArrows,
 
         /**
          * Corresponding [DefaultBow] enum type.
@@ -66,6 +69,11 @@ abstract class BowAbility(
     private var tickCounter = 0
 
     /**
+     * Set containing all arrows that have been shot with this bow.
+     */
+    protected val arrows: MutableSet<Arrow> = HashSet()
+
+    /**
      * Executes a repeating scheduled effect every [handleEveryNTicks] ticks.
      */
     open fun effect() = Unit
@@ -73,7 +81,7 @@ abstract class BowAbility(
     /**
      * Shows a single particle effect on every applicable instance.
      */
-    open fun particle() = Unit
+    open fun particle(tickNumber: Int) = Unit
 
     /**
      * Handles when a player shoots an arrow with this bow.
@@ -85,19 +93,53 @@ abstract class BowAbility(
      * @param event
      *          The corresponding [ProjectileLaunchEvent].
      */
-    open fun onPlayerShoot(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) = Unit
+    open fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) = Unit
+
+    /**
+     * Executes whenever an arrow with this abilities lands.
+     * Only arrows that are shot with this bow, or are registered in [arrow] will get a [land] event.
+     * The arrow is removed from [arrow] when the arrow landed.
+     *
+     * @param arrow
+     *          The arrow that has landed.
+     * @param player
+     *          The player that shot the arrow.
+     * @param event
+     *          The event that fired when the arrow landed.
+     */
+    open fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) = Unit
 
     override fun run() {
         tickCounter++
 
         // Only execute the effect every [handleEveryNTicks] ticks.
-        if (tickCounter >= handleEveryNTicks) {
+        if (tickCounter % handleEveryNTicks == 0) {
             effect()
-            tickCounter = 0
         }
 
         // Show particles every tick.
-        particle()
+        if (plugin.config.getBoolean("show-particles")) {
+            particle(tickCounter)
+        }
+    }
+
+    @EventHandler
+    fun eventHandlerProjectileHit(event: ProjectileHitEvent) {
+        val arrow = event.entity as? Arrow ?: return
+        val player = arrow.shooter as? Player ?: return
+
+        // Only hit arrows that are linked to this ability.
+        if (arrow in arrows) {
+            // Remove arrow beforehand, as per documentation of [land]
+            arrows.remove(arrow)
+
+            // Only apply effects when the arrow does not land in a protected region.
+            // Give back the items if it is in a protected region as they have been removed upon launch.
+            if (arrow.location.isInProtectedRegion(player)) {
+                player.reimburseBowItems()
+            }
+            else land(arrow, player, event)
+        }
     }
 
     @EventHandler
@@ -109,11 +151,12 @@ abstract class BowAbility(
         if (player.isDirtyArrowsActivated().not()) return
         if (player.hasBowInHand().not()) return
         if (player.hasPermission().not()) return
-        if (player.isInProtectedRegion()) return
+        if (player.location.isInProtectedRegion(player)) return
         if (player.meetsResourceRequirements().not()) return
 
         // All is fine, handle event.
-        onPlayerShoot(player, arrow, event)
+        arrows.add(arrow)
+        launch(player, arrow, event)
     }
 
     /**
@@ -132,7 +175,7 @@ abstract class BowAbility(
      */
     protected fun Player.hasBowInHand(): Boolean {
         val expectedName = bowName()
-        return itemInMainHand.itemName != expectedName && itemInOffHand.itemName != expectedName
+        return itemInMainHand.itemName == expectedName || itemInOffHand.itemName == expectedName
     }
 
     /**
@@ -153,14 +196,16 @@ abstract class BowAbility(
     }
 
     /**
-     * Checks if the player is inside a protected region.
+     * Checks if the location is inside a protected region.
      *
+     * @param player
+     *          The player who shot the arrow.
      * @param showError
      *          Whether to show an error to the player when they are in a protected region.
      * @return `true` when the player is in a protected region, `false` otherwise.
      */
-    protected fun Player.isInProtectedRegion(showError: Boolean = true): Boolean {
-        val inRegion = plugin.regionManager.isWithinARegionMargin(location, protectionRange) != null
+    protected fun Location.isInProtectedRegion(player: Player, showError: Boolean = true): Boolean {
+        val inRegion = plugin.regionManager.isWithinARegionMargin(this, protectionRange) != null
 
         if (showError && inRegion) {
             player.sendMessage(Broadcast.DISABLED_IN_PROTECTED_REGION.format(bowName()))
@@ -178,11 +223,11 @@ abstract class BowAbility(
      */
     protected fun Player.meetsResourceRequirements(showError: Boolean = true): Boolean {
         val survival = gameMode == GameMode.SURVIVAL || gameMode == GameMode.ADVENTURE
-        val meetsRequirements = survival && costRequirements.any { inventory.contains(it).not() }
+        val meetsRequirements = survival.not() || costRequirements.all { inventory.containsAtLeast(it, it.amount) }
 
         if (showError && meetsRequirements.not()) {
             sendMessage(Broadcast.NOT_ENOUGH_RESOURCES.format(costRequirements.joinToString(", ") {
-                "${it.itemName} (x${it.amount})"
+                "${it.type.name.toLowerCase()} (x${it.amount})"
             }))
         }
 
@@ -193,4 +238,29 @@ abstract class BowAbility(
      * Get the colour applied bow name of the bow of this ability.
      */
     protected fun bowName() = plugin.config.getString(this@BowAbility.type.nameNode).applyColours()
+
+    /**
+     * Registers that the given arrow is shot by this bow.
+     *
+     * @return `true` if the arrow has been added, `false` if the arrow is already registered.
+     */
+    protected fun registerArrow(arrow: Arrow) = arrows.add(arrow)
+
+    /**
+     * Removes all resources from the player's inventory that are required for 1 use.
+     */
+    protected fun Player.consumeBowItems() = costRequirements.forEach {
+        inventory.removeItem(it)
+    }
+
+    /**
+     * Gives back all resources from the player's inventory that are required for 1 use.
+     */
+    protected fun Player.reimburseBowItems() {
+        if (player.gameMode != GameMode.CREATIVE) {
+            costRequirements.forEach {
+                inventory.addItem(it)
+            }
+        }
+    }
 }

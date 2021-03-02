@@ -17,12 +17,12 @@ object Broadcast {
     /**
      * DirtyArrows enable message.
      */
-    val ENABLED = "$TAG ${ChatColor.RED}Disabled!"
+    val ENABLED = "$TAG ${ChatColor.GREEN}Enabled!"
 
     /**
      * DirtyArrows disable message.
      */
-    val DISABLED = "$TAG ${ChatColor.GREEN}Enabled!"
+    val DISABLED = "$TAG ${ChatColor.RED}Disabled!"
 
     /**
      * Error when not enough xp levels are available.
@@ -114,21 +114,21 @@ object Broadcast {
      *
      * %s = Name of the bow.
      */
-    val NO_BOW_PERMISSION = "$TAG_ERROR You don't have permission to use ${Colour.SECONDARY}%s{${Colour.ERROR}."
+    val NO_BOW_PERMISSION = "$TAG_ERROR You don't have permission to use ${Colour.PRIMARY}%s{${Colour.ERROR}."
 
     /**
      * Cannot use the bow in a protected region.
      *
      * %s = Name of the bow.
      */
-    val DISABLED_IN_PROTECTED_REGION = "$TAG_ERROR ${Colour.SECONDARY}%s${Colour.ERROR} is disabled in protected regions."
+    val DISABLED_IN_PROTECTED_REGION = "$TAG_ERROR ${Colour.PRIMARY}%s${Colour.ERROR} is disabled in protected regions."
 
     /**
      * Message to list all required resources.
      *
      * %s = List of required resources.
      */
-    val NOT_ENOUGH_RESOURCES = "$TAG_ERROR You don't have enough resources, required: ${Colour.SECONDARY}%s${Colour.ERROR}."
+    val NOT_ENOUGH_RESOURCES = "$TAG_ERROR You don't have enough resources, required: ${Colour.PRIMARY}%s${Colour.ERROR}."
 
     /**
      * Get the message that shows whether DA is enabled or disabled.

@@ -15,6 +15,7 @@ Changelog
 * **`+`** Added \da visualize to visualize regions and position selection.
 * **`+`** Added option to hide the enabled/disabled message.
 * **`+`** Added option to run in minigame/silent mode.
+* **`+`** Added option to disable arrow particles.
 * **`!`** Fixed anvil costs not updating correctly (and crash).
 * **`!`** Fixed cursed bastard's move-effect not being calculated properly.
 * **`!`** Fixed curse not going away after death.
@@ -25,6 +26,9 @@ Changelog
 * **`~`** Undead bow spawns zombies in a circle instead of a square.
 * **`~`** Buffed cursed bastard.
 * **`~`** Tweaked woodman bow drops (12% 1-6 planks, 8% 1-4 planks, 80% log).
+* **`~`** Increased the power of the nuclear bow.
+* **`~`** Effects are now tied to the arrow instead of the player.
+* **`~`** Improved robustness.
 * **`-`** Removed metrics.
 
 ## Version 3.0

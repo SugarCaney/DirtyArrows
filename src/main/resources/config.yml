@@ -6,6 +6,7 @@ arrow-recipe-amount: 16
 headshot: true
 headshot-multiplier: 1.5
 zombie-flint: true
+show-particles: true
 blood: true
 auto-enable: false
 show-enable-message: true

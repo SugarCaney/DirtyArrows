@@ -38,6 +38,20 @@ fun <T : Entity> Location.spawn(entity: KClass<T>): T = world.spawn(this, entity
 fun Location.dropItem(item: ItemStack): Item = world.dropItem(this, item)
 
 /**
+ * Creates an explosion at this location.
+ */
+fun Location.createExplosion(
+        power: Float,
+        setFire: Boolean = false,
+        breakBlocks: Boolean = false
+) {
+    if (breakBlocks) {
+        world.createExplosion(x, y, z, power, setFire, breakBlocks)
+    }
+    else world.createExplosion(this, power, setFire)
+}
+
+/**
  * Makes a copy of this location.
  */
 fun Location.copyOf(
@@ -66,5 +80,5 @@ val HumanEntity.itemInOffHand: ItemStack
 /**
  * The display name of the item.
  */
-val ItemStack.itemName: String
-    get() = itemMeta.displayName
+val ItemStack.itemName: String?
+    get() = itemMeta?.displayName

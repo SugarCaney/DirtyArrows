@@ -1,6 +1,8 @@
 package nl.sugcube.dirtyarrows.bow
 
 import nl.sugcube.dirtyarrows.DirtyArrows
+import nl.sugcube.dirtyarrows.bow.ability.ExplodingBow
+import nl.sugcube.dirtyarrows.bow.ability.NuclearBow
 import org.bukkit.event.HandlerList
 import java.util.logging.Level
 
@@ -20,6 +22,12 @@ open class BowManager(private val plugin: DirtyArrows): Iterable<BowType> {
      * Keeps track of all scheduled task IDs. Mapped from each bow type.
      */
     private val tasks = HashMap<BowType, Int>()
+
+    /**
+     * Get all bow types that are registered.
+     */
+    val registeredTypes: Set<BowType>
+        get() = bows.keys
 
     /**
      * Loads all enabled bows. Re-evaluates on second call.
@@ -45,7 +53,7 @@ open class BowManager(private val plugin: DirtyArrows): Iterable<BowType> {
      * Adds all enabled bow ability implementations to [bows].
      */
     private fun loadAbilities() {
-        // TODO: EXPLODING
+        DefaultBow.EXPLODING.loadIfEnabled(ExplodingBow(plugin))
         // TODO: LIGHTNING
         // TODO: CLUCKY
         // TODO: ENDER
@@ -54,7 +62,7 @@ open class BowManager(private val plugin: DirtyArrows): Iterable<BowType> {
         // TODO: BIRCH
         // TODO: JUNGLE
         // TODO: BATTY
-        // TODO: NUCLEAR
+        DefaultBow.NUCLEAR.loadIfEnabled(NuclearBow(plugin))
         // TODO: ENLIGHTENED
         // TODO: RANGED
         // TODO: MACHINE

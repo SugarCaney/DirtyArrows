@@ -1,6 +1,8 @@
 package nl.sugcube.dirtyarrows
 
-import nl.sugcube.dirtyarrows.ability.*
+import nl.sugcube.dirtyarrows.ability.CurseListener
+import nl.sugcube.dirtyarrows.ability.FrozenListener
+import nl.sugcube.dirtyarrows.ability.Iron
 import nl.sugcube.dirtyarrows.bow.BowManager
 import nl.sugcube.dirtyarrows.command.DirtyArrowsCommandManager
 import nl.sugcube.dirtyarrows.listener.*
@@ -119,15 +121,15 @@ class DirtyArrows : JavaPlugin() {
      * Registers all events.
      */
     private fun registerEvents() = with(server.pluginManager) {
-        val plugin = this@DirtyArrows
-        registerEvents(al, plugin)
-        registerEvents(el, plugin)
-        registerEvents(enl, plugin)
-        registerEvents(pjl, plugin)
-        registerEvents(pdl, plugin)
-        registerEvents(iron, plugin)
-        registerEvents(frozenListener, plugin)
-        registerEvents(anvilListener, plugin)
+//        val plugin = this@DirtyArrows
+//        registerEvents(al, plugin)
+//        registerEvents(el, plugin)
+//        registerEvents(enl, plugin)
+//        registerEvents(pjl, plugin)
+//        registerEvents(pdl, plugin)
+//        registerEvents(iron, plugin)
+//        registerEvents(frozenListener, plugin)
+//        registerEvents(anvilListener, plugin)
     }
 
     /**
@@ -149,15 +151,14 @@ class DirtyArrows : JavaPlugin() {
         registerEvents()
         recipeManager.reloadRecipes()
         regionManager.loadRegions()
-
-        server.scheduler.scheduleSyncRepeatingTask(this, Slow(this), 0, 1)
-        server.scheduler.scheduleSyncRepeatingTask(this, Airstrike(this), 5, 5)
-        server.scheduler.scheduleSyncRepeatingTask(this, Particles(this), 2, 2)
-        server.scheduler.scheduleSyncRepeatingTask(this, Airship(this), 2, 2)
-        server.scheduler.scheduleSyncRepeatingTask(this, iron, 5, 5)
-        server.scheduler.scheduleSyncRepeatingTask(this, curse, 20, 20)
-        server.scheduler.scheduleSyncRepeatingTask(this, frozenListener, 20, 20)
-
+        bowManager.reload()
+//        server.scheduler.scheduleSyncRepeatingTask(this, Slow(this), 0, 1)
+//        server.scheduler.scheduleSyncRepeatingTask(this, Airstrike(this), 5, 5)
+//        server.scheduler.scheduleSyncRepeatingTask(this, Particles(this), 2, 2)
+//        server.scheduler.scheduleSyncRepeatingTask(this, Airship(this), 2, 2)
+//        server.scheduler.scheduleSyncRepeatingTask(this, iron, 5, 5)
+//        server.scheduler.scheduleSyncRepeatingTask(this, curse, 20, 20)
+//        server.scheduler.scheduleSyncRepeatingTask(this, frozenListener, 20, 20)
         checkForUpdates()
 
         logger.info("DirtyArrows has been enabled!")
