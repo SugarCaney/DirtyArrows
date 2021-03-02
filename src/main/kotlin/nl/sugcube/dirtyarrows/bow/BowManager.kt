@@ -73,8 +73,8 @@ open class BowManager(private val plugin: DirtyArrows): Iterable<BowType> {
         // TODO: DRAINING
         FlintAndBow(plugin).load()
         // TODO: DISARMING
-        // TODO: WITHER
-        // TODO: FIREY
+        WitherBow(plugin).load()
+        FireyBow(plugin).load()
         // TODO: SLOW
         // TODO: LEVEL
         // TODO: UNDEAD

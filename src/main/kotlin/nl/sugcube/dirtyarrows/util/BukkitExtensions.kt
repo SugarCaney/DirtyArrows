@@ -8,6 +8,7 @@ import org.bukkit.entity.HumanEntity
 import org.bukkit.entity.Item
 import org.bukkit.inventory.ItemStack
 import org.bukkit.plugin.java.JavaPlugin
+import org.bukkit.util.Vector
 import kotlin.reflect.KClass
 
 /**
@@ -63,6 +64,17 @@ fun Location.copyOf(
     pitch: Float = this.pitch
 ): Location {
     return Location(world, x, y, z, yaw, pitch)
+}
+
+/**
+ * Makes a copy of this vector.
+ */
+fun Vector.copyOf(
+        x: Number = this.x,
+        y: Number = this.y,
+        z: Number = this.z
+): Vector {
+    return Vector(x.toDouble(), y.toDouble(), z.toDouble())
 }
 
 /**

@@ -259,6 +259,13 @@ abstract class BowAbility(
     protected fun registerArrow(arrow: Arrow) = arrows.add(arrow)
 
     /**
+     * Unregisters the arrow.
+     *
+     * @return `true` if the arrow has been successfully removed; `false` if it was not present.
+     */
+    protected fun unregisterArrow(arrow: Arrow) = arrows.remove(arrow)
+
+    /**
      * Removes all resources from the player's inventory that are required for 1 use.
      */
     protected open fun Player.consumeBowItems() = costRequirements.forEach {
