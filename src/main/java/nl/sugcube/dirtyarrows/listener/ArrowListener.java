@@ -7,7 +7,6 @@ import nl.sugcube.dirtyarrows.effect.Lumberjack;
 import nl.sugcube.dirtyarrows.effect.ZombieSwarm;
 import nl.sugcube.dirtyarrows.util.DaUtil;
 import nl.sugcube.dirtyarrows.util.Error;
-import nl.sugcube.dirtyarrows.util.Util;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
@@ -1872,7 +1871,7 @@ public class ArrowListener implements Listener {
 							for (int i = 0; i < 5; i++) {
 								TNTPrimed tnt = world.spawn(loc, TNTPrimed.class);
 								tnt.setFuseTicks(40);
-								tnt.setVelocity(Util.ranCluster(ran));
+								//tnt.setVelocity(Util.ranCluster(ran));
 							}
 							
 							canCluster.remove(player.getUniqueId().toString());
