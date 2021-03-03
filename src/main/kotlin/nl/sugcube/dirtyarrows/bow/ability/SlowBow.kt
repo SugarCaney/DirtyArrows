@@ -36,7 +36,6 @@ open class SlowBow(plugin: DirtyArrows) : BowAbility(
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
         velocityAndAge.remove(arrow)
-        println("Hit entity: ${event.hitEntity}")
         monsterDamage(event.hitEntity, player)
     }
 

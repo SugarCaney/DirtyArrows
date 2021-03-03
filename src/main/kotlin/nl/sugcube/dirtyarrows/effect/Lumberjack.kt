@@ -9,6 +9,7 @@ import nl.sugcube.dirtyarrows.util.isLog
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
+import org.bukkit.material.Wood
 import kotlin.random.Random
 
 /**
@@ -18,18 +19,19 @@ import kotlin.random.Random
 fun Location.dropWood() {
     val woodMaterial = block.type
     // Data deprecation will be replaced in later versions (1.13, 1.14, ...)
-    val damageValue = block.data.toShort()
+    val data = block.state.data as Wood
+    val damageValue = data.species.ordinal
+    val dataValue = if (woodMaterial == Material.LOG_2) damageValue - 4 else damageValue
 
     // 80% chance to drop log. 20% chance to drop stick/planks.
     if (Random.nextInt(5) != 0) {
-        dropItem(ItemStack(woodMaterial, 1, damageValue.toShort()))
+        dropItem(ItemStack(woodMaterial, 1, dataValue.toShort()))
         return
     }
 
     // 40% of dropping planks, 60% of dropping sticks (8% planks, 12% sticks).
     if (Random.nextDouble() < 0.4) {
-        val dataValue = if (woodMaterial == Material.LOG_2) damageValue + 4 else damageValue
-        dropItem(ItemStack(Material.WOOD, Random.nextInt(4) + 1, dataValue.toShort()))
+        dropItem(ItemStack(Material.WOOD, Random.nextInt(4) + 1, damageValue.toShort()))
     }
     else dropItem(ItemStack(Material.STICK, Random.nextInt(6) + 1))
 }

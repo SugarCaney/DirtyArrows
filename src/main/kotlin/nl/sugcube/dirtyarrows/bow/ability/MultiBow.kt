@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack
 import kotlin.random.Random
 
 /**
- * Shoots 8 arrows simultaneously in slightly different directions.
+ * Shoots 12 arrows simultaneously in slightly different directions.
  *
  * @author SugarCaney
  */
@@ -24,12 +24,12 @@ open class MultiBow(plugin: DirtyArrows) : BowAbility(
         type = DefaultBow.MULTI,
         canShootInProtectedRegions = true,
         removeArrow = false,
-        costRequirements = listOf(ItemStack(Material.ARROW, 8))
+        costRequirements = listOf(ItemStack(Material.ARROW, 12))
 ) {
 
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {
-        // Launch 7 extra arrows.
-        repeat(7) {
+        // Launch 1 extra arrows.
+        repeat(11) {
             player.world.spawn(arrow.location, Arrow::class.java).apply {
                 shooter = player
                 velocity = arrow.velocity.copyOf(
@@ -37,6 +37,7 @@ open class MultiBow(plugin: DirtyArrows) : BowAbility(
                         y = arrow.velocity.y + Random.nextDouble() / 2.0 - 0.254,
                         z = arrow.velocity.z + Random.nextDouble() / 2.0 - 0.254
                 )
+                isCritical = true
                 applyBowEnchantments(player.bowItem())
 
                 if (player.gameMode == GameMode.CREATIVE) {

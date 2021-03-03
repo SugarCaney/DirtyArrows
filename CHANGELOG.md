@@ -21,6 +21,7 @@ Changelog
 * **`!`** Fixed curse not going away after death.
 * **`!`** Fixed frozen not going away after death.
 * **`!`** Fixed perpetual frozen when you die when you're frozen.
+* **`!`** Fixed some entity references not being removed.
 * **`~`** Undead bow spawns zombies on the first available Y instead of the highest Y level.
 * **`~`** Decreased the amount of zombies spawned by the undead bow.
 * **`~`** Undead bow spawns zombies in a circle instead of a square.
@@ -32,6 +33,9 @@ Changelog
 * **`~`** Tree bows spawn trees more easily.
 * **`~`** Tree bows now spawn all possible tree variants (chosen randomly).
 * **`~`** Items get reimbursed when an effect (like the oak bow) fails.
+* **`~`** Machine bow shoots more arrows, and slightly less accurate.
+* **`~`** 7 level cost changed to 12 level cost.
+* **`~`** Multi bow now shoots 12 (was 8) arrows, and are always critical.
 * **`~`** Improved robustness.
 * **`-`** Removed metrics.
 

@@ -13,7 +13,7 @@ show-enable-message: true
 exploding:
   name: 'Exploding Bastard'
   enabled: true
-  levels: 10
+  levels: 12
 lightning:
   name: 'Lightning Bastard'
   enabled: true
@@ -57,11 +57,11 @@ enlightened:
 ranged:
   name: 'Ranged Bastard'
   enabled: true
-  levels: 10
+  levels: 12
 machine:
   name: 'Machine Bastard'
   enabled: true
-  levels: 7
+  levels: 12
 poisonous:
   name: 'Poisonous Bastard'
   enabled: true
@@ -73,7 +73,7 @@ disorienting:
 swap:
   name: 'Swap Bastard'
   enabled: true
-  levels: 10
+  levels: 12
 draining:
   name: 'Draining Bastard'
   enabled: true
@@ -81,7 +81,7 @@ draining:
 flintand:
   name: 'Flint and Bastard'
   enabled: true
-  levels: 10
+  levels: 12
 disarming:
   name: 'Disarming Bastard'
   enabled: true
@@ -101,7 +101,7 @@ slow:
 level:
   name: 'Level Bastard'
   enabled: true
-  levels: 10
+  levels: 12
 undead:
   name: 'Undead Bastard'
   enabled: true
@@ -117,7 +117,7 @@ starvation:
 multi:
   name: 'Multi Bastard'
   enabled: true
-  levels: 10
+  levels: 12
 bomb:
   name: 'Bomb Bastard'
   enabled: true
@@ -161,7 +161,7 @@ cluster:
 airship:
   name: 'Airship Bastard'
   enabled: true
-  levels: 10
+  levels: 12
 iron:
   name: 'Iron Bastard'
   enabled: true
