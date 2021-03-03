@@ -32,9 +32,9 @@ open class IronBow(plugin: DirtyArrows) : BowAbility(
 ) {
 
     /**
-     * All registered anvils mapped to the unix epoch of birth.
+     * All registered anvils mapped to the (unix epoch of birth, player who shot).
      */
-    private val anvils = HashMap<FallingBlock, Long>()
+    private val anvils = HashMap<FallingBlock, Pair<Long, Player>>()
 
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {
         player.world.spawnFallingBlock(
@@ -42,8 +42,11 @@ open class IronBow(plugin: DirtyArrows) : BowAbility(
         ).apply {
             velocity = arrow.velocity
             dropItem = true
-            anvils[this] = System.currentTimeMillis()
+            anvils[this] = System.currentTimeMillis() to player
         }
+
+        unregisterArrow(arrow)
+        arrow.remove()
     }
 
     override fun effect() {
@@ -62,7 +65,7 @@ open class IronBow(plugin: DirtyArrows) : BowAbility(
      */
     private fun removeExpiredAnvils() {
         anvils.keys.removeIf { anvil ->
-            val birthDate = anvils[anvil]!!
+            val birthDate = anvils[anvil]!!.first
             val age = System.currentTimeMillis() - birthDate
             age >= MAX_LIFESPAN_MILLIS
         }
@@ -72,6 +75,15 @@ open class IronBow(plugin: DirtyArrows) : BowAbility(
     fun anvilLandEvent(event: EntityChangeBlockEvent) {
         val anvil = event.entity as? FallingBlock ?: return
         if (anvils.containsKey(anvil).not()) return
+        val player = anvils[anvil]?.second ?: return
+
+        /// Do not land in protected areas.
+        if (anvil.location.isInProtectedRegion(player)) {
+            player.reimburseBowItems()
+            event.isCancelled = true
+            anvils.remove(anvil)
+            return
+        }
 
         // Damage all entities in range.
         anvil.world.entities.asSequence()
@@ -81,7 +93,7 @@ open class IronBow(plugin: DirtyArrows) : BowAbility(
                     if (it is Player) {
                         it.playSound(anvil.location, Sound.BLOCK_ANVIL_LAND, 10f, 1f)
                     }
-                    it.damage(10.0)p
+                    it.damage(10.0)
                 }
         anvils.remove(anvil)
     }
