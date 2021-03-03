@@ -3,6 +3,7 @@ package nl.sugcube.dirtyarrows.bow.ability
 import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
+import nl.sugcube.dirtyarrows.util.applyBowEnchantments
 import nl.sugcube.dirtyarrows.util.copyOf
 import org.bukkit.GameMode
 import org.bukkit.Material
@@ -27,37 +28,23 @@ open class MultiBow(plugin: DirtyArrows) : BowAbility(
 ) {
 
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {
-        val bowInHand = player.bowItem()
-
         // Launch 7 extra arrows.
         repeat(7) {
-            val multiArrow = player.world.spawn(arrow.location, Arrow::class.java).apply {
+            player.world.spawn(arrow.location, Arrow::class.java).apply {
                 shooter = player
                 velocity = arrow.velocity.copyOf(
                         x = arrow.velocity.x + Random.nextDouble() / 2.0 - 0.254,
                         y = arrow.velocity.y + Random.nextDouble() / 2.0 - 0.254,
                         z = arrow.velocity.z + Random.nextDouble() / 2.0 - 0.254
                 )
+                applyBowEnchantments(player.bowItem())
 
-                // When these are inifinity arrows, they cannot be picked up.
-                if (bowInHand?.containsEnchantment(Enchantment.ARROW_INFINITE) == false) {
-                    pickupStatus = Arrow.PickupStatus.ALLOWED
-                }
-
-                // Set punch enchantment.
-                knockbackStrength = bowInHand?.getEnchantmentLevel(Enchantment.ARROW_KNOCKBACK) ?: 0
-
-                // Make them critcal if the bow has power.
-                // Does not fully account for all levels, but I wouldn't bother too much. This is fine.
-                isCritical = bowInHand?.containsEnchantment(Enchantment.ARROW_DAMAGE) == true
-
-                // Set on fire when the bow has flame.
-                if (bowInHand?.containsEnchantment(Enchantment.ARROW_FIRE) == true) {
-                    fireTicks = 1200
+                if (player.gameMode == GameMode.CREATIVE) {
+                    pickupStatus = Arrow.PickupStatus.CREATIVE_ONLY
                 }
             }
-            registerArrow(multiArrow)
         }
+        unregisterArrow(arrow)
     }
 
     override fun Player.consumeBowItems() {

@@ -92,7 +92,7 @@ open class BowManager(private val plugin: DirtyArrows): Iterable<BowType> {
         AirshipBow(plugin).load()
         IronBow(plugin).load()
         // TODO: CURSE
-        // TODO: ROUND
+        RoundBow(plugin).load()
         // TODO: FROZEN
     }
 
