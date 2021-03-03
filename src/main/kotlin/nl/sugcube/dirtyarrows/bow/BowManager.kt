@@ -81,10 +81,10 @@ open class BowManager(private val plugin: DirtyArrows): Iterable<BowType> {
         WoodmanBow(plugin).load()
         // TODO: STARVATION
         MultiBow(plugin).load()
-        // TODO: BOMB
+        BombBow(plugin).load()
         // TODO: DROP
         // TODO: AIRSTRIKE
-        // TODO: MAGMATIC
+        MagmaticBow(plugin).load()
         // TODO: AQUATIC
         // TODO: PULL
         // TODO: PARALYZE
