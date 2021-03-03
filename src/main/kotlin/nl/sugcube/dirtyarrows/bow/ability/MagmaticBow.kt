@@ -37,6 +37,8 @@ open class MagmaticBow(plugin: DirtyArrows) : BowAbility(
     }
 
     override fun particle(tickNumber: Int) {
+        if (tickNumber % 3 == 0) return
+
         arrows.forEach {
             it.world.playEffect(it.location.copyOf().add(0.5, 0.5, 0.5), Effect.STEP_SOUND, Material.LAVA)
         }

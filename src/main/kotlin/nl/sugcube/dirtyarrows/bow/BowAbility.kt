@@ -11,6 +11,7 @@ import org.bukkit.Location
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
+import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.event.entity.ProjectileLaunchEvent
@@ -128,7 +129,7 @@ abstract class BowAbility(
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.NORMAL)
     fun eventHandlerProjectileHit(event: ProjectileHitEvent) {
         val arrow = event.entity as? Arrow ?: return
         val player = arrow.shooter as? Player ?: return
@@ -136,7 +137,7 @@ abstract class BowAbility(
         // Only hit arrows that are linked to this ability.
         if (arrow in arrows) {
             // Remove arrow beforehand, as per documentation of [land]
-            arrows.remove(arrow)
+            unregisterArrow(arrow)
 
             // Only apply effects when the arrow does not land in a protected region.
             // Give back the items if it is in a protected region as they have been removed upon launch.
@@ -151,7 +152,7 @@ abstract class BowAbility(
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.NORMAL)
     fun eventHandlerLaunchProjectile(event: ProjectileLaunchEvent) {
         val arrow = event.entity as? Arrow ?: return
         val player = arrow.shooter as? Player ?: return
@@ -256,14 +257,14 @@ abstract class BowAbility(
      *
      * @return `true` if the arrow has been added, `false` if the arrow is already registered.
      */
-    protected fun registerArrow(arrow: Arrow) = arrows.add(arrow)
+    protected open fun registerArrow(arrow: Arrow) = arrows.add(arrow)
 
     /**
      * Unregisters the arrow.
      *
      * @return `true` if the arrow has been successfully removed; `false` if it was not present.
      */
-    protected fun unregisterArrow(arrow: Arrow) = arrows.remove(arrow)
+    protected open fun unregisterArrow(arrow: Arrow) = arrows.remove(arrow)
 
     /**
      * Removes all resources from the player's inventory that are required for 1 use.

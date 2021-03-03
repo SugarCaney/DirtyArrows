@@ -98,3 +98,16 @@ fun CommandSender.sendError(message: String) = sendFormattedMessage(Broadcast.TA
 fun onlinePlayer(name: String) = if (name == "@r") {
     Bukkit.getOnlinePlayers().random()
 } else Bukkit.getOnlinePlayers().firstOrNull { it.name == name }
+
+/**
+ * Loops over x, y, z range.
+ */
+inline fun forXYZ(xRange: IntRange, yRange: IntRange, zRange: IntRange, action: (dx: Int, dy: Int, dz: Int) -> Unit) {
+    for (dx in xRange) {
+        for (dy in yRange) {
+            for (dz in zRange) {
+                action(dx, dy, dz)
+            }
+        }
+    }
+}

@@ -131,6 +131,16 @@ object Broadcast {
     val NOT_ENOUGH_RESOURCES = "$TAG_ERROR You don't have enough resources, required: ${Colour.PRIMARY}%s${Colour.ERROR}."
 
     /**
+     * Message to let the player know they defrosted.
+     */
+    val DEFROSTED = "$TAG You defrosted."
+
+    /**
+     * Message to let the player know they are frozen.
+     */
+    val FROZEN = "$TAG You have been frozen."
+
+    /**
      * Get the message that shows whether DA is enabled or disabled.
      *
      * @param plugin
