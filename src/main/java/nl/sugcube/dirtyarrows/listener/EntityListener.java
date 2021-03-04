@@ -29,14 +29,6 @@ public class EntityListener implements Listener {
 	Player player;
 	
 	@EventHandler
-	public void onProjectileHit(ProjectileHitEvent event) {
-		if (deadArrows.contains(event.getEntity())) {
-			event.getEntity().remove();
-			deadArrows.remove(event.getEntity());
-		}
-	}
-	
-	@EventHandler
 	public void onEntityExplode(EntityExplodeEvent event) {
 		Entity entity = event.getEntity();
 		if (entity instanceof WitherSkull) {
@@ -84,15 +76,7 @@ public class EntityListener implements Listener {
 			}
 		}
 	}
-	
-	@EventHandler
-	public void onEntityChangeBlock(EntityChangeBlockEvent event) {
-		if (plugin.getRegionManager().isWithinARegionXZMargin(event.getBlock().getLocation(), 5) != null) {
-			event.setCancelled(true);
-			event.getEntity().remove();
-		}
-	}
-	
+
 	@EventHandler
 	public void onEntityDeath(EntityDeathEvent event) {
 		try {

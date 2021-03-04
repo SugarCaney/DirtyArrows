@@ -1,25 +1,14 @@
 package nl.sugcube.dirtyarrows
 
-import nl.sugcube.dirtyarrows.ability.CurseListener
-import nl.sugcube.dirtyarrows.ability.FrozenListener
-import nl.sugcube.dirtyarrows.ability.Iron
 import nl.sugcube.dirtyarrows.bow.BowManager
 import nl.sugcube.dirtyarrows.command.DirtyArrowsCommandManager
-import nl.sugcube.dirtyarrows.listener.*
+import nl.sugcube.dirtyarrows.effect.AnvilLevelModification
+import nl.sugcube.dirtyarrows.effect.Headshot
 import nl.sugcube.dirtyarrows.recipe.RecipeManager
 import nl.sugcube.dirtyarrows.region.RegionManager
-import nl.sugcube.dirtyarrows.util.Error
-import nl.sugcube.dirtyarrows.util.Help
 import nl.sugcube.dirtyarrows.util.Update
 import org.bukkit.configuration.file.FileConfiguration
-import org.bukkit.entity.Entity
-import org.bukkit.entity.FallingBlock
-import org.bukkit.entity.Player
-import org.bukkit.entity.Projectile
 import org.bukkit.plugin.java.JavaPlugin
-import org.bukkit.util.Vector
-import java.util.*
-import java.util.concurrent.ConcurrentHashMap
 import java.util.logging.Level
 
 /**
@@ -61,43 +50,11 @@ class DirtyArrows : JavaPlugin() {
      */
     val bowManager = BowManager(this)
 
-    var al = ArrowListener(this)
-    var el = EnchantmentListener(this)
-    var pjl = PlayerJoinListener(this)
-    var pdl = PlayerDamageListener(this)
-    var enl = EntityListener(this)
-    var help = Help(this)
-    var iron = Iron(this)
-    var curse = CurseListener(this)
-    var frozenListener = FrozenListener(this)
-    var anvilListener = AnvilListener(this)
-
-    @JvmField var slow: MutableList<Projectile> = ArrayList()
-    @JvmField var airstrike: MutableList<Projectile> = ArrayList()
-    @JvmField var airship: MutableList<Projectile> = ArrayList()
-    @JvmField var noFallDamage: MutableList<UUID> = ArrayList()
-    @JvmField var slowVec: MutableList<Vector> = ArrayList()
-    @JvmField var cursed = ConcurrentHashMap<Entity, Int>()
-    @JvmField var frozen = ConcurrentHashMap<Entity, Int>()
-    @JvmField var noInteract: MutableList<Player> = ArrayList()
-    @JvmField var particleExploding: MutableList<Projectile> = ArrayList()
-    @JvmField var particleFire: MutableList<Projectile> = ArrayList()
-    @JvmField var particleLava: MutableList<FallingBlock> = ArrayList()
-    @JvmField var particleWater: MutableList<FallingBlock> = ArrayList()
-    @JvmField var ice: MutableList<Int> = ArrayList()
-    @JvmField var iceParticle: MutableList<Projectile> = ArrayList()
-    @JvmField var anvils = ConcurrentHashMap<FallingBlock, Int>()
-
     /**
      * Manages if DA is turned on or off for what entities.
      * DA should only apply the effects of the bows when DA is enabled.
      */
     val activationManager = ActivationManager(this::isMinigameVersion)
-
-    /**
-     * Helper for showing error messages.
-     */
-    val error = Error(this)
 
     /**
      * Whether the plugin runs in a DirtyArrows minigame.
@@ -121,15 +78,9 @@ class DirtyArrows : JavaPlugin() {
      * Registers all events.
      */
     private fun registerEvents() = with(server.pluginManager) {
-//        val plugin = this@DirtyArrows
-//        registerEvents(al, plugin)
-//        registerEvents(el, plugin)
-//        registerEvents(enl, plugin)
-//        registerEvents(pjl, plugin)
-//        registerEvents(pdl, plugin)
-//        registerEvents(iron, plugin)
-//        registerEvents(frozenListener, plugin)
-//        registerEvents(anvilListener, plugin)
+        val plugin = this@DirtyArrows
+        registerEvents(AnvilLevelModification(plugin), plugin)
+        registerEvents(Headshot(plugin), plugin)
     }
 
     /**
@@ -152,13 +103,6 @@ class DirtyArrows : JavaPlugin() {
         recipeManager.reloadRecipes()
         regionManager.loadRegions()
         bowManager.reload()
-//        server.scheduler.scheduleSyncRepeatingTask(this, Slow(this), 0, 1)
-//        server.scheduler.scheduleSyncRepeatingTask(this, Airstrike(this), 5, 5)
-//        server.scheduler.scheduleSyncRepeatingTask(this, Particles(this), 2, 2)
-//        server.scheduler.scheduleSyncRepeatingTask(this, Airship(this), 2, 2)
-//        server.scheduler.scheduleSyncRepeatingTask(this, iron, 5, 5)
-//        server.scheduler.scheduleSyncRepeatingTask(this, curse, 20, 20)
-//        server.scheduler.scheduleSyncRepeatingTask(this, frozenListener, 20, 20)
         checkForUpdates()
 
         logger.info("DirtyArrows has been enabled!")
