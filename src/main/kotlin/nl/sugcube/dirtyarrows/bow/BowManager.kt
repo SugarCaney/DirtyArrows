@@ -86,8 +86,8 @@ open class BowManager(private val plugin: DirtyArrows): Iterable<BowType> {
         AirstrikeBow(plugin).load()
         MagmaticBow(plugin).load()
         AquaticBow(plugin).load()
-        // TODO: PULL
-        // TODO: PARALYZE
+        PullBow(plugin).load()
+        ParalyzeBow(plugin).load()
         ClusterBow(plugin).load()
         AirshipBow(plugin).load()
         IronBow(plugin).load()
