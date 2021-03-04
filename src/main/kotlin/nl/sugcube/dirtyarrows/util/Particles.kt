@@ -89,3 +89,18 @@ fun Entity.showEnderParticle() {
 fun Location.showGrowthParticle(strength: Int = 5) {
     world.playEffect(this, Effect.VILLAGER_PLANT_GROW, strength)
 }
+
+/**
+ * Shows healing particles at the given entity.
+ *
+ * @param hearts
+ *          The amount of hearts to show.
+ */
+fun Entity.showHealParticle(hearts: Int) {
+    world.spawnParticle(Particle.HEART,
+            location.x.fuzz(0.3),
+            location.y + 2.0.fuzz(0.5),
+            location.z.fuzz(0.3),
+            hearts
+    )
+}
