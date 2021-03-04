@@ -4,6 +4,7 @@ package nl.sugcube.dirtyarrows.util
 
 import org.bukkit.Location
 import kotlin.math.abs
+import kotlin.random.Random
 
 /**
  * Checks if the given location is within euclidean distance `margin` of this location.
@@ -55,3 +56,12 @@ fun Location.northEastSouthWest() = listOf(north(), east(), south(), west())
  * Gets all 5 blocks in a cross form in the horizontal plane.
  */
 fun Location.crossBlocks() = listOf(this) + northEastSouthWest()
+
+/**
+ * Changes the location to a random location with at most `maxFuzz`.
+ */
+fun Location.fuzz(maxFuzz: Double) = copyOf(
+        x = x + Random.nextDouble() * 2 * maxFuzz - maxFuzz,
+        y = y + Random.nextDouble() * 2 * maxFuzz - maxFuzz,
+        z = z + Random.nextDouble() * 2 * maxFuzz - maxFuzz,
+)

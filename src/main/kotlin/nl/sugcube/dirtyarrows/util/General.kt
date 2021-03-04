@@ -9,6 +9,7 @@ import org.bukkit.Location
 import org.bukkit.command.CommandSender
 import kotlin.math.ceil
 import kotlin.math.floor
+import kotlin.random.Random
 
 /**
  * Converts a string to a location.
@@ -111,3 +112,8 @@ inline fun forXYZ(xRange: IntRange, yRange: IntRange, zRange: IntRange, action: 
         }
     }
 }
+
+/**
+ * Fuzzes this number: creates a random number in `[this - maxFuzz, this + maxFuzz]`.
+ */
+fun Double.fuzz(maxFuzz: Double) = this - maxFuzz + 2 * Random.nextDouble(maxFuzz)

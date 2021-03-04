@@ -66,7 +66,7 @@ enum class DefaultBow(
     ENLIGHTENED("enlightened"),
     RANGED("ranged"),
     MACHINE("machine"),
-    POISONOUS("poisonous"),
+    VENOMOUS("poisonous"),
     DISORIENTING("disorienting"),
     SWAP("swap"),
     DRAINING("draining"),

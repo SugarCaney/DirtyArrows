@@ -4,6 +4,7 @@ import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.BowType
 import nl.sugcube.dirtyarrows.bow.DefaultBow
+import nl.sugcube.dirtyarrows.util.isWater
 import nl.sugcube.dirtyarrows.util.showGrowthParticle
 import org.bukkit.Material
 import org.bukkit.TreeType
@@ -28,7 +29,7 @@ open class TreeBow(plugin: DirtyArrows, val tree: Tree) : BowAbility(
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
         // Try a random tree type.
-        val variant = tree.randomTreeType()
+        val variant = if (arrow.location.block.isWater()) TreeType.SWAMP else tree.randomTreeType()
         if (arrow.world.generateTree(arrow.location, variant)) {
             arrow.location.showGrowthParticle()
             return
