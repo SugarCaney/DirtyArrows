@@ -1,5 +1,6 @@
 package nl.sugcube.dirtyarrows.util
 
+import org.bukkit.Color
 import org.bukkit.Effect
 import org.bukkit.Location
 import org.bukkit.Particle
@@ -37,18 +38,39 @@ fun Location.showFlameParticle() = clone().add(0.5, 0.5, 0.5).let {
 /**
  * Shows a potion break particle at the given location.
  */
-fun Location.showPotionParticle(potionType: PotionType) = let {
-    val color = potionType.effectType.color
-    repeat(50) { _ ->
-        val location = it.fuzz(0.5)
-        world.spawnParticle(
-                Particle.REDSTONE,
-                location.x, location.y + 1.0, location.z,
-                0,
-                color.red / 255.0, color.green / 255.0, color.blue / 255.0
-        )
-    }
+fun Location.showPotionParticle(potionType: PotionType) = fuzz(0.5)
+        .add(0.0, 1.0, 0.0)
+        .showColoredDust(potionType.effectType.color, 50)
 
+/**
+ * Shows a coloured dust particle at the given location.
+ *
+ * @param color
+ *          The colour of the dust particle.
+ * @param count
+ *          The amount of particles to show.
+ */
+fun Location.showColoredDust(color: Color, count: Int) = showColoredDust(color.red, color.green, color.blue, count)
+
+/**
+ * Shows a coloured dust particle at the given location.
+ *
+ * @param red
+ *          The redness [0,255] of the particle.
+ * @param green
+ *          The greenness [0,255] of the particle.
+ * @param blue
+ *          The blueness [0,255] of the particle.
+ * @param count
+ *          The amount of particles to show.
+ */
+fun Location.showColoredDust(red: Int, green: Int, blue: Int, count: Int) = repeat(count) { _ ->
+    world.spawnParticle(
+            Particle.REDSTONE,
+            x, y, z,
+            0,
+            red / 255.0, green / 255.0, blue / 255.0
+    )
 }
 
 /**

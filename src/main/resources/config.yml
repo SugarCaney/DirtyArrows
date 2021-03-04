@@ -49,7 +49,7 @@ batty:
 nuclear:
   name: 'Nuclear Bastard'
   enabled: true
-  levels: 50
+  levels: 100
 enlightened:
   name: 'Enlightened Bastard'
   enabled: true

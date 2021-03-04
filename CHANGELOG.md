@@ -28,6 +28,8 @@ Changelog
 * **`~`** Buffed cursed bastard.
 * **`~`** Tweaked woodman bow drops (12% 1-6 planks, 8% 1-4 planks, 80% log).
 * **`~`** Increased the power of the nuclear bow.
+* **`~`** Nuclear bow now creates fallout that fades over time (giving poison).
+* **`~`** Nuclear bow now costs 100 levels by default.
 * **`~`** Effects are now tied to the arrow instead of the player.
 * **`~`** Increased cost of batty bow to 6 rotten flesh (was 3).
 * **`~`** Tree bows spawn trees more easily.
@@ -36,6 +38,7 @@ Changelog
 * **`~`** Machine bow shoots more arrows, and slightly less accurate.
 * **`~`** 7 level cost changed to 12 level cost.
 * **`~`** Multi bow now shoots 12 (was 8) arrows, and are always critical.
+* **`~`** Poisonous bow shows particles on hit.
 * **`~`** Improved robustness.
 * **`-`** Removed metrics.
 
