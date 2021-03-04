@@ -141,6 +141,16 @@ object Broadcast {
     val FROZEN = "$TAG You have been frozen."
 
     /**
+     * Message to let the player know they were cursed.
+     */
+    val CURSED = "$TAG You have been cursed."
+
+    /**
+     * Let know that the curse was lifted.
+     */
+    val CURSE_LIFTED = "$TAG The curse has been lifted."
+
+    /**
      * Get the message that shows whether DA is enabled or disabled.
      *
      * @param plugin

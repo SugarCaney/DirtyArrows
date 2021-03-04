@@ -116,7 +116,12 @@ inline fun forXYZ(xRange: IntRange, yRange: IntRange, zRange: IntRange, action: 
 /**
  * Fuzzes this number: creates a random number in `[this - maxFuzz, this + maxFuzz]`.
  */
-fun Double.fuzz(maxFuzz: Double) = this - maxFuzz + 2 * Random.nextDouble(maxFuzz)
+fun Double.fuzz(maxFuzz: Double) = this - maxFuzz + 2 * Random.nextDouble() * maxFuzz
+
+/**
+ * Fuzzes this number: creates a random number in `[this - maxFuzz, this + maxFuzz]`.
+ */
+fun Float.fuzz(maxFuzz: Float) = this - maxFuzz + 2 * Random.nextFloat() * maxFuzz
 
 /**
  * Fuzzes this number: creates a random number `this-maxFuzz <= this <= this+maxFuzz`.
