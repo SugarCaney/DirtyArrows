@@ -1,25 +1,25 @@
 package nl.sugcube.dirtyarrows.listener;
 
 import nl.sugcube.dirtyarrows.DirtyArrows;
-import org.bukkit.*;
+import org.bukkit.EntityEffect;
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.*;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class EntityListener implements Listener {
 	
 	public static DirtyArrows plugin;
-	public static List<Arrow> deadArrows = new ArrayList<Arrow>();
-	
+
 	public EntityListener(DirtyArrows instance) {
 		plugin = instance;
 	}
@@ -27,39 +27,6 @@ public class EntityListener implements Listener {
 	Random ran = new Random();
 	boolean extra = false;
 	Player player;
-	
-	@EventHandler
-	public void onEntityExplode(EntityExplodeEvent event) {
-		Entity entity = event.getEntity();
-		if (entity instanceof WitherSkull) {
-			if (((WitherSkull) entity).getShooter() instanceof Player) {
-				Player player = (Player) ((WitherSkull) entity).getShooter();
-				if (plugin.getRegionManager().isWithinARegionMargin(event.getLocation(), 5) != null) {
-					event.setCancelled(true);
-					if (player.getGameMode() != GameMode.CREATIVE)
-					player.getInventory().addItem(new ItemStack(Material.SOUL_SAND, 3));
-					player.sendMessage(ChatColor.RED + "[!!] Wither skulls can't explode near protected regions!");
-				}
-			}
-		} else if (entity instanceof Fireball) {
-			if (((Fireball) entity).getShooter() instanceof Player) {
-				Player player = (Player) ((Fireball) entity).getShooter();
-				if (plugin.getRegionManager().isWithinARegionMargin(event.getLocation(), 5) != null) {
-					event.setCancelled(true);
-					if (player.getGameMode() != GameMode.CREATIVE)
-						player.getInventory().addItem(new ItemStack(Material.FIREBALL, 1));
-					player.sendMessage(ChatColor.RED + "[!!] Fireballs can't explode near protected regions!");
-				}
-			}
-		}
-	}
-	
-	@EventHandler
-	public void onEntityDamage(EntityDamageEvent event) {
-		if (plugin.getConfig().getBoolean("blood") && event.getEntity() instanceof LivingEntity) {
-			event.getEntity().getWorld().playEffect(event.getEntity().getLocation().add(0, 1.5, 0), Effect.STEP_SOUND, Material.REDSTONE_BLOCK);
-		}
-	}
 	
 	@EventHandler
 	public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
