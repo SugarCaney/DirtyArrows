@@ -20,16 +20,17 @@ open class DirtyArrowsCommandManager(private val plugin: DirtyArrows) : CommandE
      * All available \da commands.
      */
     private val commands = listOf(
-        CommandGive(),
-        CommandRegister(),
-        CommandRemove(),
-        CommandReload(),
-        CommandPos(1),
-        CommandPos(2),
-        CommandVisualize(),
-        CommandList(),
-        CommandCheck(),
-        CommandHelp()
+            CommandGive(),
+            CommandRegister(),
+            CommandRemove(),
+            CommandReload(),
+            CommandPos(1),
+            CommandPos(2),
+            CommandVisualize(),
+            CommandTeleport(),
+            CommandList(),
+            CommandCheck(),
+            CommandHelp()
     )
 
     /**
@@ -48,10 +49,10 @@ open class DirtyArrowsCommandManager(private val plugin: DirtyArrows) : CommandE
     }
 
     override fun onCommand(
-        sender: CommandSender?,
-        command: Command?,
-        label: String?,
-        args: Array<out String>?
+            sender: CommandSender?,
+            command: Command?,
+            label: String?,
+            args: Array<out String>?
     ): Boolean {
         if (sender == null || command == null || label == null || args == null) return false
 
@@ -63,32 +64,32 @@ open class DirtyArrowsCommandManager(private val plugin: DirtyArrows) : CommandE
 
         // Otherwise, handle the correct command.
         commands.firstOrNull { it.name.equals(args.first(), ignoreCase = true) }
-            ?.execute(plugin, sender, *Arrays.copyOfRange(args, 1, args.size))
-            ?.also { return true }
+                ?.execute(plugin, sender, *Arrays.copyOfRange(args, 1, args.size))
+                ?.also { return true }
 
         // No corresponding command found: do nothing.
         return false
     }
 
     override fun onTabComplete(
-        sender: CommandSender?,
-        command: Command?,
-        alias: String?,
-        args: Array<out String>?
+            sender: CommandSender?,
+            command: Command?,
+            alias: String?,
+            args: Array<out String>?
     ): MutableList<String>? {
         if (sender == null || command == null || args == null) return ArrayList()
 
         // Main command suggestions.
         if (args.size <= 1) {
             return commands.asSequence()
-                .filter { it.hasPermission(sender) }
-                .map { it.name }
-                .filter {
-                    args.firstOrNull()?.let { firstArgument ->
-                        it.startsWith(firstArgument, ignoreCase = true)
-                    } ?: false
-                }
-                .toMutableList()
+                    .filter { it.hasPermission(sender) }
+                    .map { it.name }
+                    .filter {
+                        args.firstOrNull()?.let { firstArgument ->
+                            it.startsWith(firstArgument, ignoreCase = true)
+                        } ?: false
+                    }
+                    .toMutableList()
         }
 
         // Find the corresponding command.
@@ -98,6 +99,6 @@ open class DirtyArrowsCommandManager(private val plugin: DirtyArrows) : CommandE
 
         // Get autocompletion.
         return subCommand?.getAutoComplete(args.size - 2)
-            ?.optionsFromQuery(args.last(), plugin)?.toMutableList()
+                ?.optionsFromQuery(args.last(), plugin)?.toMutableList()
     }
 }

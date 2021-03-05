@@ -16,6 +16,7 @@ Changelog
 * **`+`** Added option to hide the enabled/disabled message.
 * **`+`** Added option to run in minigame/silent mode.
 * **`+`** Added option to disable arrow particles.
+* **`+`** Added \da tp command to teleport to the center of a region.
 * **`!`** Fixed anvil costs not updating correctly (and crash).
 * **`!`** Fixed cursed bastard's move-effect not being calculated properly.
 * **`!`** Fixed curse not going away after death.

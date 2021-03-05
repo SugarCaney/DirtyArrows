@@ -94,6 +94,13 @@ object Broadcast {
     val REGION_CREATED = "$TAG Created region ${Colour.SECONDARY}%s${Colour.PRIMARY}."
 
     /**
+     * Teleported to a certain region.
+     *
+     * %s = Region name.
+     */
+    val REGION_TELEPORTED = "$TAG Teleported you to region ${Colour.SECONDARY}%s${Colour.PRIMARY}."
+
+    /**
      * Got impacted by a headshot from a different player.
      *
      * %s = Name of player who made the headshot.
