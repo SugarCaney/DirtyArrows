@@ -85,6 +85,7 @@ class DirtyArrows : JavaPlugin() {
         registerEvents(ExplosionProtection(plugin), plugin)
         registerEvents(Blood(plugin), plugin)
         registerEvents(DamageEffects(), plugin)
+        registerEvents(ZombieFlint(plugin), plugin)
     }
 
     /**

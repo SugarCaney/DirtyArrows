@@ -7,6 +7,7 @@ import nl.sugcube.dirtyarrows.util.applyBowEnchantments
 import nl.sugcube.dirtyarrows.util.fuzz
 import nl.sugcube.dirtyarrows.util.subtractDurability
 import org.bukkit.Effect
+import org.bukkit.GameMode
 import org.bukkit.Location
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.EntityType
@@ -59,6 +60,10 @@ open class MachineBow(plugin: DirtyArrows) : BowAbility(
                 applyBowEnchantments(player.bowItem())
                 shooter = player
                 velocity = player.eyeLocation.direction.multiply(3).fuzz(maxFuzz = 0.22)
+
+                if (player.gameMode == GameMode.CREATIVE) {
+                    pickupStatus = Arrow.PickupStatus.CREATIVE_ONLY
+                }
 
                 player.bowItem()?.subtractDurability(player)
                 player.playEffect(player.location, Effect.BOW_FIRE, null)
