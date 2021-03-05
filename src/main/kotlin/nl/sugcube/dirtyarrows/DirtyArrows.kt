@@ -4,6 +4,7 @@ import nl.sugcube.dirtyarrows.bow.BowManager
 import nl.sugcube.dirtyarrows.command.DirtyArrowsCommandManager
 import nl.sugcube.dirtyarrows.effect.AnvilLevelModification
 import nl.sugcube.dirtyarrows.effect.Headshot
+import nl.sugcube.dirtyarrows.effect.LootingOnBow
 import nl.sugcube.dirtyarrows.recipe.RecipeManager
 import nl.sugcube.dirtyarrows.region.RegionManager
 import nl.sugcube.dirtyarrows.util.Update
@@ -81,6 +82,7 @@ class DirtyArrows : JavaPlugin() {
         val plugin = this@DirtyArrows
         registerEvents(AnvilLevelModification(plugin), plugin)
         registerEvents(Headshot(plugin), plugin)
+        registerEvents(LootingOnBow(plugin), plugin)
     }
 
     /**
