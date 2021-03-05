@@ -3,6 +3,7 @@ package nl.sugcube.dirtyarrows
 import nl.sugcube.dirtyarrows.bow.BowManager
 import nl.sugcube.dirtyarrows.command.DirtyArrowsCommandManager
 import nl.sugcube.dirtyarrows.effect.AnvilLevelModification
+import nl.sugcube.dirtyarrows.effect.ExplosionProtection
 import nl.sugcube.dirtyarrows.effect.Headshot
 import nl.sugcube.dirtyarrows.effect.LootingOnBow
 import nl.sugcube.dirtyarrows.recipe.RecipeManager
@@ -84,6 +85,7 @@ class DirtyArrows : JavaPlugin() {
         registerEvents(AnvilLevelModification(plugin), plugin)
         registerEvents(Headshot(plugin), plugin)
         registerEvents(LootingOnBow(plugin), plugin)
+        registerEvents(ExplosionProtection(plugin), plugin)
     }
 
     /**
