@@ -1,5 +1,6 @@
 package nl.sugcube.dirtyarrows.command
 
+import nl.sugcube.dirtyarrows.Broadcast
 import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.util.sendFormattedMessage
 import org.bukkit.command.CommandSender
@@ -20,7 +21,7 @@ open class CommandList : SubCommand<DirtyArrows>(
     override fun executeImpl(plugin: DirtyArrows, sender: CommandSender, vararg arguments: String) {
         val regions = plugin.regionManager.allNames
         val chat = regions.joinToString("&e, ") { "&a$it" }
-        sender.sendFormattedMessage("&eRegions (${regions.size}): &a$chat")
+        sender.sendFormattedMessage(Broadcast.REGIONS_LIST.format(regions.size, chat))
     }
 
     override fun assertSender(sender: CommandSender) = true
