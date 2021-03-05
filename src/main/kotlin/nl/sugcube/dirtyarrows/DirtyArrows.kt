@@ -80,6 +80,7 @@ class DirtyArrows : JavaPlugin() {
      */
     private fun registerEvents() = with(server.pluginManager) {
         val plugin = this@DirtyArrows
+        registerEvents(JoinListener(plugin), plugin)
         registerEvents(AnvilLevelModification(plugin), plugin)
         registerEvents(Headshot(plugin), plugin)
         registerEvents(LootingOnBow(plugin), plugin)
@@ -92,8 +93,9 @@ class DirtyArrows : JavaPlugin() {
     private fun checkForUpdates() {
         if (config.getBoolean("updates.check-for-updates").not()) return
 
-        if (Update(BUKKIT_DEV_PROJECT_ID, description.version).query()) {
-            logger.log(Level.INFO, "A new version of DirtyArrows is available!")
+        val updateChecker = Update(BUKKIT_DEV_PROJECT_ID, description.version)
+        if (updateChecker.query()) {
+            logger.log(Level.INFO, "A new version of DirtyArrows is available: v${updateChecker.latestVersion}")
         }
         else logger.log(Level.INFO, "DirtyArrows is up-to-date!")
     }

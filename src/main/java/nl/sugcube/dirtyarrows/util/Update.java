@@ -1,5 +1,6 @@
 package nl.sugcube.dirtyarrows.util;
 
+import org.jetbrains.annotations.Nullable;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -14,6 +15,10 @@ import java.net.URLConnection;
 /**
  * Gravity's Simple Update Checker This class is a barebones example of how to use the BukkitDev
  * ServerMods API to check for file updates.
+ *
+ * Older version of: https://github.com/gravitylow/Updater
+ *
+ * @author gravitylow
  */
 public class Update {
 
@@ -22,6 +27,9 @@ public class Update {
 
     // The current version of the plugin.
     private final String currentVersion;
+
+    // The new version of the plugin that is available.
+    private String latestVersion;
 
     // Keys for extracting file information from JSON response
     private static final String API_NAME_VALUE = "name";
@@ -86,7 +94,7 @@ public class Update {
                 String versionName = (String)latest.get(API_NAME_VALUE);
 
                 // Compares the file name with the current version.
-                String latestVersion = versionName.replace("DirtyArrows [", "")
+                latestVersion = versionName.replace("DirtyArrows [", "")
                         .replace("[a-z]", "")
                         .replace("[A-Z]", "")
                         .replace("]", "")
@@ -106,5 +114,10 @@ public class Update {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Nullable
+    public String getLatestVersion() {
+        return latestVersion;
     }
 }

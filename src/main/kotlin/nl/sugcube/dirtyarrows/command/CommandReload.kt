@@ -1,8 +1,8 @@
 package nl.sugcube.dirtyarrows.command
 
+import nl.sugcube.dirtyarrows.Broadcast
 import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.util.sendError
-import nl.sugcube.dirtyarrows.util.sendFormattedMessage
 import org.bukkit.command.CommandSender
 
 /**
@@ -23,7 +23,7 @@ open class CommandReload : SubCommand<DirtyArrows>(
             configurationManager.loadConfig()
             recipeManager.reloadRecipes()
 
-            sender.sendFormattedMessage("&eReloaded config.yml")
+            sender.sendMessage(Broadcast.RELOADED_CONFIG)
         }
         catch (e: Exception) {
             e.printStackTrace()

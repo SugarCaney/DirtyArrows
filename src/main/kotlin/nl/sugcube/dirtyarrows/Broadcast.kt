@@ -15,6 +15,18 @@ object Broadcast {
     val TAG_MINIGAME = "${Colour.TERTIARY}[${Colour.SECONDARY}->${Colour.TERTIARY}]${Colour.PRIMARY}"
 
     /**
+     * New version notification message.
+     *
+     * `%s` = New version number.
+     */
+    val NEW_VERSION_AVAILABLE = "$TAG A new version of ${Colour.SECONDARY}DirtyArrows${Colour.PRIMARY} is available: ${Colour.SECONDARY}v%s${Colour.PRIMARY}"
+
+    /**
+     * Shows that the plugin.yml has been reloaded.
+     */
+    val RELOADED_CONFIG = "$TAG Reloaded ${Colour.SECONDARY}plugin.yml"
+
+    /**
      * DirtyArrows enable message.
      */
     val ENABLED = "$TAG ${ChatColor.GREEN}Enabled!"
