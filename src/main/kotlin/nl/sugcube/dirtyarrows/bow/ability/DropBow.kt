@@ -18,7 +18,8 @@ import org.bukkit.util.Vector
 open class DropBow(plugin: DirtyArrows) : BowAbility(
         plugin = plugin,
         type = DefaultBow.DROP,
-        canShootInProtectedRegions = true
+        canShootInProtectedRegions = true,
+        description = "Launches the target in the air."
 ) {
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {

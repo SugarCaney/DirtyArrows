@@ -22,6 +22,7 @@ open class EnderBow(plugin: DirtyArrows) : BowAbility(
         type = DefaultBow.ENDER,
         canShootInProtectedRegions = true,
         costRequirements = listOf(ItemStack(Material.ENDER_PEARL, 1)),
+        description = "Teleport to location of impact."
 ) {
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {

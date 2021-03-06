@@ -65,7 +65,12 @@ abstract class BowAbility(
         /**
          * Whether to remove the arrow when it hit.
          */
-        val removeArrow: Boolean = true
+        val removeArrow: Boolean = true,
+
+        /**
+         * Short human readable description of the bow's effects.
+         */
+        val description: String = ""
 
 ) : Listener, Runnable {
 
@@ -250,7 +255,7 @@ abstract class BowAbility(
     /**
      * Get the colour applied bow name of the bow of this ability.
      */
-    protected fun bowName() = plugin.config.getString(this@BowAbility.type.nameNode).applyColours()
+    fun bowName() = plugin.config.getString(this@BowAbility.type.nameNode).applyColours()
 
     /**
      * Registers that the given arrow is shot by this bow.

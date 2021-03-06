@@ -23,6 +23,7 @@ open class AirstrikeBow(plugin: DirtyArrows) : BowAbility(
         canShootInProtectedRegions = false,
         protectionRange = 6.0,
         costRequirements = listOf(ItemStack(Material.TNT, 1)),
+        description = "Arrow drops TNT during flight."
 ) {
 
     /**

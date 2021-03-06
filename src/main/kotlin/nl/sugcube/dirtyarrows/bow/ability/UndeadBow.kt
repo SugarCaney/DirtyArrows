@@ -28,6 +28,7 @@ open class UndeadBow(plugin: DirtyArrows) : BowAbility(
         canShootInProtectedRegions = false,
         protectionRange = 8.0,
         costRequirements = listOf(ItemStack(Material.ROTTEN_FLESH, 64)),
+        description = "Spawns a circle of zombies."
 ) {
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {

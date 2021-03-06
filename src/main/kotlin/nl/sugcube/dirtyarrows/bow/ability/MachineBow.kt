@@ -25,7 +25,8 @@ open class MachineBow(plugin: DirtyArrows) : BowAbility(
         plugin = plugin,
         type = DefaultBow.MACHINE,
         canShootInProtectedRegions = true,
-        removeArrow = false
+        removeArrow = false,
+        description = "Shoots quickly, and slightly accurate."
 ) {
 
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {

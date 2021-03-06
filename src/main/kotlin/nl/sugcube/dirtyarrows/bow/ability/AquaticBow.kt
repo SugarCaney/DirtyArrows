@@ -24,6 +24,7 @@ open class AquaticBow(plugin: DirtyArrows) : BowAbility(
         canShootInProtectedRegions = false,
         protectionRange = 1.0,
         costRequirements = listOf(ItemStack(Material.WATER_BUCKET, 1)),
+        description = "Shoot water."
 ) {
 
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {

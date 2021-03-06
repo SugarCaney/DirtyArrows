@@ -25,7 +25,8 @@ open class RoundBow(plugin: DirtyArrows) : BowAbility(
         type = DefaultBow.ROUND,
         canShootInProtectedRegions = true,
         removeArrow = false,
-        costRequirements = listOf(ItemStack(Material.ARROW, 1))
+        costRequirements = listOf(ItemStack(Material.ARROW, 1)),
+        description = "Shoots arrows all around you."
 ) {
 
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {

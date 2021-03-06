@@ -24,6 +24,7 @@ open class AirshipBow(plugin: DirtyArrows) : BowAbility(
         handleEveryNTicks = 2,
         canShootInProtectedRegions = true,
         costRequirements = listOf(ItemStack(Material.FEATHER, 2)),
+        description = "Fly behind your arrows."
 ) {
 
     /**
@@ -61,7 +62,8 @@ open class AirshipBow(plugin: DirtyArrows) : BowAbility(
         // Remove when arrows have their effects applied for the maximum time.
         // Sometimes the hit event is not registered correctly, therefore this must be taken care of seperately.
         active.keys.removeAll {
-            val mustDie = System.currentTimeMillis() - (birthTime[it] ?: System.currentTimeMillis()) >= MAX_LIFESPAN_MILLIS
+            val mustDie = System.currentTimeMillis() - (birthTime[it]
+                    ?: System.currentTimeMillis()) >= MAX_LIFESPAN_MILLIS
             mustDie.apply {
                 if (this) {
                     players.remove(active[it])

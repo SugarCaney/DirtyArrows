@@ -11,9 +11,10 @@ import org.bukkit.entity.Player
  * @author SugarCaney
  */
 open class CommandPos(val id: Int) : SubCommand<DirtyArrows>(
-    name = "pos$id",
-    usage = "/da pos$id",
-    argumentCount = 0
+        name = "pos$id",
+        usage = "/da pos$id",
+        argumentCount = 0,
+        description = "Set region position $id."
 ) {
 
     init {

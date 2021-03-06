@@ -28,7 +28,12 @@ abstract class SubCommand<Plugin : JavaPlugin>(
      * This is the amount of required arguments.
      * Optional arguments do not count.
      */
-    val argumentCount: Int
+    val argumentCount: Int,
+
+    /**
+     * Human readable information string for the command.
+     */
+    val description: String = ""
 ) {
 
     /**

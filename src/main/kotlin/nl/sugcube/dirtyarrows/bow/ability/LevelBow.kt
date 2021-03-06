@@ -17,7 +17,8 @@ import org.bukkit.event.entity.ProjectileHitEvent
 open class LevelBow(plugin: DirtyArrows) : BowAbility(
         plugin = plugin,
         type = DefaultBow.LEVEL,
-        canShootInProtectedRegions = true
+        canShootInProtectedRegions = true,
+        description = "Steals 1 level from the target."
 ) {
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {

@@ -21,6 +21,7 @@ open class EnlightenedBow(plugin: DirtyArrows) : BowAbility(
         canShootInProtectedRegions = false,
         protectionRange = 2.0,
         costRequirements = listOf(ItemStack(Material.TORCH, 1)),
+        description = "Places torches."
 ) {
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {

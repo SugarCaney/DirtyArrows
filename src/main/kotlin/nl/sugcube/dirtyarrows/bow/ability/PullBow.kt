@@ -15,7 +15,8 @@ import org.bukkit.event.entity.ProjectileHitEvent
 open class PullBow(plugin: DirtyArrows) : BowAbility(
         plugin = plugin,
         type = DefaultBow.PULL,
-        canShootInProtectedRegions = true
+        canShootInProtectedRegions = true,
+        description = "Pulls the target toward you."
 ) {
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {

@@ -22,6 +22,7 @@ open class ExplodingBow(plugin: DirtyArrows) : BowAbility(
         canShootInProtectedRegions = false,
         protectionRange = 5.0,
         costRequirements = listOf(ItemStack(Material.TNT, 1)),
+        description = "Explosive arrows."
 ) {
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {

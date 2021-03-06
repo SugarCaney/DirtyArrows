@@ -19,17 +19,17 @@ open class DirtyArrowsCommandManager(private val plugin: DirtyArrows) : CommandE
     /**
      * All available \da commands.
      */
-    private val commands = listOf(
-            CommandGive(),
-            CommandRegister(),
-            CommandRemove(),
+    val commands: List<SubCommand<DirtyArrows>> = listOf(
             CommandReload(),
+            CommandGive(),
+            CommandList(),
+            CommandCheck(),
+            CommandTeleport(),
             CommandPos(1),
             CommandPos(2),
             CommandVisualize(),
-            CommandTeleport(),
-            CommandList(),
-            CommandCheck(),
+            CommandRegister(),
+            CommandRemove(),
             CommandHelp()
     )
 

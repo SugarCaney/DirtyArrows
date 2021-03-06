@@ -26,6 +26,7 @@ open class VenomousBow(plugin: DirtyArrows) : BowAbility(
         canShootInProtectedRegions = false,
         protectionRange = 1.0,
         costRequirements = listOf(ItemStack(Material.SPIDER_EYE, 1)),
+        description = "Poisons the target."
 ) {
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {

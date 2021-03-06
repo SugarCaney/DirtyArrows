@@ -21,7 +21,8 @@ open class SlowBow(plugin: DirtyArrows) : BowAbility(
         type = DefaultBow.SLOW,
         handleEveryNTicks = 1,
         canShootInProtectedRegions = true,
-        removeArrow = false
+        removeArrow = false,
+        description = "Shoots an extremely powerful, but extremely slow arrow."
 ) {
 
     /**

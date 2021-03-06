@@ -27,7 +27,8 @@ open class ParalyzeBow(plugin: DirtyArrows) : BowAbility(
         plugin = plugin,
         type = DefaultBow.PARALYZE,
         canShootInProtectedRegions = true,
-        costRequirements = listOf(ItemStack(Material.NETHER_STALK, 1))
+        costRequirements = listOf(ItemStack(Material.NETHER_STALK, 1)),
+        description = "Paralyzes the target."
 ) {
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {

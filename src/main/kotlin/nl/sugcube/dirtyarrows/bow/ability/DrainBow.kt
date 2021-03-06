@@ -19,7 +19,8 @@ import kotlin.math.min
 open class DrainBow(plugin: DirtyArrows) : BowAbility(
         plugin = plugin,
         type = DefaultBow.DRAINING,
-        canShootInProtectedRegions = true
+        canShootInProtectedRegions = true,
+        description = "Gain 1 heart every hit."
 ) {
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {

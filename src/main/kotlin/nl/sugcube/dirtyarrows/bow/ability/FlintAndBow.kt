@@ -26,6 +26,7 @@ open class FlintAndBow(plugin: DirtyArrows) : BowAbility(
         canShootInProtectedRegions = false,
         protectionRange = 12.0,
         costRequirements = listOf(ItemStack(Material.FLINT_AND_STEEL, 1)),
+        description = "Sets blocks on fire."
 ) {
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {

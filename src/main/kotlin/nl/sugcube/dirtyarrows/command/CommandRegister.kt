@@ -11,9 +11,10 @@ import org.bukkit.entity.Player
  * @author SugarCaney
  */
 open class CommandRegister : SubCommand<DirtyArrows>(
-    name = "register",
-    usage = "/da register <region>",
-    argumentCount = 1
+        name = "register",
+        usage = "/da register <region>",
+        argumentCount = 1,
+        description = "Registers the region between positions 1 & 2."
 ) {
 
     init {

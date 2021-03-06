@@ -20,7 +20,8 @@ open class WoodmanBow(plugin: DirtyArrows) : BowAbility(
         type = DefaultBow.WOODMAN,
         canShootInProtectedRegions = false,
         protectionRange = 1.0,
-        removeArrow = false
+        removeArrow = false,
+        description = "Tear down trees quickly."
 ) {
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {

@@ -9,9 +9,10 @@ import org.bukkit.command.CommandSender
  * @author SugarCaney
  */
 open class CommandList : SubCommand<DirtyArrows>(
-    name = "list",
-    usage = "/da list",
-    argumentCount = 0
+        name = "list",
+        usage = "/da list",
+        argumentCount = 0,
+        description = "Lists all registered protection regions."
 ) {
 
     init {

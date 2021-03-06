@@ -21,6 +21,7 @@ open class WitherBow(plugin: DirtyArrows) : BowAbility(
         canShootInProtectedRegions = false,
         protectionRange = 5.0,
         costRequirements = listOf(ItemStack(Material.SOUL_SAND, 3)),
+        description = "Shoot wither skulls."
 ) {
 
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {

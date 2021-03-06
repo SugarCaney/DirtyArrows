@@ -16,7 +16,8 @@ import kotlin.math.max
 open class StarvationBow(plugin: DirtyArrows) : BowAbility(
         plugin = plugin,
         type = DefaultBow.STARVATION,
-        canShootInProtectedRegions = true
+        canShootInProtectedRegions = true,
+        description = "Target loses hunger points."
 ) {
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {

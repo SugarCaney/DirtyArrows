@@ -25,6 +25,7 @@ open class ClusterBow(plugin: DirtyArrows) : BowAbility(
         canShootInProtectedRegions = false,
         protectionRange = 24.0,
         costRequirements = listOf(ItemStack(Material.TNT, 5)),
+        description = "Ignite clusters of 5 TNT."
 ) {
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {

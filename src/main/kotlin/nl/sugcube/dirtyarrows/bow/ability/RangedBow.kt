@@ -16,7 +16,8 @@ open class RangedBow(plugin: DirtyArrows) : BowAbility(
         plugin = plugin,
         type = DefaultBow.RANGED,
         canShootInProtectedRegions = true,
-        removeArrow = false
+        removeArrow = false,
+        description = "Shoot powerful, far-reaching arrows."
 ) {
 
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {

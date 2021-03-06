@@ -11,9 +11,10 @@ import org.bukkit.entity.Player
  * @author SugarCaney
  */
 open class CommandTeleport : SubCommand<DirtyArrows>(
-    name = "tp",
-    usage = "/da tp <region>",
-    argumentCount = 1
+        name = "tp",
+        usage = "/da tp <region>",
+        argumentCount = 1,
+        description = "Teleports you to the center of the region."
 ) {
 
     init {

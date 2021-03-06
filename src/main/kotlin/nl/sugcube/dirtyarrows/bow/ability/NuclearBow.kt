@@ -31,6 +31,7 @@ open class NuclearBow(plugin: DirtyArrows) : BowAbility(
         canShootInProtectedRegions = false,
         protectionRange = 64.0,
         costRequirements = listOf(ItemStack(Material.TNT, 64)),
+        description = "Huge boom. Radiation included."
 ) {
 
     /**

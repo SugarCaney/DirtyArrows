@@ -22,6 +22,7 @@ open class CluckyBow(plugin: DirtyArrows) : BowAbility(
         canShootInProtectedRegions = false,
         protectionRange = 3.0,
         costRequirements = listOf(ItemStack(Material.EGG, 1)),
+        description = "Spawn chickens."
 ) {
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {

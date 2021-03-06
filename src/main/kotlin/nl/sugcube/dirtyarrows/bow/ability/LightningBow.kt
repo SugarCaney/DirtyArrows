@@ -20,6 +20,7 @@ open class LightningBow(plugin: DirtyArrows) : BowAbility(
         canShootInProtectedRegions = false,
         protectionRange = 3.0,
         costRequirements = listOf(ItemStack(Material.GLOWSTONE_DUST, 1)),
+        description = "Spawns lightning."
 ) {
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {

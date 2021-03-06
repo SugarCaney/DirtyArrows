@@ -10,9 +10,10 @@ import org.bukkit.entity.Player
  * @author SugarCaney
  */
 open class CommandCheck : SubCommand<DirtyArrows>(
-    name = "check",
-    usage = "/da check",
-    argumentCount = 0
+        name = "check",
+        usage = "/da check",
+        argumentCount = 0,
+        description = "Checks in which registered region you are."
 ) {
 
     init {
@@ -25,8 +26,7 @@ open class CommandCheck : SubCommand<DirtyArrows>(
 
         if (region == null) {
             sender.sendMessage(Broadcast.NOT_IN_REGION)
-        }
-        else sender.sendFormattedMessage(Broadcast.IN_REGION.format(region.name))
+        } else sender.sendFormattedMessage(Broadcast.IN_REGION.format(region.name))
     }
 
     override fun assertSender(sender: CommandSender) = sender is Player

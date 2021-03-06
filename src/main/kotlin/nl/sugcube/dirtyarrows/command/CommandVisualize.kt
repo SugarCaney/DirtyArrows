@@ -10,9 +10,10 @@ import org.bukkit.command.CommandSender
  * @author SugarCaney
  */
 open class CommandVisualize : SubCommand<DirtyArrows>(
-    name = "visualize",
-    usage = "/da visualize [region]",
-    argumentCount = 0
+        name = "visualize",
+        usage = "/da visualize [region]",
+        argumentCount = 0,
+        description = "Shows the set positions, or the corners of the region."
 ) {
 
     init {

@@ -22,6 +22,7 @@ open class BattyBow(plugin: DirtyArrows) : BowAbility(
         canShootInProtectedRegions = false,
         protectionRange = 5.0,
         costRequirements = listOf(ItemStack(Material.ROTTEN_FLESH, 6)),
+        description = "Spawn a swarm of bats on impact."
 ) {
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {

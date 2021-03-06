@@ -24,6 +24,7 @@ open class MagmaticBow(plugin: DirtyArrows) : BowAbility(
         canShootInProtectedRegions = false,
         protectionRange = 1.0,
         costRequirements = listOf(ItemStack(Material.LAVA_BUCKET, 1)),
+        description = "Shoots lava."
 ) {
 
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {

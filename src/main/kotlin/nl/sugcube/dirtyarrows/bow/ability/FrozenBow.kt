@@ -40,6 +40,7 @@ open class FrozenBow(plugin: DirtyArrows) : BowAbility(
         canShootInProtectedRegions = false,
         protectionRange = 8.0,
         costRequirements = listOf(ItemStack(Material.SNOW_BALL, 1)),
+        description = "Spawns snow/ice and freezes targets."
 ) {
 
     /**

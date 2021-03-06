@@ -8,10 +8,10 @@ import org.bukkit.Bukkit
  */
 enum class AutoCompleteArgument(
 
-    /**
-     * Generates the list of options
-     */
-    val optionProvider: (plugin: DirtyArrows) -> List<String>
+        /**
+         * Generates the list of options
+         */
+        val optionProvider: (plugin: DirtyArrows) -> List<String>
 ) {
 
     /**
@@ -37,7 +37,7 @@ enum class AutoCompleteArgument(
     /**
      * All page numbers for Help.
      */
-    HELP_PAGES({ (1..7).map { it.toString() } }),
+    HELP_PAGES({ plugin -> List(plugin.help.pageCount) { "${it + 1}" } }),
 
     /**
      * No autocompletion items.
@@ -48,7 +48,7 @@ enum class AutoCompleteArgument(
      * Get all autocomplete options that are available for the given query.
      */
     fun optionsFromQuery(query: String, plugin: DirtyArrows) = optionProvider(plugin).asSequence()
-        .filter { it.startsWith(query, ignoreCase = true) }
-        .sortedBy { it.toLowerCase() }
-        .toList()
+            .filter { it.startsWith(query, ignoreCase = true) }
+            .sortedBy { it.toLowerCase() }
+            .toList()
 }

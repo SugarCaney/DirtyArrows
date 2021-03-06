@@ -21,6 +21,7 @@ open class FireyBow(plugin: DirtyArrows) : BowAbility(
         canShootInProtectedRegions = false,
         protectionRange = 5.0,
         costRequirements = listOf(ItemStack(Material.FIREBALL, 1)),
+        description = "Shoot fireballs."
 ) {
 
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {

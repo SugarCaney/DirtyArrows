@@ -17,7 +17,8 @@ import org.bukkit.event.player.PlayerTeleportEvent
 open class SwapBow(plugin: DirtyArrows) : BowAbility(
         plugin = plugin,
         type = DefaultBow.SWAP,
-        canShootInProtectedRegions = true
+        canShootInProtectedRegions = true,
+        description = "Swap locations with the target."
 ) {
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {

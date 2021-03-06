@@ -35,6 +35,11 @@ class DirtyArrows : JavaPlugin() {
         get() = configurationManager.data
 
     /**
+     * Manages all DA commands.
+     */
+    val commandManager = DirtyArrowsCommandManager(this)
+
+    /**
      * Manages all DA protection regions.
      */
     val regionManager = RegionManager(this)
@@ -56,6 +61,11 @@ class DirtyArrows : JavaPlugin() {
     val activationManager = ActivationManager(this::isMinigameVersion)
 
     /**
+     * Shows the help menu messages.
+     */
+    val help = Help(this)
+
+    /**
      * Whether the plugin runs in a DirtyArrows minigame.
      *
      * @return `true` when part of a minigame, `false` otherwise.
@@ -66,7 +76,6 @@ class DirtyArrows : JavaPlugin() {
      * Registers all DA commands.
      */
     private fun registerCommands() {
-        val commandManager = DirtyArrowsCommandManager(this)
         getCommand("dirtyarrows").apply {
             executor = commandManager
             tabCompleter = commandManager

@@ -20,7 +20,8 @@ import kotlin.random.Random
 open class DisorientingBow(plugin: DirtyArrows) : BowAbility(
         plugin = plugin,
         type = DefaultBow.DISORIENTING,
-        canShootInProtectedRegions = true
+        canShootInProtectedRegions = true,
+        description = "Disorients the target."
 ) {
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {

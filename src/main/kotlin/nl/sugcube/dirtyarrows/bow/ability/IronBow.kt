@@ -29,6 +29,7 @@ open class IronBow(plugin: DirtyArrows) : BowAbility(
         canShootInProtectedRegions = false,
         protectionRange = 1.0,
         costRequirements = listOf(ItemStack(Material.ANVIL, 1)),
+        description = "Shoots deadly anvils."
 ) {
 
     /**

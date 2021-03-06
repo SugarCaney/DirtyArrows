@@ -18,7 +18,8 @@ import kotlin.random.Random
 open class DisarmingBow(plugin: DirtyArrows) : BowAbility(
         plugin = plugin,
         type = DefaultBow.DISARMING,
-        canShootInProtectedRegions = true
+        canShootInProtectedRegions = true,
+        description = "Targets have a chance to drop their items."
 ) {
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {

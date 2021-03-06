@@ -24,6 +24,7 @@ open class BombBow(plugin: DirtyArrows) : BowAbility(
         canShootInProtectedRegions = false,
         protectionRange = 16.0,
         costRequirements = listOf(ItemStack(Material.TNT, 3)),
+        description = "Let 3 TNT fall from above."
 ) {
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {

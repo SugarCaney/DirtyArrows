@@ -9,9 +9,10 @@ import org.bukkit.command.CommandSender
  * @author SugarCaney
  */
 open class CommandRemove : SubCommand<DirtyArrows>(
-    name = "remove",
-    usage = "/da remove <region>",
-    argumentCount = 1
+        name = "remove",
+        usage = "/da remove <region>",
+        argumentCount = 1,
+        description = "Removes the region with the given name."
 ) {
 
     init {
@@ -22,7 +23,8 @@ open class CommandRemove : SubCommand<DirtyArrows>(
 
     override fun executeImpl(plugin: DirtyArrows, sender: CommandSender, vararg arguments: String) {
         val regionName = arguments.firstOrNull() ?: run { sender.sendError("No region name specified."); return }
-        val region = plugin.regionManager.regionByName(regionName) ?: run { sender.sendError("There is no region with name '$regionName'"); return }
+        val region = plugin.regionManager.regionByName(regionName)
+                ?: run { sender.sendError("There is no region with name '$regionName'"); return }
         plugin.regionManager.removeRegion(region.name)
         sender.sendMessage(Broadcast.REGION_REMOVED.format(region.name))
     }
