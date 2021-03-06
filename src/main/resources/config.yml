@@ -1,180 +1,789 @@
+##############################################################################################
+### DirtyArrows configuration file
+### Version: 4.0
+### Author: SugarCaney
+### GitHub: https://github.com/SugarCaney/DirtyArrows
+###
+### You can modify almost any magic value in this plugin to customize it to your wishes.
+### For indentation use SPACES, -not- tabs.
+### You can reload the configuration using the /da reload command.
+##############################################################################################
+
+##
+## Update Checking settings.
+##
 updates:
+  # Whether to check for updates.
+  # (Boolean) default: true
   check-for-updates: true
+
+  # If admins (with the dirtyarrows.admin permission) must be notified when a new updates is ready.
+  # (Boolean) default: true
   show-admin: true
+
+# Whether to run in minigame mode.
+# Plugin messages are more subtle and less branded. Also hides enabled/disabled messages.
+# (Boolean) default: false
 minigame-mode: false
-arrow-recipe-amount: 16
-headshot: true
-headshot-multiplier: 1.5
-zombie-flint: true
-show-particles: true
-blood: true
+
+# Whether dirty arrow abilities must be enabled automatically.
+# Normally you need to enable DirtyArrows manually using /da. Settings this to true will enable DirtyArrows
+# automatically when a player joins.
+# (Boolean) default: false
 auto-enable: false
+
+# Whether to show a message to the player when DirtyArrows got enabled/disabled for them.
+# (Boolean) default: true
 show-enable-message: true
+
+# Whether the plugin should display particles (true) or not (false).
+# (Boolean) default: true
+show-particles: true
+
+# Whether entities should show blood particles when damaged.
+# (Boolean) default: true
+blood: true
+
+# How many arrows must be crafted with the default arrow recipe.
+# (Int) default: 16
+arrow-recipe-amount: 16
+
+##
+## Headshot settings.
+##
+headshot:
+  # Whether headshots are enabled.
+  # (Boolean) default: true
+  enabled: true
+
+  # With what number to multiply the damage dealt when a headshot was made.
+  # (Double) default: 1.5
+  damage-multiplier: 1.5
+
+# Whether zombies should drop flint or not on death.
+# (Boolean) default: true
+zombie-flint: true
+
+##
+## ABILITY: Exploding Bow
+## - Explodes on impact.
+##
 exploding:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Exploding Bastard
   name: 'Exploding Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
   enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 12
   levels: 12
+
+##
+## ABILITY: Lightning
+## - Summons lightning.
+##
 lightning:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Lightning Bastard
   name: 'Lightning Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
   enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 7
   levels: 7
+
+##
+## ABILITY: Clucky
+## - Spawns a chicken.
+##
 clucky:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Clucky Bastard
   name: 'Clucky Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
   enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 3
   levels: 3
+
+##
+## ABILITY: Ender
+## - Teleports the player to the arrow location on impact.
+## - Maintains pitch/yaw.
+##
 ender:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Ender Bastard
   name: 'Ender Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
   enabled: true
-  levels: 5
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 7
+  levels: 7
+
+##
+## ABILITY: Oak
+## - Spawns an oak tree.
+##
 oak:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Oak Bastard
   name: 'Oak Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
   enabled: true
-  levels: 2
-birch:
-  name: 'Birch Bastard'
-  enabled: true
-  levels: 2
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 5
+  levels: 5
+
+##
+## ABILITY: Spruce
+## - Spawns a spruce tree.
+##
 spruce:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Spruce Bastard
   name: 'Spruce Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
   enabled: true
-  levels: 2
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 5
+  levels: 5
+
+##
+## ABILITY: Birch
+## - Spawns a birch tree.
+##
+birch:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Birch Bastard
+  name: 'Birch Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 5
+  levels: 5
+
+##
+## ABILITY: Jungle
+## - Spawns a jungle tree.
+##
 jungle:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Jungle Bastard
   name: 'Jungle Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
   enabled: true
-  levels: 2
-batty:
-  name: 'Batty Bastard'
-  enabled: true
-  levels: 7
-nuclear:
-  name: 'Nuclear Bastard'
-  enabled: true
-  levels: 100
-enlightened:
-  name: 'Enlightened Bastard'
-  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 5
   levels: 5
-ranged:
-  name: 'Ranged Bastard'
-  enabled: true
-  levels: 12
-machine:
-  name: 'Machine Bastard'
-  enabled: true
-  levels: 12
-poisonous:
-  name: 'Poisonous Bastard'
-  enabled: true
-  levels: 7
-disorienting:
-  name: 'Disorienting Bastard'
-  enabled: true
-  levels: 7
-swap:
-  name: 'Swap Bastard'
-  enabled: true
-  levels: 12
-draining:
-  name: 'Draining Bastard'
-  enabled: true
-  levels: 7
-flintand:
-  name: 'Flint and Bastard'
-  enabled: true
-  levels: 12
-disarming:
-  name: 'Disarming Bastard'
-  enabled: true
-  levels: 7
-wither:
-  name: 'Wither Bastard'
-  enabled: true
-  levels: 7
-firey:
-  name: 'Firey Bastard'
-  enabled: true
-  levels: 7
-slow:
-  name: 'Slow Bastard'
-  enabled: true
-  levels: 7
-level:
-  name: 'Level Bastard'
-  enabled: true
-  levels: 12
-undead:
-  name: 'Undead Bastard'
-  enabled: true
-  levels: 15
-woodman:
-  name: "Woodman's Bastard"
-  enabled: true
-  levels: 7
-starvation:
-  name: 'Bastard of Starvation'
-  enabled: true
-  levels: 7
-multi:
-  name: 'Multi Bastard'
-  enabled: true
-  levels: 12
-bomb:
-  name: 'Bomb Bastard'
-  enabled: true
-  levels: 15
-drop:
-  name: 'Drop Bastard'
-  enabled: true
-  levels: 7
-airstrike:
-  name: 'Airstrike Bastard'
-  enabled: true
-  levels: 20
-magmatic:
-  name: 'Magmatic Bastard'
-  enabled: true
-  levels: 10
-aquatic:
-  name: 'Aquatic Bastard'
-  enabled: true
-  levels: 7
-pull:
-  name: 'Pull Bastard'
-  enabled: true
-  levels: 7
-paralyze:
-  name: 'Paralyze Bastard'
-  enabled: true
-  levels: 7
+
+##
+## ABILITY: Acacia
+## - Generates an acacia tree.
+##
 acacia:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Acacia Bastard
   name: 'Acacia Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
   enabled: true
-  levels: 2
-darkoak:
-  name: 'Dark Oak Bastard'
-  enabled: true
-  levels: 2
-cluster:
-  name: 'Cluster Bastard'
-  enabled: true
-  levels: 15
-airship:
-  name: 'Airship Bastard'
-  enabled: true
-  levels: 12
-iron:
-  name: 'Iron Bastard'
-  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 5
   levels: 5
+
+##
+## ABILITY: Dark Oak
+## - Generates a dark oak tree.
+##
+darkoak:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default:
+  name: 'Dark Oak Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 5
+  levels: 5
+
+##
+## ABILITY: Batty
+## - Spawns a swarm of bats.
+##
+batty:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Batty Bastard
+  name: 'Batty Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 12
+  levels: 12
+
+##
+## ABILITY: Nuclear
+## - Creates a massive explosion which sets blocks on fire.
+## - Spawns radiation after explosion that will poison and wither nearby entities.
+##
+nuclear:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Nuclear Bastard
+  name: 'Nuclear Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 100
+  levels: 100
+
+##
+## ABILITY: Enlightened
+## - Places a torch on the location of impact.
+##
+enlightened:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Enlightened Bastard
+  name: 'Enlightened Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 5
+  levels: 5
+
+##
+## ABILITY: Ranged
+## - Shoots arrows that go fast and reach far.
+## - Arrows do more damage than normal.
+##
+ranged:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Ranged Bastard
+  name: 'Ranged Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 12
+  levels: 12
+
+##
+## ABILITY: Machine
+## - Shoots arrows instantly with a slightly varying direction.
+## - Can be spammed.
+##
+machine:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Machine Bastard
+  name: 'Machine Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 12
+  levels: 12
+
+##
+## ABILITY: Poisonous
+## - Poisons the target.
+##
+poisonous:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Poisonous Bastard
+  name: 'Poisonous Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 12
+  levels: 12
+
+##
+## ABILITY: Disorienting
+## - Target get a random pitch/yaw.
+##
+disorienting:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Disorienting Bastard
+  name: 'Disorienting Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 7
+  levels: 7
+
+##
+## ABILITY: Swap
+## - Swaps location with the target entity.
+##
+swap:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Swap Bastard
+  name: 'Swap Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 7
+  levels: 7
+
+##
+## ABILITY: Draining
+## - Heals the player when it damages a target.
+##
+draining:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Draining Bastard
+  name: 'Draining Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 7
+  levels: 7
+
+##
+## ABILITY: Flint and
+## - Sets fire to the blocks around the location of impact.
+##
+flintand:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Flint and Bastard
+  name: 'Flint and Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 12
+  levels: 12
+
+##
+## ABILITY: Disarming
+## - Random chance that the target loses hand items and possible armour.
+##
+disarming:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Disarming Bastard
+  name: 'Disarming Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 7
+  levels: 7
+
+##
+## ABILITY: Wither
+## - Shoots wither skulls.
+## - Wither skulls give a wither effect on impact.
+##
+wither:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Wither Bastard
+  name: 'Wither Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 12
+  levels: 12
+
+##
+## ABILITY: Firey
+## - Shoots fireballs.
+##
+firey:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Firey Bastard
+  name: 'Firey Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 12
+  levels: 12
+
+##
+## ABILITY: Slow
+## - Extremely slow arrow that shoots goes straight.
+## - Insta-kills the target.
+##
+slow:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Slow Bastard
+  name: 'Slow Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 12
+  levels: 12
+
+##
+## ABILITY: Level
+## - Steals levels from the target player.
+##
+level:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Level Bastard
+  name: 'Level Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 12
+  levels: 12
+
+##
+## ABILITY: Undead
+## - Spawns a circle of zombies around the location of impact.
+##
+undead:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Undead Bastard
+  name: 'Undead Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 15
+  levels: 15
+
+##
+## ABILITY: Woodman
+## - Tears down the hit tree (only vertical blocks).
+##
+woodman:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Woodman's Bastard
+  name: "Woodman's Bastard"
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 7
+  levels: 7
+
+##
+## ABILITY: Starvation
+## - The target loses hunger points.
+##
+starvation:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Bastard of Starvation
+  name: 'Bastard of Starvation'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 7
+  levels: 7
+
+##
+## ABILITY: Multi
+## - Shoots multiple arrows at the same time (like a shotgun).
+##
+multi:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Multi Bastard
+  name: 'Multi Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 10
+  levels: 10
+
+##
+## ABILITY: Bomb
+## - Drops TNT from the sky which explodes when it reaches the ground.
+##
+bomb:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Bomb Bastard
+  name: 'Bomb Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 15
+  levels: 15
+
+##
+## ABILITY: Drop
+## - Launches the target in the air so it takes fall damage.
+##
+drop:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Drop Bastard
+  name: 'Drop Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 7
+  levels: 7
+
+##
+## ABILITY: Airstrike
+## - Shoots an arrow that drops ~3 TNT per second.
+##
+airstrike:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Airstrike Bastard
+  name: 'Airstrike Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 20
+  levels: 20
+
+##
+## ABILITY: Magmatic
+## - Shoot lava.
+##
+magmatic:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Magmatic Bastard
+  name: 'Magmatic Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 12
+  levels: 12
+
+##
+## ABILITY: Aquatic
+## - Shoot water.
+##
+aquatic:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Aquatic Bastard
+  name: 'Aquatic Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 7
+  levels: 7
+
+##
+## ABILITY: Pull
+## - Pulls the target toward you.
+##
+pull:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Pull Bastard
+  name: 'Pull Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 7
+  levels: 7
+
+##
+## ABILITY: Paralyze
+## - Gives random (strong) blindness/slowness/confusion/weakness effects.
+##
+paralyze:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Paralyze Bastard
+  name: 'Paralyze Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 10
+  levels: 10
+
+##
+## ABILITY: Cluster
+## - Spawns ignited TNT on impact.
+##
+cluster:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Cluster Bastard
+  name: 'Cluster Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 15
+  levels: 15
+
+##
+## ABILITY: Airship
+## - Fly behind the last shot arrow.
+##
+airship:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Airship Bastard
+  name: 'Airship Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 12
+  levels: 12
+
+##
+## ABILITY: Iron
+## - Shoots anvil.
+## - Damages entities around the anvil.
+##
+iron:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Iron Bastard
+  name: 'Iron Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 5
+  levels: 5
+
+##
+## ABILITY: Curse
+## - Curses a target: random small explosions, velocity boosts, set on fire.
+##
 curse:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Curse
   name: 'Curse Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
   enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 7
   levels: 7
+
+##
+## ABILITY: Round
+## - Shoot arrows 360 degrees around the player.
+##
 round:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: 360 Bastard
   name: '360 Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
   enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 7
   levels: 7
+
+##
+## ABILITY: Frozen
+## - Creates snow layers.
+## - Freezes water.
+## - Turns ice into packed ice.
+## - Freezes entities.
+##
 frozen:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default:
   name: 'Frozen Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
   enabled: true
-  levels: 7
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 12
+  levels: 12

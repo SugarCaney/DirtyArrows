@@ -17,6 +17,7 @@ Changelog
 * **`+`** Added option to run in minigame/silent mode.
 * **`+`** Added option to disable arrow particles.
 * **`+`** Added \da tp command to teleport to the center of a region.
+* **`+`** Added documentation to the default configuration file.
 * **`!`** Fixed anvil costs not updating correctly (and crash).
 * **`!`** Fixed cursed bastard's move-effect not being calculated properly.
 * **`!`** Fixed curse not going away after death.
@@ -37,8 +38,8 @@ Changelog
 * **`~`** Tree bows now spawn all possible tree variants (chosen randomly).
 * **`~`** Items get reimbursed when an effect (like the oak bow) fails.
 * **`~`** Machine bow shoots more arrows, and slightly less accurate.
-* **`~`** 7 level cost changed to 12 level cost.
 * **`~`** Multi bow now shoots 12 (was 8) arrows, and are always critical.
+* **`~`** Tweaked default level costs.
 * **`~`** Poisonous bow shows particles on hit.
 * **`~`** Improved robustness.
 * **`-`** Removed metrics.

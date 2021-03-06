@@ -18,7 +18,7 @@ open class Headshot(private val plugin: DirtyArrows) : Listener {
 
     @EventHandler
     fun headshotListener(event: EntityDamageByEntityEvent) {
-        if (plugin.config.getBoolean("headshot").not()) return
+        if (plugin.config.getBoolean("headshot.enabled").not()) return
         if (event.cause != EntityDamageEvent.DamageCause.PROJECTILE) return
 
         val projectile = event.damager as Projectile
@@ -30,7 +30,7 @@ open class Headshot(private val plugin: DirtyArrows) : Listener {
         val isHeadshot = y - targetY > 1.35
         if (isHeadshot.not()) return
 
-        val multiplier = plugin.config.getDouble("headshot-multiplier")
+        val multiplier = plugin.config.getDouble("damage-multiplier")
         event.damage = event.damage * multiplier
 
         target.sendMessage(Broadcast.headshot(damager, HeadshotType.BY, plugin))
