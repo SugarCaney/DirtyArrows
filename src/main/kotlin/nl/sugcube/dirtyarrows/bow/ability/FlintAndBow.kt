@@ -29,6 +29,11 @@ open class FlintAndBow(plugin: DirtyArrows) : BowAbility(
         description = "Sets blocks on fire."
 ) {
 
+    /**
+     * A particle will spawn from shot arrows every N ticks.
+     */
+    val particleEveryNTicks = config.getInt("$node.particle-every-n-ticks")
+
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
         arrow.location.crossBlocks().forEach {
             if (it.block.type in FIRE_REPLACABLE) {
@@ -39,7 +44,7 @@ open class FlintAndBow(plugin: DirtyArrows) : BowAbility(
     }
 
     override fun particle(tickNumber: Int) = arrows.forEach {
-        if (tickNumber % 4 == 0) {
+        if (tickNumber % particleEveryNTicks == 0) {
             it.showFlameParticle()
         }
     }

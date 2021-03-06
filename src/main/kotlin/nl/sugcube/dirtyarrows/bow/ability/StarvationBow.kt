@@ -9,7 +9,7 @@ import org.bukkit.event.entity.ProjectileHitEvent
 import kotlin.math.max
 
 /**
- * Removes 3 (1.5) hunger points from the target player.
+ * Removes hunger points from the target player.
  *
  * @author SugarCaney
  */
@@ -20,10 +20,15 @@ open class StarvationBow(plugin: DirtyArrows) : BowAbility(
         description = "Target loses hunger points."
 ) {
 
+    /**
+     * How many hunger points the target loses.
+     */
+    val hungerPoints = 3
+
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
         val target = event.hitEntity as? Player ?: return
         if (target == player) return
 
-        target.foodLevel = max(0, target.foodLevel - 3)
+        target.foodLevel = max(0, target.foodLevel - hungerPoints)
     }
 }

@@ -8,6 +8,7 @@ import nl.sugcube.dirtyarrows.util.itemInOffHand
 import nl.sugcube.dirtyarrows.util.itemName
 import org.bukkit.GameMode
 import org.bukkit.Location
+import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -60,7 +61,7 @@ abstract class BowAbility(
         /**
          * What items are required for a single use.
          */
-        val costRequirements: List<ItemStack> = emptyList(),
+        costRequirements: List<ItemStack> = emptyList(),
 
         /**
          * Whether to remove the arrow when it hit.
@@ -75,6 +76,12 @@ abstract class BowAbility(
 ) : Listener, Runnable {
 
     /**
+     * What items are required for a single use.
+     */
+    var costRequirements: List<ItemStack> = costRequirements
+        protected set
+
+    /**
      * Keeps track of the amount of ticks that have passed.
      */
     private var tickCounter = 0
@@ -83,6 +90,16 @@ abstract class BowAbility(
      * Set containing all arrows that have been shot with this bow.
      */
     protected val arrows: MutableSet<Arrow> = HashSet()
+
+    /**
+     * The plugin's configuration.
+     */
+    protected val config: FileConfiguration = plugin.config
+
+    /**
+     * The configuration node of the bow.
+     */
+    protected val node = type.node
 
     /**
      * Executes a repeating scheduled effect every [handleEveryNTicks] ticks.
@@ -298,10 +315,8 @@ abstract class BowAbility(
         val bowName = bowName()
         return if (itemInMainHand.itemName == bowName) {
             itemInMainHand
-        }
-        else if (itemInOffHand.itemName == bowName) {
+        } else if (itemInOffHand.itemName == bowName) {
             itemInOffHand
-        }
-        else null
+        } else null
     }
 }

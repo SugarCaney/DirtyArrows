@@ -14,6 +14,7 @@ import org.bukkit.entity.Entity
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
+import org.bukkit.event.entity.EntityDeathEvent
 import org.bukkit.event.entity.EntityInteractEvent
 import org.bukkit.event.entity.EntityShootBowEvent
 import org.bukkit.event.entity.ProjectileHitEvent
@@ -48,6 +49,58 @@ open class FrozenBow(plugin: DirtyArrows) : BowAbility(
      */
     private val frozenEntities = HashMap<Entity, Long>()
 
+    /**
+     * How far along the x/z axis the bow can freeze.
+     */
+    val horizontalRange = config.getInt("$node.horizontal-range")
+
+    /**
+     * How far along the y axis the bow can freeze.
+     */
+    val verticalRange = config.getInt("$node.vertical-range")
+
+    /**
+     * Chance for a block to spawn snow.
+     */
+    val snowChance = config.getDouble("$node.snow-chance")
+
+    /**
+     * Chance to spawn an extra snow layer.
+     */
+    val snowExtraLayerChance = config.getDouble("$node.snow-extra-layer-chance")
+
+    /**
+     * Chance for a water block to freeze.
+     */
+    val freezeChance = config.getDouble("$node.freeze-chance")
+
+    /**
+     * Chance for an ice block to turn into packed ice.
+     */
+    val packedIceChance = config.getDouble("$node.packed-ice-chance")
+
+    /**
+     * The amount of milliseconds an entity stays frozen.
+     */
+    val freezeTime = config.getInt("$node.freeze-time")
+
+    /**
+     * How much varience there is in freeze time in milliseconds.
+     */
+    val freezeTimeFuzzing = config.getInt("$node.freeze-time-fuzzing")
+
+    /**
+     * A particle will spawn from shot arrows every N ticks.
+     */
+    val particleEveryNTicks = config.getInt("$node.particle-every-n-ticks")
+
+    init {
+        check(snowChance in 0.0..1.0) { "$node.snow-chance must be between 0 and 1, got <$snowChance>" }
+        check(snowExtraLayerChance in 0.0..1.0) { "$node.snow-extra-layer-chance must be between 0 and 1, got <$snowExtraLayerChance>" }
+        check(freezeChance in 0.0..1.0) { "$node.freeze-chance must be between 0 and 1, got <$freezeChance>" }
+        check(packedIceChance in 0.0..1.0) { "$node.packed-ice-chance must be between 0 and 1, got <$packedIceChance>" }
+    }
+
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
         freezeHitEntity(event.hitEntity)
         freezeLandscape(arrow)
@@ -56,33 +109,37 @@ open class FrozenBow(plugin: DirtyArrows) : BowAbility(
     /**
      * Freezes terrain features.
      */
-    private fun freezeLandscape(arrow: Arrow) = forXYZ(-2..2, -2..2, -2..2) { dx, dy, dz ->
+    private fun freezeLandscape(arrow: Arrow) = forXYZ(
+            -horizontalRange..horizontalRange,
+            -verticalRange..verticalRange,
+            -horizontalRange..horizontalRange
+    ) { dx, dy, dz ->
         val target = arrow.location.copyOf().add(dx.toDouble(), dy.toDouble(), dz.toDouble())
         val block = target.block
 
         when (block.type) {
             // Place snow layers.
             Material.AIR -> {
-                if (block.onSolid() && block.type == Material.AIR && Random.nextDouble() < SNOW_CHANCE) {
+                if (block.onSolid() && block.type == Material.AIR && Random.nextDouble() < snowChance) {
                     block.type = Material.SNOW
                 }
             }
             // Increase snow level.
             Material.SNOW -> {
-                if (Random.nextDouble() < SNOW_EXTRA_LAYER_CHANCE) {
+                if (Random.nextDouble() < snowExtraLayerChance) {
                     @Suppress("DEPRECATION") /* Could not find a Snow BlockData variant in 1.11.2 */
                     block.data = min(block.data + 1, 7).toByte()
                 }
             }
             // Freeze water.
             Material.STATIONARY_WATER -> {
-                if (Random.nextDouble() < FREEZE_CHANCE) {
+                if (Random.nextDouble() < freezeChance) {
                     block.type = Material.ICE
                 }
             }
             // Deep freeze ice blocks to packed ice.
             Material.ICE -> {
-                if (Random.nextDouble() < PACKED_ICE_CHANCE) {
+                if (Random.nextDouble() < packedIceChance) {
                     block.type = Material.PACKED_ICE
                 }
             }
@@ -100,7 +157,7 @@ open class FrozenBow(plugin: DirtyArrows) : BowAbility(
         val entity = target as? LivingEntity ?: return
 
         // Mark hit entity as frozen.
-        frozenEntities[entity] = System.currentTimeMillis() + Random.nextInt(-FREEZE_FUZZING, FREEZE_FUZZING)
+        frozenEntities[entity] = System.currentTimeMillis() + Random.nextInt(-freezeTimeFuzzing, freezeTimeFuzzing)
         entity.world.playEffect(entity.location.copyOf().add(0.5, 0.5, 0.5), Effect.STEP_SOUND, Material.SNOW_BLOCK)
 
         if (entity is Player) {
@@ -113,7 +170,7 @@ open class FrozenBow(plugin: DirtyArrows) : BowAbility(
         frozenEntities.keys.removeIf { entity ->
             val start = frozenEntities[entity]!!
             val elapsed = System.currentTimeMillis() - start
-            val isDone = elapsed >= FREEZE_TIME
+            val isDone = elapsed >= freezeTime
             if (isDone) {
                 when (entity) {
                     is Player -> entity.sendMessage(Broadcast.DEFROSTED)
@@ -125,7 +182,7 @@ open class FrozenBow(plugin: DirtyArrows) : BowAbility(
     }
 
     override fun particle(tickNumber: Int) {
-        if (tickNumber % 3 == 0) return
+        if (tickNumber % particleEveryNTicks == 0) return
 
         arrows.forEach {
             it.world.playEffect(it.location.copyOf().add(0.5, 0.5, 0.5), Effect.STEP_SOUND, Material.SNOW_BLOCK)
@@ -147,36 +204,8 @@ open class FrozenBow(plugin: DirtyArrows) : BowAbility(
         event.isCancelled = frozenEntities.containsKey(event.player)
     }
 
-    companion object {
-
-        /**
-         * Chance for a block to spawn snow.
-         */
-        const val SNOW_CHANCE = 0.74
-
-        /**
-         * Chance to spawn an extra snow layer.
-         */
-        const val SNOW_EXTRA_LAYER_CHANCE = 0.57
-
-        /**
-         * Chance for a water block to freeze.
-         */
-        const val FREEZE_CHANCE = 0.74
-
-        /**
-         * Chance for an ice blok to turn into packed ice.
-         */
-        const val PACKED_ICE_CHANCE = 0.18
-
-        /**
-         * The amount of milliseconds an entity stays frozen.
-         */
-        const val FREEZE_TIME = 5000
-
-        /**
-         * How much varience there is in freeze time in milliseconds.
-         */
-        const val FREEZE_FUZZING = 1500
+    @EventHandler
+    fun unfreezeOnDeath(event: EntityDeathEvent) {
+        frozenEntities.remove(event.entity)
     }
 }

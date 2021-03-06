@@ -25,8 +25,17 @@ open class BattyBow(plugin: DirtyArrows) : BowAbility(
         description = "Spawn a swarm of bats on impact."
 ) {
 
+    /**
+     * How many bats to spawn.
+     */
+    val swarmSize = config.getInt("$node.swarm-size")
+
+    init {
+        check(swarmSize >= 0) { "$node.swarm-size cannot be negative, got <$swarmSize>" }
+    }
+
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
-        repeat(10) {
+        repeat(swarmSize) {
             arrow.world.spawnEntity(arrow.location, EntityType.BAT)
         }
         player.playSound(player.location, Sound.ENTITY_BAT_AMBIENT, 10f, 1f)

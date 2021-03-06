@@ -31,8 +31,22 @@ open class UndeadBow(plugin: DirtyArrows) : BowAbility(
         description = "Spawns a circle of zombies."
 ) {
 
+    /**
+     * The amount of zombies to spawn.
+     */
+    val zombieCount = config.getInt("$node.zombie-count")
+
+    /**
+     * The distance the zombies spawn from the location of impact (= circle radius).
+     */
+    val distance = config.getDouble("$node.distance")
+
+    init {
+        check(zombieCount >= 0) { "$node.zombie-count cannot be negative, got <$zombieCount>" }
+    }
+
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
-        arrow.location.spawnZombieSwarm(zombieCount = 16, distance = 5.0)
+        arrow.location.spawnZombieSwarm(zombieCount = zombieCount, distance = distance)
     }
 
     /**

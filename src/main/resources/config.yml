@@ -81,6 +81,20 @@ exploding:
   # (Int) default: 12
   levels: 12
 
+  # The power of the explosion. TNT is 4.0 for reference.
+  # Beware: the region protection range stays the same. Largers explosions leave you at a risk of blowing up
+  #         otherwise protected blocks.
+  # (Double) default: 4.0
+  power: 4.0
+
+  # Whether the explosion can set blocks on fire.
+  # (Boolean) default: false
+  set-on-fire: false
+
+  # Whether to break the broken blocks.
+  # (Boolean) default: true
+  break-blocks: true
+
 ##
 ## ABILITY: Lightning
 ## - Summons lightning.
@@ -114,6 +128,10 @@ clucky:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 3
   levels: 3
+
+  # How many chickens to spawn.
+  # (Int) default: 1
+  spawn-count: 1
 
 ##
 ## ABILITY: Ender
@@ -252,6 +270,10 @@ batty:
   # (Int) default: 12
   levels: 12
 
+  # The amount of bats to spawn.
+  # (Int) default: 10
+  swarm-size: 10
+
 ##
 ## ABILITY: Nuclear
 ## - Creates a massive explosion which sets blocks on fire.
@@ -269,6 +291,85 @@ nuclear:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 100
   levels: 100
+
+  # Settings for the explosion.
+  explosion:
+    # The power of the explosion. TNT has a power of 4.0.
+    # Beware that increasing the power might make region protection not work anymore.
+    # (Float) default: 55.0
+    power: 55.0
+
+    # Whether the explosion should set blocks on fire.
+    # (Boolean) default: true
+    set-on-fire: true
+
+    # Whether the explosion should break blocks.
+    # (Boolean) default: true
+    break-blocks: true
+
+  # All settings for radiation after the explosion.
+  radiation:
+    # Whether to generate radiation after the explosion.
+    # (Boolean) default: true
+    enabled: true
+
+    # The time range for radiation to disappear in milliseconds.
+    # (Int) default: 390000
+    time: 390000
+
+    # The maximum deviation from the radiation time in milliseconds.
+    # (Int) default: 210000
+    fuzzing: 210000
+
+    # How close (in blocks) a target has to be to a radiation location to be affected by poison.
+    # (Double) default: 4.5
+    damage-proximity: 4.5
+
+    # The level of poison and wither to give to entities close to radiation locations.
+    # (Int) default: 0
+    poison-level: 0
+
+    # How many ticks the poison and wither effect must be applied to entities close to radiation locations.
+    # (Int) default: 200
+    poison-duration: 200
+
+    # The maximum deviation of radiation particles from their original location (in blocks).
+    # (Double) default: 2.5
+    particle-fuzzing: 2.5
+
+    # Up until how many blocks along each axis from the place of impact radiation could spawn.
+    # (Int) default: 64
+    range: 64
+
+    # Settings for the speed radiation locations fall down to the ground.
+    fall-speed:
+      # How many blocks the radiation particles fall per second.
+      # (Double) default: 0.1
+      mean: 0.1
+
+      # The maximum deviation from the radiation fall speed.
+      # (Double) default: 0.05
+      fuzzing: 0.05
+
+      # How much slower (<1) or faster (>1) radiation falls down in water.
+      # (Double) default: 0.3
+      water-multiplier: 0.3
+
+    # Impacts the amount of radiation that is being generated.
+    # Each block has a 3/x^y chance of spawning a radiation location, where y is the chance exponent.
+    # Higher values = less radiation. Lower values = more radiations.
+    # Be careful when tweaking this value. Setting it lower can drastically increase the amount of radiation
+    # spots and impact the performance of the server and clients.
+    # (Double) default: 2.4
+    distribution-exponent: 2.4
+
+    # Whether to show radiation particles.
+    # (Boolean) default: true
+    particles: true
+
+    # Each radiation spot will spawn a particle every N ticks.
+    # (Int) default: 4
+    particle-every-n-ticks: 4
 
 ##
 ## ABILITY: Enlightened
@@ -305,6 +406,10 @@ ranged:
   # (Int) default: 12
   levels: 12
 
+  # How much quicker the arrow fires than normal.
+  # (Double) default: 5.0
+  speed-multiplier: 5.0
+
 ##
 ## ABILITY: Machine
 ## - Shoots arrows instantly with a slightly varying direction.
@@ -323,6 +428,18 @@ machine:
   # (Int) default: 12
   levels: 12
 
+  # The amount of arrows to fire per click. Must be at least 1.
+  # (Int) default: 3
+  bullet-count: 3
+
+  # How many ticks there are between each bullet. Must be at least 0.
+  # (Int) default: 2
+  bullet-delay: 2
+
+  # Some kinda random deviation from the initial direction.
+  # (Double) default: 0.22
+  direction-fuzz: 0.22
+
 ##
 ## ABILITY: Poisonous
 ## - Poisons the target.
@@ -340,6 +457,18 @@ poisonous:
   # (Int) default: 12
   levels: 12
 
+  # How long the target gets poisoned in ticks.
+  # (Int) default: 160
+  poison-time: 160
+
+  # Maximum deviation from the poison time in ticks.
+  # (Int) default: 30
+  poison-time-fuzzing: 30
+
+  # The level of poison. Must be at least 1.
+  # (Int) default: 3
+  poison-level: 3
+
 ##
 ## ABILITY: Disorienting
 ## - Target get a random pitch/yaw.
@@ -356,6 +485,14 @@ disorienting:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 7
   levels: 7
+
+  # Maximum change in yaw in degrees.
+  # (Double) default: 30.0
+  yaw-fuzzing: 30.0
+
+  # Maximum change in pitch in degrees.
+  # (Double) default: 90.0
+  pitch-fuzzing: 90.0
 
 ##
 ## ABILITY: Swap
@@ -391,6 +528,10 @@ draining:
   # (Int) default: 7
   levels: 7
 
+  # The amount of health points to heal on every hit. 1 point = half a heart.
+  # (Int) default: 2
+  health-points: 2
+
 ##
 ## ABILITY: Flint and
 ## - Sets fire to the blocks around the location of impact.
@@ -408,6 +549,10 @@ flintand:
   # (Int) default: 12
   levels: 12
 
+  #  A particle will spawn from shot arrows every N ticks.
+  # (Int) default: 4
+  particle-every-n-ticks: 4
+
 ##
 ## ABILITY: Disarming
 ## - Random chance that the target loses hand items and possible armour.
@@ -424,6 +569,17 @@ disarming:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 7
   levels: 7
+
+  # The chance of disarming anything.
+  # Chance between 0 and 1.
+  # (Double) default: 0.3
+  drop-item-chance: 0.3
+
+  # The chance of dropping each armor piece. Each armour slot is evaluated seperately per hit.
+  # Applies only if an item can be dropped (see disarming.drop-item-chance).
+  # Chance between 0 and 1.
+  # (Double) default: 0.15
+  drop-armour-chance: 0.15
 
 ##
 ## ABILITY: Wither
@@ -443,6 +599,10 @@ wither:
   # (Int) default: 12
   levels: 12
 
+  # Multiplier of the initial arrow velocity.
+  # (Double) default: 0.6
+  head-speed-multiplier: 0.6
+
 ##
 ## ABILITY: Firey
 ## - Shoots fireballs.
@@ -459,6 +619,10 @@ firey:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 12
   levels: 12
+
+  # Multiplier of the initial arrow velocity.
+  # (Double) default: 0.8
+  fireball-speed-multiplier: 0.8
 
 ##
 ## ABILITY: Slow
@@ -478,6 +642,11 @@ slow:
   # (Int) default: 12
   levels: 12
 
+  # After what time the arrows should despawn, in milliseconds.
+  # Prevents arrows to be stored after they despawn. Not recommended to increase the default value.
+  # (Int) default: 59000
+  despawn-time: 59000
+
 ##
 ## ABILITY: Level
 ## - Steals levels from the target player.
@@ -495,6 +664,10 @@ level:
   # (Int) default: 12
   levels: 12
 
+  # The amount of levels to steal per hit.
+  # (Int) default: 1
+  level-change: 1
+
 ##
 ## ABILITY: Undead
 ## - Spawns a circle of zombies around the location of impact.
@@ -511,6 +684,14 @@ undead:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 15
   levels: 15
+
+  # The amount of zombies to spawn.
+  # (Int) default: 16
+  zombie-count: 16
+
+  # The distance the zombies spawn from the location of impact (= circle radius).
+  # (Double) default: 5.0
+  distance: 5.0
 
 ##
 ## ABILITY: Woodman
@@ -546,6 +727,10 @@ starvation:
   # (Int) default: 7
   levels: 7
 
+  # How many hunger points the target loses.
+  # (Int) default: 3
+  hunger-points: 3
+
 ##
 ## ABILITY: Multi
 ## - Shoots multiple arrows at the same time (like a shotgun).
@@ -562,6 +747,14 @@ multi:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 10
   levels: 10
+
+  # The amount of arrows to fire at once, must be at least 1.
+  # (Int) default: 12
+  arrow-count: 12
+
+  # The maximum deviation of the arrows from the base arrow along each axis
+  # (Double) default: 0.254
+  direction-fuzz: 0.254
 
 ##
 ## ABILITY: Bomb
@@ -580,6 +773,18 @@ bomb:
   # (Int) default: 15
   levels: 15
 
+  # The amount of TNT to spawn.
+  # (Int) default: 3
+  bomb-count: 3
+
+  # The square radius (in blocks) around the location of impact where the bombs can spawn.
+  # (Double) default: 4.5
+  bomb-radius: 4.5
+
+  # How high (in blocks) above location of impact the bombs must spawn.
+  # (Double) default: 32.0
+  spawn-height: 32.0
+
 ##
 ## ABILITY: Drop
 ## - Launches the target in the air so it takes fall damage.
@@ -596,6 +801,18 @@ drop:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 7
   levels: 7
+
+  # How much upward force to apply. 1.0 is roughly 8 blocks.
+  # (Double) default: 1.0
+  launch-intensity: 1.0
+
+  # The maximum amount of deviation from the launch intensity.
+  # (Double) default: 0.2
+  launch-intensity-fuzzing: 0.2
+
+  # The maximum amount of horizontal force to apply per axis.
+  # (Double) default: 0.2
+  horizontal-fuzzing: 0.2
 
 ##
 ## ABILITY: Airstrike
@@ -614,6 +831,11 @@ airstrike:
   # (Int) default: 20
   levels: 20
 
+  # The maximum amount of milliseconds the arrow can spawn TNT.
+  # This is mostly a safety measure for when land events are not registered.
+  # (Int) default: 7000
+  max-lifespan: 7000
+
 ##
 ## ABILITY: Magmatic
 ## - Shoot lava.
@@ -630,6 +852,10 @@ magmatic:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 12
   levels: 12
+
+  # A particle will spawn from shot arrows every N (this amount of) ticks.
+  # (Int) default: 3
+  particle-every-n-ticks: 3
 
 ##
 ## ABILITY: Aquatic
@@ -648,6 +874,10 @@ aquatic:
   # (Int) default: 7
   levels: 7
 
+  # A particle will spawn from shot arrows every N (this amount of) ticks.
+  # (Int) default: 3
+  particle-every-n-ticks: 3
+
 ##
 ## ABILITY: Pull
 ## - Pulls the target toward you.
@@ -664,6 +894,10 @@ pull:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 7
   levels: 7
+
+  # How hard to the bow pulls (quite magic value).
+  # (Double) default: 7.5
+  strength: 7.5
 
 ##
 ## ABILITY: Paralyze
@@ -682,6 +916,24 @@ paralyze:
   # (Int) default: 10
   levels: 10
 
+  # How long the effects last in ticks.
+  # (Int) default: 240
+  effect-time: 240
+
+  # Maximum deviation from the effect time in ticks.
+  # (Int) default: 60
+  effect-time-fuzzing: 60
+
+  # How much chance the target has to be applied a certain effect.
+  # Value between 0 and 1.
+  # (Double) default: 0.4
+  effect-chance: 0.4
+
+  # How much chance the target has to be confused.
+  # Value between 0 and 1.
+  # (Double) default: 0.5
+  confusion-chance: 0.5
+
 ##
 ## ABILITY: Cluster
 ## - Spawns ignited TNT on impact.
@@ -699,6 +951,18 @@ cluster:
   # (Int) default: 15
   levels: 15
 
+  # The amount of TNT to spawn.
+  # (Int) default: 5
+  tnt-count: 5
+
+  # How many ticks the TNT is ignited before it explodes.
+  # (Int) default: 40
+  tnt-fuse: 40
+
+  # The maximum horizontal velocity a spawned, ignited tnt block gets.
+  # (Double) default: 0.15
+  maximum-horizontal-velocity: 0.15
+
 ##
 ## ABILITY: Airship
 ## - Fly behind the last shot arrow.
@@ -715,6 +979,15 @@ airship:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 12
   levels: 12
+
+  # The maximum amount of milliseconds the arrow can boost the player.
+  # This is mostly a safety measure for when land events are not registered.
+  # (Int) default: 7000
+  max-lifespan: 7000
+
+  # The arrow's velocity is multiplied by this number to determine the actual player velocity.
+  # (Double) default: 0.8
+  velocity-multiplier: 0.8
 
 ##
 ## ABILITY: Iron
@@ -734,9 +1007,39 @@ iron:
   # (Int) default: 5
   levels: 5
 
+  # Settings for anvils that get near entities during flight.
+  flying:
+    # The damage entities receive that are within this distance from the flying anvil.
+    # (Double) default: 3.0
+    damage: 3.0
+
+    # Entities within this distance from the flying anvil will get damaged.
+    # (Double) default: 1.0
+    range: 1.0
+
+  # Settings for anvils that land.
+  landing:
+    # The damage entities receive that are within this distance from the landing place of the anvil.
+    # (Double) default: 10.0
+    damage: 10.0
+
+    # Entities within this distance from where the anvil lands get damaged.
+    # (Double) default: 3.0
+    range: 3.0
+
+  # The maximum amount of milliseconds anvil will damage surrounding entities.
+  # This is mostly a safety measure for when land events are not registered.
+  # (Int) default: 7000
+  max-lifespan: 7000
+
 ##
 ## ABILITY: Curse
-## - Curses a target: random small explosions, velocity boosts, set on fire.
+## - Curses a target for a random amount of time. During that time, applies effects every 18 ticks:
+##  - Disorient the player (change pitch/yaw).
+##  - Launch upward.
+##  - Ignite.
+##  - Move horizontally in a random direction.
+##  - Explode.
 ##
 curse:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
@@ -750,6 +1053,97 @@ curse:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 7
   levels: 7
+
+  # The mean duration of the curse in milliseconds.
+  # (Int) default: 14000
+  duration: 14000
+
+  # Maximum deviation from the curse duration. In milliseconds.
+  # (Int) default: 4500
+  duration-fuzzing: 4500
+
+  # Chances of curse effects to happen:
+  effect-chance:
+    # Chance of any effect happening. 1-this chance of no effect being applied this iteration.
+    # Must be between 0 and 1.
+    # (Double) default: 0.6
+    global: 0.6
+
+    # Chance of being disoriented each iteration.
+    # Must be between 0 and 1.
+    # (Double) default: 0.25
+    disorient: 0.25
+
+    # Chance of being launched upward each iteration.
+    # Must be between 0 and 1.
+    # (Double) default: 0.25
+    launch: 0.25
+
+    # Chance of being set on fire each iteration.
+    # Must be between 0 and 1.
+    # (Double) default: 0.4
+    fire: 0.4
+
+    # Chance of being moved in a different direction each iteration.
+    # Must be between 0 and 1.
+    # (Double) default: 0.2
+    move: 0.2
+
+    # Chance of creating an explosion each iteration.
+    # Must be between 0 and 1.
+    # (Double) default: 0.3
+    explode: 0.3
+
+  # Disorient curse effect options:
+  disorient:
+    # The maximum amount of degrees the yaw can change when getting disoriented.
+    # (Float) default: 60.0
+    yaw-fuzzing: 60.0
+
+    # The maximum amount of degrees the pitch can change when getting disoriented.
+    # (Float) default: 60.0
+    pitch-fuzzing: 60.0
+
+  # Launch curse effect options:
+  launch:
+    # The mean velocity being applied when the launch effect gets chosen.
+    # (Double) default: 0.94
+    velocity: 0.94
+
+    # The maximum deviation from the launch velocity.
+    # (Double) default: 0.08
+    fuzzing: 0.08
+
+  # Ignite curse effect options:
+  fire:
+    # The mean amount of ticks the target is set on fire.
+    # (Int) default: 60
+    ticks: 60
+
+    # The maximum deviation from the fire ticks.
+    # (Int) default: 30
+    fuzzing: 30
+
+  # Move curse effect options:
+  move:
+    # Mean velocity the target will move on each axis in the horizontal plane when the move effect is chosen.
+    # (Double) default: 0.25
+    velocity-radius: 0.25
+
+  # Explode curse effect options:
+  # Beware: messing with these settings can mess up protected regions.
+  explode:
+    # The power of the random explosions. TNT has a power of 4.0 (for reference).
+    # (Float) default: 1.0
+    power: 1.0
+
+    # If random explosions must create fire. Enabling this will set some blocks around the explosion on fire.
+    # (Boolean) default: false
+    set-fire: false
+
+    # If random explosions must be able to break blocks.
+    # (Boolean) default: false
+    break-blocks: false
 
 ##
 ## ABILITY: Round
@@ -768,6 +1162,10 @@ round:
   # (Int) default: 7
   levels: 7
 
+  # How many arrows get fired.
+  # (Int) default: 30
+  arrow-count: 30
+
 ##
 ## ABILITY: Frozen
 ## - Creates snow layers.
@@ -777,7 +1175,7 @@ round:
 ##
 frozen:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default:
+  # (String) default: Frozen Bastard
   name: 'Frozen Bastard'
 
   # Whether the bow can be used (true).
@@ -787,3 +1185,43 @@ frozen:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 12
   levels: 12
+
+  # How many blocks along the x/z axis the bow can freeze.
+  # (Int) default: 2
+  horizontal-range: 2
+
+  # How many blocks along the y axis the bow can freeze.
+  # (Int) default: 2
+  vertical-range: 2
+
+  # Chance of a block to spawn a snow layer (if applicable).
+  # Value between 0 and 1.
+  # (Double) default: 0.74
+  snow-chance: 0.74
+
+  # Chance of a snow layer to be thickened by 1 level (if applicable).
+  # Value between 0 and 1.
+  # (Double) default: 0.57
+  snow-extra-layer-chance: 0.57
+
+  # Chance for a water block that is in range to freeze.
+  # Value between 0 and 1.
+  # (Double) default: 0.74
+  freeze-chance: 0.74
+
+  # Chance for an ice block to turn into packed ice.
+  # Value between 0 and 1.
+  # (Double) default: 0.18
+  packed-ice-chance: 0.18
+
+  # The amount of milliseconds a hit entity stays frozen.
+  # (Int) default: 5000
+  freeze-time: 5000
+
+  # The maximum deviation from the freeze time, in milliseconds.
+  # (Int) default: 1500
+  freeze-time-fuzzing: 1500
+
+  #  A particle will spawn from shot arrows every N ticks.
+  # (Int) default: 3
+  particle-every-n-ticks: 3

@@ -24,8 +24,13 @@ open class WitherBow(plugin: DirtyArrows) : BowAbility(
         description = "Shoot wither skulls."
 ) {
 
+    /**
+     * Multiplier of the initial arrow velocity.
+     */
+    val skullSpeedModifier = config.getDouble("$node.head-speed-multiplier")
+
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {
-        player.launchProjectile(WitherSkull::class.java, arrow.velocity.multiply(0.6))
+        player.launchProjectile(WitherSkull::class.java, arrow.velocity.multiply(skullSpeedModifier))
         unregisterArrow(arrow)
         arrow.remove()
     }

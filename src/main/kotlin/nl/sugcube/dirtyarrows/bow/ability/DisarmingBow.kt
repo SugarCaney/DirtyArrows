@@ -22,8 +22,23 @@ open class DisarmingBow(plugin: DirtyArrows) : BowAbility(
         description = "Targets have a chance to drop their items."
 ) {
 
+    /**
+     * The chance of disarming anything.
+     */
+    val dropItemChance = config.getDouble("$node.drop-item-chance")
+
+    /**
+     * The chance of dropping each armor piece.
+     */
+    val dropArmourChance = config.getDouble("$node.drop-armour-chance")
+
+    init {
+        check(dropItemChance in 0.0..1.0) { "$node.drop-item-chance must be between 0 and 1, got <$dropItemChance>" }
+        check(dropArmourChance in 0.0..1.0) { "$node.drop-armour-chance must be between 0 and 1, got <$dropArmourChance>" }
+    }
+
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
-        if (Random.nextDouble() < DISARM_CHANCE) return
+        if (Random.nextDouble() < dropItemChance) return
         val target = event.hitEntity as? LivingEntity ?: return
 
         // Always drop hand item.
@@ -31,7 +46,7 @@ open class DisarmingBow(plugin: DirtyArrows) : BowAbility(
 
         // Chance to drop armour.
         val newArmour = target.equipment.armorContents.map { item ->
-            if (Random.nextDouble() < ARMOUR_CHANCE) {
+            if (Random.nextDouble() < dropArmourChance) {
                 target.world.dropItem(target.location, item)
                 item.type = Material.AIR
             }
@@ -59,18 +74,5 @@ open class DisarmingBow(plugin: DirtyArrows) : BowAbility(
             mainHandItem.type = Material.AIR
             itemInMainHand = mainHandItem
         }
-    }
-
-    companion object {
-
-        /**
-         * The chance of dropping each armor piece.
-         */
-        private const val ARMOUR_CHANCE = 0.15
-
-        /**
-         * The chance of disarming anything.
-         */
-        private const val DISARM_CHANCE = 0.3
     }
 }

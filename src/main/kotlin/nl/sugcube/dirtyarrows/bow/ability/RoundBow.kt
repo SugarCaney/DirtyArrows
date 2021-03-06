@@ -29,13 +29,22 @@ open class RoundBow(plugin: DirtyArrows) : BowAbility(
         description = "Shoots arrows all around you."
 ) {
 
+    /**
+     * The amount of arrows that get fired.
+     */
+    val arrowCount = config.getInt("$node.arrow-count")
+
+    init {
+        check(arrowCount >= 0) { "$node.arrow-count cannot be negative, got <$arrowCount>" }
+    }
+
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {
         // First arrow is already shot by default.
-        repeat(TOTAL_ARROW_COUNT - 1) {
+        repeat(arrowCount - 1) {
             if (player.checkHasArrow().not()) return
 
             val initialDirection = arrow.velocity.copyOf().normalize()
-            val angle = 2.0 * PI * (it + 1.0) / TOTAL_ARROW_COUNT.toDouble()
+            val angle = 2.0 * PI * (it + 1.0) / arrowCount.toDouble()
             val direction = initialDirection.rotateAlongYAxis(angle)
             val initialVelocity = direction.multiply(arrow.velocity.length())
 
@@ -72,13 +81,5 @@ open class RoundBow(plugin: DirtyArrows) : BowAbility(
 
     override fun Player.consumeBowItems() {
         if (gameMode == GameMode.CREATIVE) return
-    }
-
-    companion object {
-
-        /**
-         * The amount of arrows that get fired.
-         */
-        const val TOTAL_ARROW_COUNT = 30
     }
 }

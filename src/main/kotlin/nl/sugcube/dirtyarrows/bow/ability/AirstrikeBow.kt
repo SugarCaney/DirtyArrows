@@ -36,6 +36,11 @@ open class AirstrikeBow(plugin: DirtyArrows) : BowAbility(
      */
     private val birthTime = HashMap<Arrow, Long>()
 
+    /**
+     * Maximum time the airship bow can be applied. In milliseconds.
+     */
+    val maximumLifespanMillis = config.getInt("$node.max-lifespan")
+
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {
         active[arrow] = player
         birthTime[arrow] = System.currentTimeMillis()
@@ -58,7 +63,7 @@ open class AirstrikeBow(plugin: DirtyArrows) : BowAbility(
         // Remove when arrows have their effects applied for the maximum time.
         // Sometimes the hit event is not registered correctly, therefore this must be taken care of seperately.
         active.keys.removeAll {
-            val mustDie = System.currentTimeMillis() - (birthTime[it] ?: System.currentTimeMillis()) >= MAX_LIFESPAN_MILLIS
+            val mustDie = System.currentTimeMillis() - (birthTime[it] ?: System.currentTimeMillis()) >= maximumLifespanMillis
             mustDie.apply {
                 if (this) {
                     birthTime.remove(it)
@@ -66,13 +71,5 @@ open class AirstrikeBow(plugin: DirtyArrows) : BowAbility(
                 }
             }
         }
-    }
-
-    companion object {
-
-        /**
-         * Maximum time the airship bow can be applied. In milliseconds.
-         */
-        const val MAX_LIFESPAN_MILLIS = 7000
     }
 }

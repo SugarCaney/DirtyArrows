@@ -5,6 +5,7 @@ import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
 import nl.sugcube.dirtyarrows.util.applyBowEnchantments
 import nl.sugcube.dirtyarrows.util.copyOf
+import nl.sugcube.dirtyarrows.util.fuzz
 import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
@@ -12,7 +13,6 @@ import org.bukkit.entity.Arrow
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.ProjectileLaunchEvent
 import org.bukkit.inventory.ItemStack
-import kotlin.random.Random
 
 /**
  * Shoots 12 arrows simultaneously in slightly different directions.
@@ -28,15 +28,29 @@ open class MultiBow(plugin: DirtyArrows) : BowAbility(
         description = "Shoots multiple arrows simultaneously."
 ) {
 
+    /**
+     * The amount of arrows to fire at once, must be at least 1.
+     */
+    val arrowCount = config.getInt("$node.arrow-count")
+
+    /**
+     * The maximum deviation of the arrows from the base arrow along each axis
+     */
+    val directionFuzz = config.getDouble("$node.direction-fuzz")
+
+    init {
+        check(arrowCount >= 1) { "$node.arrow-count must be greater than or equal to 1, got <$arrowCount>" }
+    }
+
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {
         // Launch 1 extra arrows.
-        repeat(11) {
+        repeat(arrowCount - 1) {
             player.world.spawn(arrow.location, Arrow::class.java).apply {
                 shooter = player
                 velocity = arrow.velocity.copyOf(
-                        x = arrow.velocity.x + Random.nextDouble() / 2.0 - 0.254,
-                        y = arrow.velocity.y + Random.nextDouble() / 2.0 - 0.254,
-                        z = arrow.velocity.z + Random.nextDouble() / 2.0 - 0.254
+                        x = arrow.velocity.x.fuzz(directionFuzz),
+                        y = arrow.velocity.y.fuzz(directionFuzz),
+                        z = arrow.velocity.z.fuzz(directionFuzz)
                 )
                 isCritical = true
                 applyBowEnchantments(player.bowItem())
@@ -55,7 +69,7 @@ open class MultiBow(plugin: DirtyArrows) : BowAbility(
         val hasInfinity = bowItem()?.enchantments?.containsKey(Enchantment.ARROW_INFINITE) == true
         if (hasInfinity.not()) {
             // Only subtract 7 instead of 8, because 1 gets fired by default.
-            inventory.removeItem(ItemStack(Material.ARROW, 7))
+            inventory.removeItem(ItemStack(Material.ARROW, arrowCount - 1))
         }
     }
 }

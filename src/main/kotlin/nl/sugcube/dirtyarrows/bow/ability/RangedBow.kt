@@ -20,7 +20,12 @@ open class RangedBow(plugin: DirtyArrows) : BowAbility(
         description = "Shoot powerful, far-reaching arrows."
 ) {
 
+    /**
+     * How much quicker the arrow fires.
+     */
+    val speedMultiplier = 5.0
+
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {
-        arrow.velocity = player.eyeLocation.direction.multiply(5)
+        arrow.velocity = player.eyeLocation.direction.multiply(speedMultiplier)
     }
 }

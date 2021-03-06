@@ -23,6 +23,7 @@ open class CommandReload : SubCommand<DirtyArrows>(
         try {
             configurationManager.loadConfig()
             recipeManager.reloadRecipes()
+            bowManager.reload()
 
             sender.sendMessage(Broadcast.RELOADED_CONFIG)
         } catch (e: Exception) {

@@ -18,12 +18,14 @@ Changelog
 * **`+`** Added option to disable arrow particles.
 * **`+`** Added \da tp command to teleport to the center of a region.
 * **`+`** Added documentation to the default configuration file.
+* **`+`** Added commands to the help overview.
 * **`!`** Fixed anvil costs not updating correctly (and crash).
 * **`!`** Fixed cursed bastard's move-effect not being calculated properly.
 * **`!`** Fixed curse not going away after death.
 * **`!`** Fixed frozen not going away after death.
-* **`!`** Fixed perpetual frozen when you die when you're frozen.
+* **`!`** Fixed being perpetually frozen when you die when you're frozen.
 * **`!`** Fixed some entity references not being removed.
+* **`~`** Made almost any effect configurable.
 * **`~`** Undead bow spawns zombies on the first available Y instead of the highest Y level.
 * **`~`** Decreased the amount of zombies spawned by the undead bow.
 * **`~`** Undead bow spawns zombies in a circle instead of a square.
@@ -38,10 +40,11 @@ Changelog
 * **`~`** Tree bows now spawn all possible tree variants (chosen randomly).
 * **`~`** Items get reimbursed when an effect (like the oak bow) fails.
 * **`~`** Machine bow shoots more arrows, and slightly less accurate.
-* **`~`** Multi bow now shoots 12 (was 8) arrows, and are always critical.
+* **`~`** Multi bow now shoots 12 (was 8) arrows by default, and are always critical.
 * **`~`** Tweaked default level costs.
 * **`~`** Poisonous bow shows particles on hit.
 * **`~`** Improved robustness.
+* **`~`** Improved the help screen.
 * **`-`** Removed metrics.
 
 ## Version 3.0

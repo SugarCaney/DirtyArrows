@@ -27,6 +27,11 @@ open class MagmaticBow(plugin: DirtyArrows) : BowAbility(
         description = "Shoots lava."
 ) {
 
+    /**
+     * A particle will spawn from shot arrows every N ticks.
+     */
+    val particleEveryNTicks = config.getInt("$node.particle-every-n-ticks")
+
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {
         val direction = arrow.velocity.copyOf().normalize()
         // Spawn the lava block slightly in front of the player.
@@ -38,7 +43,7 @@ open class MagmaticBow(plugin: DirtyArrows) : BowAbility(
     }
 
     override fun particle(tickNumber: Int) {
-        if (tickNumber % 3 == 0) return
+        if (tickNumber % particleEveryNTicks == 0) return
 
         arrows.forEach {
             it.world.playEffect(it.location.copyOf().add(0.5, 0.5, 0.5), Effect.STEP_SOUND, Material.LAVA)

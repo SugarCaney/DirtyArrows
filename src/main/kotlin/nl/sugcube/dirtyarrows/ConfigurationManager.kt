@@ -46,8 +46,8 @@ open class ConfigurationManager(private val plugin: DirtyArrows) {
     fun initialiseConfiguration() {
         if (configFile.exists().not()) {
             copyConfigDefaults()
-            saveConfig()
         }
+        loadConfig()
     }
 
     /**
@@ -63,7 +63,11 @@ open class ConfigurationManager(private val plugin: DirtyArrows) {
      * Sets all configu values to the config values provided by the default configuration file.
      */
     fun copyConfigDefaults() {
-        config.options().copyDefaults(true)
+        if (configFile.exists().not()) {
+            val configData = javaClass.getResourceAsStream("/config.yml").bufferedReader().readText()
+            configFile.writeText(configData)
+            plugin.logger.log(Level.INFO, "Extracted default configuration file (config.yml)")
+        }
     }
 
     /**
@@ -96,8 +100,7 @@ open class ConfigurationManager(private val plugin: DirtyArrows) {
     fun saveData() {
         try {
             data.save(dataFile)
-        }
-        catch (ioe: IOException) {
+        } catch (ioe: IOException) {
             plugin.logger.log(Level.SEVERE, "Could not save data file to $dataFile", ioe)
         }
     }

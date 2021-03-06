@@ -37,6 +37,31 @@ open class IronBow(plugin: DirtyArrows) : BowAbility(
      */
     private val anvils = HashMap<FallingBlock, Pair<Long, Player>>()
 
+    /**
+     * The maximum amount of milliseconds anvil will damage surrounding entities.
+     */
+    val maximumLifespanMillis = config.getInt("$node.max-lifespan")
+
+    /**
+     * The damage entities receive that are within this distance from the flying anvil.
+     */
+    val flyingDamageAmount = config.getDouble("$node.flying.damage")
+
+    /**
+     * Entities within this distance from the flying anvil will get damaged.
+     */
+    val flyingDamageRange = config.getDouble("$node.flying.range")
+
+    /**
+     * The damage entities receive that are within this distance from the landing place of the anvil.
+     */
+    val landingDamageAmount = config.getDouble("$node.landing.damage")
+
+    /**
+     * Entities within this distance from where the anvil lands get damaged.
+     */
+    val landingDamageRange = config.getDouble("$node.landing.range")
+
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {
         player.world.spawnFallingBlock(
                 player.location.copyOf().add(0.0, 1.0, 0.0), MaterialData(Material.ANVIL)
@@ -55,20 +80,20 @@ open class IronBow(plugin: DirtyArrows) : BowAbility(
         anvils.keys.forEach { anvil ->
             anvil.world.entities.asSequence()
                     .mapNotNull { it as? LivingEntity }
-                    .filter { it.location.isCloseTo(anvil.location, margin = 1.0) }
-                    .forEach { it.damage(3.0) }
+                    .filter { it.location.isCloseTo(anvil.location, margin = flyingDamageRange) }
+                    .forEach { it.damage(flyingDamageAmount) }
         }
         removeExpiredAnvils()
     }
 
     /**
-     * Unregisters all anvils that lived longer than [MAX_LIFESPAN_MILLIS].
+     * Unregisters all anvils that lived longer than [maximumLifespanMillis].
      */
     private fun removeExpiredAnvils() {
         anvils.keys.removeIf { anvil ->
             val birthDate = anvils[anvil]!!.first
             val age = System.currentTimeMillis() - birthDate
-            age >= MAX_LIFESPAN_MILLIS
+            age >= maximumLifespanMillis
         }
     }
 
@@ -89,21 +114,13 @@ open class IronBow(plugin: DirtyArrows) : BowAbility(
         // Damage all entities in range.
         anvil.world.entities.asSequence()
                 .mapNotNull { it as? LivingEntity }
-                .filter { it.location.isCloseTo(anvil.location, margin = 3.0) }
+                .filter { it.location.isCloseTo(anvil.location, margin = landingDamageRange) }
                 .forEach {
                     if (it is Player) {
                         it.playSound(anvil.location, Sound.BLOCK_ANVIL_LAND, 10f, 1f)
                     }
-                    it.damage(10.0)
+                    it.damage(landingDamageAmount)
                 }
         anvils.remove(anvil)
-    }
-
-    companion object {
-
-        /**
-         * Maximum time the anvil damage can be applied. In milliseconds.
-         */
-        const val MAX_LIFESPAN_MILLIS = 7000
     }
 }

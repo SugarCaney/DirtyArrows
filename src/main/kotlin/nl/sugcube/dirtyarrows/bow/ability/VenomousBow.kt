@@ -29,26 +29,34 @@ open class VenomousBow(plugin: DirtyArrows) : BowAbility(
         description = "Poisons the target."
 ) {
 
+    /**
+     * How long the target gets poisoned in ticks.
+     */
+    val poisonTime = 8 * 20
+
+    /**
+     * Maximum deviation from the poison time in ticks.
+     */
+    val poisonTimeFuzzing = 30
+
+    /**
+     * The level of poison
+     */
+    val poisonLevel = 3
+
+    init {
+        check(poisonTime >= 0) { "$node.poison-time cannot be negative, got <$poisonTime>" }
+        check(poisonTimeFuzzing >= 0) { "$node.poison-time cannot be negative, got <$poisonTimeFuzzing>" }
+        check(poisonLevel >= 1) { "$node.poison-time must greater than or equal to 1, got <$poisonLevel>" }
+    }
+
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
         val target = event.hitEntity as? LivingEntity ?: return
         target.addPotionEffect(PotionEffect(
                 PotionEffectType.POISON,
-                POISON_TIME + Random.nextInt(-POISON_TIME_FUZZING, POISON_TIME_FUZZING),
-                2
+                poisonTime + Random.nextInt(-poisonTimeFuzzing, poisonTimeFuzzing),
+                poisonLevel - 1
         ), true)
         target.location.showPotionParticle(PotionType.POISON)
-    }
-
-    companion object {
-
-        /**
-         * How long the target gets poisoned in ticks.
-         */
-        private const val POISON_TIME = 8 * 20
-
-        /**
-         * (Random) varience in poison time (ticks).
-         */
-        private const val POISON_TIME_FUZZING = 30
     }
 }

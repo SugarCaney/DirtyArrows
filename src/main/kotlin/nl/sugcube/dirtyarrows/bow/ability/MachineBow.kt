@@ -15,6 +15,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.entity.ProjectileLaunchEvent
 import org.bukkit.event.player.PlayerInteractEvent
+import kotlin.math.max
 
 /**
  * Shoots very quickly and immediately.
@@ -28,6 +29,26 @@ open class MachineBow(plugin: DirtyArrows) : BowAbility(
         removeArrow = false,
         description = "Shoots quickly, and slightly accurate."
 ) {
+
+    /**
+     * The amount of arrows to fire per click.
+     */
+    val bulletCount = config.getInt("$node.bullet-count")
+
+    /**
+     * The amount of ticks between each consecutive arrow.
+     */
+    val bulletDelay = config.getInt("$node.bullet-delay").toLong()
+
+    /**
+     * Maximum deviation for the launch direction.
+     */
+    val directionFuzz = config.getDouble("$node.direction-fuzz")
+
+    init {
+        check(bulletCount >= 1) { "$node.bullet-count must be greater than or equal to 1, got <$bulletCount>" }
+        check(bulletDelay >= 0) { "$node.bullet-count cannot be negative, got <$bulletDelay>" }
+    }
 
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {
         unregisterArrow(arrow)
@@ -43,10 +64,10 @@ open class MachineBow(plugin: DirtyArrows) : BowAbility(
         val spawnLocation = direction.toLocation(player.world)
 
         shootBullet(player, spawnLocation)
-        repeat(2) {
+        repeat(max(0, bulletCount - 1)) {
             plugin.server.scheduler.scheduleSyncDelayedTask(plugin, {
                 shootBullet(player, spawnLocation)
-            }, it * 2L)
+            }, it * bulletDelay)
         }
 
         event.isCancelled
@@ -60,7 +81,7 @@ open class MachineBow(plugin: DirtyArrows) : BowAbility(
             with(this as Arrow) {
                 applyBowEnchantments(player.bowItem())
                 shooter = player
-                velocity = player.eyeLocation.direction.multiply(3).fuzz(maxFuzz = 0.22)
+                velocity = player.eyeLocation.direction.multiply(3).fuzz(maxFuzz = directionFuzz)
 
                 if (player.gameMode == GameMode.CREATIVE) {
                     pickupStatus = Arrow.PickupStatus.CREATIVE_ONLY

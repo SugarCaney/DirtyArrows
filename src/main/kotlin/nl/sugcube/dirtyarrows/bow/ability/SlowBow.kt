@@ -30,6 +30,11 @@ open class SlowBow(plugin: DirtyArrows) : BowAbility(
      */
     private val velocityAndAge = HashMap<Arrow, Pair<Vector, Long>>()
 
+    /**
+     * After what time the arrows should despawn, in milliseconds.
+     */
+    val despawnTime = 59000
+
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {
         arrow.velocity = arrow.velocity.multiply(0.12)
         velocityAndAge[arrow] = arrow.velocity to System.currentTimeMillis()
@@ -59,19 +64,11 @@ open class SlowBow(plugin: DirtyArrows) : BowAbility(
             // automatically.
             val (_, birthTime) = velocityAndAge[it]!!
             val age = System.currentTimeMillis() - birthTime
-            if (age >= DESPAWN_TIME) {
+            if (age >= despawnTime) {
                 unregisterArrow(it)
                 true
             }
             else false
         }
-    }
-
-    companion object {
-
-        /**
-         * In what time the arrows should despawn.
-         */
-        const val DESPAWN_TIME = 59000
     }
 }

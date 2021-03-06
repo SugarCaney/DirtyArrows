@@ -19,18 +19,15 @@ open class PullBow(plugin: DirtyArrows) : BowAbility(
         description = "Pulls the target toward you."
 ) {
 
+    /**
+     * How hard to the bow pulls (quite magic value).
+     */
+    val pullStrength = config.getDouble("$node.strength")
+
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
         val target = event.hitEntity ?: return
         if (target == player) return
 
-        target.velocity = player.location.direction.multiply(-PULL_STRENGTH)
-    }
-
-    companion object {
-
-        /**
-         * How hard to the bow pulls (quite magic value).
-         */
-        private const val PULL_STRENGTH = 7.5
+        target.velocity = player.location.direction.multiply(-pullStrength)
     }
 }

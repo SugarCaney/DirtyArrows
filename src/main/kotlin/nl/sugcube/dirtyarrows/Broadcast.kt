@@ -24,7 +24,7 @@ object Broadcast {
     /**
      * Shows that the plugin.yml has been reloaded.
      */
-    val RELOADED_CONFIG = "$TAG Reloaded ${Colour.SECONDARY}plugin.yml"
+    val RELOADED_CONFIG = "$TAG Reloaded ${Colour.SECONDARY}config.yml"
 
     /**
      * DirtyArrows enable message.

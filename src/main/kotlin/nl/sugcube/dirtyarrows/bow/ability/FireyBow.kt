@@ -24,8 +24,13 @@ open class FireyBow(plugin: DirtyArrows) : BowAbility(
         description = "Shoot fireballs."
 ) {
 
+    /**
+     * Multiplier of the initial arrow velocity.
+     */
+    val fireballSpeedMultiplier = config.getDouble("$node.fireball-speed-multiplier")
+
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {
-        player.launchProjectile(Fireball::class.java, arrow.velocity.multiply(0.8))
+        player.launchProjectile(Fireball::class.java, arrow.velocity.multiply(fireballSpeedMultiplier))
         unregisterArrow(arrow)
         arrow.remove()
     }

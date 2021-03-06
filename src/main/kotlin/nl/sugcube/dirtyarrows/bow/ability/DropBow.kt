@@ -22,18 +22,29 @@ open class DropBow(plugin: DirtyArrows) : BowAbility(
         description = "Launches the target in the air."
 ) {
 
+    /**
+     * How much upward force to apply.
+     */
+    val launchIntensity = config.getDouble("$node.launch-intensity")
+
+    /**
+     * The maximum amount of deviation from the launch intensity.
+     */
+    val launchIntensityFuzzing = config.getDouble("$node.launch-intensity-fuzzing")
+
+    /**
+     * The maximum amount of horizontal force to apply per axis.
+     */
+    val horizontalFuzzing = config.getDouble("$node.horizontal-fuzzing")
+
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
         val target = event.hitEntity as? LivingEntity ?: return
         if (target == player) return
 
-        target.velocity = Vector(0.0.fuzz(0.2), LAUNCH_INTENSITY.fuzz(0.2), 0.0.fuzz(0.2))
-    }
-
-    companion object {
-
-        /**
-         * How much upward force to apply.
-         */
-        const val LAUNCH_INTENSITY = 1.0
+        target.velocity = Vector(
+                0.0.fuzz(horizontalFuzzing),
+                launchIntensity.fuzz(launchIntensityFuzzing),
+                0.0.fuzz(horizontalFuzzing)
+        )
     }
 }
