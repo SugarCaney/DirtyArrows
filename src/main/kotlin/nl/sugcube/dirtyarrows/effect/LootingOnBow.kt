@@ -18,6 +18,9 @@ import kotlin.random.Random
  * - On all levels has a 12.5% chance of being applied by default.
  * - Has a 35% chance of being the only enchantment by default.
  *
+ * No need to add custom functionality of dropping more items as that happens by default when holding
+ * the looting bow.
+ *
  * @author SugarCaney
  */
 open class LootingOnBow(private val plugin: DirtyArrows) : Listener {
