@@ -2,7 +2,9 @@ package nl.sugcube.dirtyarrows.util
 
 import org.bukkit.Material
 import org.bukkit.block.Block
+import org.bukkit.entity.Arrow
 import org.bukkit.material.MaterialData
+import org.bukkit.util.BlockIterator
 
 /**
  * Checks if the block below this block is solid.
@@ -26,4 +28,18 @@ inline fun <reified Data : MaterialData> Block.updateData(updater: (Data) -> Uni
     updater(theData)
     state.data = theData
     state.update(true)
+}
+
+/**
+ * Finds the block that the arrow hits.
+ */
+fun Arrow.hitBlock(): Block {
+    // Find the block that the arrow hits.
+    val iterator = BlockIterator(world, location.toVector(), velocity.normalize(), 0.0, 4)
+    var hitBlock = iterator.next()
+    while (iterator.hasNext()) {
+        hitBlock = iterator.next()
+        if (hitBlock.type != Material.AIR) break
+    }
+    return hitBlock
 }

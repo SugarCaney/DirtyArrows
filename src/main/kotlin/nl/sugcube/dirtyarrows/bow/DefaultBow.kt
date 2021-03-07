@@ -93,6 +93,7 @@ enum class DefaultBow(
     CURSE("curse"),
     ROUND("round"),
     FROZEN("frozen"),
+    TUNNELER("tunneler"),
     ;
 
     /**

@@ -1217,3 +1217,27 @@ frozen:
   #  A particle will spawn from shot arrows every N ticks.
   # (Int) default: 3
   particle-every-n-ticks: 3
+
+##
+## ABILITY: Tunneler
+## - Helps creating tunnels.
+## - Digs out square slices of blocks.
+## - Uses the most advanced pickaxe in the inventory for abilities (hardness, looting, etc.)
+## - Cannot mine bedrock and obsidian.
+##
+tunneler:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Tunneler's Bastard
+  name: "Tunneler's Bastard"
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 7
+  levels: 7
+
+  # The (square) diameter of the block slices to break.
+  # (Int) default: 3
+  diameter: 3
