@@ -9,12 +9,15 @@ import nl.sugcube.dirtyarrows.util.subtractDurability
 import org.bukkit.Effect
 import org.bukkit.GameMode
 import org.bukkit.Location
+import org.bukkit.Material
+import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.entity.ProjectileLaunchEvent
 import org.bukkit.event.player.PlayerInteractEvent
+import org.bukkit.inventory.ItemStack
 import kotlin.math.max
 
 /**
@@ -58,6 +61,7 @@ open class MachineBow(plugin: DirtyArrows) : BowAbility(
     @EventHandler
     fun clickBowHandler(event: PlayerInteractEvent) {
         val player = event.player
+        if (plugin.activationManager.isActivatedFor(player).not()) return
         if (player.hasBowInHand().not()) return
 
         val direction = player.eyeLocation.toVector().add(player.location.direction.multiply(3))
@@ -74,12 +78,20 @@ open class MachineBow(plugin: DirtyArrows) : BowAbility(
     }
 
     /**
+     * Checks if the player has arrows in their inventory.
+     */
+    private fun Player.hasArrows() = gameMode == GameMode.CREATIVE || inventory.contains(Material.ARROW)
+
+    /**
      * Shoots a machine gun bullet from the given spawn location.
      */
     private fun shootBullet(player: Player, spawnLocation: Location) {
+        if (player.hasArrows().not()) return
+
+        val bow = player.bowItem()
         player.world.spawnEntity(spawnLocation, EntityType.ARROW).apply {
             with(this as Arrow) {
-                applyBowEnchantments(player.bowItem())
+                applyBowEnchantments(bow)
                 shooter = player
                 velocity = player.eyeLocation.direction.multiply(3).fuzz(maxFuzz = directionFuzz)
 
@@ -89,6 +101,10 @@ open class MachineBow(plugin: DirtyArrows) : BowAbility(
 
                 player.bowItem()?.subtractDurability(player)
                 player.playEffect(player.location, Effect.BOW_FIRE, null)
+
+                if (bow?.containsEnchantment(Enchantment.ARROW_INFINITE) == false) {
+                    player.inventory.removeItem(ItemStack(Material.ARROW, 1))
+                }
             }
         }
     }

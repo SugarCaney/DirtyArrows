@@ -778,8 +778,8 @@ bomb:
   bomb-count: 3
 
   # The square radius (in blocks) around the location of impact where the bombs can spawn.
-  # (Double) default: 4.5
-  bomb-radius: 4.5
+  # (Double) default: 3.5
+  bomb-radius: 3.5
 
   # How high (in blocks) above location of impact the bombs must spawn.
   # (Double) default: 32.0
@@ -802,17 +802,9 @@ drop:
   # (Int) default: 7
   levels: 7
 
-  # How much upward force to apply. 1.0 is roughly 8 blocks.
-  # (Double) default: 1.0
-  launch-intensity: 1.0
-
-  # The maximum amount of deviation from the launch intensity.
-  # (Double) default: 0.2
-  launch-intensity-fuzzing: 0.2
-
-  # The maximum amount of horizontal force to apply per axis.
-  # (Double) default: 0.2
-  horizontal-fuzzing: 0.2
+  # How many blocks the target must be teleported upward.
+  # (Int) default: 8
+  drop-height: 8
 
 ##
 ## ABILITY: Airstrike
@@ -1127,8 +1119,8 @@ curse:
   # Move curse effect options:
   move:
     # Mean velocity the target will move on each axis in the horizontal plane when the move effect is chosen.
-    # (Double) default: 0.25
-    velocity-radius: 0.25
+    # (Double) default: 1.25
+    velocity-radius: 1.25
 
   # Explode curse effect options:
   # Beware: messing with these settings can mess up protected regions.

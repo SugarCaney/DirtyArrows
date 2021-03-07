@@ -126,7 +126,7 @@ open class NuclearBow(plugin: DirtyArrows) : BowAbility(
     /**
      * Each radiation spot will spawn a particle every N ticks.
      */
-    val particleEveryNTicks = config.getInt("$node.particle-every-n-ticks")
+    val particleEveryNTicks = config.getInt("$node.radiation.particle-every-n-ticks")
 
     init {
         check(radiationPoisonDuration >= 0) { "$node.radiation.poison-duration must not be negative, got <$radiationPoisonDuration>" }
@@ -167,7 +167,7 @@ open class NuclearBow(plugin: DirtyArrows) : BowAbility(
     override fun particle(tickNumber: Int) {
         showArrowParticles(tickNumber)
 
-        if (radiationEnabled) {
+        if (radiationEnabled && radiationParticles) {
             showRadiationParticles(tickNumber)
         }
     }

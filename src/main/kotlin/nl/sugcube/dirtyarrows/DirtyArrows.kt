@@ -6,6 +6,7 @@ import nl.sugcube.dirtyarrows.effect.*
 import nl.sugcube.dirtyarrows.recipe.RecipeManager
 import nl.sugcube.dirtyarrows.region.RegionManager
 import nl.sugcube.dirtyarrows.util.Update
+import org.bukkit.Bukkit
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.logging.Level
@@ -111,6 +112,19 @@ class DirtyArrows : JavaPlugin() {
         else logger.log(Level.INFO, "DirtyArrows is up-to-date!")
     }
 
+    /**
+     * Enables Dirty Arrows for all online players that have the dirtyarrows permission.
+     */
+    private fun enableForAllPlayers() = Bukkit.getOnlinePlayers().forEach { player ->
+        if (config.getBoolean("auto-enable").not()) return
+        if (player.hasPermission("dirtyarrows").not()) return@forEach
+
+        activationManager.activateFor(player)
+        if (config.getBoolean("show-enable-message")) {
+            player.sendMessage(Broadcast.enabledMessage(this, enabled = true))
+        }
+    }
+
     override fun onEnable() {
         configurationManager.initialise()
         registerCommands()
@@ -119,6 +133,7 @@ class DirtyArrows : JavaPlugin() {
         regionManager.loadRegions()
         bowManager.reload()
         checkForUpdates()
+        enableForAllPlayers()
 
         logger.info("DirtyArrows has been enabled!")
     }

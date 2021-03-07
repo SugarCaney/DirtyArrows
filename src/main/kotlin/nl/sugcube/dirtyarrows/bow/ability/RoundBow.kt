@@ -78,8 +78,4 @@ open class RoundBow(plugin: DirtyArrows) : BowAbility(
 
         return false
     }
-
-    override fun Player.consumeBowItems() {
-        if (gameMode == GameMode.CREATIVE) return
-    }
 }

@@ -33,8 +33,9 @@ open class JoinListener(private val plugin: DirtyArrows) : Listener {
         if (plugin.config.getBoolean("auto-enable").not()) return
 
         val player = event.player
-        plugin.activationManager.activateFor(player)
+        if (player.hasPermission("dirtyarrows").not()) return
 
+        plugin.activationManager.activateFor(player)
         if (plugin.config.getBoolean("show-enable-message")) {
             player.sendMessage(Broadcast.enabledMessage(plugin, enabled = true))
         }

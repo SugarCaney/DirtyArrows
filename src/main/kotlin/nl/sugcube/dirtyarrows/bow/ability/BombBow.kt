@@ -34,7 +34,7 @@ open class BombBow(plugin: DirtyArrows) : BowAbility(
     /**
      * The square radius around the location of impact where the bombs can spawn.
      */
-    val bombRadius = config.getDouble("$node.radius")
+    val bombRadius = config.getDouble("$node.bomb-radius")
 
     /**
      * How high above location of impact the bombs must spawn.

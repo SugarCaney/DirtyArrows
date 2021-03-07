@@ -3,12 +3,11 @@ package nl.sugcube.dirtyarrows.bow.ability
 import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
-import nl.sugcube.dirtyarrows.util.fuzz
+import nl.sugcube.dirtyarrows.util.copyOf
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.ProjectileHitEvent
-import org.bukkit.util.Vector
 
 /**
  * Shoots the target entity up so it will drop down.
@@ -23,28 +22,23 @@ open class DropBow(plugin: DirtyArrows) : BowAbility(
 ) {
 
     /**
-     * How much upward force to apply.
+     * How many blocks the targets get teleported upward.
      */
-    val launchIntensity = config.getDouble("$node.launch-intensity")
-
-    /**
-     * The maximum amount of deviation from the launch intensity.
-     */
-    val launchIntensityFuzzing = config.getDouble("$node.launch-intensity-fuzzing")
-
-    /**
-     * The maximum amount of horizontal force to apply per axis.
-     */
-    val horizontalFuzzing = config.getDouble("$node.horizontal-fuzzing")
+    val dropHeight = config.getInt("$node.drop-height")
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
         val target = event.hitEntity as? LivingEntity ?: return
         if (target == player) return
 
-        target.velocity = Vector(
-                0.0.fuzz(horizontalFuzzing),
-                launchIntensity.fuzz(launchIntensityFuzzing),
-                0.0.fuzz(horizontalFuzzing)
-        )
+        val dropLocation = target.location
+        for (i in 1..dropHeight) {
+            val block = target.world.getBlockAt(dropLocation.blockX, dropLocation.blockY + i, dropLocation.blockZ)
+            if (block?.type?.isSolid == true) {
+                target.teleport(dropLocation.copyOf(y = (dropLocation.blockY + i).toDouble()))
+                return
+            }
+        }
+
+        target.teleport(dropLocation.copyOf(y = (dropLocation.blockY + dropHeight).toDouble()))
     }
 }

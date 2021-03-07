@@ -17,6 +17,7 @@ import org.bukkit.event.entity.EntityDeathEvent
 import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.util.Vector
+import java.util.concurrent.ConcurrentHashMap
 import kotlin.random.Random
 
 /**
@@ -41,7 +42,7 @@ open class CurseBow(plugin: DirtyArrows) : BowAbility(
     /**
      * All cursed entities mapped to the unix timestamp where the arrow was launched.
      */
-    private val cursed = HashMap<LivingEntity, Long>()
+    private val cursed = ConcurrentHashMap<LivingEntity, Long>()
 
     /**
      * The mean duration of the curse in milliseconds.

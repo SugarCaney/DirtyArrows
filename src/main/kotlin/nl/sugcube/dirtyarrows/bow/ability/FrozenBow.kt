@@ -22,6 +22,7 @@ import org.bukkit.event.player.PlayerMoveEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
+import java.util.concurrent.ConcurrentHashMap
 import kotlin.math.min
 import kotlin.random.Random
 
@@ -47,7 +48,7 @@ open class FrozenBow(plugin: DirtyArrows) : BowAbility(
     /**
      * All entities that are frozen, mapped to the time they were frozen.
      */
-    private val frozenEntities = HashMap<Entity, Long>()
+    private val frozenEntities = ConcurrentHashMap<Entity, Long>()
 
     /**
      * How far along the x/z axis the bow can freeze.

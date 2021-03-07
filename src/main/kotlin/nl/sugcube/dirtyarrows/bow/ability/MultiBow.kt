@@ -52,8 +52,8 @@ open class MultiBow(plugin: DirtyArrows) : BowAbility(
                         y = arrow.velocity.y.fuzz(directionFuzz),
                         z = arrow.velocity.z.fuzz(directionFuzz)
                 )
-                isCritical = true
                 applyBowEnchantments(player.bowItem())
+                isCritical = true
 
                 if (player.gameMode == GameMode.CREATIVE) {
                     pickupStatus = Arrow.PickupStatus.CREATIVE_ONLY
@@ -68,8 +68,7 @@ open class MultiBow(plugin: DirtyArrows) : BowAbility(
 
         val hasInfinity = bowItem()?.enchantments?.containsKey(Enchantment.ARROW_INFINITE) == true
         if (hasInfinity.not()) {
-            // Only subtract 7 instead of 8, because 1 gets fired by default.
-            inventory.removeItem(ItemStack(Material.ARROW, arrowCount - 1))
+            inventory.removeItem(ItemStack(Material.ARROW, arrowCount))
         }
     }
 }

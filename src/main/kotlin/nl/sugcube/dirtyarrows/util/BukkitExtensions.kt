@@ -46,7 +46,7 @@ fun Location.createExplosion(
         setFire: Boolean = false,
         breakBlocks: Boolean = false
 ) {
-    if (breakBlocks) {
+    if (breakBlocks.not()) {
         world.createExplosion(x, y, z, power, setFire, breakBlocks)
     }
     else world.createExplosion(this, power, setFire)
