@@ -17,7 +17,7 @@ enum class AutoCompleteArgument(
     /**
      * All names of online players.
      */
-    PLAYERS({ Bukkit.getOnlinePlayers().map { it.name } }),
+    PLAYERS({ listOf("@a", "@r") +  Bukkit.getOnlinePlayers().map { it.name } }),
 
     /**
      * All technical IDS of the bows.
