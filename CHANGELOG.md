@@ -13,10 +13,11 @@ Changelog
 * **`i`** Updated for Minecraft 1.11.2.
 * **`i`** Refactored the whole code base.
 * **`+`** Added \da visualize to visualize regions and position selection.
+* **`+`** Added \da tp command to teleport to the center of a region.
+* **`+`** Added \da ammo to quickly give the required items to players.
 * **`+`** Added option to hide the enabled/disabled message.
 * **`+`** Added option to run in minigame/silent mode.
 * **`+`** Added option to disable arrow particles.
-* **`+`** Added \da tp command to teleport to the center of a region.
 * **`+`** Added documentation to the default configuration file.
 * **`+`** Added commands to the help overview.
 * **`!`** Fixed anvil costs not updating correctly (and crash).

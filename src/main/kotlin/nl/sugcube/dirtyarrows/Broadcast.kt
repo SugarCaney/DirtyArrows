@@ -170,6 +170,21 @@ object Broadcast {
     val CURSE_LIFTED = "$TAG The curse has been lifted."
 
     /**
+     * Lets know that the bow does not requires ammonution.
+     *
+     * %s = bow name.
+     */
+    val NO_AMMO_REQUIRED = "$TAG ${Colour.SECONDARY}%s${Colour.PRIMARY} does not require ammonution."
+
+    /**
+     * Give ammo confirmation.
+     *
+     * %s = Item list.
+     * $s = Target player.
+     */
+    val GAVE_AMMO = "$TAG Gave ${Colour.TERTIARY}%s${Colour.PRIMARY} to ${Colour.SECONDARY}%s${Colour.PRIMARY}."
+
+    /**
      * Get the message that shows whether DA is enabled or disabled.
      *
      * @param plugin

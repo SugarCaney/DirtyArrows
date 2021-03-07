@@ -22,6 +22,7 @@ open class DirtyArrowsCommandManager(private val plugin: DirtyArrows) : CommandE
     val commands: List<SubCommand<DirtyArrows>> = listOf(
             CommandReload(),
             CommandGive(),
+            CommandAmmo(),
             CommandList(),
             CommandCheck(),
             CommandTeleport(),
