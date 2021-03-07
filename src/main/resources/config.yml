@@ -1222,7 +1222,7 @@ frozen:
 ## ABILITY: Tunneler
 ## - Helps creating tunnels.
 ## - Digs out square slices of blocks.
-## - Uses the most advanced pickaxe in the inventory for abilities (hardness, looting, etc.)
+## - Uses the most advanced pickaxe in the inventory for breaking blocks.
 ## - Cannot mine bedrock and obsidian.
 ##
 tunneler:
