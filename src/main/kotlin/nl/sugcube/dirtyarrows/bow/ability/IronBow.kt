@@ -4,8 +4,8 @@ import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
 import nl.sugcube.dirtyarrows.util.copyOf
-import nl.sugcube.dirtyarrows.util.isCloseTo
 import org.bukkit.Material
+import org.bukkit.Particle
 import org.bukkit.Sound
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.FallingBlock
@@ -78,9 +78,9 @@ open class IronBow(plugin: DirtyArrows) : BowAbility(
     override fun effect() {
         // Damage all entities in range of the anvil.
         anvils.keys.forEach { anvil ->
-            anvil.world.entities.asSequence()
+            anvil.world.getNearbyEntities(anvil.location, flyingDamageRange, flyingDamageRange, flyingDamageRange)
+                    .asSequence()
                     .mapNotNull { it as? LivingEntity }
-                    .filter { it.location.isCloseTo(anvil.location, margin = flyingDamageRange) }
                     .forEach { it.damage(flyingDamageAmount) }
         }
         removeExpiredAnvils()
@@ -112,15 +112,19 @@ open class IronBow(plugin: DirtyArrows) : BowAbility(
         }
 
         // Damage all entities in range.
-        anvil.world.entities.asSequence()
+        val world = anvil.world
+        world.getNearbyEntities(anvil.location, landingDamageRange, landingDamageRange, landingDamageRange).asSequence()
                 .mapNotNull { it as? LivingEntity }
-                .filter { it.location.isCloseTo(anvil.location, margin = landingDamageRange) }
                 .forEach {
                     if (it is Player) {
                         it.playSound(anvil.location, Sound.BLOCK_ANVIL_LAND, 10f, 1f)
                     }
                     it.damage(landingDamageAmount)
                 }
+        if (config.getBoolean("show-particles")) {
+            world.spawnParticle(Particle.CLOUD, anvil.location, 25)
+        }
+
         anvils.remove(anvil)
     }
 }

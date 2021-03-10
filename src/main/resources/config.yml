@@ -1016,8 +1016,8 @@ iron:
     damage: 10.0
 
     # Entities within this distance from where the anvil lands get damaged.
-    # (Double) default: 3.0
-    range: 3.0
+    # (Double) default: 2.5
+    range: 2.5
 
   # The maximum amount of milliseconds anvil will damage surrounding entities.
   # This is mostly a safety measure for when land events are not registered.
