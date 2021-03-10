@@ -1219,16 +1219,17 @@ frozen:
   particle-every-n-ticks: 3
 
 ##
-## ABILITY: Tunneler
+## ABILITY: Drill
 ## - Helps creating tunnels.
 ## - Digs out square slices of blocks.
 ## - Uses the most advanced pickaxe in the inventory for breaking blocks.
 ## - Cannot mine bedrock and obsidian.
+## - Power N drills N layers.
 ##
-tunneler:
+drill:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Tunneler's Bastard
-  name: "Tunneler's Bastard"
+  # (String) default: Drill Bastard
+  name: "Drill Bastard"
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
