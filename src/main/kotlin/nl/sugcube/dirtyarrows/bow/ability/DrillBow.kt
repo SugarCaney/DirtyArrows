@@ -16,6 +16,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.inventory.ItemStack
 import kotlin.math.abs
+import kotlin.math.max
 
 /**
  * Breaks a slice of blocks.
@@ -49,7 +50,7 @@ open class DrillBow(plugin: DirtyArrows) : BowAbility(
         val hitBlock = arrow.hitBlock()
         val toolLevel = player.maxToolLevel()
         val mineTool = createMineTool(toolLevel)
-        val layers = player.layers()
+        val layers = max(1, player.layers())
 
         val dx = abs(arrow.velocity.x)
         val dy = abs(arrow.velocity.y)
@@ -162,7 +163,7 @@ open class DrillBow(plugin: DirtyArrows) : BowAbility(
      * @return The amount of layers the player can drill per shot.
      */
     private fun Player.layers(): Int {
-        return bowItem()?.getEnchantmentLevel(Enchantment.ARROW_DAMAGE) ?: return 0
+        return bowItem()?.getEnchantmentLevel(Enchantment.ARROW_DAMAGE) ?: return 1
     }
 
     companion object {

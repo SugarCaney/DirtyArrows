@@ -12,7 +12,7 @@ Changelog
 
 * **`i`** Updated for Minecraft 1.11.2.
 * **`i`** Refactored the whole code base.
-* **`+`** Added Tunneler's bow.
+* **`+`** Added Drill bow.
 * **`+`** Added \da visualize to visualize regions and position selection.
 * **`+`** Added \da tp command to teleport to the center of a region.
 * **`+`** Added \da ammo to quickly give the required items to players.
@@ -21,6 +21,7 @@ Changelog
 * **`+`** Added option to disable arrow particles.
 * **`+`** Added documentation to the default configuration file.
 * **`+`** Added commands to the help overview.
+* **`+`** Added option for ability cooldown time.
 * **`!`** Fixed anvil costs not updating correctly (and crash).
 * **`!`** Fixed cursed bastard's move-effect not being calculated properly.
 * **`!`** Fixed curse not going away after death.

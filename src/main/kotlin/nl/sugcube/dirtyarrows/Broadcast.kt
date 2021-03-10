@@ -180,9 +180,17 @@ object Broadcast {
      * Give ammo confirmation.
      *
      * %s = Item list.
-     * $s = Target player.
+     * %s = Target player.
      */
     val GAVE_AMMO = "$TAG Gave ${Colour.TERTIARY}%s${Colour.PRIMARY} to ${Colour.SECONDARY}%s${Colour.PRIMARY}."
+
+    /**
+     * You have to wait X seconds to use the bow again.
+     *
+     * %.1f = The amount of seconds left.
+     * %s = Bow name.
+     */
+    val COOLDOWN = "$TAG_ERROR Wait ${Colour.PRIMARY}%.1fs${Colour.ERROR} before you can use ${Colour.SECONDARY}%s${Colour.ERROR} again."
 
     /**
      * Get the message that shows whether DA is enabled or disabled.

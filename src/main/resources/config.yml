@@ -49,14 +49,6 @@ blood: true
 arrow-recipe-amount: 16
 
 ##
-## Help screen settings (/da help).
-##
-help:
-  # How many bows are displayed on each help page.
-  # (Int) default: 10
-  bows-per-page: 10
-
-##
 ## Headshot settings.
 ##
 headshot:
@@ -71,6 +63,14 @@ headshot:
 # Whether zombies should drop flint or not on death.
 # (Boolean) default: true
 zombie-flint: true
+
+##
+## Help screen settings (/da help).
+##
+help:
+  # How many bows are displayed on each help page.
+  # (Int) default: 10
+  bows-per-page: 10
 
 ##
 ## ABILITY: Exploding Bow
@@ -88,6 +88,10 @@ exploding:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 12
   levels: 12
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
 
   # The power of the explosion. TNT is 4.0 for reference.
   # Beware: the region protection range stays the same. Largers explosions leave you at a risk of blowing up
@@ -120,6 +124,10 @@ lightning:
   # (Int) default: 7
   levels: 7
 
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
 ##
 ## ABILITY: Clucky
 ## - Spawns a chicken.
@@ -141,6 +149,10 @@ clucky:
   # (Int) default: 1
   spawn-count: 1
 
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
 ##
 ## ABILITY: Ender
 ## - Teleports the player to the arrow location on impact.
@@ -159,6 +171,10 @@ ender:
   # (Int) default: 7
   levels: 7
 
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
 ##
 ## ABILITY: Oak
 ## - Spawns an oak tree.
@@ -175,6 +191,10 @@ oak:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 5
   levels: 5
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
 
 ##
 ## ABILITY: Spruce
@@ -193,6 +213,10 @@ spruce:
   # (Int) default: 5
   levels: 5
 
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
 ##
 ## ABILITY: Birch
 ## - Spawns a birch tree.
@@ -209,6 +233,10 @@ birch:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 5
   levels: 5
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
 
 ##
 ## ABILITY: Jungle
@@ -227,6 +255,10 @@ jungle:
   # (Int) default: 5
   levels: 5
 
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
 ##
 ## ABILITY: Acacia
 ## - Generates an acacia tree.
@@ -244,6 +276,10 @@ acacia:
   # (Int) default: 5
   levels: 5
 
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
 ##
 ## ABILITY: Dark Oak
 ## - Generates a dark oak tree.
@@ -260,6 +296,10 @@ darkoak:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 5
   levels: 5
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
 
 ##
 ## ABILITY: Batty
@@ -282,6 +322,10 @@ batty:
   # (Int) default: 10
   swarm-size: 10
 
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
 ##
 ## ABILITY: Nuclear
 ## - Creates a massive explosion which sets blocks on fire.
@@ -299,6 +343,10 @@ nuclear:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 100
   levels: 100
+
+  # How many milliseconds each use must be apart. Has 5 minutes of cooldown by default.
+  # (Int) default: 300000
+  cooldown: 300000
 
   # Settings for the explosion.
   explosion:
@@ -396,6 +444,10 @@ enlightened:
   # (Int) default: 5
   levels: 5
 
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
 ##
 ## ABILITY: Ranged
 ## - Shoots arrows that go fast and reach far.
@@ -413,6 +465,10 @@ ranged:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 12
   levels: 12
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
 
   # How much quicker the arrow fires than normal.
   # (Double) default: 5.0
@@ -435,6 +491,10 @@ machine:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 12
   levels: 12
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
 
   # The amount of arrows to fire per click. Must be at least 1.
   # (Int) default: 3
@@ -465,6 +525,10 @@ poisonous:
   # (Int) default: 12
   levels: 12
 
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
   # How long the target gets poisoned in ticks.
   # (Int) default: 160
   poison-time: 160
@@ -494,6 +558,10 @@ disorienting:
   # (Int) default: 7
   levels: 7
 
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
   # Maximum change in yaw in degrees.
   # (Double) default: 30.0
   yaw-fuzzing: 30.0
@@ -519,6 +587,10 @@ swap:
   # (Int) default: 7
   levels: 7
 
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
 ##
 ## ABILITY: Draining
 ## - Heals the player when it damages a target.
@@ -535,6 +607,10 @@ draining:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 7
   levels: 7
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
 
   # The amount of health points to heal on every hit. 1 point = half a heart.
   # (Int) default: 2
@@ -557,6 +633,10 @@ flintand:
   # (Int) default: 12
   levels: 12
 
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
   #  A particle will spawn from shot arrows every N ticks.
   # (Int) default: 4
   particle-every-n-ticks: 4
@@ -577,6 +657,10 @@ disarming:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 7
   levels: 7
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
 
   # The chance of disarming anything.
   # Chance between 0 and 1.
@@ -603,6 +687,10 @@ wither:
   # (Boolean) default: true
   enabled: true
 
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 12
   levels: 12
@@ -628,6 +716,10 @@ firey:
   # (Int) default: 12
   levels: 12
 
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
   # Multiplier of the initial arrow velocity.
   # (Double) default: 0.8
   fireball-speed-multiplier: 0.8
@@ -649,6 +741,10 @@ slow:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 12
   levels: 12
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
 
   # After what time the arrows should despawn, in milliseconds.
   # Prevents arrows to be stored after they despawn. Not recommended to increase the default value.
@@ -672,6 +768,10 @@ level:
   # (Int) default: 12
   levels: 12
 
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
   # The amount of levels to steal per hit.
   # (Int) default: 1
   level-change: 1
@@ -692,6 +792,10 @@ undead:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 15
   levels: 15
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
 
   # The amount of zombies to spawn.
   # (Int) default: 16
@@ -717,6 +821,10 @@ woodman:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 7
   levels: 7
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
 
 ##
 ## ABILITY: Starvation
@@ -756,6 +864,10 @@ multi:
   # (Int) default: 10
   levels: 10
 
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
   # The amount of arrows to fire at once, must be at least 1.
   # (Int) default: 12
   arrow-count: 12
@@ -780,6 +892,10 @@ bomb:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 15
   levels: 15
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
 
   # The amount of TNT to spawn.
   # (Int) default: 3
@@ -810,6 +926,10 @@ drop:
   # (Int) default: 7
   levels: 7
 
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
   # How many blocks the target must be teleported upward.
   # (Int) default: 8
   drop-height: 8
@@ -830,6 +950,10 @@ airstrike:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 20
   levels: 20
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
 
   # The maximum amount of milliseconds the arrow can spawn TNT.
   # This is mostly a safety measure for when land events are not registered.
@@ -853,6 +977,10 @@ magmatic:
   # (Int) default: 12
   levels: 12
 
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
   # A particle will spawn from shot arrows every N (this amount of) ticks.
   # (Int) default: 3
   particle-every-n-ticks: 3
@@ -873,6 +1001,10 @@ aquatic:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 7
   levels: 7
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
 
   # A particle will spawn from shot arrows every N (this amount of) ticks.
   # (Int) default: 3
@@ -895,6 +1027,10 @@ pull:
   # (Int) default: 7
   levels: 7
 
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
   # How hard to the bow pulls (quite magic value).
   # (Double) default: 7.5
   strength: 7.5
@@ -915,6 +1051,10 @@ paralyze:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 10
   levels: 10
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
 
   # How long the effects last in ticks.
   # (Int) default: 240
@@ -951,6 +1091,10 @@ cluster:
   # (Int) default: 15
   levels: 15
 
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
   # The amount of TNT to spawn.
   # (Int) default: 5
   tnt-count: 5
@@ -980,6 +1124,10 @@ airship:
   # (Int) default: 12
   levels: 12
 
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
   # The maximum amount of milliseconds the arrow can boost the player.
   # This is mostly a safety measure for when land events are not registered.
   # (Int) default: 7000
@@ -1006,6 +1154,10 @@ iron:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 5
   levels: 5
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
 
   # Settings for anvils that get near entities during flight.
   flying:
@@ -1053,6 +1205,10 @@ curse:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 7
   levels: 7
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
 
   # The mean duration of the curse in milliseconds.
   # (Int) default: 14000
@@ -1162,6 +1318,10 @@ round:
   # (Int) default: 7
   levels: 7
 
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
   # How many arrows get fired.
   # (Int) default: 30
   arrow-count: 30
@@ -1185,6 +1345,10 @@ frozen:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 12
   levels: 12
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
 
   # How many blocks along the x/z axis the bow can freeze.
   # (Int) default: 2
@@ -1246,6 +1410,10 @@ drill:
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 7
   levels: 7
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
 
   # The (square) diameter of the block slices to break.
   # (Int) default: 3

@@ -8,6 +8,7 @@ import nl.sugcube.dirtyarrows.util.itemInOffHand
 import nl.sugcube.dirtyarrows.util.itemName
 import org.bukkit.GameMode
 import org.bukkit.Location
+import org.bukkit.Sound
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.Player
@@ -17,6 +18,9 @@ import org.bukkit.event.Listener
 import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.event.entity.ProjectileLaunchEvent
 import org.bukkit.inventory.ItemStack
+import java.util.*
+import java.util.concurrent.ConcurrentHashMap
+import kotlin.collections.HashSet
 
 /**
  * Base for all bow abilities.
@@ -102,6 +106,24 @@ abstract class BowAbility(
     protected val node = type.node
 
     /**
+     * How many milliseconds of cooldown the ability has.
+     */
+    private val cooldownTime = config.getInt("$node.cooldown").toLong()
+
+    /**
+     * Whether to play a sound when the recharge time expires.
+     */
+    private val playSoundWhenRecharged = config.getBoolean("play-sound-when-charged")
+
+    /**
+     * Maps each player to the unix time they used this bow ability (millis).
+     * When a player is contained in this map, the cooldown period is active.
+     * When an ability has no cooldown, this map is always empty.
+     * Gets accessed from the scheduler (run) and the event thread (projectilel launch event) hence concurrent.
+     */
+    private val cooldownMap = ConcurrentHashMap<Player, Long>()
+
+    /**
      * Executes a repeating scheduled effect every [handleEveryNTicks] ticks.
      */
     open fun effect() = Unit
@@ -149,6 +171,23 @@ abstract class BowAbility(
         if (plugin.config.getBoolean("show-particles")) {
             particle(tickCounter)
         }
+
+        removeExpiredCooldowns()
+    }
+
+    /**
+     * Removes all cooldown periods when they have expired.
+     */
+    private fun removeExpiredCooldowns() {
+        val now = System.currentTimeMillis()
+
+        cooldownMap.entries.removeIf { (player, usedTime) ->
+            val toRemove = now - usedTime >= cooldownTime
+            if (toRemove) {
+                player.playSound(player.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10f, 1f)
+            }
+            toRemove
+        }
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
@@ -183,8 +222,14 @@ abstract class BowAbility(
         if (player.isDirtyArrowsActivated().not()) return
         if (player.hasBowInHand().not()) return
         if (player.hasPermission().not()) return
+        if (player.inCooldownPeriod()) return
         if (canShootInProtectedRegions.not() && player.location.isInProtectedRegion(player)) return
         if (player.meetsResourceRequirements().not()) return
+
+        // Set cooldown.
+        if (cooldownTime > 0) {
+            cooldownMap[player] = System.currentTimeMillis()
+        }
 
         // All is fine, handle event.
         arrows.add(arrow)
@@ -226,6 +271,25 @@ abstract class BowAbility(
         }
 
         return hasPermission
+    }
+
+    /**
+     * Checks if the ability is in cooldown.
+     *
+     * @param showError
+     *          Whether to show an error if the ability is in cooldown.
+     * @return `true` when the player is in cooldown, `false` otherwise.
+     */
+    protected fun Player.inCooldownPeriod(showError: Boolean = true): Boolean {
+        val cooldown = isOnCooldown(player)
+
+        if (cooldown && showError) {
+            val timeLeft = cooldownTimeLeft() / 1000.0
+            val bowName = config.getString(this@BowAbility.type.nameNode).applyColours()
+            player.sendMessage(Broadcast.COOLDOWN.format(timeLeft, bowName))
+        }
+
+        return cooldown
     }
 
     /**
@@ -273,6 +337,24 @@ abstract class BowAbility(
      * Get the colour applied bow name of the bow of this ability.
      */
     fun bowName() = plugin.config.getString(this@BowAbility.type.nameNode).applyColours()
+
+    /**
+     * Whether the given player has the ability on cooldown.
+     *
+     * @param player
+     *          The player to check for.
+     * @return `true` if the player has the ability on cooldown, `false` otherwise.
+     */
+    fun isOnCooldown(player: Player) = cooldownMap.containsKey(player)
+
+    /**
+     * Looks up how many milliseconds of cooldown the given player has left for this ability.
+     */
+    protected fun Player.cooldownTimeLeft(): Long {
+        if (isOnCooldown(this).not()) return 0
+        val usedTime = cooldownMap.getOrDefault(this, 0L)
+        return cooldownTime - (System.currentTimeMillis() - usedTime)
+    }
 
     /**
      * Registers that the given arrow is shot by this bow.
