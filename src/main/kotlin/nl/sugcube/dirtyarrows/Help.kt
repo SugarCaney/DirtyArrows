@@ -26,11 +26,17 @@ class Help(val plugin: DirtyArrows) {
         get() = "$TERTIARY>>$SECONDARY-----$TERTIARY>$TERTIARY DirtyArrows %s${SECONDARY}Page %d/%d$TERTIARY <$SECONDARY-----$TERTIARY<<"
 
     /**
+     * How many bows to show per help page.
+     */
+    private val bowsPerPage: Int
+        get() = plugin.config.getInt("help.bows-per-page")
+
+    /**
      * Get the total amount of help pages.
      */
     val pageCount: Int
         get() {
-            val bowPages = ceil(plugin.bowManager.registeredTypes.size / BOWS_PER_PAGE.toDouble())
+            val bowPages = ceil(plugin.bowManager.registeredTypes.size / bowsPerPage.toDouble())
             return (bowPages + 1).toInt()
         }
 
@@ -116,19 +122,11 @@ class Help(val plugin: DirtyArrows) {
 
         // Bows have pages 2-pageCount.
         if (pageNumber in 2..pageCount) {
-            val from = BOWS_PER_PAGE * index
-            val to = min(allBows.size, from + BOWS_PER_PAGE)
+            val from = bowsPerPage * index
+            val to = min(allBows.size, from + bowsPerPage)
             val bowsOnPage = allBows.subList(from, to).mapNotNull { plugin.bowManager[it] }
             showBowHelp(sender, bowsOnPage, pageNumber)
         }
         else showCommandHelp(sender)
-    }
-
-    companion object {
-
-        /**
-         * How many bows to show per help page.
-         */
-        private const val BOWS_PER_PAGE = 9
     }
 }

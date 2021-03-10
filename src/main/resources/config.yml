@@ -49,6 +49,14 @@ blood: true
 arrow-recipe-amount: 16
 
 ##
+## Help screen settings (/da help).
+##
+help:
+  # How many bows are displayed on each help page.
+  # (Int) default: 10
+  bows-per-page: 10
+
+##
 ## Headshot settings.
 ##
 headshot:

@@ -28,7 +28,7 @@ open class DrillBow(plugin: DirtyArrows) : BowAbility(
         canShootInProtectedRegions = false,
         protectionRange = 5.0,
         removeArrow = false,
-        description = "Create beautiful tunnels."
+        description = "Create beautiful tunnels. Requires a pickaxe."
 ) {
 
     /**
