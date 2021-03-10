@@ -1418,3 +1418,25 @@ drill:
   # The (square) diameter of the block slices to break.
   # (Int) default: 3
   diameter: 3
+
+##
+## ABILITY: Music
+## - Plays music when the arrow lands.
+## - Takes the first music disc it can find in the inventory.
+##
+music:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Music Bastard
+  name: "Music Bastard"
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 7
+  levels: 7
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 30000
+  cooldown: 30000

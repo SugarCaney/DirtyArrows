@@ -13,6 +13,7 @@ Changelog
 * **`i`** Updated for Minecraft 1.11.2.
 * **`i`** Refactored the whole code base.
 * **`+`** Added Drill bow.
+* **`+`** Added Music bow.
 * **`+`** Added \da visualize to visualize regions and position selection.
 * **`+`** Added \da tp command to teleport to the center of a region.
 * **`+`** Added \da ammo to quickly give the required items to players.

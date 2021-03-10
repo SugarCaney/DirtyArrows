@@ -104,3 +104,10 @@ fun Entity.showHealParticle(hearts: Int) {
             hearts
     )
 }
+
+/**
+ * Shows a music note particle on this location.
+ */
+fun Location.showMusicNoteParticle() = clone().add(0.5, 0.5, 0.5).let {
+    world.spawnParticle(Particle.NOTE, this, 1)
+}

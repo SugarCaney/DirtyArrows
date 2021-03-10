@@ -193,6 +193,11 @@ object Broadcast {
     val COOLDOWN = "$TAG_ERROR Wait ${Colour.PRIMARY}%.1fs${Colour.ERROR} before you can use ${Colour.SECONDARY}%s${Colour.ERROR} again."
 
     /**
+     * Notifies that they player misses a music disc in their inventory.
+     */
+    val NO_RECORD = "$TAG_ERROR You need a ${Colour.PRIMARY}music disc${Colour.ERROR} in your inventory to play music."
+
+    /**
      * Get the message that shows whether DA is enabled or disabled.
      *
      * @param plugin

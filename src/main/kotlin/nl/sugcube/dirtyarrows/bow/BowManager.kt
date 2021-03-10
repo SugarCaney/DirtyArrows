@@ -95,6 +95,7 @@ open class BowManager(private val plugin: DirtyArrows): Iterable<BowType> {
         RoundBow(plugin).load()
         FrozenBow(plugin).load()
         DrillBow(plugin).load()
+        MusicBow(plugin).load()
     }
 
     /**
