@@ -1401,7 +1401,7 @@ frozen:
 drill:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
   # (String) default: Drill Bastard
-  name: "Drill Bastard"
+  name: 'Drill Bastard'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -1427,7 +1427,7 @@ drill:
 music:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
   # (String) default: Music Bastard
-  name: "Music Bastard"
+  name: 'Music Bastard'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -1440,3 +1440,52 @@ music:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 30000
   cooldown: 30000
+
+##
+## ABILITY: Homing
+## - Shoots arrows that home in on the nearest entity.
+##
+homing:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Homing Bastard
+  name: 'Homing Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 12
+  levels: 12
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # How many milliseconds until the homing effect wears out.
+  # (Int) default: 2500
+  homing-period: 2500
+
+  # How many milliseconds after firing the homing effects should start.
+  # (Int) default: 200
+  start-time: 200
+
+  # How many blocks away from the arrow the arrow can detect targets.
+  # (Double) default: 32.0
+  target-range: 32.0
+
+  # How far from the player's location to start the search for targets.
+  # With a small sight distance targets could also be targetted behind the player.
+  # (Double) default: 20.0
+  sight-distance: 20.0
+
+  # How quickly the arrow must turn toward the target.
+  # Value between 0.0 and 1.0 where 0.0 is no homing and 1.0 is immediate homing.
+  # Values outside this range can result in strange effects.
+  # (Double) default: 0.3
+  homing-strength: 0.3
+
+  # How strong the explosion is on impact. TNT has a power of 4.0.
+  # 0.0 for no explosion.
+  # (Double) default: 0.75
+  explosive-power: 0.75

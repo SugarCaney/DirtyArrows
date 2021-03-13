@@ -95,6 +95,7 @@ enum class DefaultBow(
     FROZEN("frozen"),
     DRILL("drill"),
     MUSIC("music"),
+    HOMING("homing"),
     ;
 
     /**

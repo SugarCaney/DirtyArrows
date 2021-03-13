@@ -6,7 +6,7 @@ Changelog
 * **`+`** Added feature
 * **`!`** Fixed bug
 * **`~`** Tweaked
-* **`~`** Removed feature
+* **`-`** Removed feature
 
 ## Version 4.0 (Upcoming)
 
@@ -14,6 +14,7 @@ Changelog
 * **`i`** Refactored the whole code base.
 * **`+`** Added Drill bow.
 * **`+`** Added Music bow.
+* **`+`** Added Homing bow.
 * **`+`** Added \da visualize to visualize regions and position selection.
 * **`+`** Added \da tp command to teleport to the center of a region.
 * **`+`** Added \da ammo to quickly give the required items to players.

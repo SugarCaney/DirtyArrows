@@ -3,6 +3,7 @@ package nl.sugcube.dirtyarrows.util
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.World
+import org.bukkit.configuration.MemorySection
 import org.bukkit.entity.Entity
 import org.bukkit.entity.HumanEntity
 import org.bukkit.entity.Item
@@ -22,6 +23,11 @@ import kotlin.reflect.KClass
 fun JavaPlugin.scheduleDelayed(delayTicks: Long, task: Runnable) {
     Bukkit.getScheduler().scheduleSyncDelayedTask(this, task, delayTicks)
 }
+
+/**
+ * Reads a float from the configuration.
+ */
+fun MemorySection.getFloat(node: String) = getDouble(node).toFloat()
 
 /**
  * Spawns an entity at this location.
