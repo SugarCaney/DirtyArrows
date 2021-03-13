@@ -52,6 +52,7 @@ fun Location.cutDownTree(): Boolean {
             block.type = Material.AIR
             dropped = true
         }
+        else return
     }
 
     scanAndDrop(blockY..Worlds.MAX_WORLD_Y)
