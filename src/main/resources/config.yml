@@ -1534,3 +1534,64 @@ interdimensional:
   # The maximum deviation from the spawn distance, in blocks.
   # (Double) default: 1.5
   spawn-distance-fuzzing: 1.5
+
+##
+## ABILITY: Singularity
+## - During flight, slightly pulls entities towards the arrow.
+## - On impact, has a bigger, longer, stronger pull and suffocates all enemies around the arrow.
+## - After the pull period ran out, gives a small explosion..
+##
+singularity:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Singularity Bastard
+  name: 'Singularity Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 12
+  levels: 12
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # Settings to the impact location of the arrows:
+  impact:
+    # How far from the impact site entities can be pulled in.
+    # (Double) default: 12.0
+    pull-range: 12.0
+
+    # How strong to pull entities toward the arrow when it landed. Somewhat magic number.
+    # (Double) default: 0.5
+    pull-power: 0.5
+
+    # How many milliseconds the landed arrow can pull entities in.
+    # (Int) default: 3000
+    pull-duration: 3000
+
+  # Settings for when the arrow flies:
+  flight:
+    # How far from flying arrows entities can be pulled in (in blocks).
+    # (Double) default: 4.0
+    pull-range: 4.0
+
+    # How strong to pull entities toward the arrow when it flies.
+    # (Double) default: 0.3
+    pull-power: 0.3
+
+  # Settings for damage:
+  damage:
+    # How far around the implosion location entities can be damaged.
+    # (Double) default: 2.0
+    range: 2.0
+
+    # How much damage to inflict (repeatedly) to entities in an implosion.
+    # (Double) default: 1.5
+    amount: 1.5
+
+    # How strong the final explosion must be, 0.0 for no explosion. TNT has power 4.0.
+    # (Double) default: 1.0
+    explosion-power: 1.0

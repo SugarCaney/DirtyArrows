@@ -3,6 +3,8 @@
 package nl.sugcube.dirtyarrows.util
 
 import org.bukkit.Location
+import org.bukkit.entity.Entity
+import org.bukkit.entity.LivingEntity
 import kotlin.math.abs
 import kotlin.random.Random
 
@@ -65,3 +67,13 @@ fun Location.fuzz(maxFuzz: Double) = copyOf(
         y = y + Random.nextDouble() * 2 * maxFuzz - maxFuzz,
         z = z + Random.nextDouble() * 2 * maxFuzz - maxFuzz,
 )
+
+/**
+ * Gets all entities that are within a certain range of this location.
+ */
+fun Location.nearbyEntities(range: Double): Collection<Entity> = world.getNearbyEntities(this, range, range, range)
+
+/**
+ * Get all living entities within a certain range of this location.
+ */
+fun Location.nearbyLivingEntities(range: Double) = nearbyEntities(range).mapNotNull { it as? LivingEntity }
