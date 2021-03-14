@@ -78,13 +78,13 @@ open class HomingBow(plugin: DirtyArrows) : BowAbility(
         }
     }
 
+    override fun particle(tickNumber: Int) = arrows.forEach {
+        it.location.copyOf().fuzz(0.2).showColoredDust(Color.WHITE, 20)
+    }
+
     override fun effect() {
         removeOldArrows()
         adjustVelocities()
-    }
-
-    override fun particle(tickNumber: Int) = arrows.forEach {
-        it.location.copyOf().fuzz(0.2).showColoredDust(Color.WHITE, 20)
     }
 
     /**

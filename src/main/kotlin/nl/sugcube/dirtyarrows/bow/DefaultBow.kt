@@ -96,6 +96,7 @@ enum class DefaultBow(
     DRILL("drill"),
     MUSIC("music"),
     HOMING("homing"),
+    INTERDIMENSIONAL("interdimensional"),
     ;
 
     /**
