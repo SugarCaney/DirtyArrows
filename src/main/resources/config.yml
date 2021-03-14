@@ -1611,8 +1611,8 @@ pushy:
   enabled: true
 
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
-  # (Int) default: 7
-  levels: 7
+  # (Int) default: 12
+  levels: 12
 
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
@@ -1637,3 +1637,41 @@ pushy:
     # How strong to push entities away from the arrow when it flies.
     # (Double) default: 0.5
     push-power: 0.5
+
+##
+## ABILITY: Rainbow
+## - RAINBOW PARTICLES
+##
+rainbow:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Rainbow
+  name: 'Rainbow'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 1
+  levels: 1
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # The saturation of the colour particles (range 0.0-1.0).
+  # (Double) default: 0.83
+  saturation: 0.83
+
+  # The brightness of the colour particles (range 0.0-1.0).
+  # (Double) default: 1.0
+  brightness: 1.0
+
+  # How many particles to spawn every tick.
+  # (Int) default: 6
+  particle-count: 6
+
+  # How quickly to scroll through all the colours (range 0-360).
+  # Lower values means that the colours change slower, higher values make the colours change quicker.
+  # (Int) default: 10
+  scroll-speed: 10

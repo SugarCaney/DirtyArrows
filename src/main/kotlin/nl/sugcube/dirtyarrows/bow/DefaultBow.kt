@@ -99,6 +99,7 @@ enum class DefaultBow(
     INTERDIMENSIONAL("interdimensional"),
     SINGULARITY("singularity"),
     PUSHY("pushy"),
+    RAINBOW("rainbow"),
     ;
 
     /**

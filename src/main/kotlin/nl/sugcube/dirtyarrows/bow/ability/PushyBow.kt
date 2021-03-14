@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.util.Vector
 
 /**
- * Pulls in all close entities and damages from suffocation.
+ * Pushes away entities. During flight and on impact.
  *
  * @author SugarCaney
  */
