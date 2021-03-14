@@ -1595,3 +1595,45 @@ singularity:
     # How strong the final explosion must be, 0.0 for no explosion. TNT has power 4.0.
     # (Double) default: 1.0
     explosion-power: 1.0
+
+##
+## ABILITY: Pushy
+## - Slighly pushes away entities during flight.
+## - Launches entities away from the arrow on impact.
+##
+pushy:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Pushy Bastard
+  name: 'Pushy Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 7
+  levels: 7
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # Settings to the impact location of the arrows:
+  impact:
+    # How far from the impact site entities can be pushed aawy.
+    # (Double) default: 12.0
+    push-range: 12.0
+
+    # How strong to push entities away from the arrow when it landed. Somewhat magic number.
+    # (Double) default: 4.0
+    push-power: 4.0
+
+  # Settings for when the arrow flies:
+  flight:
+    # How far from flying arrows entities can be pushed away (in blocks).
+    # (Double) default: 5.0
+    push-range: 5.0
+
+    # How strong to push entities away from the arrow when it flies.
+    # (Double) default: 0.5
+    push-power: 0.5
