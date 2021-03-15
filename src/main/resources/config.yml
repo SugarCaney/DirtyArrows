@@ -1719,7 +1719,7 @@ laser:
 
 ##
 ## ABILITY: Grappling
-## -
+## - Grappling hook
 ##
 grappling:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
