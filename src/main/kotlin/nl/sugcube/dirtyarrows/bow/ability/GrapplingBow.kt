@@ -35,9 +35,9 @@ open class GrapplingBow(plugin: DirtyArrows) : BowAbility(
 ) {
 
     /**
-     * All arrows that landed.
+     * All arrows that landed mapped to their birth time.
      */
-    private val landedArrows = HashSet<Arrow>()
+    private val landedArrows = HashMap<Arrow, Long>()
 
     /**
      * Contains all arrows where the shooter must have their fall damage cancelled next tick.
@@ -50,24 +50,31 @@ open class GrapplingBow(plugin: DirtyArrows) : BowAbility(
      */
     val travelSpeed = config.getDouble("$node.travel-speed")
 
+    /**
+     * The maximum amount of milliseconds the grappling hook can last.
+     * Is mostly here as fail safe in case the person gets stuck.
+     */
+    val maximumDuration = config.getLong("$node.maximum-duration")
+
     init {
         check(travelSpeed > 0) { "$node.travel-speed must be greater than 0, got <$travelSpeed>" }
     }
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
-        landedArrows += arrow
+        landedArrows[arrow] = System.currentTimeMillis()
     }
 
     override fun effect() {
         cancelFallDamage.clear()
-        landedArrows.removeIf { arrow ->
+        landedArrows.entries.removeIf { (arrow, birthTime) ->
             val shooter = arrow.shooter as Player
             val direction = arrow.location.subtract(shooter.location).toVector().normalize()
 
             shooter.velocity = direction.multiply(travelSpeed)
 
             // Hook is done.
-            if (shooter.velocity.length() < 0.5 || shooter.location.distance(arrow.location) < 1.5) {
+            val timeExpired = System.currentTimeMillis() - birthTime >= maximumDuration
+            if (timeExpired || shooter.velocity.length() < 0.5 || shooter.location.distance(arrow.location) < 2.5) {
                 cancelFallDamage.add(arrow)
                 shooter.velocity = Vector(0, 0, 0)
                 shooter.addPotionEffect(PotionEffect(PotionEffectType.LEVITATION, 10, -1, true, false))
@@ -84,7 +91,7 @@ open class GrapplingBow(plugin: DirtyArrows) : BowAbility(
     override fun particle(tickNumber: Int) {
         if (tickNumber % 4 == 0) return
 
-        landedArrows.forEach { arrow ->
+        landedArrows.entries.forEach { (arrow, _) ->
             val player = arrow.shooter as Player
             player.location.add(0.0, 0.75, 0.0).toVector().lineIteration(arrow.location.toVector(), 0.5).forEach {
                 it.toLocation(arrow.world).showColoredDust(200, 200, 200, 1)

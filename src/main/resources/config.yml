@@ -1742,3 +1742,8 @@ grappling:
   # Must be positive.
   # (Double) default: 1.25
   travel-speed: 1.25
+
+  # The maximum amount of milliseconds the grappling hook can last.
+  # Is mostly here as fail safe in case the person gets stuck.
+  # (Int) default: 8000
+  maximum-duration: 8000
