@@ -1675,3 +1675,44 @@ rainbow:
   # Lower values means that the colours change slower, higher values make the colours change quicker.
   # (Int) default: 10
   scroll-speed: 10
+
+##
+## ABILITY: Laser
+## - Shoots lasers that instantly travel up to a certain amount of blocks.
+## - Does slightly less damage than a regular arrow with the same firing speed.
+## - Power enchantments do work.
+## - Laser beams can travel through transparent blocks.
+##
+laser:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Laser Bastard
+  name: 'Laser Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 12
+  levels: 12
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # The chance that a laser beam crits. Number between 0 and 1.
+  # (Double) default: 0.25
+  critical-hit-chance: 0.25
+
+  # With what number to multiply the damage dealt compared to the vanilla damage calculation.
+  # (Double) default: 0.75
+  damage-multiplier: 0.75
+
+  # The maximum amount of blocks a laser beam can travel.
+  # (Double) default: 100.0
+  maximum-range: 100.0
+
+  # In what increment the laser travels (in blocks).
+  # Lower value = denser beam and better accuracy, but lower performance.
+  # (Double) default: 0.5
+  step: 0.5

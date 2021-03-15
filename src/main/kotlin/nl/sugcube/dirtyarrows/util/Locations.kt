@@ -5,7 +5,9 @@ package nl.sugcube.dirtyarrows.util
 import org.bukkit.Location
 import org.bukkit.entity.Entity
 import org.bukkit.entity.LivingEntity
+import org.bukkit.util.Vector
 import kotlin.math.abs
+import kotlin.math.sqrt
 import kotlin.random.Random
 
 /**
@@ -77,3 +79,10 @@ fun Location.nearbyEntities(range: Double): Collection<Entity> = world.getNearby
  * Get all living entities within a certain range of this location.
  */
 fun Location.nearbyLivingEntities(range: Double) = nearbyEntities(range).mapNotNull { it as? LivingEntity }
+
+/**
+ * Calculates the distance from this location (x,y,z) to the vectors (x,y,z).
+ */
+fun Location.distanceToVector(vector: Vector) = sqrt(
+        (x - vector.x) * (x - vector.x) + (y - vector.y) * (y - vector.y) + (z - vector.z) * (z - vector.z)
+)

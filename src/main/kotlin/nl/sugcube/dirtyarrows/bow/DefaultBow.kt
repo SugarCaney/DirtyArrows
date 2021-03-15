@@ -100,6 +100,7 @@ enum class DefaultBow(
     SINGULARITY("singularity"),
     PUSHY("pushy"),
     RAINBOW("rainbow"),
+    LASER("laser"),
     ;
 
     /**
