@@ -1716,3 +1716,29 @@ laser:
   # Lower value = denser beam and better accuracy, but lower performance.
   # (Double) default: 0.5
   step: 0.5
+
+##
+## ABILITY: Grappling
+## -
+##
+grappling:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Grappling Bastard
+  name: 'Grappling Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 7
+  levels: 7
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # How quickly the player travels to the grappling hook location (constant speed).
+  # Must be positive.
+  # (Double) default: 1.25
+  travel-speed: 1.25
