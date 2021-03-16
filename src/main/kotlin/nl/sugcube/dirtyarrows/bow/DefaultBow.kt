@@ -103,6 +103,7 @@ enum class DefaultBow(
     LASER("laser"),
     GRAPPLING("grappling"),
     BOUNCY("bouncy"),
+    MINING("mining"),
     ;
 
     /**

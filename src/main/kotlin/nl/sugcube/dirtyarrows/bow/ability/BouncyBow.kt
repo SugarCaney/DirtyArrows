@@ -14,7 +14,8 @@ import org.bukkit.projectiles.ProjectileSource
 import org.bukkit.util.Vector
 
 /**
- * Shoots a very fast and powerful arrow.
+ * Arrows bounce a few times when they don't hit an enemy.
+ * Preserves enchantments (incl. Power).
  *
  * @author SugarCaney
  */
@@ -23,7 +24,7 @@ open class BouncyBow(plugin: DirtyArrows) : BowAbility(
         type = DefaultBow.BOUNCY,
         canShootInProtectedRegions = true,
         removeArrow = false,
-        description = "Bounce on the ground."
+        description = "Bounces off block surfaces."
 ) {
 
     /**

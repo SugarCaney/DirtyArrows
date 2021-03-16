@@ -9,6 +9,17 @@ import org.bukkit.material.MaterialData
 import org.bukkit.util.BlockIterator
 
 /**
+ * The materials that are tools that can mine blocks.
+ */
+val BLOCK_BREAK_TOOLS = setOf(
+        Material.DIAMOND_PICKAXE,
+        Material.GOLD_PICKAXE,
+        Material.IRON_PICKAXE,
+        Material.STONE_PICKAXE,
+        Material.WOOD_PICKAXE,
+)
+
+/**
  * Get a copy of the location that is at the centre of the block.
  */
 val Block.centreLocation: Location

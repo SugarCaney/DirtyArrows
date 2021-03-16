@@ -3,9 +3,9 @@ package nl.sugcube.dirtyarrows.bow.ability
 import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
-import nl.sugcube.dirtyarrows.util.ToolLevel
+import nl.sugcube.dirtyarrows.util.createMineTool
 import nl.sugcube.dirtyarrows.util.forXYZ
-import nl.sugcube.dirtyarrows.util.toolLevel
+import nl.sugcube.dirtyarrows.util.maxToolLevel
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.block.Block
@@ -48,7 +48,7 @@ open class DrillBow(plugin: DirtyArrows) : BowAbility(
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
         val hitBlock = event.hitBlock ?: return
         val toolLevel = player.maxToolLevel()
-        val mineTool = createMineTool(toolLevel)
+        val mineTool = toolLevel.createMineTool()
         val layers = max(1, player.layers())
 
         val dx = abs(arrow.velocity.x)
@@ -142,21 +142,6 @@ open class DrillBow(plugin: DirtyArrows) : BowAbility(
     }
 
     /**
-     * Creates the tool used to break the blocks.
-     */
-    private fun createMineTool(toolLevel: ToolLevel?): ItemStack {
-        return ItemStack(toolLevel?.pickaxe ?: Material.AIR, 1)
-    }
-
-    /**
-     * Get the maximum tool level available.
-     */
-    private fun Player.maxToolLevel() = inventory.asSequence()
-            .filter { it?.type in BLOCK_BREAK_TOOLS }
-            .mapNotNull { it?.type?.toolLevel }
-            .maxByOrNull { it }
-
-    /**
      * The amount of layers to drill.
      *
      * @return The amount of layers the player can drill per shot.
@@ -166,17 +151,6 @@ open class DrillBow(plugin: DirtyArrows) : BowAbility(
     }
 
     companion object {
-
-        /**
-         * The materials that are tools that can mine blocks.
-         */
-        private val BLOCK_BREAK_TOOLS = setOf(
-                Material.DIAMOND_PICKAXE,
-                Material.GOLD_PICKAXE,
-                Material.IRON_PICKAXE,
-                Material.STONE_PICKAXE,
-                Material.WOOD_PICKAXE,
-        )
 
         /**
          * Blocks that cannot be mined.
