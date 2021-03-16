@@ -5,7 +5,6 @@ import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
 import nl.sugcube.dirtyarrows.util.ToolLevel
 import nl.sugcube.dirtyarrows.util.forXYZ
-import nl.sugcube.dirtyarrows.util.hitBlock
 import nl.sugcube.dirtyarrows.util.toolLevel
 import org.bukkit.Location
 import org.bukkit.Material
@@ -47,7 +46,7 @@ open class DrillBow(plugin: DirtyArrows) : BowAbility(
     }
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
-        val hitBlock = arrow.hitBlock()
+        val hitBlock = event.hitBlock ?: return
         val toolLevel = player.maxToolLevel()
         val mineTool = createMineTool(toolLevel)
         val layers = max(1, player.layers())

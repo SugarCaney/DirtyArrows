@@ -1,10 +1,25 @@
 package nl.sugcube.dirtyarrows.util
 
+import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.block.Block
+import org.bukkit.block.BlockFace
 import org.bukkit.entity.Arrow
 import org.bukkit.material.MaterialData
 import org.bukkit.util.BlockIterator
+
+/**
+ * Get a copy of the location that is at the centre of the block.
+ */
+val Block.centreLocation: Location
+    get() {
+        val location = location
+        return location.copyOf(
+                x = location.x + 0.5,
+                y = location.y + 0.5,
+                z = location.z + 0.5
+        )
+    }
 
 /**
  * Checks if the block below this block is solid.
@@ -42,4 +57,24 @@ fun Arrow.hitBlock(): Block {
         if (hitBlock.type != Material.AIR) break
     }
     return hitBlock
+}
+
+/**
+ * Get the face of the block that has been hit by the arrow.
+ *
+ * @param this
+ *          The arrow that hit the block face.
+ * @param hitBlock
+ *          The block that was hit by the arrow.
+ * @return The block face that was hit or `null` when no block face could be found.
+ */
+fun Arrow.hitBlockFace(hitBlock: Block): BlockFace? {
+    val iterator = BlockIterator(world, location.toVector(), velocity, 0.0, 3)
+    var blockBefore = hitBlock
+    var nextBlock = iterator.next()
+    while (iterator.hasNext() && nextBlock.type == Material.AIR) {
+        blockBefore = nextBlock
+        nextBlock = iterator.next()
+    }
+    return nextBlock.getFace(blockBefore)
 }

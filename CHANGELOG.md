@@ -21,6 +21,7 @@ Changelog
 * **`+`** Added Rainbow.
 * **`+`** Added Laser bow.
 * **`+`** Added Grappling bow.
+* **`+`** Added Bouncy bow.
 * **`+`** Added \da visualize to visualize regions and position selection.
 * **`+`** Added \da tp command to teleport to the center of a region.
 * **`+`** Added \da ammo to quickly give the required items to players.

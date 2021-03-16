@@ -1747,3 +1747,35 @@ grappling:
   # Is mostly here as fail safe in case the person gets stuck.
   # (Int) default: 8000
   maximum-duration: 8000
+
+##
+## ABILITY: Bouncy
+## - Arrows bounce a few times when they don't hit an enemy.
+##
+bouncy:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Bouncy Bastard
+  name: 'Bouncy Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 7
+  levels: 7
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # Multiplier for the velocity of the arrow after the bounce.
+  # Values greater than or equal to 1 make the arrow bounce perpetually.
+  # E.g. 0.5 will halve the velocity after every bounce.
+  # (Double) default: 0.74
+  softening: 0.74
+
+  # Below which speed arrows cannot bounce anymore.
+  # Keep this above 0 to make sure the arrows stop bouncing.
+  # (Double) default: 0.3
+  bounce-threshold: 0.3

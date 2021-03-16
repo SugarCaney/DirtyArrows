@@ -4,7 +4,6 @@ import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
 import nl.sugcube.dirtyarrows.effect.cutDownTree
-import nl.sugcube.dirtyarrows.util.hitBlock
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.ProjectileHitEvent
@@ -24,7 +23,7 @@ open class WoodmanBow(plugin: DirtyArrows) : BowAbility(
 ) {
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
-        val hitBlock = arrow.hitBlock()
+        val hitBlock = event.hitBlock ?: return
         if (hitBlock.location.cutDownTree()) {
             arrow.remove()
         }
