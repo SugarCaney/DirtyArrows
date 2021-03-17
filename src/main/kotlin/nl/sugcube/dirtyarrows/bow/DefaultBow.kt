@@ -104,6 +104,7 @@ enum class DefaultBow(
     GRAPPLING("grappling"),
     BOUNCY("bouncy"),
     MINING("mining"),
+    UP("up"),
     ;
 
     /**

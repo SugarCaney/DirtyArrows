@@ -1811,3 +1811,34 @@ mining:
   # A warning will show up when setting > 100.
   # (Int) default: 24
   max-vein-size: 24
+
+##
+## ABILITY: Up
+## - Arrows fall upward instead of downward.
+##
+up:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: UP Bastard
+  name: 'UP Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 5
+  levels: 5
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # Y-acceleration of the arrows in blocks per tick.
+  # Positive value = going up. Negative value = going down.
+  # (Double) default: 0.05
+  gravity: 0.05
+
+  # How long (in milliseconds) the gravity effect can be applied.
+  # Afterward, the arrow will fall down with regular gravity.
+  # (Int) default: 2500
+  rise-time: 2500
