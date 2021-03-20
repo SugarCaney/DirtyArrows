@@ -22,6 +22,23 @@ val Material.smeltedItem: ItemStack?
     get() = SMELT_RESULTS[this]
 
 /**
+ * Whether the block can be broken by shears an drop their original block.
+ * `false` in cases like wool, where the wool block can also be properly broken without shears.
+ */
+val Material.isShearable: Boolean
+    get() = when (this) {
+        Material.WEB,
+        Material.DEAD_BUSH,
+        Material.LONG_GRASS,
+        Material.DOUBLE_PLANT,
+        Material.LEAVES,
+        Material.LEAVES_2,
+        Material.TRIPWIRE,
+        Material.VINE -> true
+        else -> false
+    }
+
+/**
  * Checks if this material is a log.
  */
 fun Material.isLog(): Boolean = when (this) {

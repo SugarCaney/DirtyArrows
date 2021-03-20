@@ -14,9 +14,7 @@ import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.event.entity.ProjectileLaunchEvent
 import org.bukkit.inventory.ItemStack
 import java.util.concurrent.ConcurrentHashMap
-import kotlin.math.cos
 import kotlin.math.max
-import kotlin.math.sin
 
 /**
  * Shoots arrows that home in on nearby targets.
@@ -131,14 +129,12 @@ open class HomingBow(plugin: DirtyArrows) : BowAbility(
         val angle = arrowVelocity.angle(targetDirection) * homingStrength
 
         // The vector that defines the plane to rotate the arrow over.
-        val k = arrowVelocity.copyOf().crossProduct(targetDirection)
+        val planeNormal = arrowVelocity.copyOf().crossProduct(targetDirection)
                 .multiply(1.0 / arrowVelocity.length() * targetDirection.length())
                 .normalize()
 
         // Use Rodrigues rotation formula to apply the rotation.
-        val updatedArrowVelocity = arrowVelocity.copyOf().multiply(cos(angle))
-                .add(k.copyOf().crossProduct(arrowVelocity).multiply(sin(angle)))
-                .add(k.copyOf().multiply(k.copyOf().dot(arrowVelocity)).multiply(1.0 - cos(angle)))
+        val updatedArrowVelocity = arrowVelocity.rotateAround(planeNormal, angle)
 
         // Ensure that the velocity size stays the same.
         arrow.velocity = updatedArrowVelocity

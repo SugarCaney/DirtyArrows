@@ -22,3 +22,19 @@ fun Vector.fuzz(maxFuzz: Double) = copyOf(
         y = y + Random.nextDouble() * 2 * maxFuzz - maxFuzz,
         z = z + Random.nextDouble() * 2 * maxFuzz - maxFuzz,
 )
+
+/**
+ * Rotates this vector around the given normal vector.
+ *
+ * @param this
+ *          The vector to rotate.
+ * @param normal
+ *          The normal defining the plane to rotate over.
+ * @param angle
+ *          The angle to rotate.
+ */
+fun Vector.rotateAround(normal: Vector, angle: Double): Vector {
+    return copyOf().multiply(cos(angle))
+            .add(normal.copyOf().crossProduct(this).multiply(sin(angle)))
+            .add(normal.copyOf().multiply(normal.copyOf().dot(this)).multiply(1.0 - cos(angle)))
+}
