@@ -106,6 +106,7 @@ enum class DefaultBow(
     MINING("mining"),
     UP("up"),
     SHEAR("shear"),
+    UNDYING("undying"),
     ;
 
     /**
