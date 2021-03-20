@@ -111,3 +111,10 @@ fun Entity.showHealParticle(hearts: Int) {
 fun Location.showMusicNoteParticle() = clone().add(0.5, 0.5, 0.5).let {
     world.spawnParticle(Particle.NOTE, this, 1)
 }
+
+/**
+ * Shows a firework shooty particle.
+ */
+fun Location.showFireworkSpark(count: Int = 15) = clone().add(0.5, 0.5, 0.5).let {
+    world.spawnParticle(Particle.FIREWORKS_SPARK, x, y, z, count, 0.0, 0.0, 0.0)
+}

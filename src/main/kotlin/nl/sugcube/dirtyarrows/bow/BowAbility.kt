@@ -11,6 +11,7 @@ import org.bukkit.Location
 import org.bukkit.Sound
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.entity.Arrow
+import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
@@ -20,6 +21,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent
 import org.bukkit.inventory.ItemStack
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
+import kotlin.collections.ArrayList
 import kotlin.collections.HashSet
 
 /**
@@ -122,6 +124,17 @@ abstract class BowAbility(
      * Gets accessed from the scheduler (run) and the event thread (projectilel launch event) hence concurrent.
      */
     private val cooldownMap = ConcurrentHashMap<Player, Long>()
+
+    /**
+     * Maps each entity to the items that were consumed latest by the ability.
+     */
+    private val mostRecentItemsConsumed = HashMap<Entity, List<ItemStack>>()
+
+    /**
+     * Get the items that were consumed on last use.
+     */
+    val Entity.lastConsumedItems: List<ItemStack>
+        get() = mostRecentItemsConsumed[this] ?: emptyList()
 
     /**
      * Executes a repeating scheduled effect every [handleEveryNTicks] ticks.
@@ -373,9 +386,32 @@ abstract class BowAbility(
     /**
      * Removes all resources from the player's inventory that are required for 1 use.
      */
-    protected open fun Player.consumeBowItems() = costRequirements.forEach {
-        inventory.removeItem(it)
+    protected open fun Player.consumeBowItems() {
+        val recentlyRemoved = ArrayList<ItemStack>(costRequirements.size)
+
+        costRequirements.forEach { item ->
+            // Find the item with the correct material. removeItem won't work when the item has
+            // item data.
+            val eligibleItem = inventory.firstOrNull { it?.type == item.type && (it?.amount ?: 0) >= item.amount }
+                    ?: return@forEach
+
+            val toRemove = eligibleItem.clone().apply {
+                amount = item.amount
+            }
+            if (gameMode != GameMode.CREATIVE) {
+                inventory.removeItem(toRemove)
+            }
+            recentlyRemoved.add(toRemove)
+        }
+
+        mostRecentItemsConsumed[this] = recentlyRemoved
     }
+
+    /**
+     * Removes the given entity from the cost requirements cache.
+     * Effectively clearing the consumption cache for the entity.
+     */
+    fun removeFromCostRequirementsCache(entity: Entity) = mostRecentItemsConsumed.remove(entity)
 
     /**
      * Gives back all resources from the player's inventory that are required for 1 use.

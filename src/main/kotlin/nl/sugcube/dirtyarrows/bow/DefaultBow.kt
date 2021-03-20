@@ -107,6 +107,7 @@ enum class DefaultBow(
     UP("up"),
     SHEAR("shear"),
     UNDYING("undying"),
+    FIREWORK("firework"),
     ;
 
     /**

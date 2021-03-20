@@ -1884,3 +1884,80 @@ undying:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+##
+## ABILITY: Firework
+## - Shoots a slightly rising firework bullet that splits into multiple fireworks.
+## - Damages entities in range.
+## - Uses the colour of the firework charge for the firworks.
+## - Has a medium range by default.
+##
+firework:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Firework Bastard
+  name: 'Firework Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 12
+  levels: 12
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # The gravity that is applied to the projectiles every tick.
+  # Positive gravity makes projectiles go upward, negative gravity makes them go downward.
+  # (Double) default: 0.015
+  gravity: 0.015
+
+  # How close (in blocks) to the projectiles entities take damage.
+  # (Double) default: 5.0
+  damage-range: 5.0
+
+  # How much damage to deal to entities within range of the fireworks.
+  # The damage is proportional to the distance to the arrow.
+  # Entities with 0 distance to the explosion get full damage (this amount).
+  # Entities with [damage-range] distance to the explosion get half this damage.
+  # Everything in between will be interpolated linearly.
+  # (Double) default: 22.0
+  maximum-damage: 22.0
+
+  # Settings for the main projectile: the one you fire from your bow.
+  main:
+    # The maximum speed the main firework projectiles can move.
+    # (Double) default: 1.25
+    maximum-speed: 1.25
+
+    # The amount of milliseconds the main projectile flies before splitting into multiple projectiles.
+    # (Int) default: 1450
+    flight-time: 1450
+
+    # The maximum deviation from the main projectile flight time in milliseconds.
+    # (Int) default: 250
+    flight-time-fuzzing: 250
+
+    # Accuracy of the bow: the maximum deviation on all axis in blocks from the initial direction.
+    # (Double) default: 0.1
+    direction-fuzzing: 0.1
+
+  # Settings for burst projectiles: the ones that burst from the main projectile.
+  burst:
+    # In how many sub fireworks the main projectile should split.
+    # (Int) default: 5
+    count: 5
+
+    # How quickly the sub projectiles move.
+    # (Double) default: 1.5
+    flight-speed: 1.5
+
+    # The amount of milliseconds the burst arrows fly before splitting into multiple projectiles.
+    # (Int) default: 225
+    flight-time: 225
+
+    # The maximum deviation from the sub projectile flight time in milliseconds.
+    # (Int) default: 100
+    flight-time-fuzzing: 100

@@ -2,7 +2,10 @@ package nl.sugcube.dirtyarrows.bow
 
 import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.ability.*
+import org.bukkit.event.EventHandler
 import org.bukkit.event.HandlerList
+import org.bukkit.event.Listener
+import org.bukkit.event.player.PlayerQuitEvent
 import java.util.logging.Level
 
 /**
@@ -10,7 +13,7 @@ import java.util.logging.Level
  *
  * @author SugarCaney
  */
-open class BowManager(private val plugin: DirtyArrows): Iterable<BowType> {
+open class BowManager(private val plugin: DirtyArrows): Iterable<BowType>, Listener {
 
     /**
      * Contains all available bows.
@@ -34,8 +37,9 @@ open class BowManager(private val plugin: DirtyArrows): Iterable<BowType> {
     fun reload() = with(plugin) {
         // Remove all registered bows, to overwrite with new ones.
         unload()
-
         loadAbilities()
+
+        plugin.server.pluginManager.registerEvents(this@BowManager, plugin)
 
         bows.forEach { (bowType, ability) ->
             plugin.server.pluginManager.registerEvents(ability, plugin)
@@ -108,6 +112,7 @@ open class BowManager(private val plugin: DirtyArrows): Iterable<BowType> {
         UpBow(plugin).load()
         ShearBow(plugin).load()
         UndyingBow(plugin).load()
+        FireworkBow(plugin).load()
     }
 
     /**
@@ -130,6 +135,7 @@ open class BowManager(private val plugin: DirtyArrows): Iterable<BowType> {
             HandlerList.unregisterAll(ability)
             tasks[bowType]?.let { server.scheduler.cancelTask(it) }
         }
+        HandlerList.unregisterAll(this)
 
         bows.clear()
         tasks.clear()
@@ -155,4 +161,10 @@ open class BowManager(private val plugin: DirtyArrows): Iterable<BowType> {
     operator fun get(bowType: BowType) = implementation(bowType)
 
     override fun iterator() = bows.keys.iterator()
+
+    @EventHandler
+    fun playerQuits(event: PlayerQuitEvent) {
+        val player = event.player ?: return
+        bows.values.forEach { it.removeFromCostRequirementsCache(player) }
+    }
 }
