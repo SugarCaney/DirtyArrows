@@ -4,10 +4,12 @@ import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
 import nl.sugcube.dirtyarrows.util.*
+import org.bukkit.GameMode
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Arrow
+import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.inventory.ItemStack
@@ -82,7 +84,7 @@ open class MeteorBow(plugin: DirtyArrows) : BowAbility(
             val cost = costRequirements.first()
 
             repeat(player.powerLevel()) {
-                if (it != 0 && player.inventory.contains(cost.type).not()) return@repeat
+                if (it != 0 && player.meetsResourceRequirements(showError = false) && player.gameMode != GameMode.CREATIVE) return@repeat
 
                 arrow.spawnMeteor(deviation)
 
@@ -97,6 +99,7 @@ open class MeteorBow(plugin: DirtyArrows) : BowAbility(
     /**
      * Summons a meteor that will strike on the location of the arrow.
      * Has a deviation in [range] blocks.
+     * Does not spawn the meteor when the spawn location is within a protected region.
      *
      * @param deviation
      *          Amount of blocks the meteor can spawn from the arrow location.
@@ -112,6 +115,8 @@ open class MeteorBow(plugin: DirtyArrows) : BowAbility(
                 world.maxHeight.toDouble(),
                 baseLocation.z.fuzz(35.0)
         )
+
+        if (spawnLocation.isInProtectedRegion(shooter as? LivingEntity, showError = false)) return
 
         val speed = meteorSpeed.fuzz(meteorSpeedFuzzing)
         val direction = impactLocation.subtract(spawnLocation).toVector().normalize().multiply(speed)
