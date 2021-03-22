@@ -109,6 +109,7 @@ enum class DefaultBow(
     UNDYING("undying"),
     FIREWORK("firework"),
     BRIDGE("bridge"),
+    METEOR("meteor"),
     ;
 
     /**

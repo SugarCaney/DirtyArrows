@@ -1994,3 +1994,58 @@ bridge:
   # How long before dissapearance particles must be shown, in milliseconds.
   # (Int) default: 4000
   notify-range: 4000
+
+##
+## ABILITY: Meteor
+## - Spawns meteors that strike at the given location.
+## - The amount of meteors is dependent on the power level of the bow (level = amount).
+##
+meteor:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Meteor Bastard
+  name: 'Meteor Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 12
+  levels: 12
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # The power of the explosions of the fireballs on impact. TNT is 4.0 for reference.
+  # Beware: the region protection range stays the same. Largers explosions leave you at a risk of blowing up
+  #         otherwise protected blocks.
+  # (Double) default: 2.0
+  explosion-power: 2.0
+
+  # Whether the meteor explosions can set blocks on fire.
+  # (Boolean) default: true
+  set-on-fire: true
+
+  # Whether to break the broken blocks.
+  # (Boolean) default: true
+  break-blocks: true
+
+  # How many blocks from the location of impact the meteor will randomly spawn when there is only 1 meteor.
+  # The amount will scale up with the amount of meteors to [maximum-range].
+  # (Double) default: 3.0
+  minimum-range: 3.0
+
+  # How many blocks from the location of impact the meteors will randomly spawn when there are 5 meteors.
+  # The amount will scale up from the amount of meteors in [minimum-range].
+  # (Double) default: 10.0
+  maximum-range: 10.0
+
+  # The speed of the meteor in blocks/second.
+  # (Double) default: 4.0
+  meteor-speed: 4.0
+
+  # Maximum deviation from the meteor speed.
+  # Having a non-zero value means that the meteors won't all land simultaneously.
+  # (Double) default: 0.5
+  meteor-speed-fuzzing: 0.5

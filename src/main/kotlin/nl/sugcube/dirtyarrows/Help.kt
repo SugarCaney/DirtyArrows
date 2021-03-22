@@ -117,7 +117,7 @@ class Help(val plugin: DirtyArrows) {
      *          The help page index >= 1, where page 1 is the command page.
      */
     fun showHelpPage(sender: CommandSender, pageNumber: Int) {
-        val allBows = plugin.bowManager.registeredTypes.sortedBy { it.node }
+        val allBows = plugin.bowManager.registeredTypes.sortedBy { plugin.config.getString(it.nameNode).toLowerCase() }
         val index = pageNumber - 2
 
         // Bows have pages 2-pageCount.
