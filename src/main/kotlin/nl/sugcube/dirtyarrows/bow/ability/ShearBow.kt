@@ -11,6 +11,7 @@ import org.bukkit.Material
 import org.bukkit.block.Block
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.EntityType
+import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.inventory.ItemStack
@@ -48,7 +49,9 @@ open class ShearBow(plugin: DirtyArrows) : BowAbility(
 
     override fun effect() {
         arrows.forEach {
-            it.location.block.shearBlocks()
+            if (it.location.isInProtectedRegion(it.shooter as? LivingEntity, showError = false).not()) {
+                it.location.block.shearBlocks()
+            }
         }
     }
 

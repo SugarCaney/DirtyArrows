@@ -1961,3 +1961,36 @@ firework:
     # The maximum deviation from the sub projectile flight time in milliseconds.
     # (Int) default: 100
     flight-time-fuzzing: 100
+
+##
+## ABILITY: Bridge
+## - Spawns temporary blocks on the trajectory.
+##
+bridge:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Bridge Bastard
+  name: 'Bridge Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 7
+  levels: 7
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # What block to use as bridge.
+  # (String) default: cobblestone
+  material: 'cobblestone'
+
+  # How long after spawning the blocks they can dissappear, in milliseconds.
+  # (Int) default: 15000
+  duration: 15000
+
+  # How long before dissapearance particles must be shown, in milliseconds.
+  # (Int) default: 4000
+  notify-range: 4000

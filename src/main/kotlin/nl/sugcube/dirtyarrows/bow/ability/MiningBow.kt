@@ -104,6 +104,8 @@ open class MiningBow(plugin: DirtyArrows) : BowAbility(
      * @return `true` when the block was succesfully broken, `false` otherwise.
      */
     private fun Block.breakOre(player: Player): Boolean {
+        if (location.isInProtectedRegion(player, showError = false)) return false
+
         val bow = player.bowItem() ?: return false
         val toolLevel = player.maxToolLevel()
         val oreMaterial = type

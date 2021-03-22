@@ -3,6 +3,7 @@ package nl.sugcube.dirtyarrows.bow.ability
 import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
+import nl.sugcube.dirtyarrows.util.ColourScheme
 import nl.sugcube.dirtyarrows.util.fuzz
 import nl.sugcube.dirtyarrows.util.showColoredDust
 import org.bukkit.*
@@ -153,6 +154,7 @@ open class FireworkBow(plugin: DirtyArrows) : BowAbility(
      */
     private fun Arrow.explode() {
         val player = shooter as? Player ?: return
+        if (location.isInProtectedRegion(player)) return
 
         val fireworkEffect = fireworkMeta(player)?.effect
         location.createFirework(player, fireworkEffect)
@@ -203,7 +205,7 @@ open class FireworkBow(plugin: DirtyArrows) : BowAbility(
                 power = 3
                 val effectBuilder = FireworkEffect.builder()
                         .with(fireworkEffect?.type ?: FireworkEffect.Type.BALL)
-                        .withColor(fireworkEffect?.colors ?: fireworkColours(player) ?: listOf(Color.WHITE))
+                        .withColor(fireworkEffect?.colors ?: fireworkColours(player) ?: ColourScheme.DEFAULT_SCHEMES.random())
 
                 fireworkEffect?.fadeColors?.let { effectBuilder.withFade(it) }
                 fireworkEffect?.hasFlicker()?.let { effectBuilder.flicker(it) }
@@ -225,8 +227,10 @@ open class FireworkBow(plugin: DirtyArrows) : BowAbility(
     private fun Arrow.burst() {
         val player = shooter as? Player ?: return
 
-        repeat(burstCount) {
-            location.shootBurstArrow(player, speed = subProjectileFlightSpeed)
+        if (location.isInProtectedRegion(player, showError = false).not()) {
+            repeat(burstCount) {
+                location.shootBurstArrow(player, speed = subProjectileFlightSpeed)
+            }
         }
 
         this.explode()
@@ -279,7 +283,7 @@ open class FireworkBow(plugin: DirtyArrows) : BowAbility(
      * @param player
      *          The player who shot the firework item.
      */
-    private fun fireworkColour(player: Player) = fireworkColours(player)?.firstOrNull() ?: Color.WHITE
+    private fun fireworkColour(player: Player) = fireworkColours(player)?.firstOrNull()
 
     /**
      * Determines which colours the firework could have.

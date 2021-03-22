@@ -12,6 +12,7 @@ import org.bukkit.Sound
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.Entity
+import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
@@ -308,17 +309,17 @@ abstract class BowAbility(
     /**
      * Checks if the location is inside a protected region.
      *
-     * @param player
-     *          The player who shot the arrow.
+     * @param entity
+     *          The entity that shot the arrow.
      * @param showError
      *          Whether to show an error to the player when they are in a protected region.
      * @return `true` when the player is in a protected region, `false` otherwise.
      */
-    protected fun Location.isInProtectedRegion(player: Player, showError: Boolean = true): Boolean {
+    protected fun Location.isInProtectedRegion(entity: LivingEntity?, showError: Boolean = true): Boolean {
         val inRegion = plugin.regionManager.isWithinARegionMargin(this, protectionRange) != null
 
         if (showError && inRegion && canShootInProtectedRegions.not()) {
-            player.sendMessage(Broadcast.DISABLED_IN_PROTECTED_REGION.format(bowName()))
+            entity?.sendMessage(Broadcast.DISABLED_IN_PROTECTED_REGION.format(bowName()))
         }
 
         return inRegion

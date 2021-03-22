@@ -113,6 +113,7 @@ open class BowManager(private val plugin: DirtyArrows): Iterable<BowType>, Liste
         ShearBow(plugin).load()
         UndyingBow(plugin).load()
         FireworkBow(plugin).load()
+        BridgeBow(plugin).load()
     }
 
     /**

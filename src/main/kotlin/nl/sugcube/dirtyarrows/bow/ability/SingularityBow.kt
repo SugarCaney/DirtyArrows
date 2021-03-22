@@ -25,6 +25,7 @@ open class SingularityBow(plugin: DirtyArrows) : BowAbility(
         type = DefaultBow.SINGULARITY,
         handleEveryNTicks = 1,
         canShootInProtectedRegions = false,
+        protectionRange = 20.0,
         removeArrow = true,
         description = "Pulls in entities & suffocates.",
         costRequirements = listOf(ItemStack(Material.REDSTONE, 3))
@@ -121,6 +122,8 @@ open class SingularityBow(plugin: DirtyArrows) : BowAbility(
      * Handles effects of flying arrows (pull in arrows).
      */
     private fun flyingArrowEffect() = arrows.forEach { arrow ->
+        if (arrow.location.isInProtectedRegion(arrow.shooter as? LivingEntity, showError = false)) return@forEach
+
         arrow.location.nearbyLivingEntities(flightPullRange).forEach { entity ->
             if (entity != arrow.shooter) {
                 entity.pullTowards(arrow.location, flightPullPower)

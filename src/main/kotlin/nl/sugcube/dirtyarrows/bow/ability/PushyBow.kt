@@ -58,7 +58,11 @@ open class PushyBow(plugin: DirtyArrows) : BowAbility(
     }
 
     override fun effect() = arrows.forEach { arrow ->
-        arrow.location.nearbyLivingEntities(flightPushRange).forEach { entity ->
+        arrow.location.nearbyLivingEntities(flightPushRange).forEach entities@ { entity ->
+            if (arrow.location.isInProtectedRegion(arrow.shooter as? LivingEntity, false)) {
+                return@entities
+            }
+
             if (entity != arrow.shooter) {
                 entity.pushAway(arrow.location, flightPushPower)
             }
