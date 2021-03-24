@@ -117,6 +117,7 @@ open class BowManager(private val plugin: DirtyArrows): Iterable<BowType>, Liste
         MeteorBow(plugin).load()
         DraggyBow(plugin).load()
         BabyBow(plugin).load()
+        SmokyBow(plugin).load()
     }
 
     /**
