@@ -3,14 +3,10 @@ package nl.sugcube.dirtyarrows.bow.ability
 import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
-import nl.sugcube.dirtyarrows.util.centreLocation
-import nl.sugcube.dirtyarrows.util.dropItem
-import nl.sugcube.dirtyarrows.util.forXYZ
-import nl.sugcube.dirtyarrows.util.isShearable
+import nl.sugcube.dirtyarrows.util.*
 import org.bukkit.Material
 import org.bukkit.block.Block
 import org.bukkit.entity.Arrow
-import org.bukkit.entity.EntityType
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.ProjectileHitEvent
@@ -44,7 +40,7 @@ open class ShearBow(plugin: DirtyArrows) : BowAbility(
         }
 
         event.hitBlock.shearBlocks()
-        arrow.respawnArrow()
+        registerArrow(arrow.respawnArrow())
     }
 
     override fun effect() {
@@ -82,26 +78,6 @@ open class ShearBow(plugin: DirtyArrows) : BowAbility(
         Material.LONG_GRASS -> (state.data as LongGrass).species.data
         Material.DOUBLE_PLANT -> state.data.data
         else -> 0
-    }
-
-    /**
-     * Respawns an arrow in the same direction as this arrow.
-     *
-     * @return The spawned arrow.
-     */
-    private fun Arrow.respawnArrow(): Arrow {
-        val landedArrow = this
-        landedArrow.remove()
-        return landedArrow.world.spawnEntity(landedArrow.location, EntityType.ARROW).apply {
-            val createdArrow = this as Arrow
-            createdArrow.velocity = landedArrow.velocity
-            createdArrow.isCritical = landedArrow.isCritical
-            createdArrow.pickupStatus = landedArrow.pickupStatus
-            createdArrow.knockbackStrength = landedArrow.knockbackStrength
-            createdArrow.fireTicks = landedArrow.fireTicks
-            createdArrow.shooter = this@respawnArrow.shooter
-            registerArrow(createdArrow)
-        } as Arrow
     }
 
     companion object {
