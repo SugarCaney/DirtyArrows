@@ -36,7 +36,7 @@ open class DrainBow(plugin: DirtyArrows) : BowAbility(
         val maxHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).value
         player.health = min(maxHealth, player.health + healthPointsToHeal)
         repeat(abs(healthPointsToHeal)) {
-            player.showHealParticle(1)
+            player.location.showHealParticle(1)
         }
     }
 }

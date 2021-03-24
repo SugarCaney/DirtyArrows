@@ -95,12 +95,14 @@ fun Location.showGrowthParticle(strength: Int = 5) {
  *
  * @param hearts
  *          The amount of hearts to show.
+ * @param fuzzing
+ *          Maximum deviation in the x and z direction.
  */
-fun Entity.showHealParticle(hearts: Int) {
+fun Location.showHealParticle(hearts: Int, fuzzing: Double = 0.3) {
     world.spawnParticle(Particle.HEART,
-            location.x.fuzz(0.3),
-            location.y + 2.0.fuzz(0.5),
-            location.z.fuzz(0.3),
+            x.fuzz(fuzzing),
+            y + 2.0.fuzz(0.5),
+            z.fuzz(fuzzing),
             hearts
     )
 }

@@ -111,6 +111,7 @@ enum class DefaultBow(
     BRIDGE("bridge"),
     METEOR("meteor"),
     DRAGGY("draggy"),
+    BABY("baby"),
     ;
 
     /**
