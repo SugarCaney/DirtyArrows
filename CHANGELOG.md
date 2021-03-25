@@ -32,6 +32,7 @@ Changelog
 * **`+`** Added Draggy bow.
 * **`+`** Added Baby bow.
 * **`+`** Added Smoky bow.
+* **`+`** Added Invincibility bow.
 * **`+`** Added \da visualize to visualize regions and position selection.
 * **`+`** Added \da tp command to teleport to the center of a region.
 * **`+`** Added \da ammo to quickly give the required items to players.
