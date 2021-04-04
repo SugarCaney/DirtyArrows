@@ -1846,6 +1846,9 @@ up:
 ##
 ## ABILITY: Shear
 ## - Breaks and drops all shearable blocks.
+## - Shears sheep in range on impact.
+## - Shears mooshrooms in range on impact.
+## - Shears snow golems in range on impact.
 ##
 shear:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
@@ -1863,6 +1866,14 @@ shear:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The range around the location of impact where special blocks/entities (sheep, pumpkins, ...), in blocks.
+  # (Double) default: 2.0
+  impact-range: 2.0
+
+  # How much the range increases per power level on the bow, in blocks.
+  # (Double) default: 1.0
+  range-increase: 1.0
 
 ##
 ## ABILITY: Undying
