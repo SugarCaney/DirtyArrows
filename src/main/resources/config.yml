@@ -2220,3 +2220,43 @@ blocky:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+##
+## ABILITY: Accelerating
+## - Shoots arrows that start slow, but move faster and faster.
+## - The faster the arrow flies, the more damage it does.
+##
+accelerating:
+  # Bows with this item Invincibility have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Accelerating Bastard
+  name: 'Accelerating Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 12
+  levels: 12
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # The minimum speed of the arrow in blocks/tick. This is also the start speed.
+  # (Double) default: 0.5
+  minimum-speed: 0.5
+
+  # The maximum speed of the arrows in blocks/tick.
+  # For a regular bow, this is roughly 3.0
+  # (Double) default: 8.0
+  maximum-speed: 8.0
+
+  # The maximum amount of milliseconds the arrow can accelerate for.
+  # (Int) default: 2500
+  accelerate-time: 2500
+
+  # How many blocks/tick the arrow should move upward to counteract the downward tendency of the arrow.
+  # Generally needs to be higher at higher velocities, and lower at lower velocities.
+  # (Double) default: 0.04
+  vertical-compensation: 0.04
