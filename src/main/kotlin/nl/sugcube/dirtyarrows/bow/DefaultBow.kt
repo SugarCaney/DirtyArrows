@@ -114,6 +114,7 @@ enum class DefaultBow(
     BABY("baby"),
     SMOKY("smoky"),
     INVINCIBILITY("invincibility"),
+    BLOCKY("blocky"),
     ;
 
     /**
