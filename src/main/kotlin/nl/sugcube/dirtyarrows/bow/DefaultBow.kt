@@ -116,6 +116,7 @@ enum class DefaultBow(
     INVINCIBILITY("invincibility"),
     BLOCKY("blocky"),
     ACCELERATING("accelerating"),
+    FARMERS("farmers"),
     ;
 
     /**

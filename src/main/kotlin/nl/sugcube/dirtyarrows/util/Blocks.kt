@@ -89,3 +89,17 @@ fun Arrow.hitBlockFace(hitBlock: Block): BlockFace? {
     }
     return nextBlock.getFace(blockBefore)
 }
+
+/**
+ * Turns this block into regular dirt if this block is coarse dirt.
+ *
+ * @return `true` if the block was succesfully restored from coarse dirt to regular dirt.
+ */
+@Suppress("DEPRECATION")
+fun Block.restoreCoarseDirt(): Boolean {
+    if (type != Material.DIRT) return false
+    if (state.rawData != 1.toByte()) return false
+
+    data = 0
+    return true
+}

@@ -114,6 +114,11 @@ inline fun forXYZ(xRange: IntProgression, yRange: IntProgression, zRange: IntPro
 }
 
 /**
+ * Loops over x, y, z range.
+ */
+inline fun forXYZ(range: IntProgression, action: (dx: Int, dy: Int, dz: Int) -> Unit) = forXYZ(range, range, range, action)
+
+/**
  * Fuzzes this number: creates a random number in `[this - maxFuzz, this + maxFuzz]`.
  */
 fun Double.fuzz(maxFuzz: Double) = this - maxFuzz + 2 * Random.nextDouble() * maxFuzz

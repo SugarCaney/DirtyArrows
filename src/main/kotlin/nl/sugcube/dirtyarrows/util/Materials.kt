@@ -5,6 +5,7 @@ import org.bukkit.Material
 import org.bukkit.block.Block
 import org.bukkit.inventory.FurnaceRecipe
 import org.bukkit.inventory.ItemStack
+import kotlin.math.min
 import kotlin.random.Random
 
 /**
@@ -62,12 +63,14 @@ fun Material.fortuneDrops(level: Int = 0): Collection<ItemStack> {
         Material.QUARTZ_ORE -> oreFortuneCount(fortuneLevel = level, dropAmount = 1..1)
         Material.LAPIS_ORE -> oreFortuneCount(fortuneLevel = level, dropAmount = 4..9)
         Material.REDSTONE_ORE -> redstoneFortuneCount(fortuneLevel = level)
+        Material.MELON_BLOCK -> melonFortuneCount(fortuneLevel = level)
         else -> 1
     }
 
     val dropMaterial = when (this) {
         Material.IRON_ORE, Material.GOLD_ORE -> this
-        else -> smeltedItem?.type ?: return emptyList()
+        Material.MELON_BLOCK -> Material.MELON
+        else -> smeltedItem?.type ?: this
     }
 
     return if (this == Material.LAPIS_ORE) {
@@ -102,3 +105,11 @@ fun oreFortuneCount(fortuneLevel: Int = 0, dropAmount: IntRange = 1..1): Int {
  *          The level of the fortune enchantment to consider (0 for no fortune).
  */
 fun redstoneFortuneCount(fortuneLevel: Int = 0) = 4 + Random.nextInt(0, fortuneLevel + 2)
+
+/**
+ * Calculates a random amount of melon slices to drop from a melon block.
+ *
+ * @param fortuneLevel
+ *          The level of the fortune enchantment to consider (0 for no fortune).
+ */
+fun melonFortuneCount(fortuneLevel: Int = 0) = min(9, 3 + Random.nextInt(0, fortuneLevel + 4))
