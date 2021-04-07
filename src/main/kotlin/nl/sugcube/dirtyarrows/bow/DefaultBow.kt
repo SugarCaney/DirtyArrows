@@ -118,6 +118,7 @@ enum class DefaultBow(
     ACCELERATING("accelerating"),
     FARMERS("farmers"),
     BOW("bow"),
+    MINE("mine"),
     ;
 
     /**

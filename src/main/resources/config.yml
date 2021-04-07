@@ -103,7 +103,7 @@ exploding:
   # (Boolean) default: false
   set-on-fire: false
 
-  # Whether to break the broken blocks.
+  # Whether the explosion can break blocks.
   # (Boolean) default: true
   break-blocks: true
 
@@ -2042,7 +2042,7 @@ meteor:
   # (Boolean) default: true
   set-on-fire: true
 
-  # Whether to break the broken blocks.
+  # Whether the explosion can break blocks.
   # (Boolean) default: true
   break-blocks: true
 
@@ -2344,3 +2344,56 @@ bow:
   # The initial speed of the child arrows will be this multiplier times the original arrow speed.
   # (Double) default: 0.6
   velocity-multiplier: 0.6
+
+##
+## ABILITY: Mine
+## - Shoots proximity mines.
+## - When living entities come close to the mine they explode.
+##
+mine:
+  # Bows with this item Invincibility have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Mine Bastard
+  name: 'Mine Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 12
+  levels: 12
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # The power of the mine explosions. TNT is 4.0 for reference.
+  # Beware: the region protection range stays the same. Largers explosions leave you at a risk of blowing up
+  #         otherwise protected blocks.
+  # (Double) default: 3.0
+  power: 3.0
+
+  # Whether the explosion can set blocks on fire.
+  # (Boolean) default: false
+  set-on-fire: false
+
+  # Whether the explosion can break blocks.
+  # (Boolean) default: true
+  break-blocks: true
+
+  # How close a living entity has to be to the mine for it to explode, in blocks.
+  # (Double) default: 1.3
+  proximity: 1.3
+
+  # Whether the mines should display a particle (indicating that the arrow is a mine).
+  # (Boolean) deafult: true
+  show-light: true
+
+  # The light is shown every N ticks, if [show-light] is true.
+  # (Int) default: 25
+  light-frequency: 25
+
+  # How long the mine is active in milliseconds.
+  # By default, corresponds to the arrow lifetime of 1 minute.
+  # (Int) default: 60000
+  maximum-lifespan: 60000
