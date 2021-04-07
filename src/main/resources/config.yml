@@ -1535,6 +1535,10 @@ interdimensional:
   # (Double) default: 1.5
   spawn-distance-fuzzing: 1.5
 
+  # How many arrows to spawn around the target.
+  # (Int) default: 1
+  arrow-count: 1
+
 ##
 ## ABILITY: Singularity
 ## - During flight, slightly pulls entities towards the arrow.

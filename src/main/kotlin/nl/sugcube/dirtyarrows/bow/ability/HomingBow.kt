@@ -73,6 +73,8 @@ open class HomingBow(plugin: DirtyArrows) : BowAbility(
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
         if (explosivePower > 0) {
             arrow.location.createExplosion(power = explosivePower, breakBlocks = false)
+            unregisterArrow(arrow)
+            arrow.remove()
         }
     }
 

@@ -69,14 +69,22 @@ open class InterdimensionalBow(plugin: DirtyArrows) : BowAbility(
      */
     val spawnDistanceFuzzing = config.getDouble("$node.spawn-distance-fuzzing")
 
+    /**
+     * How many arrows to spawn around the target.
+     */
+    val arrowCount = config.getInt("$node.arrow-count")
+
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {
         arrow.findTarget()?.let { target ->
-            val location = target.arrowWarpLocation() ?: return@let
-            location.world.playSound(location, Sound.ENTITY_ENDERMEN_TELEPORT, 10f, 1f)
+            val bow = player.bowItem() ?: error("Interdimensional arrow was fired without an interdimensional bow")
+
+            repeat(arrowCount) {
+                val location = target.arrowWarpLocation() ?: return@let
+                location.world.playSound(location, Sound.ENTITY_ENDERMEN_TELEPORT, 10f, 1f)
+                launched += LaunchState(arrow.velocity.copyOf(), player, target, location, bow = bow)
+            }
             arrow.showLaunchEffect(player)
 
-            val bow = player.bowItem() ?: error("Interdimensional arrow was fired without an interdimensional bow")
-            launched += LaunchState(arrow.velocity.copyOf(), player, target, location, bow = bow)
             unregisterArrow(arrow)
             arrow.remove()
         }
