@@ -91,7 +91,8 @@ abstract class BowAbility(
     /**
      * Keeps track of the amount of ticks that have passed.
      */
-    private var tickCounter = 0
+    protected var tickCounter = 0
+        private set
 
     /**
      * Set containing all arrows that have been shot with this bow.

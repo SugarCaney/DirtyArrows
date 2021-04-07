@@ -78,7 +78,10 @@ fun Location.nearbyEntities(range: Double): Collection<Entity> = world.getNearby
 /**
  * Get all living entities within a certain range of this location.
  */
-fun Location.nearbyLivingEntities(range: Double) = nearbyEntities(range).mapNotNull { it as? LivingEntity }
+fun Location.nearbyLivingEntities(range: Double) = nearbyEntities(range).asSequence()
+        .filter { distance(it.location) <= range }
+        .mapNotNull { it as? LivingEntity }
+        .toList()
 
 /**
  * Calculates the distance from this location (x,y,z) to the vectors (x,y,z).

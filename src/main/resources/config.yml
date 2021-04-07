@@ -2307,3 +2307,40 @@ farmers:
   # How much the range increases per power level, in blocks.
   # (Int) default: 1
   range-increment: 1
+
+##
+## ABILITY: Bow
+## - Shoots arrows that act as bows: they shoot more stuff.
+##
+bow:
+  # Bows with this item Invincibility have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Bow Bastard
+  name: 'Bow Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 15
+  levels: 15
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # Arrows shoot an arrow every, this amount of, ticks.
+  # (Int) default: 6
+  handle-every-n-ticks: 6
+
+  # Maximum amount of milliseconds the arrows can shoot child arrows.
+  # (Int) default: 3000
+  maximum-lifespan: 3000
+
+  # How far the arrow will look for targets to shoot, in blocks.
+  # (Double) default: 14.0
+  shoot-range: 14.0
+
+  # The initial speed of the child arrows will be this multiplier times the original arrow speed.
+  # (Double) default: 0.6
+  velocity-multiplier: 0.6

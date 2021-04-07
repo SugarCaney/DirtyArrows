@@ -117,6 +117,7 @@ enum class DefaultBow(
     BLOCKY("blocky"),
     ACCELERATING("accelerating"),
     FARMERS("farmers"),
+    BOW("bow"),
     ;
 
     /**
