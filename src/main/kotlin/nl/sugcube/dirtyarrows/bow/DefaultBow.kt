@@ -119,6 +119,7 @@ enum class DefaultBow(
     FARMERS("farmers"),
     BOW("bow"),
     MINE("mine"),
+    BLASTER("blaster"),
     ;
 
     /**

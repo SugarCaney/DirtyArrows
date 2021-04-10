@@ -2397,3 +2397,46 @@ mine:
   # By default, corresponds to the arrow lifetime of 1 minute.
   # (Int) default: 60000
   maximum-lifespan: 60000
+
+##
+## ABILITY: Blaster
+## - Shoots arrows that keep exploding until impact.
+##
+blaster:
+  # Bows with this item Invincibility have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Blaster Bastard
+  name: 'Blaster Bastard'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 15
+  levels: 15
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # Arrows explode every N, this amount of, ticks.
+  # (Int) default: 4
+  handle-every-n-ticks: 4
+
+  # Maximum amount of milliseconds the arrows can spawn explosions.
+  # (Int) default: 3000
+  maximum-lifespan: 3000
+
+  # The power of the explosions. TNT is 4.0 for reference.
+  # Beware: the region protection range stays the same. Largers explosions leave you at a risk of blowing up
+  #         otherwise protected blocks.
+  # (Double) default: 1.8
+  power: 1.8
+
+  # Whether the explosion can set blocks on fire.
+  # (Boolean) default: false
+  set-on-fire: false
+
+  # Whether the explosion can break blocks.
+  # (Boolean) default: false
+  break-blocks: false
