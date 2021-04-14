@@ -78,8 +78,8 @@ help:
 ##
 exploding:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Exploding Bastard
-  name: 'Exploding Bastard'
+  # (String) default: Exploding Bow
+  name: 'Exploding Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -113,8 +113,8 @@ exploding:
 ##
 lightning:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Lightning Bastard
-  name: 'Lightning Bastard'
+  # (String) default: Lightning Bow
+  name: 'Lightning Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -134,8 +134,8 @@ lightning:
 ##
 clucky:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Clucky Bastard
-  name: 'Clucky Bastard'
+  # (String) default: Clucky Bow
+  name: 'Clucky Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -160,8 +160,8 @@ clucky:
 ##
 ender:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Ender Bastard
-  name: 'Ender Bastard'
+  # (String) default: Ender Bow
+  name: 'Ender Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -181,8 +181,8 @@ ender:
 ##
 oak:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Oak Bastard
-  name: 'Oak Bastard'
+  # (String) default: Oak Bow
+  name: 'Oak Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -202,8 +202,8 @@ oak:
 ##
 spruce:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Spruce Bastard
-  name: 'Spruce Bastard'
+  # (String) default: Spruce Bow
+  name: 'Spruce Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -223,8 +223,8 @@ spruce:
 ##
 birch:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Birch Bastard
-  name: 'Birch Bastard'
+  # (String) default: Birch Bow
+  name: 'Birch Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -244,8 +244,8 @@ birch:
 ##
 jungle:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Jungle Bastard
-  name: 'Jungle Bastard'
+  # (String) default: Jungle Bow
+  name: 'Jungle Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -265,8 +265,8 @@ jungle:
 ##
 acacia:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Acacia Bastard
-  name: 'Acacia Bastard'
+  # (String) default: Acacia Bow
+  name: 'Acacia Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -287,7 +287,7 @@ acacia:
 darkoak:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
   # (String) default:
-  name: 'Dark Oak Bastard'
+  name: 'Dark Oak Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -307,8 +307,8 @@ darkoak:
 ##
 batty:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Batty Bastard
-  name: 'Batty Bastard'
+  # (String) default: Batty Bow
+  name: 'Batty Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -333,8 +333,8 @@ batty:
 ##
 nuclear:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Nuclear Bastard
-  name: 'Nuclear Bastard'
+  # (String) default: Nuclear Bow
+  name: 'Nuclear Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -433,8 +433,8 @@ nuclear:
 ##
 enlightened:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Enlightened Bastard
-  name: 'Enlightened Bastard'
+  # (String) default: Enlightened Bow
+  name: 'Enlightened Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -455,8 +455,8 @@ enlightened:
 ##
 ranged:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Ranged Bastard
-  name: 'Ranged Bastard'
+  # (String) default: Ranged Bow
+  name: 'Ranged Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -481,8 +481,8 @@ ranged:
 ##
 machine:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Machine Bastard
-  name: 'Machine Bastard'
+  # (String) default: Machine Bow
+  name: 'Machine Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -514,8 +514,8 @@ machine:
 ##
 poisonous:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Poisonous Bastard
-  name: 'Poisonous Bastard'
+  # (String) default: Poisonous Bow
+  name: 'Poisonous Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -547,8 +547,8 @@ poisonous:
 ##
 disorienting:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Disorienting Bastard
-  name: 'Disorienting Bastard'
+  # (String) default: Disorienting Bow
+  name: 'Disorienting Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -576,8 +576,8 @@ disorienting:
 ##
 swap:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Swap Bastard
-  name: 'Swap Bastard'
+  # (String) default: Swap Bow
+  name: 'Swap Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -597,8 +597,8 @@ swap:
 ##
 draining:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Draining Bastard
-  name: 'Draining Bastard'
+  # (String) default: Draining Bow
+  name: 'Draining Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -622,8 +622,8 @@ draining:
 ##
 flintand:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Flint and Bastard
-  name: 'Flint and Bastard'
+  # (String) default: Flint and Bow
+  name: 'Flint and Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -647,8 +647,8 @@ flintand:
 ##
 disarming:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Disarming Bastard
-  name: 'Disarming Bastard'
+  # (String) default: Disarming Bow
+  name: 'Disarming Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -680,8 +680,8 @@ disarming:
 ##
 wither:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Wither Bastard
-  name: 'Wither Bastard'
+  # (String) default: Wither Bow
+  name: 'Wither Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -705,8 +705,8 @@ wither:
 ##
 firey:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Firey Bastard
-  name: 'Firey Bastard'
+  # (String) default: Firey Bow
+  name: 'Firey Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -731,8 +731,8 @@ firey:
 ##
 slow:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Slow Bastard
-  name: 'Slow Bastard'
+  # (String) default: Slow Bow
+  name: 'Slow Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -757,8 +757,8 @@ slow:
 ##
 level:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Level Bastard
-  name: 'Level Bastard'
+  # (String) default: Level Bow
+  name: 'Level Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -782,8 +782,8 @@ level:
 ##
 undead:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Undead Bastard
-  name: 'Undead Bastard'
+  # (String) default: Undead Bow
+  name: 'Undead Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -811,8 +811,8 @@ undead:
 ##
 woodman:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Woodman's Bastard
-  name: "Woodman's Bastard"
+  # (String) default: Woodman's Bow
+  name: "Woodman's Bow"
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -832,8 +832,8 @@ woodman:
 ##
 starvation:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Bastard of Starvation
-  name: 'Bastard of Starvation'
+  # (String) default: Bow of Starvation
+  name: 'Bow of Starvation'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -853,8 +853,8 @@ starvation:
 ##
 multi:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Multi Bastard
-  name: 'Multi Bastard'
+  # (String) default: Multi Bow
+  name: 'Multi Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -882,8 +882,8 @@ multi:
 ##
 bomb:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Bomb Bastard
-  name: 'Bomb Bastard'
+  # (String) default: Bomb Bow
+  name: 'Bomb Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -915,8 +915,8 @@ bomb:
 ##
 drop:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Drop Bastard
-  name: 'Drop Bastard'
+  # (String) default: Drop Bow
+  name: 'Drop Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -940,8 +940,8 @@ drop:
 ##
 airstrike:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Airstrike Bastard
-  name: 'Airstrike Bastard'
+  # (String) default: Airstrike Bow
+  name: 'Airstrike Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -966,8 +966,8 @@ airstrike:
 ##
 magmatic:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Magmatic Bastard
-  name: 'Magmatic Bastard'
+  # (String) default: Magmatic Bow
+  name: 'Magmatic Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -991,8 +991,8 @@ magmatic:
 ##
 aquatic:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Aquatic Bastard
-  name: 'Aquatic Bastard'
+  # (String) default: Aquatic Bow
+  name: 'Aquatic Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -1016,8 +1016,8 @@ aquatic:
 ##
 pull:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Pull Bastard
-  name: 'Pull Bastard'
+  # (String) default: Pull Bow
+  name: 'Pull Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -1041,8 +1041,8 @@ pull:
 ##
 paralyze:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Paralyze Bastard
-  name: 'Paralyze Bastard'
+  # (String) default: Paralyze Bow
+  name: 'Paralyze Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -1080,8 +1080,8 @@ paralyze:
 ##
 cluster:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Cluster Bastard
-  name: 'Cluster Bastard'
+  # (String) default: Cluster Bow
+  name: 'Cluster Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -1113,8 +1113,8 @@ cluster:
 ##
 airship:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Airship Bastard
-  name: 'Airship Bastard'
+  # (String) default: Airship Bow
+  name: 'Airship Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -1144,8 +1144,8 @@ airship:
 ##
 iron:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Iron Bastard
-  name: 'Iron Bastard'
+  # (String) default: Iron Bow
+  name: 'Iron Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -1196,7 +1196,7 @@ iron:
 curse:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
   # (String) default: Curse
-  name: 'Curse Bastard'
+  name: 'Curse Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -1307,8 +1307,8 @@ curse:
 ##
 round:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: 360 Bastard
-  name: '360 Bastard'
+  # (String) default: 360 Bow
+  name: '360 Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -1335,8 +1335,8 @@ round:
 ##
 frozen:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Frozen Bastard
-  name: 'Frozen Bastard'
+  # (String) default: Frozen Bow
+  name: 'Frozen Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -1400,8 +1400,8 @@ frozen:
 ##
 drill:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Drill Bastard
-  name: 'Drill Bastard'
+  # (String) default: Drill Bow
+  name: 'Drill Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -1426,8 +1426,8 @@ drill:
 ##
 music:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Music Bastard
-  name: 'Music Bastard'
+  # (String) default: Music Bow
+  name: 'Music Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -1447,8 +1447,8 @@ music:
 ##
 homing:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Homing Bastard
-  name: 'Homing Bastard'
+  # (String) default: Homing Bow
+  name: 'Homing Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -1496,8 +1496,8 @@ homing:
 ##
 interdimensional:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Interdimensional Bastard
-  name: 'Interdimensional Bastard'
+  # (String) default: Interdimensional Bow
+  name: 'Interdimensional Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -1547,8 +1547,8 @@ interdimensional:
 ##
 singularity:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Singularity Bastard
-  name: 'Singularity Bastard'
+  # (String) default: Singularity Bow
+  name: 'Singularity Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -1607,8 +1607,8 @@ singularity:
 ##
 pushy:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Pushy Bastard
-  name: 'Pushy Bastard'
+  # (String) default: Pushy Bow
+  name: 'Pushy Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -1689,8 +1689,8 @@ rainbow:
 ##
 laser:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Laser Bastard
-  name: 'Laser Bastard'
+  # (String) default: Laser Bow
+  name: 'Laser Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -1727,8 +1727,8 @@ laser:
 ##
 grappling:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Grappling Bastard
-  name: 'Grappling Bastard'
+  # (String) default: Grappling Bow
+  name: 'Grappling Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -1759,8 +1759,8 @@ grappling:
 ##
 bouncy:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Bouncy Bastard
-  name: 'Bouncy Bastard'
+  # (String) default: Bouncy Bow
+  name: 'Bouncy Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -1795,8 +1795,8 @@ bouncy:
 ##
 mining:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Mining Bastard
-  name: 'Mining Bastard'
+  # (String) default: Mining Bow
+  name: 'Mining Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -1822,8 +1822,8 @@ mining:
 ##
 up:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: UP Bastard
-  name: 'UP Bastard'
+  # (String) default: UP Bow
+  name: 'UP Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -1856,8 +1856,8 @@ up:
 ##
 shear:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Shear Bastard
-  name: 'Shear Bastard'
+  # (String) default: Shear Bow
+  name: 'Shear Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -1885,8 +1885,8 @@ shear:
 ##
 undying:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Shear Bastard
-  name: 'Bastard of Undying'
+  # (String) default: Shear Bow
+  name: 'Bow of Undying'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -1909,8 +1909,8 @@ undying:
 ##
 firework:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Firework Bastard
-  name: 'Firework Bastard'
+  # (String) default: Firework Bow
+  name: 'Firework Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -1983,8 +1983,8 @@ firework:
 ##
 bridge:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Bridge Bastard
-  name: 'Bridge Bastard'
+  # (String) default: Bridge Bow
+  name: 'Bridge Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -2017,8 +2017,8 @@ bridge:
 ##
 meteor:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Meteor Bastard
-  name: 'Meteor Bastard'
+  # (String) default: Meteor Bow
+  name: 'Meteor Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -2072,8 +2072,8 @@ meteor:
 ##
 draggy:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Draggy Bastard
-  name: 'Draggy Bastard'
+  # (String) default: Draggy Bow
+  name: 'Draggy Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -2104,8 +2104,8 @@ draggy:
 ##
 baby:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Baby Bastard
-  name: 'Baby Bastard'
+  # (String) default: Baby Bow
+  name: 'Baby Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -2126,8 +2126,8 @@ baby:
 ##
 smoky:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Smoky Bastard
-  name: 'Smoky Bastard'
+  # (String) default: Smoky Bow
+  name: 'Smoky Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -2188,8 +2188,8 @@ smoky:
 ##
 invincibility:
   # Bows with this item Invincibility have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Invincibility Bastard
-  name: 'Invincibility Bastard'
+  # (String) default: Invincibility Bow
+  name: 'Invincibility Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -2221,8 +2221,8 @@ invincibility:
 ##
 blocky:
   # Bows with this item Invincibility have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Blocky Bastard
-  name: 'Blocky Bastard'
+  # (String) default: Blocky Bow
+  name: 'Blocky Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -2243,8 +2243,8 @@ blocky:
 ##
 accelerating:
   # Bows with this item Invincibility have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Accelerating Bastard
-  name: 'Accelerating Bastard'
+  # (String) default: Accelerating Bow
+  name: 'Accelerating Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -2285,8 +2285,8 @@ accelerating:
 ##
 farmers:
   # Bows with this item Invincibility have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Farmer's Bastard
-  name: "Farmer's Bastard"
+  # (String) default: Farmer's Bow
+  name: "Farmer's Bow"
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -2314,8 +2314,8 @@ farmers:
 ##
 bow:
   # Bows with this item Invincibility have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Bow Bastard
-  name: 'Bow Bastard'
+  # (String) default: Bow Bow
+  name: 'Bow Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -2352,8 +2352,8 @@ bow:
 ##
 mine:
   # Bows with this item Invincibility have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Mine Bastard
-  name: 'Mine Bastard'
+  # (String) default: Mine Bow
+  name: 'Mine Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true
@@ -2404,8 +2404,8 @@ mine:
 ##
 blaster:
   # Bows with this item Invincibility have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Blaster Bastard
-  name: 'Blaster Bastard'
+  # (String) default: Blaster Bow
+  name: 'Blaster Bow'
 
   # Whether the bow can be used (true).
   # (Boolean) default: true

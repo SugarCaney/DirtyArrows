@@ -75,6 +75,7 @@ Changelog
 * **`~`** Poisonous bow shows particles on hit.
 * **`~`** Improved robustness.
 * **`~`** Improved the help screen.
+* **`~`** Bows are now called 'Bow' instead of 'Bastard' by default.
 * **`-`** Removed metrics.
 
 ## Version 3.0
