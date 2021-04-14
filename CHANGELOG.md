@@ -33,6 +33,12 @@ Changelog
 * **`+`** Added Baby bow.
 * **`+`** Added Smoky bow.
 * **`+`** Added Invincibility bow.
+* **`+`** Added Blocky bow.
+* **`+`** Added Accelerating bow.
+* **`+`** Added Farmers bow.
+* **`+`** Added Bow bow.
+* **`+`** Added Mine bow.
+* **`+`** Added Blaster bow.
 * **`+`** Added \da visualize to visualize regions and position selection.
 * **`+`** Added \da tp command to teleport to the center of a region.
 * **`+`** Added \da ammo to quickly give the required items to players.
@@ -48,6 +54,7 @@ Changelog
 * **`!`** Fixed frozen not going away after death.
 * **`!`** Fixed being perpetually frozen when you die when you're frozen.
 * **`!`** Fixed some entity references not being removed.
+* **`!`** Fixed DirtyArrows not getting disabled when leaving the server.
 * **`~`** Made almost any effect configurable.
 * **`~`** Undead bow spawns zombies on the first available Y instead of the highest Y level.
 * **`~`** Decreased the amount of zombies spawned by the undead bow.
