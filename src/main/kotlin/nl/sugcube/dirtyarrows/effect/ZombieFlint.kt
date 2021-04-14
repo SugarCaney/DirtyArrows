@@ -11,31 +11,38 @@ import kotlin.random.Random
 
 /**
  * Let zombies drop flint on death.
+ * Not affected by Looting enchantment.
  *
  * @author SugarCaney
  */
 open class ZombieFlint(private val plugin: DirtyArrows) : Listener {
 
+    /**
+     * Whether zombies should drop flint or not on death.
+     */
+    val enabled: Boolean
+        get() = plugin.config.getBoolean("zombie-flint.enabled")
+
+    /**
+     * The chance for flint to drop on death of a zombie in range [0,1] inclusive.
+     */
+    val dropChance: Double
+        get() = plugin.config.getDouble("zombie-flint.drop-chance")
+
+    /**
+     * The maximum amount of flint that can drop at once.
+     * The actual amount will be a value between 1 and this value (inclusive).
+     */
+    val maximumDropAmount: Int
+        get() = plugin.config.getInt("zombie-flint.maximum-drop-count")
+
     @EventHandler
     fun flintDropper(event: EntityDeathEvent) {
         if (event.entity !is Zombie) return
-        if (plugin.config.getBoolean("zombie-flint").not()) return
-        if (Random.nextDouble() > DROP_CHANCE) return
+        if (enabled.not()) return
+        if (Random.nextDouble() > dropChance) return
 
-        val amount = Random.nextInt(1, MAXIMUM_DROP_AMOUNT + 1)
+        val amount = Random.nextInt(1, maximumDropAmount + 1)
         event.drops.add(ItemStack(Material.FLINT, amount))
-    }
-
-    companion object {
-
-        /**
-         * The chance for flint to drop on death of a zombie.
-         */
-        private const val DROP_CHANCE = 0.1
-
-        /**
-         * The maximum amount of flint a zombie can drop at once.
-         */
-        private const val MAXIMUM_DROP_AMOUNT = 2
     }
 }

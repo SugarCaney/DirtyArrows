@@ -60,9 +60,24 @@ headshot:
   # (Double) default: 1.5
   damage-multiplier: 1.5
 
-# Whether zombies should drop flint or not on death.
-# (Boolean) default: true
-zombie-flint: true
+##
+## Settings for zombies dropping flint.
+## Not affected by Looting enchantments.
+##
+zombie-flint:
+  # Whether zombies should drop flint or not on death.
+  # (Boolean) default: true
+  enabled: true
+
+  # The chance for flint to drop on death of a zombie in range [0,1] inclusive.
+  # 0 means no chance of dropping, 1 means dropping always.
+  # (Double) default: 0.1
+  drop-chance: 0.1
+
+  # The maximum amount of flint that can drop at once.
+  # The actual amount will be a value between 1 and this value (inclusive).
+  # (Int) default: 2
+  maximum-drop-count: 2
 
 ##
 ## Help screen settings (/da help).
