@@ -1,5 +1,6 @@
 package nl.sugcube.dirtyarrows
 
+import nl.sugcube.dirtyarrows.bow.AutoActivation
 import nl.sugcube.dirtyarrows.bow.BowManager
 import nl.sugcube.dirtyarrows.command.DirtyArrowsCommandManager
 import nl.sugcube.dirtyarrows.effect.*
@@ -88,7 +89,8 @@ class DirtyArrows : JavaPlugin() {
      */
     private fun registerEvents() = with(server.pluginManager) {
         val plugin = this@DirtyArrows
-        registerEvents(JoinListener(plugin), plugin)
+        registerEvents(UpdateCheck(plugin), plugin)
+        registerEvents(AutoActivation(plugin), plugin)
         registerEvents(AnvilLevelModification(plugin), plugin)
         registerEvents(Headshot(plugin), plugin)
         registerEvents(LootingOnBow(plugin), plugin)
