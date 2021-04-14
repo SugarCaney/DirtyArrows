@@ -174,7 +174,7 @@ object Broadcast {
      *
      * %s = bow name.
      */
-    val NO_AMMO_REQUIRED = "$TAG ${Colour.SECONDARY}%s${Colour.PRIMARY} does not require ammonution."
+    val NO_AMMO_REQUIRED = "$TAG ${Colour.SECONDARY}%s${Colour.PRIMARY} does not require ammunition."
 
     /**
      * Give ammo confirmation.
