@@ -76,6 +76,7 @@ Changelog
 * **`~`** Improved robustness.
 * **`~`** Improved the help screen.
 * **`~`** Bows are now called 'Bow' instead of 'Bastard' by default.
+* **`~`** Blood particles are now disabled by default.
 * **`-`** Removed metrics.
 
 ## Version 3.0

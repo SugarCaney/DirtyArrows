@@ -41,8 +41,8 @@ show-enable-message: true
 show-particles: true
 
 # Whether entities should show blood particles when damaged.
-# (Boolean) default: true
-blood: true
+# (Boolean) default: false
+blood: false
 
 # How many arrows must be crafted with the default arrow recipe.
 # (Int) default: 16
