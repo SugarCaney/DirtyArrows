@@ -80,6 +80,32 @@ zombie-flint:
   maximum-drop-count: 2
 
 ##
+## Settings for enchanting bows with the Looting enchantment.
+##
+looting:
+  # The chance of Looting to appear on the bow in range [0,1].
+  # A value of 0 means that it's disabled, 1 means it will always add looting.
+  # (Double) default: 0.125
+  appearance-chance: 0.125
+
+  # The chance that Looting is the only enchantment when enchanting in range [0,1].
+  # A value of 0 means that looting will never be the only enchantment, 1 means that it always be.
+  # (Double) default: 0.35
+  only-looting-chance: 0.35
+
+  # The minimum amount of levels required to get a level 1 looting enchantment.
+  # (Int) default: 11
+  minimum-xp-level-1: 11
+
+  # The minimum amount of levels required to get a level 2 looting enchantment.
+  # (Int) default: 20
+  minimum-xp-level-2: 20
+
+  # The minimum amount of levels required to get a level 3 looting enchantment.
+  # (Int) default: 28
+  minimum-xp-level-3: 28
+
+##
 ## Help screen settings (/da help).
 ##
 help:

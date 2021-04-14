@@ -36,6 +36,11 @@ open class ZombieFlint(private val plugin: DirtyArrows) : Listener {
     val maximumDropAmount: Int
         get() = plugin.config.getInt("zombie-flint.maximum-drop-count")
 
+    init {
+        check(dropChance in 0.0..1.0) { "zombie-flint.drop-chance must be between 0 and 1, got <$dropChance>" }
+        check(maximumDropAmount >= 0) { "zombie-flint.maximum-drop-count must not be negative, got <$maximumDropAmount>" }
+    }
+
     @EventHandler
     fun flintDropper(event: EntityDeathEvent) {
         if (event.entity !is Zombie) return
