@@ -16,9 +16,21 @@ import org.bukkit.event.entity.EntityDamageEvent
  */
 open class Headshot(private val plugin: DirtyArrows) : Listener {
 
+    /**
+     * Whether headshots are enabled.
+     */
+    val enabled: Boolean
+        get() = plugin.config.getBoolean("headshot.enabled")
+
+    /**
+     * With what number to multiply the damage dealt when a headshot was made.
+     */
+    val damageMultiplier: Double
+        get() = plugin.config.getDouble("headshot.damage-multiplier")
+
     @EventHandler
     fun headshotListener(event: EntityDamageByEntityEvent) {
-        if (plugin.config.getBoolean("headshot.enabled").not()) return
+        if (enabled.not()) return
         if (event.cause != EntityDamageEvent.DamageCause.PROJECTILE) return
 
         val projectile = event.damager as Projectile
@@ -30,8 +42,7 @@ open class Headshot(private val plugin: DirtyArrows) : Listener {
         val isHeadshot = y - targetY > 1.35
         if (isHeadshot.not()) return
 
-        val multiplier = plugin.config.getDouble("damage-multiplier")
-        event.damage = event.damage * multiplier
+        event.damage = event.damage * damageMultiplier
 
         target.sendMessage(Broadcast.headshot(damager, HeadshotType.BY, plugin))
         damager.sendMessage(Broadcast.headshot(target, HeadshotType.ON, plugin))
