@@ -32,17 +32,17 @@ open class VenomousBow(plugin: DirtyArrows) : BowAbility(
     /**
      * How long the target gets poisoned in ticks.
      */
-    val poisonTime = 8 * 20
+    val poisonTime = config.getInt("$node.poison-time")
 
     /**
      * Maximum deviation from the poison time in ticks.
      */
-    val poisonTimeFuzzing = 30
+    val poisonTimeFuzzing = config.getInt("$node.poison-time-fuzzing")
 
     /**
      * The level of poison
      */
-    val poisonLevel = 3
+    val poisonLevel = config.getInt("$node.poison-level")
 
     init {
         check(poisonTime >= 0) { "$node.poison-time cannot be negative, got <$poisonTime>" }
