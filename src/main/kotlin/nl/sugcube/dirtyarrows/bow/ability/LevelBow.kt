@@ -25,12 +25,12 @@ open class LevelBow(plugin: DirtyArrows) : BowAbility(
     /**
      * The amount of levels to steal per hit.
      */
-    val levelChange = 1
+    val levelChange = config.getInt("$node.level-change")
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
         val target = event.hitEntity as? Player ?: return
         if (target == player) return
-        if (target.level < 1) return
+        if (target.level < levelChange) return
 
         target.level = max(0, target.level - levelChange)
         player.level = player.level + levelChange
