@@ -796,6 +796,10 @@ slow:
   # (Double) default: 99999.0 (insta-kill)
   damage: 99999.0
 
+  # With what number to multiply the default arrow speed.
+  # (Double) default: 0.12
+  arrow-speed: 0.12
+
 ##
 ## ABILITY: Level
 ## - Steals levels from the target player.

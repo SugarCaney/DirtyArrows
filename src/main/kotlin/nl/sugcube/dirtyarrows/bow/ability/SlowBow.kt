@@ -40,8 +40,13 @@ open class SlowBow(plugin: DirtyArrows) : BowAbility(
      */
     val damage = config.getDouble("$node.damage")
 
+    /**
+     * With what number to multiply the default arrow speed.
+     */
+    val arrowSpeed = config.getDouble("$node.arrow-speed")
+
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {
-        arrow.velocity = arrow.velocity.multiply(0.12)
+        arrow.velocity = arrow.velocity.multiply(arrowSpeed)
         velocityAndAge[arrow] = arrow.velocity to System.currentTimeMillis()
     }
 
