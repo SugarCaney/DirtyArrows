@@ -23,7 +23,7 @@ open class StarvationBow(plugin: DirtyArrows) : BowAbility(
     /**
      * How many hunger points the target loses.
      */
-    val hungerPoints = 3
+    val hungerPoints = config.getInt("$node.hunger-points")
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
         val target = event.hitEntity as? Player ?: return
