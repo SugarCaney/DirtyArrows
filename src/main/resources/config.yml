@@ -918,12 +918,12 @@ multi:
   cooldown: 0
 
   # The amount of arrows to fire at once, must be at least 1.
-  # (Int) default: 12
-  arrow-count: 12
+  # (Int) default: 8
+  arrow-count: 8
 
   # The maximum deviation of the arrows from the base arrow along each axis
-  # (Double) default: 0.254
-  direction-fuzz: 0.254
+  # (Double) default: 0.28
+  direction-fuzz: 0.28
 
 ##
 ## ABILITY: Bomb
