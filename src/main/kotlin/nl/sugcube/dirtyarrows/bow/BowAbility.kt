@@ -16,6 +16,7 @@ import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.event.entity.ProjectileLaunchEvent
+import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import java.util.concurrent.ConcurrentHashMap
 
@@ -330,7 +331,7 @@ abstract class BowAbility(
     protected fun Player.meetsResourceRequirements(showError: Boolean = true): Boolean {
         val survival = gameMode == GameMode.SURVIVAL || gameMode == GameMode.ADVENTURE
         val meetsRequirements = survival.not() || costRequirements.all {
-            inventory.containsAtLeastInlcudingData(it)
+            inventory.checkForItem(it)
         }
 
         if (showError && meetsRequirements.not()) {
@@ -341,6 +342,11 @@ abstract class BowAbility(
 
         return meetsRequirements
     }
+
+    /**
+     * Checks if the inventory contains the required item.
+     */
+    open fun Inventory.checkForItem(itemStack: ItemStack) = containsAtLeastInlcudingData(itemStack)
 
     /**
      * Get the colour applied bow name of the bow of this ability.

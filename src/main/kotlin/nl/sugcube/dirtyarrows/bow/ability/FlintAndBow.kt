@@ -12,6 +12,7 @@ import org.bukkit.Sound
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.ProjectileHitEvent
+import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import java.util.*
 
@@ -48,6 +49,8 @@ open class FlintAndBow(plugin: DirtyArrows) : BowAbility(
             it.showFlameParticle()
         }
     }
+
+    override fun Inventory.checkForItem(itemStack: ItemStack) = contains(itemStack.type)
 
     override fun Player.consumeBowItems() {
         if (gameMode == GameMode.CREATIVE) return
