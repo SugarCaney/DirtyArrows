@@ -20,6 +20,7 @@ open class DisorientingBow(plugin: DirtyArrows) : BowAbility(
         plugin = plugin,
         type = DefaultBow.DISORIENTING,
         canShootInProtectedRegions = true,
+        removeArrow = false,
         description = "Disorients the target."
 ) {
 
