@@ -38,7 +38,7 @@ open class DisarmingBow(plugin: DirtyArrows) : BowAbility(
     }
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
-        if (Random.nextDouble() < dropItemChance) return
+        if (Random.nextDouble() > dropItemChance) return
         val target = event.hitEntity as? LivingEntity ?: return
 
         // Always drop hand item.
@@ -46,7 +46,7 @@ open class DisarmingBow(plugin: DirtyArrows) : BowAbility(
 
         // Chance to drop armour.
         val newArmour = target.equipment.armorContents.map { item ->
-            if (Random.nextDouble() < dropArmourChance) {
+            if (item.type != Material.AIR && Random.nextDouble() <= dropArmourChance) {
                 target.world.dropItem(target.location, item)
                 item.type = Material.AIR
             }
