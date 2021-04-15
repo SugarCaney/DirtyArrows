@@ -32,12 +32,10 @@ open class ExplosionProtection(private val plugin: DirtyArrows) : Listener {
         get() = plugin.bowManager[DefaultBow.FIREY]
 
     @EventHandler
-    fun preventExplosions(event: EntityExplodeEvent) {
-        when (event.entity) {
-            is WitherSkull -> event.preventWitherExplosion()
-            is Fireball -> event.preventFireChargeExplosion()
-            else -> Unit
-        }
+    fun preventExplosions(event: EntityExplodeEvent) = when (event.entity) {
+        is WitherSkull -> event.preventWitherExplosion()
+        is Fireball -> event.preventFireChargeExplosion()
+        else -> Unit
     }
 
     /**

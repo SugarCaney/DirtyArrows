@@ -792,6 +792,10 @@ slow:
   # (Int) default: 59000
   despawn-time: 59000
 
+  # How much damage a slow arrow does.
+  # (Double) default: 99999.0 (insta-kill)
+  damage: 99999.0
+
 ##
 ## ABILITY: Level
 ## - Steals levels from the target player.

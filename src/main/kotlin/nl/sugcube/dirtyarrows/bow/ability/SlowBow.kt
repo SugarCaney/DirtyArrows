@@ -33,7 +33,12 @@ open class SlowBow(plugin: DirtyArrows) : BowAbility(
     /**
      * After what time the arrows should despawn, in milliseconds.
      */
-    val despawnTime = 59000
+    val despawnTime = config.getInt("$node.despawn-time")
+
+    /**
+     * How much damage a slow arrow does.
+     */
+    val damage = config.getDouble("$node.damage")
 
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {
         arrow.velocity = arrow.velocity.multiply(0.12)
@@ -50,7 +55,7 @@ open class SlowBow(plugin: DirtyArrows) : BowAbility(
      */
     fun monsterDamage(target: Entity?, player: Player) {
         val livingEntity = target as? LivingEntity
-        livingEntity?.damage(99999.0, player)
+        livingEntity?.damage(damage, player)
     }
 
     override fun effect() {
