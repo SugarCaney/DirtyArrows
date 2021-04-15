@@ -2,10 +2,7 @@ package nl.sugcube.dirtyarrows.bow
 
 import nl.sugcube.dirtyarrows.Broadcast
 import nl.sugcube.dirtyarrows.DirtyArrows
-import nl.sugcube.dirtyarrows.util.applyColours
-import nl.sugcube.dirtyarrows.util.itemInMainHand
-import nl.sugcube.dirtyarrows.util.itemInOffHand
-import nl.sugcube.dirtyarrows.util.itemName
+import nl.sugcube.dirtyarrows.util.*
 import org.bukkit.GameMode
 import org.bukkit.Location
 import org.bukkit.Sound
@@ -20,10 +17,7 @@ import org.bukkit.event.Listener
 import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.event.entity.ProjectileLaunchEvent
 import org.bukkit.inventory.ItemStack
-import java.util.*
 import java.util.concurrent.ConcurrentHashMap
-import kotlin.collections.ArrayList
-import kotlin.collections.HashSet
 
 /**
  * Base for all bow abilities.
@@ -336,7 +330,7 @@ abstract class BowAbility(
     protected fun Player.meetsResourceRequirements(showError: Boolean = true): Boolean {
         val survival = gameMode == GameMode.SURVIVAL || gameMode == GameMode.ADVENTURE
         val meetsRequirements = survival.not() || costRequirements.all {
-            inventory.contains(it.type, it.amount)
+            inventory.containsAtLeastInlcudingData(it)
         }
 
         if (showError && meetsRequirements.not()) {
@@ -388,20 +382,23 @@ abstract class BowAbility(
     /**
      * Removes all resources from the player's inventory that are required for 1 use.
      */
+    @Suppress("DEPRECATION")
     protected open fun Player.consumeBowItems() {
         val recentlyRemoved = ArrayList<ItemStack>(costRequirements.size)
 
         costRequirements.forEach { item ->
             // Find the item with the correct material. removeItem won't work when the item has
             // item data.
-            val eligibleItem = inventory.firstOrNull { it?.type == item.type && (it?.amount ?: 0) >= item.amount }
+            val eligibleItem = inventory.asSequence()
+                    .filterNotNull()
+                    .firstOrNull { it.type == item.type && it.amount >= item.amount && it.data.data == item.data.data }
                     ?: return@forEach
 
             val toRemove = eligibleItem.clone().apply {
                 amount = item.amount
             }
             if (gameMode != GameMode.CREATIVE) {
-                inventory.removeItem(toRemove)
+                inventory.removeIncludingData(toRemove)
             }
             recentlyRemoved.add(toRemove)
         }

@@ -101,6 +101,17 @@ fun onlinePlayer(name: String) = if (name == "@r") {
 } else Bukkit.getOnlinePlayers().firstOrNull { it.name == name }
 
 /**
+ * Performs the given [action] on each element that is not `null`.
+ */
+public inline fun <T> Iterable<T?>.forEachNotNull(action: (T) -> Unit): Unit {
+    for (element in this) {
+        if (element != null) {
+            action(element)
+        }
+    }
+}
+
+/**
  * Loops over x, y, z range.
  */
 inline fun forXYZ(xRange: IntProgression, yRange: IntProgression, zRange: IntProgression, action: (dx: Int, dy: Int, dz: Int) -> Unit) {
