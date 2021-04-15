@@ -1,6 +1,7 @@
 package nl.sugcube.dirtyarrows.effect
 
 import nl.sugcube.dirtyarrows.DirtyArrows
+import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
 import nl.sugcube.dirtyarrows.util.sendError
 import org.bukkit.Location
@@ -21,26 +22,30 @@ open class ExplosionProtection(private val plugin: DirtyArrows) : Listener {
     /**
      * Ability implementation for the wither bow, or `null` when the wither bow is not available.
      */
-    private val witherAbility by lazy { plugin.bowManager[DefaultBow.WITHER] }
+    private val witherAbility: BowAbility?
+        get() = plugin.bowManager[DefaultBow.WITHER]
 
     /**
      * Ability implementation for the firey bow, or `null` when the firey bow is not available.
      */
-    private val fireyAbility by lazy { plugin.bowManager[DefaultBow.FIREY] }
+    private val fireyAbility: BowAbility?
+        get() = plugin.bowManager[DefaultBow.FIREY]
 
     @EventHandler
-    fun preventExplosions(event: EntityExplodeEvent) = when (event.entity) {
-        is WitherSkull -> event.preventWitherExplosion()
-        is Fireball -> event.preventFireChargeExplosion()
-        else -> Unit
+    fun preventExplosions(event: EntityExplodeEvent) {
+        when (event.entity) {
+            is WitherSkull -> event.preventWitherExplosion()
+            is Fireball -> event.preventFireChargeExplosion()
+            else -> Unit
+        }
     }
 
     /**
      * Prevents wither skulls from exploding in protected regions, and refunds the costs.
      */
     private fun EntityExplodeEvent.preventWitherExplosion() {
-        if (witherAbility == null) return
-        if (location.isInProtectedRegion(margin = witherAbility!!.protectionRange).not()) return
+        val witherAbility = witherAbility ?: return
+        if (location.isInProtectedRegion(margin = witherAbility.protectionRange).not()) return
 
         isCancelled = true
 
@@ -53,8 +58,8 @@ open class ExplosionProtection(private val plugin: DirtyArrows) : Listener {
      * Prevents fire charges from exploding in protected regions, and refunds the costs.
      */
     private fun EntityExplodeEvent.preventFireChargeExplosion() {
-        if (fireyAbility == null) return
-        if (location.isInProtectedRegion(margin = fireyAbility!!.protectionRange).not()) return
+        val fireyAbility = fireyAbility ?: return
+        if (location.isInProtectedRegion(margin = fireyAbility.protectionRange).not()) return
 
         isCancelled = true
 

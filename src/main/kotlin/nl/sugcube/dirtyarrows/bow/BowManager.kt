@@ -147,7 +147,7 @@ open class BowManager(private val plugin: DirtyArrows): Iterable<BowType>, Liste
             HandlerList.unregisterAll(ability)
             tasks[bowType]?.let { server.scheduler.cancelTask(it) }
         }
-        HandlerList.unregisterAll(this)
+        HandlerList.unregisterAll(this@BowManager)
 
         bows.clear()
         tasks.clear()
