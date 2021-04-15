@@ -359,13 +359,13 @@ batty:
   # (Int) default: 12
   levels: 12
 
-  # The amount of bats to spawn.
-  # (Int) default: 10
-  swarm-size: 10
-
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The amount of bats to spawn.
+  # (Int) default: 10
+  swarm-size: 10
 
 ##
 ## ABILITY: Nuclear

@@ -23,7 +23,7 @@ open class RangedBow(plugin: DirtyArrows) : BowAbility(
     /**
      * How much quicker the arrow fires.
      */
-    val speedMultiplier = 5.0
+    val speedMultiplier = config.getDouble("$node.speed-multiplier")
 
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {
         arrow.velocity = player.eyeLocation.direction.multiply(speedMultiplier)
