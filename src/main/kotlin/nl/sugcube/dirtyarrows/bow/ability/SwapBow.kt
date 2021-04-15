@@ -18,6 +18,7 @@ open class SwapBow(plugin: DirtyArrows) : BowAbility(
         plugin = plugin,
         type = DefaultBow.SWAP,
         canShootInProtectedRegions = true,
+        removeArrow = false,
         description = "Swap locations with the target."
 ) {
 
