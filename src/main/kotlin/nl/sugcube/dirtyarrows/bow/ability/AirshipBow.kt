@@ -4,6 +4,7 @@ import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
 import nl.sugcube.dirtyarrows.util.copyOf
+import nl.sugcube.dirtyarrows.util.scheduleDelayed
 import org.bukkit.Material
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.Player
@@ -60,8 +61,11 @@ open class AirshipBow(plugin: DirtyArrows) : BowAbility(
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
         active.remove(arrow)
-        players.remove(player)
         birthTime.remove(arrow)
+
+        plugin.scheduleDelayed(10L) {
+            players.remove(player)
+        }
     }
 
     override fun effect() {
@@ -89,6 +93,7 @@ open class AirshipBow(plugin: DirtyArrows) : BowAbility(
         if (event.cause != EntityDamageEvent.DamageCause.FALL) return
         val player = event.entity as? Player ?: return
         if (player in players) {
+            event.damage = 0.0
             event.isCancelled = true
         }
     }
