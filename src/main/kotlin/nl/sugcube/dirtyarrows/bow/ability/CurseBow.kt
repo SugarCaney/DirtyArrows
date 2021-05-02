@@ -36,6 +36,7 @@ open class CurseBow(plugin: DirtyArrows) : BowAbility(
         handleEveryNTicks = 18,
         canShootInProtectedRegions = true,
         costRequirements = listOf(ItemStack(Material.FERMENTED_SPIDER_EYE, 1)),
+        removeArrow = false,
         description = "Curses the target."
 ) {
 
