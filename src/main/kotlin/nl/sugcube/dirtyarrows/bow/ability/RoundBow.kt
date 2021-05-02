@@ -25,7 +25,6 @@ open class RoundBow(plugin: DirtyArrows) : BowAbility(
         type = DefaultBow.ROUND,
         canShootInProtectedRegions = true,
         removeArrow = false,
-        costRequirements = listOf(ItemStack(Material.ARROW, 1)),
         description = "Shoots arrows all around you."
 ) {
 
