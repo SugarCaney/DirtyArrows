@@ -94,7 +94,7 @@ open class FireworkBow(plugin: DirtyArrows) : BowAbility(
     /**
      * How much damage to deal to entities within range of the fireworks.
      */
-    val maximumFireworkDamage = 22.0
+    val maximumFireworkDamage = config.getDouble("$node.maximum-damage")
 
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {
         val speed = min(arrow.velocity.length() / 2.0, maximumProjectileSpeed)
