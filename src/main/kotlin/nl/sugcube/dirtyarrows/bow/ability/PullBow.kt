@@ -16,6 +16,7 @@ open class PullBow(plugin: DirtyArrows) : BowAbility(
         plugin = plugin,
         type = DefaultBow.PULL,
         canShootInProtectedRegions = true,
+        removeArrow = false,
         description = "Pulls the target toward you."
 ) {
 
@@ -28,6 +29,7 @@ open class PullBow(plugin: DirtyArrows) : BowAbility(
         val target = event.hitEntity ?: return
         if (target == player) return
 
-        target.velocity = player.location.direction.multiply(-pullStrength)
+        val direction = player.location.subtract(target.location).toVector().normalize()
+        target.velocity = direction.multiply(pullStrength)
     }
 }
