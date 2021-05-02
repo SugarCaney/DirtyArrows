@@ -103,7 +103,7 @@ open class LaserBow(plugin: DirtyArrows) : BowAbility(
      * Get the first living entity near this location.
      */
     private fun Location.findEntity(shooter: LivingEntity): LivingEntity? {
-        return nearbyLivingEntities(0.5).asSequence()
+        return copyOf(y = y - 0.7).nearbyLivingEntities(0.5).asSequence()
                 .filter { it != shooter }
                 .firstOrNull()
     }
