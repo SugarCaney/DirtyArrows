@@ -8,7 +8,10 @@ import org.bukkit.Effect
 import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.entity.Arrow
+import org.bukkit.entity.FallingBlock
 import org.bukkit.entity.Player
+import org.bukkit.event.EventHandler
+import org.bukkit.event.entity.EntityChangeBlockEvent
 import org.bukkit.event.entity.ProjectileLaunchEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.material.MaterialData
@@ -32,6 +35,11 @@ open class MagmaticBow(plugin: DirtyArrows) : BowAbility(
      */
     val particleEveryNTicks = config.getInt("$node.particle-every-n-ticks")
 
+    /**
+     * Shot falling blocks mapped to their shooter.
+     */
+    private val lavaBlocks = HashMap<FallingBlock, Player>()
+
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {
         val direction = arrow.velocity.copyOf().normalize()
         // Spawn the lava block slightly in front of the player.
@@ -39,6 +47,7 @@ open class MagmaticBow(plugin: DirtyArrows) : BowAbility(
         player.world.spawnFallingBlock(spawnLocation, MaterialData(Material.LAVA)).apply {
             velocity = arrow.velocity
             dropItem = false
+            lavaBlocks[this] = player
         }
     }
 
@@ -56,5 +65,17 @@ open class MagmaticBow(plugin: DirtyArrows) : BowAbility(
         // Empty the lava bucket.
         inventory.firstOrNull { it?.type == Material.LAVA_BUCKET }
                 ?.let { it.type = Material.BUCKET }
+    }
+
+    @EventHandler
+    fun lavaBlockProtection(event: EntityChangeBlockEvent) {
+        val lavaBlock = event.entity as? FallingBlock ?: return
+        val shooter = lavaBlocks[lavaBlock] ?: return
+
+        if (lavaBlock.location.isInProtectedRegion(shooter)) {
+            event.isCancelled = true
+            lavaBlocks.remove(lavaBlock)
+            lavaBlock.remove()
+        }
     }
 }
