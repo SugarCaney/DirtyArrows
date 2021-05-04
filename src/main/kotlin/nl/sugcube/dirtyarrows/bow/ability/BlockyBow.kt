@@ -41,14 +41,17 @@ open class BlockyBow(plugin: DirtyArrows) : BowAbility(
     /**
      * Removes a block of the given type from the inventory, do nothing if the item should not be removed.
      */
+    @Suppress("DEPRECATION")
     private fun Player.removeBlockItem(type: Material) {
         if (gameMode == GameMode.CREATIVE) return
 
-        val newCount = itemInOffHand.amount - 1
+        val offHandItem = itemInOffHand
+        val newCount = offHandItem.amount - 1
+        val itemData = offHandItem.data
 
         if (newCount == 0) {
             inventory.itemInOffHand = ItemStack(Material.AIR, 0)
         }
-        else inventory.itemInOffHand = ItemStack(type, newCount)
+        else inventory.itemInOffHand = ItemStack(type, newCount, itemData.data.toShort())
     }
 }
