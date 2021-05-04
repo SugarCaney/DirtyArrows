@@ -8,6 +8,7 @@ import nl.sugcube.dirtyarrows.util.getFloat
 import nl.sugcube.dirtyarrows.util.showSmokeParticle
 import org.bukkit.Material
 import org.bukkit.entity.Arrow
+import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.event.entity.ProjectileLaunchEvent
@@ -87,6 +88,8 @@ open class BlasterBow(plugin: DirtyArrows) : BowAbility(
      * Shoots a child projectile from this arrow when a target is in range.
      */
     private fun Arrow.explode() {
+        if (location.isInProtectedRegion(shooter as? LivingEntity, showError = false)) return
+
         location.createExplosion(power = power, setFire = setOnFire, breakBlocks = breakBlocks)
         showSmokeParticle()
     }

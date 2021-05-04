@@ -2379,8 +2379,8 @@ bow:
   cooldown: 0
 
   # Arrows shoot an arrow every, this amount of, ticks.
-  # (Int) default: 6
-  handle-every-n-ticks: 6
+  # (Int) default: 5
+  handle-every-n-ticks: 5
 
   # Maximum amount of milliseconds the arrows can shoot child arrows.
   # (Int) default: 3000
