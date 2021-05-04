@@ -28,6 +28,8 @@ object ArrowRecipe {
      * Flint: *, Stick: #, Feather: %.
      */
     private fun recipe(amount: Int, flint: String, stick: String, feather: String): ShapedRecipe {
+        // TODO: Will remove in 1.13/the flattening.
+        @Suppress("DEPRECATION")
         return ShapedRecipe(ItemStack(Material.ARROW, amount))
             .shape(flint, stick, feather)
             .setIngredient('*', Material.FLINT)

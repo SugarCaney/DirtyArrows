@@ -66,7 +66,15 @@ open class HomingBow(plugin: DirtyArrows) : BowAbility(
      */
     val explosivePower = config.getFloat("$node.explosive-power")
 
+    /**
+     * The minimum velocity the arrow must have before it can become a homing arrow.
+     * Lower velocities might create persistent arrows.
+     */
+    val minimumVelocity = config.getDouble("$node.minimum-velocity")
+
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {
+        if (arrow.velocity.length() < minimumVelocity) return
+
         arrowShootTime[arrow] = System.currentTimeMillis()
     }
 

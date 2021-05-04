@@ -1539,6 +1539,11 @@ homing:
   # (Double) default: 0.75
   explosive-power: 0.75
 
+  # The minimum velocity the arrow must have before it can become a homing arrow.
+  # Lower velocities might create persistent arrows.
+  # (Double) default: 1.0
+  minimum-velocity: 1.0
+
 ##
 ## ABILITY: Interdimensional
 ## - Shot arrows teleport somewhere around the target after 2 seconds.
