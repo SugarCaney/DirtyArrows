@@ -82,7 +82,6 @@ open class BowBow(plugin: DirtyArrows) : BowAbility(
         val bow = player.bowItem() ?: return
 
         if (player.hasArrows().not()) return
-        player.removeArrow(bow)
 
         // Determine the direction of the arrow.
         val target = location.nearbyLivingEntities(shootRange).filter { it != player }.randomOrNull() ?: return
@@ -90,6 +89,8 @@ open class BowBow(plugin: DirtyArrows) : BowAbility(
         val direction = target.location.copyOf().subtract(spawnLocation)
         val speed = velocity.length()
         val arrowVelocity = direction.toVector().normalize().multiply(speed).add(Vector(0.0, 0.25, 0.0))
+
+        player.removeArrow(bow)
 
         // Spawn the arrow.
         spawnLocation.world.spawnEntity(spawnLocation, EntityType.ARROW).apply {
