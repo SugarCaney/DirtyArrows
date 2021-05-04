@@ -19,7 +19,7 @@ open class DropBow(plugin: DirtyArrows) : BowAbility(
         type = DefaultBow.DROP,
         canShootInProtectedRegions = true,
         removeArrow = false,
-        description = "Launches the target in the air."
+        description = "Teleports the target into the air."
 ) {
 
     /**

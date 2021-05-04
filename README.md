@@ -43,65 +43,94 @@ How to contact me/ask for support:
 
 ## How to install
 1. Download the version of DirtyArrows you'd like to have on your server.
-2. Place the .jar in the plugins folder.
+2. Place the .jar in the `plugins` folder.
 3. You're now ready to go! You can even customize a little in the config.yml.
 
 ## Videos
-* Plugin showcase by [BrokenBukkit (German/Deutsch)](https://www.youtube.com/watch?v=LjOTILxRlJE).
+* Official plugin video (v4.0) by SugarCaney (TBA)
+* Plugin showcase (v3.0 and earlier) by [BrokenBukkit (German/Deutsch)](https://www.youtube.com/watch?v=LjOTILxRlJE).
 
 ## Bows
-All features and bastards will be listed down here.
+All 69 nice bow types will be listed here.
 Have you forgotten what all the names are in-game?
-Use `/da help <page number 1-3>` to get the possible bows.
+Use `/da help` (from page #2) to get the possible bows with a short description.
+All bow names are also present in the autocompletion of commands.
 Make sure that you have toggled DirtyArrows on before you can shoot with your Bastards.
-Use `/da` to enable or disable the plugin.
-If you don't like a feature, you could always disable it in the configuration file.
+Use `/da` to enable or disable the plugin for yourself.
+If you do not like a feature, you could always disable it in the configuration file.
 The listed names are the default names, you can change the names in the configuration file.
 
-| ID | Bow Name (default) | Description | Cost |
+| ID | Bow Name (default) | Description | Ammo |
 | --- | --- | --- | --- |
-| 1 | Exploding Bastard | Lets you shoot arrows that explode on impact. | 1 TNT |
-| 2 | Lightning Bastard | Strikes lightning on impact. | 1 Glowstone Dust |
-| 3 | Clucky Bastard | Spawns a chicken on impact. | 1 Egg |
-| 4 | Ender Bastard | Teleports you to the location of impact. | 1 Ender Pearl |
-| 5 | Oak Bastard | Generates an oak tree on impact. | 1 Oak Sapling, 1 Bone Meal |
-| 6 | Spruce Bastard | Generates a spruce tree on impact. | 1 Spruce Sapling, 1 Bone Meal |
-| 7 | Birch Bastard | Generates a birch tree on impact. | 1 Birch Sapling, 1 Bone Meal |
-| 8 | Jungle Bastard | Generates a jungle tree on impact. | 1 Jungle Sapling, 1 Bone Meal |
-| 9 | Batty Bastard | Spawns a swarm of bats on impact. | 3 Rotten Flesh |
-| 10 | Nuclear Bastard | Ruins your world. It is recommended to disable this one. | 64 TNT |
-| 11 | Enlightened Bastard | Places a torch on the location of impact. | 1 Torch |
-| 12 | Ranged Bastard | Has a long range and great power. | - |
-| 13 | Machine Bastard | Spams arrows. Rapid fire. Works with Infinity & Flame, not with the rest. | - |
-| 14 | Poisonous Bastard | Poisons your target (level 2 for 7,5 seconds). | 1 Spider Eye |
-| 15 | Disorienting Bastard | Disorients your target (changes yaw/pitch). | - |
-| 16 | Swap Bastard | Swap locations with your target. | - |
-| 17 | Draining Bastard | Heals 1/3 of the damage dealt. | - |
-| 18 | Flint and Bastard | Sets 5 blocks on fire on the location of impact. | 5 durability of Flint and Steel |
-| 19 | Disarming Bastard | Gives a 50% chance to disarm the target. It also has a 20% chance to drop armour. | - |
-| 20 | Wither Bastard | Shoots a wither skull. | 3 Soul Sand |
-| 21 | Firey Bastard | Shoots a fireball. | 1 Fireball |
-| 22 | Slow Bastard | Shoots an extremely slow arrow which 1 hit KOs everything. | - |
-| 23 | Level Bastard | Steals 1 level from the targeted player. | - |
-| 24 | Undead Bastard | Summons a ring of zombies around the location of impact. | 64 Rotten Flesh |
-| 25 | Woodman's Bastard | Tears down a vertical pillar of wood (basic tree). | - |
-| 26 | Bastard of Starvation | Removes as many hunger points as damage dealt. | - |
-| 27 | Multi Bastard | Shoots a flock of 8 arrows simultaneously. | - |
-| 28 | Bomb Bastard | Drops 3 TNT at the location of impact. | 3 TNT |
-| 29 | Drop Bastard | Teleports the target a few blocks into the sky. | - |
-| 30 | Airstrike Bastard | The arrow drops TNT during its flight. | 1 TNT per second |
-| 31 | Magmatic Bastard | Shoots lava. | 1 Bucket of Lava |
-| 32 | Aquatic Bastard | Shoots water. | 1 Bucket of Water |
-| 33 | Pull Bastard | Pulls the target towards you. | - |
-| 34 | Paralyze Bastard | Has a change of paralyzing the target (slowness and/or blindness and/or nausea). | 1 Nether Wart |
-| 35 | Acacia Bastard | Generates an acacia tree on impact. | 1 Acacia Sapling, 1 Bone Meal |
-| 36 | Dark Oak Bastard | Generates a dark oak tree on impact. | 1 Dark Oak Sapling, 1 Bone Meal |
-| 37 | Cluster Bastard | Spawns 5 TNT on impact. | 5 TNT |
-| 38 | Airship Bastard | Fly in the direction of your shot arrow. | 2 Feathers |
-| 39 | Iron Bastard | Shoots an anvil that damages all nearby players. | 1 Anvil |
-| 40 | Curse Bastard | Curse an entity with the most ancient of magics. | 1 Fermented Spider Eye |
-| 41 | 360 Bastard | Shoot 32 arrows around you within 2 seconds. | - | 
-| 42 | Frozen Bastard | Freezes entities. Freezes water or regular ice and plops down snow. | 1 Snowball |
+| acacia | Acacia Bow | Spawns an acacia tree. | 1 acacia sapling, 1 bone meal |
+| accelerating | Accelerating Bow | Arrows accelerate during flight. | - |
+| airship | Airship Bow | Fly behind your arrows. | 2 feathers |
+| airstrike | Airstrike Bow | Arrow drops TNT during flight. | At least 1 TNT |
+| aquatic | Aquatic Bow | Shoot water blocks. | 1 water bucket |
+| baby | Baby Bow | Turns baby mobs into adult mobs, and adults into babies. | - |
+| batty | Batty Bow | Spawns a swarm of bats on impact. | 6 rotten flesh |
+| birch | Birch Bow | Spawns a birch tree. | 1 birch sapling, 1 bone meal |
+| blaster | Blaster Bow | Arrows keep exploding during flight. | 3 gunpowder |
+| blocky | Blocky Bow | Places blocks from your off hand. | - |
+| bomb | Bomb Bow | Summons a TNT drop at this place. | 5 TNT |
+| bouncy | Bouncy Bow | Arrows bounce off blocks surfaces. | - |
+| bow | Bow Bow | Shoots arrows that shoot arrows. | - |
+| bridge | Bridge Bow | Creates a temporary bridge out of blocks (configurable). | At least 1 cobblestone |
+| clucky | Clucky Bow | Spawns chickens. | 1 egg |
+| cluster | Cluster Bow | Ignite clusters of TNT. | 5 TNT |
+| curse | Curse Bow | Curses the target (weird effects over time). | 1 fermented spider eye |
+| darkoak | Dark Oak Bow | Spawns a dark oak tree. | 4 dark oak saplings, 1 bone meal |
+| disarming | Disarming Bow | Targets have a chance to drop their hand item/armour. | - |
+| disorienting | Disorienting Bow | Manipulates the target's pitch/yaw. | - |
+| draggy | Draggy Bow | Arrows drag close entities to the landing spot. | - |
+| draining | Draining Bow | Gain health back every hit. | - |
+| drill | Drill Bow | Create beautiful tunnels. Requires a pickaxe, quality affected. | - |
+| drop | Drop Bow | Teleports the target into the air. | - |
+| ender | Ender Bow | Teleport to the location of impact. | 1 ender pearl |
+| enlightened | Enlightened Bow | Places torches. | 1 torch |
+| exploding | Exploding Bow | Explosive arrows. | 1 TNT |
+| farmers | Farmer's Bow | Creates farmland, harvests crops, and plants crops. | seeds (in off hand) |
+| firework | Firework Bow | Splits into deadly fireworks (firework customizable). | 2 firework charges |
+| firey | Firey Bow | Shoot fireballs. | 1 fire charge |
+| flintand | Flint and Bow | Sets blocks on fire. | flint and steel |
+| frozen | Frozen Bow | Spawns snow/ice and freezes targets. | 1 snow ball |
+| grappling | Grappling Bow | Acts as a grappling hook. | 1 tripwire hook |
+| homing | Homing Bow | Shoot mini homing rockets. | 1 gunpowder |
+| interdimensional | Interdimensional Bow | Warps arrows to targets. | - |
+| invincibility | Invincibility Bow | Powerful shots, but they make targets briefly invincible. | - |
+| iron | Iron Bow | Shoots deadly anvils. | 1 anvil |
+| jungle | Jungle Bow | Spawns a jungle tree/bush. | 1 jungle sapling, 1 bone meal |
+| laser | Laser Bow | Fast beams that can travel through non-opaque blocks, but do less damage. | 1 redstone |
+| level | Level Bow | Steals levels from the target. | - |
+| lightning | Lightning Bow | Spawns lightning. | 1 glowstone dust |
+| machine | Machine Bow | Shoots very quickly, and slightly inaccurate. | - |
+| magmatic | Magmatic Bow | Shoots lava. | 1 lava bucket |
+| meteor | Meteor Bow | Meteors will strike on impact depending on Power level. | 3 fire charges |
+| mine | Mine Bow | Arrows that land turn into landmines. | 3 gunpowder, 1 redstone |
+| mining | Mining Bow | Mines ore veins instantly. Flame auto-smelts ores. Requires pickaxe. | - |
+| multi | Multi Bow | Shoots multiple arrows simultaneously. | 12 arrows |
+| music | Music Bow | Plays a music disc at the location of impact. | music disc (not consumed) |
+| nuclear | Nuclear Bow | Huge boom. Radiation included. | 64 TNT |
+| oak | Oak Bow | Spawns an oak tree. | 1 oak sapling, 1 bone meal |
+| paralyze | Paralyze Bow | Paralyzes the target (nausea/slowness/blindness/weakness). | 1 nether wart |
+| poisonous | Poisonous Bow | Poisons the target. | 1 spider eye |
+| pull | Pull Bow | Pulls the target toward you. | - |
+| pushy | Pushy Bow | Pushes away entities with great force. | 3 feathers |
+| rainbow | Rainbow | So pretty. | - |
+| ranged | Ranged Bow | Shoot powerful, far-reaching arrows. | - |
+| round | 360 Bow | Shoots arrows all around you. | - |
+| shear | Shear Bow | Breaks all shearable blocks, and shears all shearable entities. | - |
+| singularity | Singularity Bow | Pulls in entities, suffocates them, and explodes. | 3 redstone |
+| slow | Slow Bow | Shoots extremely powerful, but extremely slow arrows. | - |
+| smoky | Smoky Bow | Creates a smokescreen and blinds entities. | 1 bone meal |
+| spruce | Spruce Bow | Spawns a spruce tree. | 1 spruce sapling, 1 bone meal |
+| starvation | Bow of Starvation | Target loses hunger points. | - |
+| swap | Swap Bow | Swap locations with the target. | - |
+| undead | Undead Bow | Spawns a circle of zombies. | 64 rotten flesh |
+| undying | Bow of Undying | Saves you from death when held. | - |
+| up | UP Bow | Arrows have reversed gravity. | - |
+| wither | Wither Bow | Shoots wither skulls. | 3 soul sand |
+| woodman | Woodman's Bow | Tears down trees quickly. | - |
 
 ## Other features
 
@@ -119,17 +148,22 @@ The listed names are the default names, you can change the names in the configur
 
 ## Commands
 
+All commands have <kbd>tab</kbd> completion where applicable.
+
 | Command | Description |
 | --- | --- |
 | `\da` | Toggle bow abilities (on/off). |
 | `\da reload` | Reloads the configuration file. |
 | `\da help <page>` | Shows the help pages, where `page` is the page number. |
 | `\da give <player> <bow> [ench]` | Gives the player a special bow. `player` is either the player name, @a for all, or @r for a random player. `bow` is either the ID number or the name. Append `ench` to get an unbreaking 10 infinity 1 bow. |
+| `\da ammo <player> <bow> [amount]` | Gives the player the ammunition required for a certain bow. |
 | `\da list` | Lists all regions |
 | `\da pos1` | Sets the first position (at your feet). |
 | `\da pos2` | Sets the second position (at your feet). |
 | `\da register <name>` | Registers a region by the given name. The set positions are used for the outer 2 corners. |
 | `\da remove <name>` | Unregisters the region with the given name. |
+| `\da visualize <name>` | Briefly highlights the corners of the given region. |
+| `\da tp <name>` | Teleports you to the centre of the given region. |
 | `\da check` | Check in which region you are currently in. |
 
 ## Configuration
@@ -140,24 +174,40 @@ You can reload the configuration file in-game using the `/da reload` command.
 
 | Node | Type | Default | Description | 
 | --- | --- | --- | --- |
-| metrics.enabled | Boolean | `true` | Does not work anymore. Should be turned off (`false`). |
-| updates.check-for-updates | Boolean | `true` | Whether to check for updates of the plugin. |
-| updates.show-admin | Boolean | `true` | Whether to show the update message to admin players on login. When disabled, it only shows in the console. |
-| arrow-recipe-amount | Integer | `16` | How many arrows get crafted by the arrow recipe. |
-| headshot | Boolean | `true` | Whether headshots are enabled. |
-| headshot-multiplier | Double | `1.5` | The damage multiplier for headshots. |
-| zombie-flint | Boolean | `true` | Whether zombies should drop flint. |
-| blood | Boolean | `true` | Whether to show blood particles or not. |
-| auto-enable | Boolean | `false` | When `true`, automatically enables bow abilities on log in. When `false`, `\da` is required to enable them first. |
-| \<bow-name\>.name | String | _name_ | The name of the bow. When the bow item has this name, the corresponding ability is used. Supports colour codes. |
-| \<bow-name\>.enabled | Boolean | `true` | Enables or diables the use of the bow. |
-| \<bow-name\>.levels | Integer | _varies_ | The amount of levels it takes to craft (rename) this bow in an anvil. |
+| minigame-mode | Boolean | `false` | Whether to run in minigame mode. Plugin messages are more subtle and less branded. Also hides enabled/disabled messages. Does not do much yet. |
+| auto-enable | Boolean | `false` | Whether dirty arrow abilities must be enabled automatically. Normally you need to enable DirtyArrows manually using /da. Settings this to true will enable DirtyArrows automatically when a player joins. |
+| show-enable-message | Boolean | `true` | Whether to show a message to the player when DirtyArrows got enabled/disabled for them. |
+| show-particles | Boolean | `true` | Whether the plugin should display particles (true) or not (false). |
+| blood | Boolean | `false` | Whether entities should show blood particles when damaged. |
+| arrow-recipe-amount | Integer | `16` | How many arrows must be crafted with the default arrow recipe. |
+| **updates** |
+| check-for-updates | Boolean | `true` | Whether to check for updates. |
+| show-admin | Boolean | `true` | If admins (with the dirtyarrows.admin permission) must be notified when a new updates is ready. |
+| **headshot** |
+| enabled | Boolean | `true` | Whether headshots are enabled. |
+| damage-multiplier | Double | `1.5` | With what number to multiply the damage dealt when a headshot was made. |
+| **zombie-flint** |
+| enabled | Boolean | `true` | Whether zombies should drop flint or not on death. |
+| drop-chance | Double | `0.1` | The chance for flint to drop on death of a zombie in range [0,1] inclusive. 0 means no chance of dropping, 1 means dropping always. |
+| maximum-drop-count | Integer | `2` | The maximum amount of flint that can drop at once. The actual amount will be a value between 1 and this value (inclusive). |
+| **looting** |
+| appearance-chance | Double | `0.125` | The chance of Looting to appear on the bow in range [0,1]. A value of 0 means that it's disabled, 1 means it will always add looting. |
+| only-looting-chance | Double | `0.35` | The chance that Looting is the only enchantment when enchanting in range [0,1]. A value of 0 means that looting will never be the only enchantment, 1 means that it always be. |
+| minimum-xp-level-1 | Integer | `11` | The minimum amount of levels required to get a level 1 looting enchantment. |
+| minimum-xp-level-2 | Integer | `20` | The minimum amount of levels required to get a level 2 looting enchantment. |
+| minimum-xp-level-3 | Integer | `28` | The minimum amount of levels required to get a level 3 looting enchantment. |
+| **<bow-id>** |
+| name | String | - | Bows with this item name will have the effects applied. Supports colour codes. |
+| enabled | Boolean | `true` | When disabled (set to `false`), the bow effects will not be applied. The bow ability also won't be loaded by the plugin. |
+| levels | Integer | - | How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost). |
+| cooldown | Integer | `0` | How many milliseconds each use must be apart. Has no cooldown by default. |
+| _bow settings_ | - | - | Most bows also have specific settings. These are documented in the default `config.yml` file. |
 
 ### Colour codes
 
 The name properties support colour codes.
 When using colours, the names of the bows become uncraftable using a regular anvil.
-When using colour codes, make sure that the name is put between (single) quotes like so: `'&4Exploding&f Bastard'`.
+When using colour codes, make sure that the name is put between (single) quotes like so: `'&4Exploding&f Bow'`.
 The following codes are supported:
 
 * **`&0`** - Black
@@ -189,49 +239,8 @@ The following codes are supported:
 | --- | --- |
 | dirtyarrows  | Without this node, you can't use the plugin. |
 | dirtyarrows.admin  | Access to `/da give`, `/da reload` and the region commands (`/da help admin`). |
-| dirtyarrows.*  | Access to all Bastards. |
-| dirtyarrows.exploding  | Access to Exploding Bastard. |
-| dirtyarrows.lightning  | Access to Lightning Bastard. |
-| dirtyarrows.clucky  | Access to Clucky Bastard. |
-| dirtyarrows.ender  | Access to Ender Bastard. |
-| dirtyarrows.oak  | Access to Oak Bastard. |
-| dirtyarrows.birch  | Access to Birch Bastard. |
-| dirtyarrows.spruce  | Access to Spruce Bastard. |
-| dirtyarrows.jungle  | Access to Jungle Bastard. |
-| dirtyarrows.batty  | Access to Batty Bastard. |
-| dirtyarrows.nuclear  | Access to Nuclear Bastard. |
-| dirtyarrows.enlightened  | Access to Enlightened Bastard. |
-| dirtyarrows.ranged  | Access to Ranged Bastard. |
-| dirtyarrows.machine  | Access to Machine Bastard. |
-| dirtyarrows.poisonous  | Access to Poisonous Bastard. |
-| dirtyarrows.disorienting  | Access to Disorienting Bastard. |
-| dirtyarrows.swap  | Access to Swap Bastard. |
-| dirtyarrows.draining  | Access to Draining Bastard. |
-| dirtyarrows.flintand  | Access to Flint and Bastard. |
-| dirtyarrows.disarming  | Access to Disarming Bastard. |
-| dirtyarrows.wither  | Access to Wither Bastard. |
-| dirtarrows.firey  | Access to Firey Bastard. |
-| dirtyarrows.slow  | Access to Slow Bastard. |
-| dirtyarrows.level  | Access to Level Bastard. |
-| dirtyarrows.undead  | Access to Undead Bastard. |
-| dirtyarrows.woodman  | Access to Woodman's Bastard. |
-| dirtyarrows.starvation  | Access to Bastard of Starvation. |
-| dirtyarrows.multi  | Access to Multi Bastard. |
-| dirtyarrows.bomb  | Access to Bomb Bastard. |
-| dirtyarrows.drop  | Access to Drop Bastard. |
-| dirtyarrows.airstrike  | Access to Airstrike Bastard. |
-| dirtyarrows.magmatic  | Access to Magmatic Bastard. |
-| dirtyarrows.aquatic  | Access to Aquatic Bastard. |
-| dirtyarrows.pull  | Access to Pull Bastard. |
-| dirtyarrows.paralyze  | Access to Paralyze Bastard. |
-| dirtyarrows.acacia  | Access to Acacia Bastard. |
-| dirtyarrows.darkoak  | Access to Dark Oak Bastard. |
-| dirtyarrows.cluster  | Access to Cluster Bastard. |
-| dirtyarrows.airship  | Access to Airship Bastard. |
-| dirtyarrows.iron  | Access to Iron Bastard. |
-| dirtyarrows.curse  | Access to Curse Bastard. |
-| dirtyarrows.round  | Access to 360 Bastard. |
-| dirtyarrows.frozen  | Access to Frozen Bastard. |
+| dirtyarrows.*  | Access to all bows. |
+| dirtyarrows.<bow-id>  | Access to the bow with the given id. |
 
 ## Changelog
 

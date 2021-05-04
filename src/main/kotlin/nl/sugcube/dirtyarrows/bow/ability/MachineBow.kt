@@ -30,7 +30,7 @@ open class MachineBow(plugin: DirtyArrows) : BowAbility(
         type = DefaultBow.MACHINE,
         canShootInProtectedRegions = true,
         removeArrow = false,
-        description = "Shoots quickly, and slightly accurate."
+        description = "Shoots quickly, and slightly inaccurate."
 ) {
 
     /**

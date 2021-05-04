@@ -25,7 +25,7 @@ open class MeteorBow(plugin: DirtyArrows) : BowAbility(
         type = DefaultBow.METEOR,
         canShootInProtectedRegions = false,
         protectionRange = 10.0,
-        costRequirements = listOf(ItemStack(Material.FIREBALL, 1)),
+        costRequirements = listOf(ItemStack(Material.FIREBALL, 3)),
         description = "Meteors will strike on impact."
 ) {
 
