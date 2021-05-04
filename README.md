@@ -240,7 +240,7 @@ The following codes are supported:
 | dirtyarrows  | Without this node, you can't use the plugin. |
 | dirtyarrows.admin  | Access to `/da give`, `/da reload` and the region commands (`/da help admin`). |
 | dirtyarrows.*  | Access to all bows. |
-| dirtyarrows.<bow-id>  | Access to the bow with the given id. |
+| dirtyarrows._bow-id_  | Access to the bow with the given id. |
 
 ## Changelog
 
