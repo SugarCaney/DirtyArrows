@@ -1998,8 +1998,8 @@ firework:
   # Settings for the main projectile: the one you fire from your bow.
   main:
     # The maximum speed the main firework projectiles can move.
-    # (Double) default: 1.25
-    maximum-speed: 1.25
+    # (Double) default: 1.4
+    maximum-speed: 1.4
 
     # The amount of milliseconds the main projectile flies before splitting into multiple projectiles.
     # (Int) default: 1450

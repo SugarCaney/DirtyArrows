@@ -5,6 +5,7 @@ import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
 import nl.sugcube.dirtyarrows.util.ColourScheme
 import nl.sugcube.dirtyarrows.util.fuzz
+import nl.sugcube.dirtyarrows.util.scheduleDelayed
 import nl.sugcube.dirtyarrows.util.showColoredDust
 import org.bukkit.*
 import org.bukkit.entity.*
@@ -213,7 +214,10 @@ open class FireworkBow(plugin: DirtyArrows) : BowAbility(
 
                 addEffect(effectBuilder.build())
             }
-            detonate()
+
+            plugin.scheduleDelayed(1) {
+                detonate()
+            }
         }
     }
 
