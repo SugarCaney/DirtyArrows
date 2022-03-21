@@ -1,56 +1,39 @@
 package nl.sugcube.dirtyarrows.recipe
 
 import nl.sugcube.dirtyarrows.DirtyArrows
-import java.util.logging.Level
+import org.bukkit.Material
+import org.bukkit.event.EventHandler
+import org.bukkit.event.Listener
+import org.bukkit.event.inventory.PrepareItemCraftEvent
 
 /**
  * Manages all custom DirtyArrows recipes.
  *
  * @author SugarCaney
  */
-open class RecipeManager(private val plugin: DirtyArrows) {
+open class RecipeManager(private val plugin: DirtyArrows) : Listener {
 
     /**
-     * The amount of by DA registered recipes.
+     * The amount of arrows that must be crafted per recipe instance.
      */
-    private var registeredRecipes: Int = 0
+    private var arrowAmount: Int = 4
+
+    init {
+        reloadConfig()
+    }
 
     /**
-     * Registers all DirtyArrows recipes and clears all old DirtyArrows recipes.
+     * Reloads configuration values.
      */
-    fun reloadRecipes() = with(plugin) {
-        // Remove all old versions of the recipes.
-        removeRecipes()
+    fun reloadConfig() {
+        arrowAmount = plugin.config.getInt("arrow-recipe-amount")
+    }
 
-        // Add the arrow recipes. Add to [addedRecipes] to keep track of which recipes are added by DA.
-        val arrowAmount = config.getInt("arrow-recipe-amount")
-        val recipesToAdd = recipes(arrowAmount)
-        recipesToAdd.forEach { recipe ->
-            server.addRecipe(recipe)
-            registeredRecipes++
+    @EventHandler
+    fun craftArrow(event: PrepareItemCraftEvent) {
+        val resultItem = event.inventory.contents.firstOrNull() ?: return
+        if (resultItem.type == Material.ARROW) {
+            resultItem.amount = arrowAmount
         }
-
-        logger.log(Level.INFO, "Loaded ${recipesToAdd.size} recipes.")
     }
-
-    /**
-     * Removes all recipes that have been registered by DirtyArrows.
-     */
-    fun removeRecipes() = with(plugin) {
-        if (registeredRecipes == 0) return
-
-        server.resetRecipes()
-
-        logger.log(Level.INFO, "Removed $registeredRecipes recipes.")
-        registeredRecipes = 0
-    }
-
-    /**
-     * Produces a list containing all DirtyArrows recipes.
-     */
-    private fun recipes(amount: Int) = listOf(
-        ArrowRecipe.left(amount),
-        ArrowRecipe.middle(amount),
-        ArrowRecipe.right(amount)
-    )
 }

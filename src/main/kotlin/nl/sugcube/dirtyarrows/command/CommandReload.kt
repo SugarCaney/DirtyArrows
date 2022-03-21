@@ -22,7 +22,7 @@ open class CommandReload : SubCommand<DirtyArrows>(
     override fun executeImpl(plugin: DirtyArrows, sender: CommandSender, vararg arguments: String) = with(plugin) {
         try {
             configurationManager.loadConfig()
-            recipeManager.reloadRecipes()
+            recipeManager.reloadConfig()
             bowManager.reload()
 
             sender.sendMessage(Broadcast.RELOADED_CONFIG)

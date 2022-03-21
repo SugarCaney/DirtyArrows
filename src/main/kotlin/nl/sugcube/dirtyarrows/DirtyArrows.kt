@@ -98,6 +98,7 @@ class DirtyArrows : JavaPlugin() {
         registerEvents(Blood(plugin), plugin)
         registerEvents(DamageEffects(), plugin)
         registerEvents(ZombieFlint(plugin), plugin)
+        registerEvents(recipeManager, plugin)
     }
 
     /**
@@ -131,7 +132,6 @@ class DirtyArrows : JavaPlugin() {
         configurationManager.initialise()
         registerCommands()
         registerEvents()
-        recipeManager.reloadRecipes()
         regionManager.loadRegions()
         bowManager.reload()
         checkForUpdates()
