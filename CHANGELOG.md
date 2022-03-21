@@ -8,7 +8,13 @@ Changelog
 * **`~`** Tweaked
 * **`-`** Removed feature
 
-## Version 4.0 (Upcoming)
+## Version 4.1
+* **`i`** Updated for Minecraft 1.12.2
+* **`!`** Fixed custom arrow recipe count not working (1.12.2)
+* **`!`** Fixed Firework bow not detonating (1.12.2)
+* **`!`** Fixed NPE when Disarming bow encounters a null armour item.
+
+## Version 4.0
 
 * **`i`** Updated for Minecraft 1.11.2.
 * **`i`** Refactored the whole code base.

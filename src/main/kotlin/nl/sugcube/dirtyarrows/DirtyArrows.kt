@@ -128,7 +128,17 @@ class DirtyArrows : JavaPlugin() {
         }
     }
 
+    /**
+     * Create all necessary directories for the plugin to work.
+     */
+    private fun createDirectories() {
+        if (dataFolder.exists().not()) {
+            dataFolder.mkdirs()
+        }
+    }
+
     override fun onEnable() {
+        createDirectories()
         configurationManager.initialise()
         registerCommands()
         registerEvents()

@@ -47,7 +47,7 @@ How to contact me/ask for support:
 3. You're now ready to go! You can even customize a little in the config.yml.
 
 ## Videos
-* Official plugin video (v4.0) by SugarCaney (TBA)
+* Official plugin video (v4.x) by SugarCaney (TBA)
 * Plugin showcase (v3.0 and earlier) by [BrokenBukkit (German/Deutsch)](https://www.youtube.com/watch?v=LjOTILxRlJE).
 
 ## Bows
