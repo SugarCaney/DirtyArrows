@@ -19,8 +19,8 @@ dependencies {
 
     // Bukkit jar
 //    implementation name: 'bukkit-1.11.2'
-    implementation name: 'bukkit-1.12.2'
-//    implementation name: 'bukkit-1.13.2'
+//    implementation name: 'bukkit-1.12.2'
+    implementation name: 'bukkit-1.13.2'
 //    implementation name: 'bukkit-1.14.4'
 //    implementation name: 'bukkit-1.15.2'
 //    implementation name: 'bukkit-1.16.5'

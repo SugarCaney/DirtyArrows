@@ -124,10 +124,10 @@ open class RegionManager(private val plugin: DirtyArrows) {
             return
         }
 
-        data.getConfigurationSection("regions").getKeys(false).forEach { key ->
+        data.getConfigurationSection("regions")?.getKeys(false)?.forEach { key ->
             val path = "regions.$key"
-            val position1 = data.getString("$path.pos1").toLocation() ?: return@forEach
-            val position2 = data.getString("$path.pos2").toLocation() ?: return@forEach
+            val position1 = data.getString("$path.pos1")?.toLocation() ?: return@forEach
+            val position2 = data.getString("$path.pos2")?.toLocation() ?: return@forEach
             val region = Region(position1, position2, key)
             registeredRegions[key] = region
         }

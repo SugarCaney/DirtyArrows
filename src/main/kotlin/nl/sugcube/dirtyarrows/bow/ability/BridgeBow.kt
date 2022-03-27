@@ -28,7 +28,12 @@ open class BridgeBow(plugin: DirtyArrows) : BowAbility(
         canShootInProtectedRegions = false,
         removeArrow = true,
         description = "Creates a temporary bridge.",
-        costRequirements = listOf(ItemStack(Material.matchMaterial(plugin.config.getString("bridge.material")), 1))
+        costRequirements = listOf(ItemStack(
+                Material.matchMaterial(
+                        plugin.config.getString("bridge.material") ?: error("Invalid bridge.material value")
+                ) ?: error("No material with node ${plugin.config.getString("bridge.material")}"),
+            1)
+        )
 ) {
 
     /**
@@ -39,7 +44,7 @@ open class BridgeBow(plugin: DirtyArrows) : BowAbility(
     /**
      * The block material used for creating the bridges.
      */
-    val material = Material.matchMaterial(config.getString("$node.material"))
+    val material = Material.matchMaterial(config.getString("$node.material") ?: error("No configuration node $node.material found"))
             ?: error("Illegal $node.material: <${config.getString("$node.material")}>")
 
     /**

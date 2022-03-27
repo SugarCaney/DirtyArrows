@@ -26,7 +26,7 @@ open class SmokyBow(plugin: DirtyArrows) : BowAbility(
         type = DefaultBow.SMOKY,
         canShootInProtectedRegions = false,
         protectionRange = 10.0,
-        costRequirements = listOf(ItemStack(Material.INK_SACK, 1)),
+        costRequirements = listOf(ItemStack(Material.INK_SAC, 1)),
         description = "Create smokescreens and blind entities."
 ) {
 
@@ -89,7 +89,7 @@ open class SmokyBow(plugin: DirtyArrows) : BowAbility(
      */
     private fun Location.createCloud() = repeat(particleCloudDuration) {
         plugin.scheduleDelayed(it.toLong()) {
-            world.spawnParticle(
+            world?.spawnParticle(
                     Particle.CLOUD,
                     x, y, z,
                     particleCloudCount,

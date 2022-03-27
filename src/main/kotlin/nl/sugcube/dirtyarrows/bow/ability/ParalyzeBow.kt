@@ -27,7 +27,7 @@ open class ParalyzeBow(plugin: DirtyArrows) : BowAbility(
         plugin = plugin,
         type = DefaultBow.PARALYZE,
         canShootInProtectedRegions = true,
-        costRequirements = listOf(ItemStack(Material.NETHER_STALK, 1)),
+        costRequirements = listOf(ItemStack(Material.NETHER_WART, 1)),
         removeArrow = false,
         description = "Paralyzes the target."
 ) {

@@ -19,6 +19,7 @@ import kotlin.random.Random
 fun ItemStack.subtractDurability(player: Player) {
     if (player.gameMode == GameMode.CREATIVE) return
 
+    // TODO: Items: durability
     val unbreakingLevel = getEnchantmentLevel(Enchantment.DURABILITY)
     val reductionChance = 1.0 / (unbreakingLevel.toDouble() + 1.0)
     if (Random.nextDouble() < reductionChance) {
@@ -61,7 +62,8 @@ fun Player.fortuneLevel() = inventory.maxOf { it?.getEnchantmentLevel(Enchantmen
 fun Inventory.containsAtLeastInlcudingData(toCheck: ItemStack): Boolean {
     var count = 0
     forEachNotNull {
-        if (it.type == toCheck.type && it.data.data == toCheck.data.data) {
+        // TODO: Items data comparison new api.
+        if (it.type == toCheck.type && it.data?.data == toCheck.data?.data) {
             count += it.amount
         }
         if (count >= toCheck.amount) {
@@ -88,7 +90,8 @@ fun Inventory.removeIncludingData(toRemove: ItemStack) {
     for (i in 0 until size) {
         // Check if the item is eligible to be removed.
         val item = getItem(i) ?: continue
-        if (item.type != toRemove.type || item.data.data != toRemove.data.data) continue
+        // TODO: Items data comparison new api.
+        if (item.type != toRemove.type || item.data?.data != toRemove.data?.data) continue
 
         // The amount of items that are yet to be removed.
         val targetToRemove = totalToRemove - amountRemoved
@@ -96,7 +99,7 @@ fun Inventory.removeIncludingData(toRemove: ItemStack) {
         // All items that need to be removed are removed.
         if (targetToRemove < item.amount) {
             val newAmount = item.amount - targetToRemove
-            setItem(i, ItemStack(item.type, newAmount, item.data.data.toShort()))
+            setItem(i, ItemStack(item.type, newAmount, item.data?.data?.toShort() ?: 0))
             return
         }
 

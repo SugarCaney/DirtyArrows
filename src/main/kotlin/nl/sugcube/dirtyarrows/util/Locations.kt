@@ -73,7 +73,7 @@ fun Location.fuzz(maxFuzz: Double) = copyOf(
 /**
  * Gets all entities that are within a certain range of this location.
  */
-fun Location.nearbyEntities(range: Double): Collection<Entity> = world.getNearbyEntities(this, range, range, range)
+fun Location.nearbyEntities(range: Double): Collection<Entity> = world?.getNearbyEntities(this, range, range, range) ?: emptyList()
 
 /**
  * Get all living entities within a certain range of this location.

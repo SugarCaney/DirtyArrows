@@ -13,10 +13,10 @@ import org.bukkit.util.BlockIterator
  */
 val BLOCK_BREAK_TOOLS = setOf(
         Material.DIAMOND_PICKAXE,
-        Material.GOLD_PICKAXE,
+        Material.GOLDEN_PICKAXE,
         Material.IRON_PICKAXE,
         Material.STONE_PICKAXE,
-        Material.WOOD_PICKAXE,
+        Material.WOODEN_PICKAXE,
 )
 
 /**
@@ -40,7 +40,7 @@ fun Block.onSolid() = location.copyOf(y = location.y - 1.0).block.type.isSolid
 /**
  * Checks if this block is a water block.
  */
-fun Block.isWater() = type == Material.STATIONARY_WATER || type == Material.WATER
+fun Block.isWater() = type == Material.WATER
 
 /**
  * Updates the block data of this block.
@@ -100,6 +100,7 @@ fun Block.restoreCoarseDirt(): Boolean {
     if (type != Material.DIRT) return false
     if (state.rawData != 1.toByte()) return false
 
-    data = 0
+    /*data = 0*/
+    // TODO: block data coarse dirt.
     return true
 }

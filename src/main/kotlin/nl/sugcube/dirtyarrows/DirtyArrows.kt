@@ -78,8 +78,8 @@ class DirtyArrows : JavaPlugin() {
      * Registers all DA commands.
      */
     private fun registerCommands() {
-        getCommand("dirtyarrows").apply {
-            executor = commandManager
+        getCommand("dirtyarrows")?.apply {
+            setExecutor(commandManager)
             tabCompleter = commandManager
         }
     }

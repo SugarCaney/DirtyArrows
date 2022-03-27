@@ -93,7 +93,7 @@ open class BowBow(plugin: DirtyArrows) : BowAbility(
         player.removeArrow(bow)
 
         // Spawn the arrow.
-        spawnLocation.world.spawnEntity(spawnLocation, EntityType.ARROW).apply {
+        spawnLocation.world?.spawnEntity(spawnLocation, EntityType.ARROW)?.apply {
             val arrow = this as Arrow
             arrow.shooter = player
             arrow.velocity = arrowVelocity.multiply(velocityMultiplier)

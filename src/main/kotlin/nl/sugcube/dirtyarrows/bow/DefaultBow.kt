@@ -173,7 +173,7 @@ enum class DefaultBow(
          */
         @JvmStatic
         fun bowByItemName(itemName: String, config: FileConfiguration): DefaultBow? = ALL.firstOrNull {
-            val candidateName = config.getString(it.nameNode).applyColours()
+            val candidateName = config.getString(it.nameNode)?.applyColours()
             itemName.applyColours() == candidateName
         }
     }

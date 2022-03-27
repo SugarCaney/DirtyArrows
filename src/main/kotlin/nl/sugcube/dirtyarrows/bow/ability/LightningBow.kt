@@ -24,6 +24,6 @@ open class LightningBow(plugin: DirtyArrows) : BowAbility(
 ) {
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
-        arrow.location.world.strikeLightning(arrow.location)
+        arrow.location.world?.strikeLightning(arrow.location)
     }
 }

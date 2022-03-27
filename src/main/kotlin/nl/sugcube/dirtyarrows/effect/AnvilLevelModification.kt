@@ -21,7 +21,7 @@ open class AnvilLevelModification(private val plugin: DirtyArrows) : Listener {
         val result = event.result ?: return
         if (result.type != Material.BOW) return
 
-        val nameCandidate = anvil.renameText
+        val nameCandidate = anvil.renameText ?: return
         val bowCandidate = DefaultBow.bowByItemName(nameCandidate, plugin.config) ?: return
         anvil.repairCost = max(1, plugin.config.getInt(bowCandidate.levelsNode))
     }

@@ -45,34 +45,34 @@ open class DisarmingBow(plugin: DirtyArrows) : BowAbility(
         target.dropHandItem()
 
         // Chance to drop armour.
-        val newArmour = target.equipment.armorContents.map { item ->
+        val newArmour = target.equipment?.armorContents?.map { item ->
             if (item != null && item.type != Material.AIR && Random.nextDouble() <= dropArmourChance) {
                 target.world.dropItem(target.location, item)
                 item.type = Material.AIR
             }
             item
-        }
-        target.equipment.armorContents = newArmour.toTypedArray()
+        } ?: return
+        target.equipment?.armorContents = newArmour.toTypedArray()
     }
 
     /**
      * Removes items from the entity's hands.
      */
-    private fun LivingEntity.dropHandItem() = with(equipment) {
+    private fun LivingEntity.dropHandItem() = equipment?.apply {
         // Prioritize dropping offhand over main hand.
         val offhandItem = itemInOffHand
         if (offhandItem.type != Material.AIR) {
             world.dropItem(location, offhandItem)
             offhandItem.type = Material.AIR
-            itemInOffHand = offhandItem
-            return
+            setItemInOffHand(offhandItem)
+            return@apply
         }
 
         val mainHandItem = itemInMainHand
         if (mainHandItem.type != Material.AIR) {
             world.dropItem(location, mainHandItem)
             mainHandItem.type = Material.AIR
-            itemInMainHand = mainHandItem
+            setItemInMainHand(mainHandItem)
         }
     }
 }

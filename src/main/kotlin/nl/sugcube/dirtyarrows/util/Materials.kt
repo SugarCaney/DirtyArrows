@@ -28,12 +28,20 @@ val Material.smeltedItem: ItemStack?
  */
 val Material.isShearable: Boolean
     get() = when (this) {
-        Material.WEB,
+        Material.COBWEB,
         Material.DEAD_BUSH,
-        Material.LONG_GRASS,
-        Material.DOUBLE_PLANT,
-        Material.LEAVES,
-        Material.LEAVES_2,
+        Material.TALL_GRASS,
+        Material.LILAC,
+        Material.ROSE_BUSH,
+        Material.SUNFLOWER,
+        Material.LARGE_FERN,
+        Material.PEONY,
+        Material.OAK_LEAVES,
+        Material.SPRUCE_LEAVES,
+        Material.BIRCH_LEAVES,
+        Material.JUNGLE_LEAVES,
+        Material.ACACIA_LEAVES,
+        Material.DARK_OAK_LEAVES,
         Material.TRIPWIRE,
         Material.VINE -> true
         else -> false
@@ -43,7 +51,7 @@ val Material.isShearable: Boolean
  * Checks if this material is a log.
  */
 fun Material.isLog(): Boolean = when (this) {
-    Material.LOG, Material.LOG_2 -> true
+    Material.OAK_LOG, Material.SPRUCE_LOG, Material.BIRCH_LOG, Material.JUNGLE_LOG, Material.ACACIA_LOG, Material.DARK_OAK_LOG -> true
     else -> false
 }
 
@@ -60,21 +68,21 @@ fun Material.fortuneDrops(level: Int = 0): Collection<ItemStack> {
         Material.COAL_ORE,
         Material.DIAMOND_ORE,
         Material.EMERALD_ORE,
-        Material.QUARTZ_ORE -> oreFortuneCount(fortuneLevel = level, dropAmount = 1..1)
+        Material.NETHER_QUARTZ_ORE -> oreFortuneCount(fortuneLevel = level, dropAmount = 1..1)
         Material.LAPIS_ORE -> oreFortuneCount(fortuneLevel = level, dropAmount = 4..9)
         Material.REDSTONE_ORE -> redstoneFortuneCount(fortuneLevel = level)
-        Material.MELON_BLOCK -> melonFortuneCount(fortuneLevel = level)
+        Material.MELON -> melonFortuneCount(fortuneLevel = level)
         else -> 1
     }
 
     val dropMaterial = when (this) {
         Material.IRON_ORE, Material.GOLD_ORE -> this
-        Material.MELON_BLOCK -> Material.MELON
+        Material.MELON -> Material.MELON
         else -> smeltedItem?.type ?: this
     }
 
     return if (this == Material.LAPIS_ORE) {
-        listOf(ItemStack(Material.INK_SACK, amount, 4))
+        listOf(ItemStack(Material.LAPIS_LAZULI, amount))
     }
     else listOf(ItemStack(dropMaterial, amount))
 }

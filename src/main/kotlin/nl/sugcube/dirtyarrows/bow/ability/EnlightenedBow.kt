@@ -46,7 +46,7 @@ open class EnlightenedBow(plugin: DirtyArrows) : BowAbility(
             }
 
             // Then find a face.
-            // Notice that the facing direction is opposite from the solid direction.
+            // Notice that the facing direction is opposite to the solid direction.
             // I tried SOO MUCH, and finally settled on some weird legacy method.
             // The problem with setting type and data seperately from the API was that the type
             // would not change to torch (presumably because they cannot be placed regularly), after calling
@@ -61,7 +61,8 @@ open class EnlightenedBow(plugin: DirtyArrows) : BowAbility(
                 else -> 0x5 /* UP */
             }
             @Suppress("DEPRECATION")
-            block.setTypeIdAndData(Material.TORCH.id, data.toByte(), false)
+            /*block.setTypeIdAndData(Material.TORCH.id, data.toByte(), false)*/
+            // TODO: Update Enlightened Bow block data
 
             showFlameParticle()
         }

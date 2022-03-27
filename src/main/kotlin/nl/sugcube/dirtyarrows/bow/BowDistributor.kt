@@ -33,8 +33,9 @@ open class BowDistributor(
      */
     fun giveBow(bowType: DefaultBow, enchanted: Boolean) {
         val itemStack = ItemStack(Material.BOW, 1)
-        val itemMeta = itemStack.itemMeta
-        itemMeta.displayName = config.getString(bowType.nameNode).applyColours()
+        val itemMeta = itemStack.itemMeta ?: return
+        val bowName = config.getString(bowType.nameNode)?.applyColours() ?: error("No bow name configured with node ${bowType.nameNode}")
+        itemMeta.setDisplayName(bowName)
         itemStack.itemMeta = itemMeta
 
         if (enchanted) {

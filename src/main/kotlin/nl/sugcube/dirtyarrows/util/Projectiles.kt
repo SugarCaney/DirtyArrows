@@ -55,8 +55,8 @@ fun Player.hasArrows() = gameMode == GameMode.CREATIVE || inventory.contains(Mat
  *          The bow item used to fire the arrow.
  */
 fun Player.removeArrow(bowItem: ItemStack?) {
-    bowItem?.subtractDurability(player)
+    bowItem?.subtractDurability(player ?: return)
     if (bowItem?.containsEnchantment(Enchantment.ARROW_INFINITE) == false) {
-        player.inventory.removeItem(ItemStack(Material.ARROW, 1))
+        player?.inventory?.removeItem(ItemStack(Material.ARROW, 1))
     }
 }

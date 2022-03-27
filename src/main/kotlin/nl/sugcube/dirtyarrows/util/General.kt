@@ -46,7 +46,7 @@ fun String.toLocation(): Location? {
  *
  * @return The string that represents the location.
  */
-fun Location.toLocationString() = "${world.name}%$x%$y%$z%$pitch%$yaw"
+fun Location.toLocationString() = "${world?.name}%$x%$y%$z%$pitch%$yaw"
 
 /**
  * Converts the location to a (x: X, y: Y, z: Z) string.

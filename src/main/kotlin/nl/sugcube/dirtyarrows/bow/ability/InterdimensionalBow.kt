@@ -4,7 +4,10 @@ import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
 import nl.sugcube.dirtyarrows.util.*
-import org.bukkit.*
+import org.bukkit.GameMode
+import org.bukkit.Location
+import org.bukkit.Material
+import org.bukkit.Sound
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.LivingEntity
@@ -80,7 +83,7 @@ open class InterdimensionalBow(plugin: DirtyArrows) : BowAbility(
 
             repeat(arrowCount) {
                 val location = target.arrowWarpLocation() ?: return@let
-                location.world.playSound(location, Sound.ENTITY_ENDERMEN_TELEPORT, 10f, 1f)
+                location.world?.playSound(location, Sound.ENTITY_ENDERMAN_TELEPORT, 10f, 1f)
                 launched += LaunchState(arrow.velocity.copyOf(), player, target, location, bow = bow)
             }
             arrow.showLaunchEffect(player)
@@ -158,14 +161,14 @@ open class InterdimensionalBow(plugin: DirtyArrows) : BowAbility(
     private fun LaunchState.shootArrow() {
         // Particles and sounds.
         spawnLocation.copyOf(y = spawnLocation.y - 0.5).showFlameParticle()
-        spawnLocation.world.playSound(spawnLocation, Sound.ENTITY_ARROW_SHOOT, 10f, 1f)
+        spawnLocation.world?.playSound(spawnLocation, Sound.ENTITY_ARROW_SHOOT, 10f, 1f)
 
         // Launch arrow.
         val direction = target.location.copyOf().subtract(spawnLocation)
         val speed = velocity.length()
         val arrowVelocity = direction.toVector().normalize().multiply(speed).add(Vector(0.0, 0.25, 0.0))
 
-        spawnLocation.world.spawnEntity(spawnLocation, EntityType.ARROW).apply {
+        spawnLocation.world?.spawnEntity(spawnLocation, EntityType.ARROW)?.apply {
             val arrow = this as Arrow
             val player = this@shootArrow.shooter
             arrow.shooter = player
@@ -198,7 +201,7 @@ open class InterdimensionalBow(plugin: DirtyArrows) : BowAbility(
      * Executes all effects on launch of the arrow.
      */
     private fun Arrow.showLaunchEffect(player: Player) {
-        player.playSound(player.location, Sound.ENTITY_ENDERMEN_TELEPORT, 10f, 1f)
+        player.playSound(player.location, Sound.ENTITY_ENDERMAN_TELEPORT, 10f, 1f)
         showDustEffect(count = 20, fuzz = 0.5)
     }
 

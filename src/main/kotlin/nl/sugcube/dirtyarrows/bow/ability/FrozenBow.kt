@@ -23,7 +23,6 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import java.util.concurrent.ConcurrentHashMap
-import kotlin.math.min
 import kotlin.random.Random
 
 /**
@@ -41,7 +40,7 @@ open class FrozenBow(plugin: DirtyArrows) : BowAbility(
         handleEveryNTicks = 15,
         canShootInProtectedRegions = false,
         protectionRange = 8.0,
-        costRequirements = listOf(ItemStack(Material.SNOW_BALL, 1)),
+        costRequirements = listOf(ItemStack(Material.SNOWBALL, 1)),
         description = "Spawns snow/ice and freezes targets."
 ) {
 
@@ -127,13 +126,15 @@ open class FrozenBow(plugin: DirtyArrows) : BowAbility(
             }
             // Increase snow level.
             Material.SNOW -> {
-                if (Random.nextDouble() < snowExtraLayerChance) {
-                    @Suppress("DEPRECATION") /* Could not find a Snow BlockData variant in 1.11.2 */
-                    block.data = min(block.data + 1, 7).toByte()
-                }
+                //if (Random.nextDouble() < snowExtraLayerChance) {
+                    //@Suppress("DEPRECATION")
+                    /* Could not find a Snow BlockData variant in 1.11.2 */
+                    /* block.data = min(block.data + 1, 7).toByte() */
+                    // TODO: Frozen Bow SNOW material
+                //}
             }
             // Freeze water.
-            Material.STATIONARY_WATER -> {
+            Material.WATER -> {
                 if (Random.nextDouble() < freezeChance) {
                     block.type = Material.ICE
                 }

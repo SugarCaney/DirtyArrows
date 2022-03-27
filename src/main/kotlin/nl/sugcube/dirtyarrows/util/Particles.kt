@@ -11,36 +11,38 @@ import org.bukkit.potion.PotionType
  * Shows a smoke particle on the location of the entity.
  */
 fun Entity.showSmokeParticle() = location.clone().add(0.5, 0.5, 0.5).let {
-    location.world.playEffect(it, Effect.SMOKE, 0)
+    location.world?.playEffect(it, Effect.SMOKE, 0)
 }
 
 /**
  * Shows a smoke particle on this location.
  */
 fun Location.showSmokeParticle() = clone().add(0.5, 0.5, 0.5).let {
-    world.playEffect(it, Effect.SMOKE, 0)
+    world?.playEffect(it, Effect.SMOKE, 0)
 }
 
 /**
  * Shows a mobspawner flame particle on the location of the entity.
  */
 fun Entity.showFlameParticle() = location.clone().add(0.5, 0.5, 0.5).let {
-    location.world.playEffect(it, Effect.MOBSPAWNER_FLAMES, 0)
+    location.world?.playEffect(it, Effect.MOBSPAWNER_FLAMES, 0)
 }
 
 /**
  * Shows a mobspawner flame particle on the location of the entity.
  */
 fun Location.showFlameParticle() = clone().add(0.5, 0.5, 0.5).let {
-    world.playEffect(it, Effect.MOBSPAWNER_FLAMES, 0)
+    world?.playEffect(it, Effect.MOBSPAWNER_FLAMES, 0)
 }
 
 /**
  * Shows a potion break particle at the given location.
  */
-fun Location.showPotionParticle(potionType: PotionType) = fuzz(0.5)
-        .add(0.0, 1.0, 0.0)
-        .showColoredDust(potionType.effectType.color, 50)
+fun Location.showPotionParticle(potionType: PotionType) {
+    fuzz(0.5)
+            .add(0.0, 1.0, 0.0)
+            .showColoredDust(potionType.effectType?.color ?: return, 50)
+}
 
 /**
  * Shows a coloured dust particle at the given location.
@@ -65,7 +67,8 @@ fun Location.showColoredDust(color: Color, count: Int) = showColoredDust(color.r
  *          The amount of particles to show.
  */
 fun Location.showColoredDust(red: Int, green: Int, blue: Int, count: Int) = repeat(count) { _ ->
-    world.spawnParticle(
+    // TODO: FIX: Particle REDSTONE requires DATA, null PROVIDED.
+    world?.spawnParticle(
             Particle.REDSTONE,
             x, y, z,
             0,
@@ -77,7 +80,7 @@ fun Location.showColoredDust(red: Int, green: Int, blue: Int, count: Int) = repe
  * Shows an ender particle at the location of the entity.
  */
 fun Entity.showEnderParticle() {
-    location.world.playEffect(location, Effect.ENDER_SIGNAL, 0)
+    location.world?.playEffect(location, Effect.ENDER_SIGNAL, 0)
 }
 
 /**
@@ -87,7 +90,7 @@ fun Entity.showEnderParticle() {
  *          The amount of particles to show.
  */
 fun Location.showGrowthParticle(strength: Int = 5) {
-    world.playEffect(this, Effect.VILLAGER_PLANT_GROW, strength)
+    world?.playEffect(this, Effect.VILLAGER_PLANT_GROW, strength)
 }
 
 /**
@@ -99,7 +102,7 @@ fun Location.showGrowthParticle(strength: Int = 5) {
  *          Maximum deviation in the x and z direction.
  */
 fun Location.showHealParticle(hearts: Int, fuzzing: Double = 0.3) {
-    world.spawnParticle(Particle.HEART,
+    world?.spawnParticle(Particle.HEART,
             x.fuzz(fuzzing),
             y + 2.0.fuzz(0.5),
             z.fuzz(fuzzing),
@@ -111,12 +114,12 @@ fun Location.showHealParticle(hearts: Int, fuzzing: Double = 0.3) {
  * Shows a music note particle on this location.
  */
 fun Location.showMusicNoteParticle() = clone().add(0.5, 0.5, 0.5).let {
-    world.spawnParticle(Particle.NOTE, this, 1)
+    world?.spawnParticle(Particle.NOTE, this, 1)
 }
 
 /**
  * Shows a firework shooty particle.
  */
 fun Location.showFireworkSpark(count: Int = 15) = clone().add(0.5, 0.5, 0.5).let {
-    world.spawnParticle(Particle.FIREWORKS_SPARK, x, y, z, count, 0.0, 0.0, 0.0)
+    world?.spawnParticle(Particle.FIREWORKS_SPARK, x, y, z, count, 0.0, 0.0, 0.0)
 }

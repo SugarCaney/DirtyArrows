@@ -204,13 +204,11 @@ open class CurseBow(plugin: DirtyArrows) : BowAbility(
     }
 
     private fun LivingEntity.explode() = with(location) {
-        world.createExplosion(x, y + 0.5, z, explosionPower, explosionFire, explosionBreaksBlocks)
+        world?.createExplosion(x, y + 0.5, z, explosionPower, explosionFire, explosionBreaksBlocks)
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
     fun deadUnregisterHandler(event: EntityDeathEvent) {
-        if (event.entity is LivingEntity) {
-            cursed.remove(event.entity)
-        }
+        cursed.remove(event.entity)
     }
 }

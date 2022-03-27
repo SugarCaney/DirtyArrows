@@ -69,7 +69,7 @@ open class UndeadBow(plugin: DirtyArrows) : BowAbility(
             Location(world, circleX, y, circleZ).let {
                 it.y = it.firstSpawnEligibleY()?.toDouble() ?: y
                 it.spawn(Zombie::class)
-                world.playEffect(it, Effect.MOBSPAWNER_FLAMES, 0)
+                world?.playEffect(it, Effect.MOBSPAWNER_FLAMES, 0)
             }
         }
     }

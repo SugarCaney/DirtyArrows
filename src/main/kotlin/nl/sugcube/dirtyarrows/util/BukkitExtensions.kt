@@ -32,17 +32,17 @@ fun MemorySection.getFloat(node: String) = getDouble(node).toFloat()
 /**
  * Spawns an entity at this location.
  */
-fun <T : Entity> Location.spawn(entity: Class<T>): T = world.spawn(this, entity)
+fun <T : Entity> Location.spawn(entity: Class<T>): T? = world?.spawn(this, entity)
 
 /**
  * Spawns an entity at this location.
  */
-fun <T : Entity> Location.spawn(entity: KClass<T>): T = world.spawn(this, entity.java)
+fun <T : Entity> Location.spawn(entity: KClass<T>): T? = world?.spawn(this, entity.java)
 
 /**
  * Drops the given item on this location.
  */
-fun Location.dropItem(item: ItemStack): Item = world.dropItem(this, item)
+fun Location.dropItem(item: ItemStack): Item? = world?.dropItem(this, item)
 
 /**
  * Creates an explosion at this location.
@@ -53,16 +53,16 @@ fun Location.createExplosion(
         breakBlocks: Boolean = false
 ) {
     if (breakBlocks.not()) {
-        world.createExplosion(x, y, z, power, setFire, breakBlocks)
+        world?.createExplosion(x, y, z, power, setFire, breakBlocks)
     }
-    else world.createExplosion(this, power, setFire)
+    else world?.createExplosion(this, power, setFire)
 }
 
 /**
  * Makes a copy of this location.
  */
 fun Location.copyOf(
-    world: World = this.world,
+    world: World? = this.world,
     x: Double = this.x,
     y: Double = this.y,
     z: Double = this.z,

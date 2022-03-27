@@ -29,7 +29,7 @@ open class FireworkBow(plugin: DirtyArrows) : BowAbility(
         canShootInProtectedRegions = false,
         removeArrow = true,
         description = "Splits into deadly fireworks.",
-        costRequirements = listOf(ItemStack(Material.FIREWORK_CHARGE, 2))
+        costRequirements = listOf(ItemStack(Material.FIREWORK_STAR, 2))
 ) {
 
     /**
@@ -103,7 +103,7 @@ open class FireworkBow(plugin: DirtyArrows) : BowAbility(
         arrow.setGravity(false)
         arrow.isCritical = false
 
-        arrow.world.playSound(arrow.location, Sound.ENTITY_FIREWORK_LAUNCH, 1f, 1f)
+        arrow.world.playSound(arrow.location, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1f, 1f)
 
         mainProjectileTime[arrow] = System.currentTimeMillis().fuzz(mainProjectileFlightTimeFuzzing)
     }
@@ -179,10 +179,10 @@ open class FireworkBow(plugin: DirtyArrows) : BowAbility(
      *          How far from this location to inflict damage.
      */
     private fun Location.damageEntities(cause: Entity, damage: Double = maximumFireworkDamage, range: Double = damageRange) {
-        world.getNearbyEntities(this, damageRange, damageRange, damageRange).asSequence()
-                .mapNotNull { it as? LivingEntity }
-                .filter { it.location.distance(this) <= range }
-                .forEach {
+        world?.getNearbyEntities(this, damageRange, damageRange, damageRange)?.asSequence()
+                ?.mapNotNull { it as? LivingEntity }
+                ?.filter { it.location.distance(this) <= range }
+                ?.forEach {
                     val distance = it.location.distance(this)
                     val multiplier = max(0.5, 1.0 - distance / damageRange)
                     it.damage(damage * multiplier, cause)
@@ -200,7 +200,7 @@ open class FireworkBow(plugin: DirtyArrows) : BowAbility(
      *          The base effect the fireworks will have.
      */
     private fun Location.createFirework(player: Player, fireworkEffect: FireworkEffect?) {
-        val firework = world.spawnEntity(this, EntityType.FIREWORK) as Firework
+        val firework = world?.spawnEntity(this, EntityType.FIREWORK) as Firework
         firework.apply {
             fireworkMeta = fireworkMeta.apply {
                 power = 3
@@ -259,14 +259,14 @@ open class FireworkBow(plugin: DirtyArrows) : BowAbility(
                 0.0.fuzz(1.0)
         ).normalize().multiply(speed)
 
-        val arrow = world.spawnEntity(this, EntityType.ARROW) as Arrow
+        val arrow = world?.spawnEntity(this, EntityType.ARROW) as Arrow
         arrow.apply {
             velocity = randomDirection
             setGravity(false)
             setShooter(shooter)
 
-            world.playSound(location, Sound.ENTITY_FIREWORK_BLAST, 1f, 1f)
-            world.playSound(location, Sound.ENTITY_FIREWORK_LAUNCH, 1f, 1f)
+            world.playSound(location, Sound.ENTITY_FIREWORK_ROCKET_BLAST, 1f, 1f)
+            world.playSound(location, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1f, 1f)
         }
 
         registerArrow(arrow)
@@ -301,7 +301,7 @@ open class FireworkBow(plugin: DirtyArrows) : BowAbility(
      * Get the firework meta of the firework charge to use.
      */
     private fun fireworkMeta(player: Player) = player.lastConsumedItems.asSequence()
-            .filter { it.type == Material.FIREWORK_CHARGE && it.hasItemMeta() }
+            .filter { it.type == Material.FIREWORK_STAR && it.hasItemMeta() }
             .firstOrNull()
             ?.itemMeta as? FireworkEffectMeta
 }

@@ -33,7 +33,7 @@ open class MusicBow(plugin: DirtyArrows) : BowAbility(
             return
         }
 
-        arrow.location.world.playEffect(arrow.location, Effect.RECORD_PLAY, record)
+        arrow.location.world?.playEffect(arrow.location, Effect.RECORD_PLAY, record)
     }
 
     override fun particle(tickNumber: Int) = arrows.forEach {

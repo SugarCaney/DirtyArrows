@@ -34,7 +34,7 @@ open class DropBow(plugin: DirtyArrows) : BowAbility(
         val dropLocation = target.location
         for (i in 1..dropHeight) {
             val block = target.world.getBlockAt(dropLocation.blockX, dropLocation.blockY + i, dropLocation.blockZ)
-            if (block?.type?.isSolid == true) {
+            if (block.type.isSolid) {
                 target.teleport(dropLocation.copyOf(y = (dropLocation.blockY + i).toDouble()))
                 return
             }

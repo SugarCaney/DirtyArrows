@@ -25,7 +25,7 @@ open class MeteorBow(plugin: DirtyArrows) : BowAbility(
         type = DefaultBow.METEOR,
         canShootInProtectedRegions = false,
         protectionRange = 10.0,
-        costRequirements = listOf(ItemStack(Material.FIREBALL, 3)),
+        costRequirements = listOf(ItemStack(Material.FIRE_CHARGE, 3)),
         description = "Meteors will strike on impact."
 ) {
 
@@ -120,7 +120,7 @@ open class MeteorBow(plugin: DirtyArrows) : BowAbility(
 
         val speed = meteorSpeed.fuzz(meteorSpeedFuzzing)
         val direction = impactLocation.subtract(spawnLocation).toVector().normalize().multiply(speed)
-        spawnLocation.spawn(Arrow::class).apply {
+        spawnLocation.spawn(Arrow::class)?.apply {
             shooter = this@spawnMeteor.shooter
             velocity = direction
             fireTicks = 100000

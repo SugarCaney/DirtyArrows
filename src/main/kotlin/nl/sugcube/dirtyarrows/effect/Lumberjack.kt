@@ -21,7 +21,8 @@ fun Location.dropWood() {
     // Data deprecation will be replaced in later versions (1.13, 1.14, ...)
     val data = block.state.data as Wood
     val damageValue = data.species.ordinal
-    val dataValue = if (woodMaterial == Material.LOG_2) damageValue - 4 else damageValue
+    // TODO: Jumberjack: do stuff with all wood materials.
+    val dataValue = if (woodMaterial == Material.OAK_LOG) damageValue - 4 else damageValue
 
     // 80% chance to drop log. 20% chance to drop stick/planks.
     if (Random.nextInt(5) != 0) {
@@ -31,7 +32,8 @@ fun Location.dropWood() {
 
     // 40% of dropping planks, 60% of dropping sticks (8% planks, 12% sticks).
     if (Random.nextDouble() < 0.4) {
-        dropItem(ItemStack(Material.WOOD, Random.nextInt(4) + 1, damageValue.toShort()))
+        // TODO: Jumberjack: do stuff with all wood materials.
+        dropItem(ItemStack(Material.OAK_LOG, Random.nextInt(4) + 1, damageValue.toShort()))
     }
     else dropItem(ItemStack(Material.STICK, Random.nextInt(6) + 1))
 }

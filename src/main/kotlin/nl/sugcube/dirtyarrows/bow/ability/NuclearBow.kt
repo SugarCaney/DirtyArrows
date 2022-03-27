@@ -147,14 +147,14 @@ open class NuclearBow(plugin: DirtyArrows) : BowAbility(
         // Apply radiation effects.
         radiation.keys.forEach { radiationLocation ->
             // Poison entities.
-            radiationLocation.world.getNearbyEntities(
+            radiationLocation.world?.getNearbyEntities(
                     radiationLocation,
                     radiationDamageProximity,
                     radiationDamageProximity,
                     radiationDamageProximity
-            ).asSequence()
-                    .mapNotNull { it as? LivingEntity }
-                    .forEach {
+            )?.asSequence()
+                    ?.mapNotNull { it as? LivingEntity }
+                    ?.forEach {
                         it.addPotionEffect(PotionEffect(PotionEffectType.POISON, radiationPoisonDuration, radiationPoisonLevel), true)
                         it.addPotionEffect(PotionEffect(PotionEffectType.WITHER, radiationPoisonDuration, radiationPoisonLevel), true)
                     }

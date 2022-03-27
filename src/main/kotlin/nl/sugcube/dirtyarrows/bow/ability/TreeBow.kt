@@ -100,34 +100,34 @@ open class TreeBow(plugin: DirtyArrows, val tree: Tree) : BowAbility(
             val treeName: String
     ) {
 
-        OAK(DefaultBow.OAK, TreeType.TREE, Material.LOG, 0, 1, mapOf(
+        OAK(DefaultBow.OAK, TreeType.TREE, Material.OAK_LOG, 0, 1, mapOf(
                 TreeType.TREE to 7,
                 TreeType.BIG_TREE to 1,
                 TreeType.SWAMP to 1
         ), "an oak"),
 
-        SPRUCE(DefaultBow.SPRUCE, TreeType.REDWOOD, Material.LOG, 1, 1, mapOf(
+        SPRUCE(DefaultBow.SPRUCE, TreeType.REDWOOD, Material.SPRUCE_LOG, 0, 1, mapOf(
                 TreeType.REDWOOD to 7,
                 TreeType.TALL_REDWOOD to 3,
                 TreeType.MEGA_REDWOOD to 1
         ), "a spruce tree"),
 
-        BIRCH(DefaultBow.BIRCH, TreeType.BIRCH, Material.LOG, 2, 1, mapOf(
+        BIRCH(DefaultBow.BIRCH, TreeType.BIRCH, Material.BIRCH_LOG, 0, 1, mapOf(
                 TreeType.BIRCH to 3,
                 TreeType.TALL_BIRCH to 1
         ), "a birch"),
 
-        JUNGLE(DefaultBow.JUNGLE, TreeType.JUNGLE, Material.LOG, 3, 1, mapOf(
+        JUNGLE(DefaultBow.JUNGLE, TreeType.JUNGLE, Material.JUNGLE_LOG, 0, 1, mapOf(
                 TreeType.JUNGLE to 1,
                 TreeType.SMALL_JUNGLE to 7,
                 TreeType.JUNGLE_BUSH to 3
         ), "a jungle tree"),
 
-        ACACIA(DefaultBow.ACACIA, TreeType.ACACIA, Material.LOG_2, 0, 1, mapOf(
+        ACACIA(DefaultBow.ACACIA, TreeType.ACACIA, Material.ACACIA_LOG, 0, 1, mapOf(
                 TreeType.ACACIA to 1
         ), "an acacia tree"),
 
-        DARK_OAK(DefaultBow.DARK_OAK, TreeType.DARK_OAK, Material.LOG_2, 1, 4, mapOf(
+        DARK_OAK(DefaultBow.DARK_OAK, TreeType.DARK_OAK, Material.DARK_OAK_LOG, 0, 4, mapOf(
                 TreeType.DARK_OAK to 1
         ), "a dark oak");
 
@@ -135,9 +135,9 @@ open class TreeBow(plugin: DirtyArrows, val tree: Tree) : BowAbility(
          * The items required to use a bow of this tree type.
          */
         val requiredItems = listOf(
-                ItemStack(Material.SAPLING, saplingCount, (damageValue + if (material == Material.LOG_2) 4 else 0).toShort()),
-                // Bonemeal in older versions is ink_sack damage 15.
-                ItemStack(Material.INK_SACK, 1, 15)
+//                ItemStack(Material.SAPLING, saplingCount, (damageValue + if (material == Material.LOG_2) 4 else 0).toShort()),
+                ItemStack(Material.BONE_MEAL, 1)
+            // TODO: Tree Bow required materials
         )
 
         /**

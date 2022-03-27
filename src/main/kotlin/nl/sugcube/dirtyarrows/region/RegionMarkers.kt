@@ -18,7 +18,7 @@ import org.bukkit.potion.PotionEffectType
  *          The amount of seconds the visualisation is visible.
  */
 fun DirtyArrows.showLocationMarker(location: Location, seconds: Int) {
-    location.spawn(Shulker::class).apply {
+    location.spawn(Shulker::class)?.apply {
         addPotionEffect(PotionEffect(PotionEffectType.INVISIBILITY, seconds * 20, 1, true, false))
         isGlowing = true
         isInvulnerable = true

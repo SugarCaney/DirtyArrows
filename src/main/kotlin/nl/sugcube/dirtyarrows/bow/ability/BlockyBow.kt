@@ -9,7 +9,6 @@ import org.bukkit.Material
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.ProjectileHitEvent
-import org.bukkit.inventory.ItemStack
 
 /**
  * Places blocks from the offhand on the location of impact.
@@ -32,8 +31,10 @@ open class BlockyBow(plugin: DirtyArrows) : BowAbility(
         val block = arrow.location.block
         if (block.type != Material.AIR) return
 
-        block.type = itemToPlace.type
+        /*block.type = itemToPlace.type
         block.data = itemToPlace.data.data
+         */
+        // TODO: New block data system Blocky Bow (block)
 
         player.removeBlockItem(itemToPlace.type)
     }
@@ -49,9 +50,11 @@ open class BlockyBow(plugin: DirtyArrows) : BowAbility(
         val newCount = offHandItem.amount - 1
         val itemData = offHandItem.data
 
-        if (newCount == 0) {
-            inventory.itemInOffHand = ItemStack(Material.AIR, 0)
+        /*if (newCount == 0) {
+            inventory.setItemInOffHand(null)
         }
         else inventory.itemInOffHand = ItemStack(type, newCount, itemData.data.toShort())
+         */
+        // TODO: New block data system Blocky Bow (item)
     }
 }

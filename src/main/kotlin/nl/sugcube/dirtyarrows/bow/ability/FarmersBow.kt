@@ -62,7 +62,7 @@ open class FarmersBow(plugin: DirtyArrows) : BowAbility(
         // When a block that is hit that is soil, turn it into soil first.
         // Only create soil when the hit block is not soil! Otherwise you could mess up farm shapes.
         // Planting seeds/harvesting crops could be wanted without modifying the soil.
-        if (hitBlock.type != Material.SOIL) {
+        if (hitBlock.type != Material.FARMLAND) {
             arrow.location.createSoil(blocks)
         }
 
@@ -78,7 +78,7 @@ open class FarmersBow(plugin: DirtyArrows) : BowAbility(
      */
     private fun Location.createSoil(blocks: Int) {
         forXYZ(-blocks..blocks) { dx, dy, dz ->
-            val block = world.getBlockAt(blockX + dx, blockY + dy, blockZ + dz)
+            val block = world?.getBlockAt(blockX + dx, blockY + dy, blockZ + dz) ?: return@forXYZ
 
             if (block.restoreCoarseDirt()) return@forXYZ
             if (block.type !in APPLICABLE_SOIL_MATERIALS) return@forXYZ
@@ -90,7 +90,7 @@ open class FarmersBow(plugin: DirtyArrows) : BowAbility(
             }
 
             if (blockAbove.type == Material.AIR) {
-                block.type = Material.SOIL
+                block.type = Material.FARMLAND
             }
         }
     }
@@ -105,7 +105,7 @@ open class FarmersBow(plugin: DirtyArrows) : BowAbility(
      */
     private fun Location.plantSeeds(blocks: Int, player: Player) {
         forXYZ(-blocks..blocks) { dx, dy, dz ->
-            val block = world.getBlockAt(blockX + dx, blockY + dy, blockZ + dz)
+            val block = world?.getBlockAt(blockX + dx, blockY + dy, blockZ + dz) ?: return@forXYZ
             val blockAbove = block.getRelative(BlockFace.UP, 1)
             blockAbove.plantSeed(player)
         }
@@ -116,16 +116,16 @@ open class FarmersBow(plugin: DirtyArrows) : BowAbility(
      */
     private fun Block.plantSeed(player: Player) {
         if (type != Material.AIR) return
-        if (getRelative(BlockFace.DOWN, 1).type != Material.SOIL) return
+        if (getRelative(BlockFace.DOWN, 1).type != Material.FARMLAND) return
 
         val seeds = player.itemInOffHand
         if (seeds.type !in SEEDS || (seeds.amount <= 0 && player.gameMode != GameMode.CREATIVE)) return
 
         if (player.gameMode != GameMode.CREATIVE) {
-            player.inventory.itemInOffHand = ItemStack(seeds.type, seeds.amount - 1)
+            player.inventory.setItemInOffHand(ItemStack(seeds.type, seeds.amount - 1))
         }
 
-        type = SEEDS[seeds.type]
+        type = SEEDS[seeds.type] ?: return
     }
 
     /**
@@ -136,10 +136,10 @@ open class FarmersBow(plugin: DirtyArrows) : BowAbility(
      */
     private fun Location.harvestCrops(blocks: Int, lootingLevel: Int = 0) {
         forXYZ(-blocks..blocks) { dx, dy, dz ->
-            val block = world.getBlockAt(blockX + dx, blockY + dy, blockZ + dz)
+            val block = world?.getBlockAt(blockX + dx, blockY + dy, blockZ + dz) ?: return@forXYZ
 
             // Harvest melons/pumpkins.
-            if (block.type == Material.MELON_BLOCK || block.type == Material.PUMPKIN) {
+            if (block.type == Material.MELON || block.type == Material.PUMPKIN) {
                 val item = block.type.fortuneDrops(lootingLevel).first()
                 block.type = Material.AIR
                 block.world.dropItem(block.centreLocation, item)
@@ -147,7 +147,7 @@ open class FarmersBow(plugin: DirtyArrows) : BowAbility(
             }
 
             when (block.type) {
-                Material.BEETROOT_BLOCK, Material.CROPS, Material.CARROT, Material.POTATO -> {
+                Material.BEETROOT, Material.WHEAT, Material.CARROT, Material.POTATO -> {
                     val crops = block.state.data as Crops
                     if (crops.state == CropState.RIPE) {
                         block.breakNaturally()
@@ -173,10 +173,12 @@ open class FarmersBow(plugin: DirtyArrows) : BowAbility(
          * When these materials are above farmland, they will be removed.
          */
         private val REMOVABLE_CROPS = setOf(
-                Material.LONG_GRASS,
-                Material.DOUBLE_PLANT,
-                Material.YELLOW_FLOWER,
-                Material.RED_ROSE,
+                Material.TALL_GRASS,
+                Material.LARGE_FERN,
+                Material.SUNFLOWER,
+                Material.PEONY,
+                Material.ROSE_BUSH,
+                Material.LILAC,
                 Material.SNOW
         )
 
@@ -184,12 +186,12 @@ open class FarmersBow(plugin: DirtyArrows) : BowAbility(
          * Maps all plantable seeds to their planted material.
          */
         private val SEEDS = mapOf(
-                Material.SEEDS to Material.CROPS,
-                Material.BEETROOT_SEEDS to Material.BEETROOT_BLOCK,
+                Material.WHEAT_SEEDS to Material.WHEAT,
+                Material.BEETROOT_SEEDS to Material.BEETROOT,
                 Material.PUMPKIN_SEEDS to Material.PUMPKIN_STEM,
                 Material.MELON_SEEDS to Material.MELON_STEM,
-                Material.CARROT_ITEM to Material.CARROT,
-                Material.POTATO_ITEM to Material.POTATO
+                Material.CARROT to Material.CARROTS,
+                Material.POTATO to Material.POTATOES
         )
     }
 }

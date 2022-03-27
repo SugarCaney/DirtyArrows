@@ -11,8 +11,6 @@ import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.*
 import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.inventory.ItemStack
-import org.bukkit.material.Leaves
-import org.bukkit.material.LongGrass
 import kotlin.random.Random
 
 /**
@@ -54,12 +52,13 @@ open class ShearBow(plugin: DirtyArrows) : BowAbility(
             return
         }
 
-        if (event.hitBlock.type != Material.AIR && event.hitBlock.type.isShearable.not()) {
+        val hitBlockType = event.hitBlock?.type ?: return
+        if (hitBlockType != Material.AIR && hitBlockType.isShearable.not()) {
             arrow.location.impactEffects(player)
             return
         }
 
-        event.hitBlock.shearBlocks()
+        event.hitBlock?.shearBlocks()
         registerArrow(arrow.respawnArrow())
     }
 
@@ -93,10 +92,11 @@ open class ShearBow(plugin: DirtyArrows) : BowAbility(
      */
     @Suppress("DEPRECATION")
     private fun Block.itemDataValue(): Byte = when (type) {
-        Material.LEAVES -> (state.data as Leaves).species.data
-        Material.LEAVES_2 -> ((state.data as Leaves).species.data - 4).toByte()
-        Material.LONG_GRASS -> (state.data as LongGrass).species.data
-        Material.DOUBLE_PLANT -> state.data.data
+        // TODO: Shear Bow Leave block data
+//        Material.LEAVES -> (state.data as Leaves).species.data
+//        Material.LEAVES_2 -> ((state.data as Leaves).species.data - 4).toByte()
+//        Material.LONG_GRASS -> (state.data as LongGrass).species.data
+//        Material.DOUBLE_PLANT -> state.data.data
         else -> 0
     }
 
@@ -127,10 +127,11 @@ open class ShearBow(plugin: DirtyArrows) : BowAbility(
             .mapNotNull { it as? Sheep }
             .filter { it.isSheared.not() }
             .forEach {
-                val woolBlocks = Random.nextInt(1, 4) + lootingLevel
-                val itemDrops = ItemStack(Material.WOOL, woolBlocks, it.color.woolData.toShort())
-                it.world.dropItem(it.location, itemDrops)
-                it.isSheared = true
+//                val woolBlocks = Random.nextInt(1, 4) + lootingLevel
+//                val itemDrops = ItemStack(Material.WOOL, woolBlocks, it.color.woolData.toShort())
+//                it.world.dropItem(it.location, itemDrops)
+//                it.isSheared = true
+                // TODO: Shear Bow Sheep wool drop
             }
 
     /**

@@ -29,6 +29,6 @@ open class EnderBow(plugin: DirtyArrows) : BowAbility(
         player.showEnderParticle()
         player.teleport(arrow.location.copyOf(yaw = player.location.yaw, pitch = player.location.pitch))
         player.showEnderParticle()
-        player.playSound(player.location, Sound.ENTITY_ENDERMEN_TELEPORT, 10f, 1f)
+        player.playSound(player.location, Sound.ENTITY_ENDERMAN_TELEPORT, 10f, 1f)
     }
 }

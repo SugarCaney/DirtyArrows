@@ -55,13 +55,15 @@ open class FlintAndBow(plugin: DirtyArrows) : BowAbility(
     override fun Player.consumeBowItems() {
         if (gameMode == GameMode.CREATIVE) return
 
+        // TODO: Durability deprecation Flint and Bow
+
         inventory.firstOrNull { it?.type == Material.FLINT_AND_STEEL }?.let { flintAndSteel ->
             flintAndSteel.durability = (flintAndSteel.durability + 5).toShort()
 
             // When out of dura, remove it (flint and steel has 64 uses).
             if (flintAndSteel.durability > 64) {
                 inventory.remove(flintAndSteel)
-                playSound(player.location, Sound.ENTITY_ITEM_BREAK, 10f, 1f)
+                player?.location?.let { playSound(it, Sound.ENTITY_ITEM_BREAK, 10f, 1f) }
             }
         }
     }
@@ -76,7 +78,7 @@ open class FlintAndBow(plugin: DirtyArrows) : BowAbility(
                 Material.SNOW,
                 Material.VINE,
                 Material.DEAD_BUSH,
-                Material.LONG_GRASS
+                Material.TALL_GRASS
         )
     }
 }

@@ -26,7 +26,7 @@ open class MineBow(plugin: DirtyArrows) : BowAbility(
         protectionRange = 7.0,
         handleEveryNTicks = 1,
         removeArrow = false,
-        costRequirements = listOf(ItemStack(Material.SULPHUR, 3), ItemStack(Material.REDSTONE, 1)),
+        costRequirements = listOf(ItemStack(Material.GUNPOWDER, 3), ItemStack(Material.REDSTONE, 1)),
         description = "Arrows that land turn into mines."
 ) {
 

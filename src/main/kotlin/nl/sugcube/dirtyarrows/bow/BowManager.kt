@@ -176,7 +176,7 @@ open class BowManager(private val plugin: DirtyArrows): Iterable<BowType>, Liste
 
     @EventHandler
     fun playerQuits(event: PlayerQuitEvent) {
-        val player = event.player ?: return
+        val player = event.player
         bows.values.forEach { it.removeFromCostRequirementsCache(player) }
     }
 }

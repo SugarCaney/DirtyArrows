@@ -20,7 +20,7 @@ open class FireyBow(plugin: DirtyArrows) : BowAbility(
         type = DefaultBow.FIREY,
         canShootInProtectedRegions = false,
         protectionRange = 5.0,
-        costRequirements = listOf(ItemStack(Material.FIREBALL, 1)),
+        costRequirements = listOf(ItemStack(Material.FIRE_CHARGE, 1)),
         description = "Shoot fireballs."
 ) {
 

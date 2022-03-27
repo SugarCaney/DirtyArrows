@@ -26,7 +26,7 @@ open class UndyingBow(plugin: DirtyArrows) : BowAbility(
 
     @EventHandler
     fun saveFromDeath(event: PlayerDeathEvent) {
-        val player = event.entity ?: return
+        val player = event.entity
         val bow = player.bowItem() ?: return
 
         // Temporarily give a totem of undying.
@@ -35,7 +35,7 @@ open class UndyingBow(plugin: DirtyArrows) : BowAbility(
 
         with(player) {
             health = 0.5
-            inventory.itemInOffHand = ItemStack(Material.TOTEM, 1)
+            inventory.setItemInOffHand(ItemStack(Material.TOTEM_OF_UNDYING, 1))
             fireTicks = 0
             damage(999999.9)
             lastDamageCause = originalDamageCause
@@ -46,7 +46,7 @@ open class UndyingBow(plugin: DirtyArrows) : BowAbility(
 
         // Completely use up the bow. If it's in the offhand, removeItem doesnt work for some reason.
         if (cachedOffHand != bow) {
-            player.inventory.itemInOffHand = cachedOffHand
+            player.inventory.setItemInOffHand(cachedOffHand)
             player.inventory.removeItem(bow)
         }
     }

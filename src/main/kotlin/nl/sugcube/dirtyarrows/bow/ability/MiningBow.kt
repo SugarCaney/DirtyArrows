@@ -78,7 +78,7 @@ open class MiningBow(plugin: DirtyArrows) : BowAbility(
 
         forXYZ(-1..1, -1..1, -1..1) { dx, dy, dz ->
             val currentBlock = world.getBlockAt(startBlock.x + dx, startBlock.y + dy, startBlock.z + dz)
-            if (currentBlock.type.equalsIncludingGlowingRedstone(veinMaterial)) {
+            if (currentBlock.type == veinMaterial) {
                 // Enforce the maximum vein size, helps preventing a stack overflow error.
                 val count = oreCounts.getOrDefault(source, 0)
                 if (count < maxVeinSize) {
@@ -126,7 +126,7 @@ open class MiningBow(plugin: DirtyArrows) : BowAbility(
 
         // When flame, drop the smelted item.
         if (oreMaterial in SMELT_ORES && bow.containsEnchantment(Enchantment.ARROW_FIRE)) {
-            world.dropItem(centreLocation, oreMaterial.smeltedItem)
+            oreMaterial.smeltedItem?.let { world.dropItem(centreLocation, it) }
             return true
         }
 
@@ -135,16 +135,6 @@ open class MiningBow(plugin: DirtyArrows) : BowAbility(
         oreMaterial.fortuneDrops(fortune).forEach { world.dropItem(centreLocation, it) }
 
         return true
-    }
-
-    /**
-     * Checks if the materials are equal and considers glowing redstone ore to equal normal redstone ore.
-     */
-    private fun Material.equalsIncludingGlowingRedstone(to: Material) = when {
-        this == to -> true
-        this == Material.GLOWING_REDSTONE_ORE && to == Material.REDSTONE_ORE -> true
-        this == Material.REDSTONE_ORE && to == Material.GLOWING_REDSTONE_ORE -> true
-        else -> false
     }
 
     companion object {
@@ -157,11 +147,10 @@ open class MiningBow(plugin: DirtyArrows) : BowAbility(
                 Material.IRON_ORE to  ToolLevel.STONE,
                 Material.LAPIS_ORE to ToolLevel.STONE,
                 Material.REDSTONE_ORE to ToolLevel.IRON,
-                Material.GLOWING_REDSTONE_ORE to ToolLevel.IRON,
                 Material.GOLD_ORE to ToolLevel.IRON,
                 Material.DIAMOND_ORE to ToolLevel.IRON,
                 Material.EMERALD_ORE to ToolLevel.IRON,
-                Material.QUARTZ_ORE to ToolLevel.WOOD
+                Material.NETHER_QUARTZ_ORE to ToolLevel.WOOD
         )
 
         /**

@@ -8,8 +8,6 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabCompleter
 import org.bukkit.entity.Player
-import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * @author SugarCaney
@@ -48,15 +46,12 @@ open class DirtyArrowsCommandManager(private val plugin: DirtyArrows) : CommandE
             sender.sendMessage(Broadcast.enabledMessage(plugin, isActivated))
         }
     }
-
     override fun onCommand(
-            sender: CommandSender?,
-            command: Command?,
-            label: String?,
-            args: Array<out String>?
+            sender: CommandSender,
+            command: Command,
+            label: String,
+            args: Array<out String>
     ): Boolean {
-        if (sender == null || command == null || label == null || args == null) return false
-
         // When no arguments are supplied, toggle dirtyarrows on/off.
         if (args.isEmpty()) {
             toggleDirtyArrows(sender)
@@ -65,7 +60,7 @@ open class DirtyArrowsCommandManager(private val plugin: DirtyArrows) : CommandE
 
         // Otherwise, handle the correct command.
         commands.firstOrNull { it.name.equals(args.first(), ignoreCase = true) }
-                ?.execute(plugin, sender, *Arrays.copyOfRange(args, 1, args.size))
+                ?.execute(plugin, sender, *args.copyOfRange(1, args.size))
                 ?.also { return true }
 
         // No corresponding command found: do nothing.
@@ -73,13 +68,11 @@ open class DirtyArrowsCommandManager(private val plugin: DirtyArrows) : CommandE
     }
 
     override fun onTabComplete(
-            sender: CommandSender?,
-            command: Command?,
-            alias: String?,
-            args: Array<out String>?
+            sender: CommandSender,
+            command: Command,
+            alias: String,
+            args: Array<out String>
     ): MutableList<String>? {
-        if (sender == null || command == null || args == null) return ArrayList()
-
         // Main command suggestions.
         if (args.size <= 1) {
             return commands.asSequence()

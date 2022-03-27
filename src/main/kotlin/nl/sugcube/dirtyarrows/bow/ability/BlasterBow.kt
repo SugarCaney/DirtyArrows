@@ -26,7 +26,7 @@ open class BlasterBow(plugin: DirtyArrows) : BowAbility(
         handleEveryNTicks = 1,
         canShootInProtectedRegions = false,
         removeArrow = true,
-        costRequirements = listOf(ItemStack(Material.SULPHUR, 3)),
+        costRequirements = listOf(ItemStack(Material.GUNPOWDER, 3)),
         description = "Arrows keep exploding."
 ) {
 

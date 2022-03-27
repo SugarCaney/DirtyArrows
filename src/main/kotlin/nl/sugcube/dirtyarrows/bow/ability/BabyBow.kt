@@ -26,13 +26,14 @@ open class BabyBow(plugin: DirtyArrows) : BowAbility(
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
         val entity = event.hitEntity as? Ageable ?: return
+        val maxHealthAttribute = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH) ?: return
 
         if (entity.isAdult) {
             entity.setBaby()
         }
         else entity.setAdult()
 
-        entity.health = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).value
+        entity.health = maxHealthAttribute.value
         repeat(5) {
             entity.location.showHealParticle(1)
         }

@@ -79,7 +79,7 @@ open class DrillBow(plugin: DirtyArrows) : BowAbility(
     private fun Location.breakSlicePerpendicularToXAxis(withTool: ItemStack, xDirection: Double, layers: Int = 1) {
         val xRange = if (xDirection >= 0) blockX until (blockX + layers) else blockX downTo (blockX - layers - 1)
         forXYZ(xRange, yRange(), zRange()) { x, y, z ->
-            world.getBlockAt(x, y, z).breakBlock(withTool)
+            world?.getBlockAt(x, y, z)?.breakBlock(withTool)
         }
     }
 
@@ -96,7 +96,7 @@ open class DrillBow(plugin: DirtyArrows) : BowAbility(
     private fun Location.breakSlicePerpendicularToYAxis(withTool: ItemStack, yDirection: Double, layers: Int = 1) {
         val yRange = if (yDirection >= 0) blockY until (blockY + layers) else (blockY - layers + 1)..blockY
         forXYZ(xRange(), yRange, zRange()) { x, y, z ->
-            world.getBlockAt(x, y, z).breakBlock(withTool)
+            world?.getBlockAt(x, y, z)?.breakBlock(withTool)
         }
     }
 
@@ -113,7 +113,7 @@ open class DrillBow(plugin: DirtyArrows) : BowAbility(
     private fun Location.breakSlicePerpendicularToZAxis(withTool: ItemStack, zDirection: Double, layers: Int = 1) {
         val zRange = if (zDirection >= 0) blockZ until (blockZ + layers) else (blockZ - layers + 1)..blockZ
         forXYZ(xRange(), yRange(), zRange) { x, y, z ->
-            world.getBlockAt(x, y, z).breakBlock(withTool)
+            world?.getBlockAt(x, y, z)?.breakBlock(withTool)
         }
     }
 

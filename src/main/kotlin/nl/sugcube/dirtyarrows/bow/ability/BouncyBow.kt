@@ -55,8 +55,8 @@ open class BouncyBow(plugin: DirtyArrows) : BowAbility(
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
         // When an entity is hit, don't bounce.
-        if (event.hitEntity != null) {
-            event.hitEntity.inflictDamage(arrow)
+        event.hitEntity?.let {
+            it.inflictDamage(arrow)
             powerLevelMap.remove(arrow)
             arrow.remove()
             return
@@ -67,7 +67,8 @@ open class BouncyBow(plugin: DirtyArrows) : BowAbility(
         if (arrow.velocity.length() < bounceThreshold) return
 
         // Bounce off face.
-        val hitFace = arrow.hitBlockFace(event.hitBlock) ?: return
+        val hitBlock = event.hitBlock ?: return
+        val hitFace = arrow.hitBlockFace(hitBlock) ?: return
         val bounceDirection = hitFace.bounceVector.multiply(softening)
         val created = arrow.bounce(bounceDirection, player)
 

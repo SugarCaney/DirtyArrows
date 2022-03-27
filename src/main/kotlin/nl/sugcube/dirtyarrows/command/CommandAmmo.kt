@@ -39,7 +39,7 @@ open class CommandAmmo : SubCommand<DirtyArrows>(
 
         // Which bow to give ammo for.
         val bow = parseBow(sender, arguments.getOrNull(1)) ?: return
-        val bowName = plugin.config.getString(bow.nameNode).applyColours()
+        val bowName = plugin.config.getString(bow.nameNode)?.applyColours()
 
         // Find the corresponding ability from the bow manager as the cost requirements are needed.
         val ability = plugin.bowManager[bow] ?: run {

@@ -36,7 +36,9 @@ open class CommandTeleport : SubCommand<DirtyArrows>(
         val (location1, location2) = region
         val middleX = (location1.x + location2.x) / 2.0
         val middleZ = (location1.z + location2.z) / 2.0
-        val middleY = location1.world.getHighestBlockYAt(middleX.toInt(), middleZ.toInt()) + 1.0
+
+        val highestBlock = location1.world?.getHighestBlockYAt(middleX.toInt(), middleZ.toInt()) ?: return
+        val middleY = highestBlock + 1.0
 
         // Teleport the player to the region.
         val player = sender as Player

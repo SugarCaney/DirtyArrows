@@ -28,7 +28,7 @@ open class HomingBow(plugin: DirtyArrows) : BowAbility(
         canShootInProtectedRegions = true,
         removeArrow = false,
         description = "Shoot mini homing rockets.",
-        costRequirements = listOf(ItemStack(Material.SULPHUR, 1))
+        costRequirements = listOf(ItemStack(Material.GUNPOWDER, 1))
 ) {
 
     /**

@@ -277,7 +277,7 @@ abstract class BowAbility(
         val hasPermission = hasPermission(this@BowAbility.type.permission)
 
         if (showError && hasPermission.not()) {
-            player.sendMessage(Broadcast.NO_BOW_PERMISSION.format(bowName()))
+            player?.sendMessage(Broadcast.NO_BOW_PERMISSION.format(bowName()))
         }
 
         return hasPermission
@@ -291,12 +291,12 @@ abstract class BowAbility(
      * @return `true` when the player is in cooldown, `false` otherwise.
      */
     protected fun Player.inCooldownPeriod(showError: Boolean = true): Boolean {
-        val cooldown = isOnCooldown(player)
+        val cooldown = player?.let { isOnCooldown(it) } ?: false
 
         if (cooldown && showError) {
             val timeLeft = cooldownTimeLeft() / 1000.0
-            val bowName = config.getString(this@BowAbility.type.nameNode).applyColours()
-            player.sendMessage(Broadcast.COOLDOWN.format(timeLeft, bowName))
+            val bowName = config.getString(this@BowAbility.type.nameNode)?.applyColours()
+            player?.sendMessage(Broadcast.COOLDOWN.format(timeLeft, bowName))
         }
 
         return cooldown
@@ -351,7 +351,8 @@ abstract class BowAbility(
     /**
      * Get the colour applied bow name of the bow of this ability.
      */
-    fun bowName() = plugin.config.getString(this@BowAbility.type.nameNode).applyColours()
+    fun bowName() = plugin.config.getString(this@BowAbility.type.nameNode)?.applyColours()
+            ?: error("No bow name found in configuration for ${this@BowAbility.type.nameNode}")
 
     /**
      * Whether the given player has the ability on cooldown.
@@ -397,7 +398,7 @@ abstract class BowAbility(
             // item data.
             val eligibleItem = inventory.asSequence()
                     .filterNotNull()
-                    .firstOrNull { it.type == item.type && it.amount >= item.amount && it.data.data == item.data.data }
+                    .firstOrNull { it.type == item.type && it.amount >= item.amount && it.data?.data == item.data?.data }
                     ?: return@forEach
 
             val toRemove = eligibleItem.clone().apply {
@@ -422,7 +423,7 @@ abstract class BowAbility(
      * Gives back all resources from the player's inventory that are required for 1 use.
      */
     protected open fun Player.reimburseBowItems() {
-        if (player.gameMode != GameMode.CREATIVE) {
+        if (player != null && player!!.gameMode != GameMode.CREATIVE) {
             costRequirements.forEach {
                 inventory.addItem(it)
             }
