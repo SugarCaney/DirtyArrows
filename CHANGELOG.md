@@ -8,6 +8,12 @@ Changelog
 * **`~`** Tweaked
 * **`-`** Removed feature
 
+## Version 4.2
+* **`i`** Updated for Minecraft 1.13.2
+* **`~`** Woodman's bow stick/plank drop chances can now be customised.
+* **`~`** Colour of laser bow beams can now be customised.
+* **`~`** Shear bow can now carve pumpkins.
+
 ## Version 4.1
 * **`i`** Updated for Minecraft 1.12.2
 * **`!`** Fixed custom arrow recipe count not working (1.12.2)

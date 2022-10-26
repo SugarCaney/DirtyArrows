@@ -79,7 +79,7 @@ open class MiningBow(plugin: DirtyArrows) : BowAbility(
         forXYZ(-1..1, -1..1, -1..1) { dx, dy, dz ->
             val currentBlock = world.getBlockAt(startBlock.x + dx, startBlock.y + dy, startBlock.z + dz)
             if (currentBlock.type == veinMaterial) {
-                // Enforce the maximum vein size, helps preventing a stack overflow error.
+                // Enforce the maximum vein size, helps to prevent a stack overflow error.
                 val count = oreCounts.getOrDefault(source, 0)
                 if (count < maxVeinSize) {
                     val broken = currentBlock.breakOre(player)
@@ -124,7 +124,7 @@ open class MiningBow(plugin: DirtyArrows) : BowAbility(
             return true
         }
 
-        // When flame, drop the smelted item.
+        // On FLAME enchantment, drop the smelted item.
         if (oreMaterial in SMELT_ORES && bow.containsEnchantment(Enchantment.ARROW_FIRE)) {
             oreMaterial.smeltedItem?.let { world.dropItem(centreLocation, it) }
             return true
