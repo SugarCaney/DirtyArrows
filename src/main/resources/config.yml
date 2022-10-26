@@ -1775,6 +1775,10 @@ laser:
   # (Double) default: 0.5
   step: 0.5
 
+  # The hex representation of the colour of the laser beam.
+  # (String) default: #FF0000 (red)
+  beam-colour: '#FF0000'
+
 ##
 ## ABILITY: Grappling
 ## - Grappling hook

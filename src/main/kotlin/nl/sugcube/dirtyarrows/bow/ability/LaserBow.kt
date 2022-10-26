@@ -4,6 +4,7 @@ import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
 import nl.sugcube.dirtyarrows.util.*
+import org.bukkit.Color
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.Sound
@@ -49,6 +50,11 @@ open class LaserBow(plugin: DirtyArrows) : BowAbility(
      * In what increment the laser travels (in blocks).
      */
     val step = config.getDouble("$node.step")
+
+    /**
+     * The colour of the laser beam.
+     */
+    val beamColour: Color = config.getString("$node.beam-colour").toColour("$node.beam-colour")
 
     init {
         check(criticalHitChance in 0.0..1.0) { "$node.critical-hit-chance must be between 0 and 1, got <$criticalHitChance>" }
@@ -114,13 +120,13 @@ open class LaserBow(plugin: DirtyArrows) : BowAbility(
     private fun Location.showBeamPart(direction: Vector) {
         copyOf().add(direction.copyOf().multiply(step * 0.67))
                 .fuzz(0.05)
-                .showColoredDust(org.bukkit.Color.RED, 1)
+                .showColoredDust(beamColour, 1)
 
-        fuzz(0.05).showColoredDust(org.bukkit.Color.RED, 1)
+        fuzz(0.05).showColoredDust(beamColour, 1)
 
         copyOf().add(direction.copyOf().multiply(step * 1.33))
                 .fuzz(0.05)
-                .showColoredDust(org.bukkit.Color.RED, 1)
+                .showColoredDust(beamColour, 1)
     }
 
     /**

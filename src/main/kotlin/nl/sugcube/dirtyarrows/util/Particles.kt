@@ -4,6 +4,7 @@ import org.bukkit.Color
 import org.bukkit.Effect
 import org.bukkit.Location
 import org.bukkit.Particle
+import org.bukkit.Particle.DustOptions
 import org.bukkit.entity.Entity
 import org.bukkit.potion.PotionType
 
@@ -67,13 +68,8 @@ fun Location.showColoredDust(color: Color, count: Int) = showColoredDust(color.r
  *          The amount of particles to show.
  */
 fun Location.showColoredDust(red: Int, green: Int, blue: Int, count: Int) = repeat(count) { _ ->
-    // TODO: FIX: Particle REDSTONE requires DATA, null PROVIDED.
-    world?.spawnParticle(
-            Particle.REDSTONE,
-            x, y, z,
-            0,
-            red / 255.0, green / 255.0, blue / 255.0
-    )
+    val options = DustOptions(Color.fromRGB(red, green, blue), 1.0f)
+    world?.spawnParticle(Particle.REDSTONE, this, 0, options)
 }
 
 /**

@@ -3,8 +3,10 @@
 package nl.sugcube.dirtyarrows.util
 
 import nl.sugcube.dirtyarrows.Broadcast
+import nl.sugcube.dirtyarrows.bow.ability.AwtColor
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
+import org.bukkit.Color
 import org.bukkit.Location
 import org.bukkit.command.CommandSender
 import kotlin.math.ceil
@@ -78,6 +80,24 @@ fun String.applyColours() = replace("&0", ChatColor.BLACK.toString())
     .replace("&n", ChatColor.UNDERLINE.toString())
     .replace("&o", ChatColor.ITALIC.toString())
     .replace("&r", ChatColor.RESET.toString())
+
+/**
+ * Parses a hex string into a colour.
+ * Throws an exception when it could not be parsed with a custom info message `sourceInfo`.
+ */
+fun String?.toColour(sourceInfo: String = ""): Color {
+    if (this == null) {
+        error("No string found to parse <null>" + if (sourceInfo.isBlank()) "" else " ($sourceInfo)")
+    }
+
+    try {
+        val awt = AwtColor.decode(this)
+        return Color.fromRGB(awt.red, awt.green, awt.blue)
+    }
+    catch (e: NumberFormatException) {
+        error("Could not parse colour <$this>: ${e.message}" + if (sourceInfo.isBlank()) "" else " ($sourceInfo)")
+    }
+}
 
 /**
  * Sends a message to the given command sender where all colour codes (&1, &2, ...) are applied.
