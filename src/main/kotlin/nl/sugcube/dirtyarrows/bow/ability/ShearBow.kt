@@ -11,6 +11,7 @@ import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.*
 import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.inventory.ItemStack
+import kotlin.math.roundToInt
 import kotlin.random.Random
 
 /**
@@ -73,31 +74,17 @@ open class ShearBow(plugin: DirtyArrows) : BowAbility(
     /**
      * Shears all blocks around this block.
      */
-    @Suppress("DEPRECATION")
     private fun Block.shearBlocks() {
         forXYZ(-1..1, -1..1, -1..1) { dx, dy, dz ->
             val block = getRelative(dx, dy, dz)
             val originalType = block.type
 
             if (originalType.isShearable) {
-                val itemDrop = ItemStack(originalType, 1, block.itemDataValue().toShort())
+                val itemDrop = ItemStack(originalType, 1)
                 block.centreLocation.dropItem(itemDrop)
                 block.type = Material.AIR
             }
         }
-    }
-
-    /**
-     * Get the data value for the item that is dropped by this block.
-     */
-    @Suppress("DEPRECATION")
-    private fun Block.itemDataValue(): Byte = when (type) {
-        // TODO: Shear Bow Leave block data
-//        Material.LEAVES -> (state.data as Leaves).species.data
-//        Material.LEAVES_2 -> ((state.data as Leaves).species.data - 4).toByte()
-//        Material.LONG_GRASS -> (state.data as LongGrass).species.data
-//        Material.DOUBLE_PLANT -> state.data.data
-        else -> 0
     }
 
     /**
@@ -112,6 +99,7 @@ open class ShearBow(plugin: DirtyArrows) : BowAbility(
         shearSheep(range, lootingLevel)
         shearMooshrooms(range, lootingLevel)
         shearSnowGolems(range)
+        carvePumpkins(range)
     }
 
     /**
@@ -122,16 +110,15 @@ open class ShearBow(plugin: DirtyArrows) : BowAbility(
      * @param lootingLevel
      *          The level of the looting enchantment (0 if not applicable).
      */
-    @Suppress("DEPRECATION")
     private fun Location.shearSheep(range: Double, lootingLevel: Int = 0) = nearbyLivingEntities(range).asSequence()
             .mapNotNull { it as? Sheep }
             .filter { it.isSheared.not() }
             .forEach {
-//                val woolBlocks = Random.nextInt(1, 4) + lootingLevel
-//                val itemDrops = ItemStack(Material.WOOL, woolBlocks, it.color.woolData.toShort())
-//                it.world.dropItem(it.location, itemDrops)
-//                it.isSheared = true
-                // TODO: Shear Bow Sheep wool drop
+                val woolBlockCount = Random.nextInt(1, 4) + lootingLevel
+                val woolMaterial = it.color?.toWoolMaterial() ?: Material.WHITE_WOOL
+                val itemDrops = ItemStack(woolMaterial, woolBlockCount)
+                it.world.dropItem(it.location, itemDrops)
+                it.isSheared = true
             }
 
     /**
@@ -161,11 +148,11 @@ open class ShearBow(plugin: DirtyArrows) : BowAbility(
      */
     private fun Location.shearSnowGolems(range: Double) = nearbyLivingEntities(range).asSequence()
             .mapNotNull { it as? Snowman }
-            .filter { it.isDerp }
+            .filter { it.isDerp.not() }
             .forEach {
-                val itemDrops = ItemStack(Material.PUMPKIN, 1)
+                val itemDrops = ItemStack(Material.CARVED_PUMPKIN, 1)
                 it.world.dropItem(it.location, itemDrops)
-                it.isDerp = false
+                it.isDerp = true
             }
 
     /**
@@ -173,12 +160,17 @@ open class ShearBow(plugin: DirtyArrows) : BowAbility(
      *
      * @param range
      *          How far from this location to check for pumpkins.
-     * @param lootingLevel
-     *          The level of the looting enchantment (0 if not applicable).
      */
-    @Suppress("UNUSED_PARAMETER")
-    private fun Location.carvePumpkins(range: Double, lootingLevel: Int = 0) {
-        // TODO: carving pumpkins has been introduced in 1.13
+    private fun Location.carvePumpkins(range: Double) {
+        val delta = range.roundToInt()
+
+        forXYZ(-delta..delta, -delta..delta, -delta..delta) { dx, dy, dz ->
+            val block = this.block.getRelative(dx, dy, dz)
+            if (block.type == Material.PUMPKIN) {
+                block.type = Material.CARVED_PUMPKIN
+                dropItem(ItemStack(Material.PUMPKIN_SEEDS, 4))
+            }
+        }
     }
 
     companion object {

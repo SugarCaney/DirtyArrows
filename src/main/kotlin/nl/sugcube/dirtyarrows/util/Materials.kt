@@ -1,6 +1,7 @@
 package nl.sugcube.dirtyarrows.util
 
 import org.bukkit.Bukkit
+import org.bukkit.DyeColor
 import org.bukkit.Material
 import org.bukkit.block.Block
 import org.bukkit.inventory.FurnaceRecipe
@@ -17,6 +18,34 @@ private val SMELT_RESULTS: Map<Material, ItemStack> = Bukkit.recipeIterator().as
         .toMap()
 
 /**
+ * Maps each DyeColor to a list of (indices in DYE_INDEX_*):
+ * - Coloured wool material [DYE_INDEX_WOOL]
+ */
+private val DYE_COLOURS: Map<DyeColor, List<Material>> = hashMapOf(
+    DyeColor.WHITE to listOf(Material.WHITE_WOOL),
+    DyeColor.ORANGE to listOf(Material.ORANGE_WOOL),
+    DyeColor.MAGENTA to listOf(Material.MAGENTA_WOOL),
+    DyeColor.LIGHT_BLUE to listOf(Material.LIGHT_BLUE_WOOL),
+    DyeColor.YELLOW to listOf(Material.YELLOW_WOOL),
+    DyeColor.LIME to listOf(Material.LIME_WOOL),
+    DyeColor.PINK to listOf(Material.PINK_WOOL),
+    DyeColor.GRAY to listOf(Material.GRAY_WOOL),
+    DyeColor.LIGHT_GRAY to listOf(Material.LIGHT_GRAY_WOOL),
+    DyeColor.CYAN to listOf(Material.CYAN_WOOL),
+    DyeColor.PURPLE to listOf(Material.PURPLE_WOOL),
+    DyeColor.BLUE to listOf(Material.BLUE_WOOL),
+    DyeColor.BROWN to listOf(Material.BROWN_WOOL),
+    DyeColor.GREEN to listOf(Material.GREEN_WOOL),
+    DyeColor.RED to listOf(Material.RED_WOOL),
+    DyeColor.BLACK to listOf(Material.BLACK_WOOL),
+)
+
+/**
+ * Index in [DYE_COLOURS] for the Wool block material.
+ */
+private const val DYE_INDEX_WOOL = 0
+
+/**
  * Get the item that is obtained when smelting this material.
  */
 val Material.smeltedItem: ItemStack?
@@ -30,6 +59,7 @@ val Material.isShearable: Boolean
     get() = when (this) {
         Material.COBWEB,
         Material.DEAD_BUSH,
+        Material.GRASS,
         Material.TALL_GRASS,
         Material.LILAC,
         Material.ROSE_BUSH,
@@ -42,7 +72,6 @@ val Material.isShearable: Boolean
         Material.JUNGLE_LEAVES,
         Material.ACACIA_LEAVES,
         Material.DARK_OAK_LEAVES,
-        Material.TRIPWIRE,
         Material.VINE -> true
         else -> false
     }
@@ -99,6 +128,11 @@ fun Material.fortuneDrops(level: Int = 0): Collection<ItemStack> {
     }
     else listOf(ItemStack(dropMaterial, amount))
 }
+
+/**
+ * Get the wool material corresponding with this dye colour.
+ */
+fun DyeColor.toWoolMaterial() = DYE_COLOURS[this]!![DYE_INDEX_WOOL]
 
 /**
  * Calculates a random amount of drops for coal, diamond, emerald, nether quartz, lapis lazuli ore inclding
