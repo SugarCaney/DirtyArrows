@@ -22,9 +22,24 @@ open class WoodmanBow(plugin: DirtyArrows) : BowAbility(
         description = "Tear down trees quickly."
 ) {
 
+    /**
+     * The chance of logs turning into sticks in [0,1].
+     */
+    val stickChance = config.getDouble("$node.stick-chance")
+
+    /**
+     * The chance of logs turning into planks in [0,1].
+     */
+    val plankChance = config.getDouble("$node.plank-chance")
+
+    init {
+        check(stickChance in 0.0..1.0) { "$node.stick-chance must lie between 0 and 1, got <$stickChance>" }
+        check(plankChance in 0.0..1.0) { "$node.plank-chance must lie between 0 and 1, got <$plankChance>" }
+    }
+
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
         val hitBlock = event.hitBlock ?: return
-        if (hitBlock.location.cutDownTree()) {
+        if (hitBlock.location.cutDownTree(plankChance, stickChance)) {
             arrow.remove()
         }
     }

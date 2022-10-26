@@ -56,6 +56,19 @@ fun Material.isLog(): Boolean = when (this) {
 }
 
 /**
+ * Get the corresponding plank material of this log type
+ */
+fun Material.plankOfLog(): Material = when (this) {
+    Material.OAK_LOG -> Material.OAK_PLANKS
+    Material.SPRUCE_LOG -> Material.SPRUCE_PLANKS
+    Material.BIRCH_LOG -> Material.BIRCH_PLANKS
+    Material.JUNGLE_LOG -> Material.JUNGLE_PLANKS
+    Material.ACACIA_LOG -> Material.ACACIA_PLANKS
+    Material.DARK_OAK_LOG -> Material.DARK_OAK_PLANKS
+    else -> error("Material <$this> is not a supported log material.")
+}
+
+/**
  * Checks if this block is a log.
  */
 fun Block.isLog() = type.isLog()

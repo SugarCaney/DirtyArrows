@@ -875,6 +875,16 @@ woodman:
   # (Int) default: 0
   cooldown: 0
 
+  # The chance of sticks dropping instead of logs.
+  # Chance between 0 and 1.
+  # (Double) default: 0.08
+  stick-chance: 0.08
+
+  # The chance of planks dropping instead of logs.
+  # Chance between 0 and 1.
+  # (Double) default: 0.12
+  plank-chance: 0.12
+
 ##
 ## ABILITY: Starvation
 ## - The target loses hunger points.
