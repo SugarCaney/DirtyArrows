@@ -5,6 +5,9 @@ import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
 import nl.sugcube.dirtyarrows.util.*
 import org.bukkit.Material
+import org.bukkit.block.BlockFace
+import org.bukkit.block.data.BlockData
+import org.bukkit.block.data.Directional
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.ProjectileHitEvent
@@ -47,22 +50,18 @@ open class EnlightenedBow(plugin: DirtyArrows) : BowAbility(
 
             // Then find a face.
             // Notice that the facing direction is opposite to the solid direction.
-            // I tried SOO MUCH, and finally settled on some weird legacy method.
-            // The problem with setting type and data seperately from the API was that the type
-            // would not change to torch (presumably because they cannot be placed regularly), after calling
-            // block.setType.
-            // This disabled me from actually getting the data. This is fine for now. (1.11).
-            // Revise this for new API versions.
-            val data = when {
-                north().block.type.isSolid -> 0x3 /* SOUTH */
-                south().block.type.isSolid -> 0x4 /* NORTH */
-                east().block.type.isSolid -> 0x2 /* WEST */
-                west().block.type.isSolid -> 0x1 /* EAST */
-                else -> 0x5 /* UP */
+            val blockFace = when {
+                north().block.type.isSolid -> BlockFace.SOUTH
+                south().block.type.isSolid -> BlockFace.NORTH
+                east().block.type.isSolid -> BlockFace.WEST
+                west().block.type.isSolid -> BlockFace.EAST
+                else -> BlockFace.UP
             }
-            @Suppress("DEPRECATION")
-            /*block.setTypeIdAndData(Material.TORCH.id, data.toByte(), false)*/
-            // TODO: Update Enlightened Bow block data
+
+            block.type = Material.WALL_TORCH
+            block.setBlockData(block.blockData.useAs<BlockData, Directional> {
+                it.facing = blockFace
+            }, true)
 
             showFlameParticle()
         }

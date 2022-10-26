@@ -168,3 +168,13 @@ fun Long.fuzz(maxFuzz: Long) = Random.nextLong(this - maxFuzz, this + maxFuzz + 
  * Fuzzes this number: creates a random number `this-maxFuzz <= this <= this+maxFuzz`.
  */
 fun Int.fuzz(maxFuzz: Int) = Random.nextInt(this - maxFuzz, this + maxFuzz + 1)
+
+/**
+ * Casts this type as `otherType` and executes the given block on it. Then returns the source type.
+ * This is useful for using ItemMeta/BlockMeta and casting it temporarily to an implemented type.
+ */
+inline fun <T, reified U> T.useAs(crossinline block: (U) -> Unit): T {
+    val other = this as? U ?: return this
+    block(other)
+    return this
+}
