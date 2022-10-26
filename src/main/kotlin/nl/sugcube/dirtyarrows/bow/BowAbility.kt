@@ -212,7 +212,7 @@ abstract class BowAbility(
 
             // Only apply effects when the arrow does not land in a protected region.
             // Give back the items if it is in a protected region as they have been removed upon launch.
-            if (arrow.location.isInProtectedRegion(player)) {
+            if (canShootInProtectedRegions.not() && arrow.location.isInProtectedRegion(player)) {
                 player.reimburseBowItems()
             } else {
                 land(arrow, player, event)
