@@ -1,7 +1,7 @@
 name: DirtyArrows
 main: nl.sugcube.dirtyarrows.DirtyArrows
-version: '4.2'
-api-version: 1.13
+version: '4.3'
+api-version: 1.14
 author: SugarCaney
 website: 'https://twitter.com/CaneyDearie'
 description: >
