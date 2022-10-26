@@ -389,7 +389,6 @@ abstract class BowAbility(
     /**
      * Removes all resources from the player's inventory that are required for 1 use.
      */
-    @Suppress("DEPRECATION")
     protected open fun Player.consumeBowItems() {
         val recentlyRemoved = ArrayList<ItemStack>(costRequirements.size)
 
@@ -398,7 +397,7 @@ abstract class BowAbility(
             // item data.
             val eligibleItem = inventory.asSequence()
                     .filterNotNull()
-                    .firstOrNull { it.type == item.type && it.amount >= item.amount && it.data?.data == item.data?.data }
+                    .firstOrNull { it.type == item.type && it.amount >= item.amount && it.itemMeta == item.itemMeta }
                     ?: return@forEach
 
             val toRemove = eligibleItem.clone().apply {

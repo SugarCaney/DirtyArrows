@@ -168,8 +168,7 @@ open class FarmersBow(plugin: DirtyArrows) : BowAbility(
             Material.DIRT,
             Material.PODZOL,
             Material.MYCELIUM,
-            Material.GRASS_BLOCK,
-            Material.GRASS_PATH
+            Material.GRASS_BLOCK
         )
 
         /**

@@ -58,13 +58,11 @@ fun Player.fortuneLevel() = inventory.maxOf { it?.getEnchantmentLevel(Enchantmen
  * Checks if the inventory has (in total, so with all stacks combined) enough of items that match the
  * itemStack's material data and material type.
  */
-@Suppress("DEPRECATION")
 fun Inventory.containsAtLeastInlcudingData(toCheck: ItemStack): Boolean {
     var count = 0
     forEachNotNull {
-        // TODO: Items data comparison new api.
-        if (it.type == toCheck.type && it.data?.data == toCheck.data?.data) {
-            count += it.amount
+        if (it.type == toCheck.type && it.itemMeta == toCheck.itemMeta) {
+             count += it.amount
         }
         if (count >= toCheck.amount) {
             return true
@@ -78,7 +76,6 @@ fun Inventory.containsAtLeastInlcudingData(toCheck: ItemStack): Boolean {
  * The amount removed is the amount in the ItemStack.
  * It will combine all available stacks.
  */
-@Suppress("DEPRECATION")
 fun Inventory.removeIncludingData(toRemove: ItemStack) {
     // The total amount of items that must be removed from the inventory.
     val totalToRemove = toRemove.amount
@@ -90,8 +87,7 @@ fun Inventory.removeIncludingData(toRemove: ItemStack) {
     for (i in 0 until size) {
         // Check if the item is eligible to be removed.
         val item = getItem(i) ?: continue
-        // TODO: Items data comparison new api.
-        if (item.type != toRemove.type || item.data?.data != toRemove.data?.data) continue
+        if (item.type != toRemove.type || item.itemMeta != toRemove.itemMeta) continue
 
         // The amount of items that are yet to be removed.
         val targetToRemove = totalToRemove - amountRemoved
@@ -99,7 +95,9 @@ fun Inventory.removeIncludingData(toRemove: ItemStack) {
         // All items that need to be removed are removed.
         if (targetToRemove < item.amount) {
             val newAmount = item.amount - targetToRemove
-            setItem(i, ItemStack(item.type, newAmount, item.data?.data?.toShort() ?: 0))
+            val newItem = ItemStack(item.type, newAmount)
+            newItem.itemMeta = item.itemMeta
+            setItem(i, newItem)
             return
         }
 
