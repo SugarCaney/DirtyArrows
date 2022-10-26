@@ -66,7 +66,7 @@ open class BouncyBow(plugin: DirtyArrows) : BowAbility(
         // Stop bouncing when the threshold is met.
         if (arrow.velocity.length() < bounceThreshold) return
 
-        // Bounce off face.
+        // Bounce off face of solid block.
         val hitBlock = event.hitBlock ?: return
         val hitFace = arrow.hitBlockFace(hitBlock) ?: return
         val bounceDirection = hitFace.bounceVector.multiply(softening)

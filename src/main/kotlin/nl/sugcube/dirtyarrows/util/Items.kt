@@ -77,6 +77,23 @@ fun Inventory.containsAtLeastInlcudingData(toCheck: ItemStack): Boolean {
 }
 
 /**
+ * Checks if the inventory has (in total, so with all stacks combined) enough of items that match only the
+ * itemStack's material type and count.
+ */
+fun Inventory.containsAtLeastExcludingData(toCheck: ItemStack): Boolean {
+    var count = 0
+    forEachNotNull {
+        if (it.type == toCheck.type) {
+             count += it.amount
+        }
+        if (count >= toCheck.amount) {
+            return true
+        }
+    }
+    return false
+}
+
+/**
  * Removes the given items from the inventory, also checks for material data.
  * The amount removed is the amount in the ItemStack.
  * It will combine all available stacks.

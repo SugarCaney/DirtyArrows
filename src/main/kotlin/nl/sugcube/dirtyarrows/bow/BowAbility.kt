@@ -346,7 +346,7 @@ abstract class BowAbility(
     /**
      * Checks if the inventory contains the required item.
      */
-    open fun Inventory.checkForItem(itemStack: ItemStack) = containsAtLeastInlcudingData(itemStack)
+    open fun Inventory.checkForItem(itemStack: ItemStack) = containsAtLeastExcludingData(itemStack)
 
     /**
      * Get the colour applied bow name of the bow of this ability.
@@ -397,7 +397,7 @@ abstract class BowAbility(
             // item data.
             val eligibleItem = inventory.asSequence()
                     .filterNotNull()
-                    .firstOrNull { it.type == item.type && it.amount >= item.amount && it.itemMeta == item.itemMeta }
+                    .firstOrNull { it.type == item.type && it.amount >= item.amount }
                     ?: return@forEach
 
             val toRemove = eligibleItem.clone().apply {
