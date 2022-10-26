@@ -14,7 +14,6 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.entity.EntityChangeBlockEvent
 import org.bukkit.event.entity.ProjectileLaunchEvent
 import org.bukkit.inventory.ItemStack
-import org.bukkit.material.MaterialData
 
 /**
  * Shoots a blob of lava.
@@ -44,7 +43,7 @@ open class MagmaticBow(plugin: DirtyArrows) : BowAbility(
         val direction = arrow.velocity.copyOf().normalize()
         // Spawn the lava block slightly in front of the player.
         val spawnLocation = arrow.location.add(direction.multiply(1.5))
-        player.world.spawnFallingBlock(spawnLocation, MaterialData(Material.LAVA)).apply {
+        player.world.spawnFallingBlock(spawnLocation, Material.LAVA.createBlockData()).apply {
             velocity = arrow.velocity
             dropItem = false
             lavaBlocks[this] = player

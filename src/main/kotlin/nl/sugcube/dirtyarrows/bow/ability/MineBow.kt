@@ -9,6 +9,7 @@ import nl.sugcube.dirtyarrows.util.showColoredDust
 import nl.sugcube.dirtyarrows.util.showSmokeParticle
 import org.bukkit.Color
 import org.bukkit.Material
+import org.bukkit.entity.AbstractArrow
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.ProjectileHitEvent
@@ -79,7 +80,7 @@ open class MineBow(plugin: DirtyArrows) : BowAbility(
         if (event.hitBlock == null) return
 
         mines[arrow] = System.currentTimeMillis()
-        arrow.pickupStatus = Arrow.PickupStatus.DISALLOWED
+        arrow.pickupStatus = AbstractArrow.PickupStatus.DISALLOWED
     }
 
     override fun particle(tickNumber: Int) {

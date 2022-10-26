@@ -11,6 +11,7 @@ import org.bukkit.GameMode
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
+import org.bukkit.entity.AbstractArrow
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
@@ -74,7 +75,7 @@ open class MachineBow(plugin: DirtyArrows) : BowAbility(
             }, it * bulletDelay)
         }
 
-        event.isCancelled
+        event.isCancelled = true
     }
 
     /**
@@ -96,7 +97,7 @@ open class MachineBow(plugin: DirtyArrows) : BowAbility(
                 velocity = player.eyeLocation.direction.multiply(3).fuzz(maxFuzz = directionFuzz)
 
                 if (player.gameMode == GameMode.CREATIVE) {
-                    pickupStatus = Arrow.PickupStatus.CREATIVE_ONLY
+                    pickupStatus = AbstractArrow.PickupStatus.CREATIVE_ONLY
                 }
 
                 player.bowItem()?.subtractDurability(player)

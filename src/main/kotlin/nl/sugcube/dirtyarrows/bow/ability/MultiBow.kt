@@ -9,6 +9,7 @@ import nl.sugcube.dirtyarrows.util.fuzz
 import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
+import org.bukkit.entity.AbstractArrow
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.ProjectileLaunchEvent
@@ -56,7 +57,7 @@ open class MultiBow(plugin: DirtyArrows) : BowAbility(
                 isCritical = true
 
                 if (player.gameMode == GameMode.CREATIVE) {
-                    pickupStatus = Arrow.PickupStatus.CREATIVE_ONLY
+                    pickupStatus = AbstractArrow.PickupStatus.CREATIVE_ONLY
                 }
             }
         }

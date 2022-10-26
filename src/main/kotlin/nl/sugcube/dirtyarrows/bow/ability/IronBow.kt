@@ -15,7 +15,6 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.entity.EntityChangeBlockEvent
 import org.bukkit.event.entity.ProjectileLaunchEvent
 import org.bukkit.inventory.ItemStack
-import org.bukkit.material.MaterialData
 
 /**
  * Fires an anvil.
@@ -64,7 +63,7 @@ open class IronBow(plugin: DirtyArrows) : BowAbility(
 
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {
         player.world.spawnFallingBlock(
-                player.location.copyOf().add(0.0, 1.0, 0.0), MaterialData(Material.ANVIL)
+                player.location.copyOf().add(0.0, 1.0, 0.0), Material.ANVIL.createBlockData()
         ).apply {
             velocity = arrow.velocity
             dropItem = true

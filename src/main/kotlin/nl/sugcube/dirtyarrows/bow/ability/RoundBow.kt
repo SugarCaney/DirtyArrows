@@ -9,6 +9,7 @@ import nl.sugcube.dirtyarrows.util.rotateAlongYAxis
 import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
+import org.bukkit.entity.AbstractArrow
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.ProjectileLaunchEvent
@@ -53,7 +54,7 @@ open class RoundBow(plugin: DirtyArrows) : BowAbility(
                 applyBowEnchantments(player.bowItem())
 
                 if (player.gameMode == GameMode.CREATIVE) {
-                    pickupStatus = Arrow.PickupStatus.CREATIVE_ONLY
+                    pickupStatus = AbstractArrow.PickupStatus.CREATIVE_ONLY
                 }
             }
         }

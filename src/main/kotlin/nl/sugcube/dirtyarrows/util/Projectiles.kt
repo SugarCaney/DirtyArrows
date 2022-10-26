@@ -3,6 +3,7 @@ package nl.sugcube.dirtyarrows.util
 import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
+import org.bukkit.entity.AbstractArrow
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
@@ -14,7 +15,7 @@ import org.bukkit.inventory.ItemStack
 fun Arrow.applyBowEnchantments(bow: ItemStack?) {
     // When these are inifinity arrows, they cannot be picked up.
     if (bow?.containsEnchantment(Enchantment.ARROW_INFINITE) == false) {
-        pickupStatus = Arrow.PickupStatus.ALLOWED
+        pickupStatus = AbstractArrow.PickupStatus.ALLOWED
     }
 
     // Set punch enchantment.

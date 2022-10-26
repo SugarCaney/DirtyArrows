@@ -23,8 +23,7 @@ fun Location.firstSpawnEligibleY(): Int? {
     val thisY = floor(y).toInt()
     for (i in thisY..Worlds.MAX_WORLD_Y) {
         val block = world?.getBlockAt(x.toInt(), i, z.toInt())
-        // TODO: Worlds isTransparent deprecation
-        if (block?.type?.isTransparent == true) {
+        if (block?.type?.isOccluding == true) {
             return i
         }
     }

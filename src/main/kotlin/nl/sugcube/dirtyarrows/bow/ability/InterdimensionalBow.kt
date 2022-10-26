@@ -8,10 +8,7 @@ import org.bukkit.GameMode
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.Sound
-import org.bukkit.entity.Arrow
-import org.bukkit.entity.EntityType
-import org.bukkit.entity.LivingEntity
-import org.bukkit.entity.Player
+import org.bukkit.entity.*
 import org.bukkit.event.entity.ProjectileLaunchEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.util.Vector
@@ -176,7 +173,7 @@ open class InterdimensionalBow(plugin: DirtyArrows) : BowAbility(
             arrow.applyBowEnchantments(bow)
 
             if (player is Player && player.gameMode == GameMode.CREATIVE) {
-                arrow.pickupStatus = Arrow.PickupStatus.CREATIVE_ONLY
+                arrow.pickupStatus = AbstractArrow.PickupStatus.CREATIVE_ONLY
             }
 
             registerArrow(arrow)

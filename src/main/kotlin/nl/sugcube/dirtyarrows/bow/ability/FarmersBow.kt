@@ -4,19 +4,18 @@ import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
 import nl.sugcube.dirtyarrows.util.*
-import org.bukkit.CropState
 import org.bukkit.GameMode
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.block.Block
 import org.bukkit.block.BlockFace
+import org.bukkit.block.data.Ageable
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.event.entity.ProjectileLaunchEvent
 import org.bukkit.inventory.ItemStack
-import org.bukkit.material.Crops
 
 /**
  * Turns blocks into farmland.
@@ -148,8 +147,8 @@ open class FarmersBow(plugin: DirtyArrows) : BowAbility(
 
             when (block.type) {
                 Material.BEETROOTS, Material.WHEAT, Material.CARROTS, Material.POTATOES -> {
-                    val crops = block.state.data as Crops
-                    if (crops.state == CropState.RIPE) {
+                    val crops = block.blockData as Ageable
+                    if ((block.type == Material.BEETROOTS && crops.age == 3) || crops.age >= 7) {
                         block.breakNaturally()
                     }
                 }
@@ -185,7 +184,6 @@ open class FarmersBow(plugin: DirtyArrows) : BowAbility(
             Material.GRASS,
             Material.FERN,
             Material.DANDELION,
-            Material.DANDELION_YELLOW,
             Material.POPPY,
             Material.BLUE_ORCHID,
             Material.ALLIUM,
@@ -196,7 +194,10 @@ open class FarmersBow(plugin: DirtyArrows) : BowAbility(
             Material.PINK_TULIP,
             Material.OXEYE_DAISY,
             Material.BROWN_MUSHROOM,
-            Material.RED_MUSHROOM
+            Material.RED_MUSHROOM,
+            Material.CORNFLOWER,
+            Material.LILY_OF_THE_VALLEY,
+            Material.WITHER_ROSE
         )
 
         /**

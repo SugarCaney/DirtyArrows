@@ -5,6 +5,7 @@ import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
 import nl.sugcube.dirtyarrows.util.*
 import org.bukkit.GameMode
+import org.bukkit.entity.AbstractArrow
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
@@ -101,7 +102,7 @@ open class BowBow(plugin: DirtyArrows) : BowAbility(
             arrow.isCritical = false
 
             if (player.gameMode == GameMode.CREATIVE) {
-                arrow.pickupStatus = Arrow.PickupStatus.CREATIVE_ONLY
+                arrow.pickupStatus = AbstractArrow.PickupStatus.CREATIVE_ONLY
             }
 
             registerArrow(arrow)
