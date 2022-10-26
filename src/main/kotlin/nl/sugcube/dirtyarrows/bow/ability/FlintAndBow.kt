@@ -14,6 +14,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.meta.Damageable
 import java.util.*
 
 /**
@@ -55,17 +56,20 @@ open class FlintAndBow(plugin: DirtyArrows) : BowAbility(
     override fun Player.consumeBowItems() {
         if (gameMode == GameMode.CREATIVE) return
 
-        // TODO: Durability deprecation Flint and Bow
+        inventory
+            .firstOrNull { it?.type == Material.FLINT_AND_STEEL }
+            ?.let { flintAndSteel ->
 
-        inventory.firstOrNull { it?.type == Material.FLINT_AND_STEEL }?.let { flintAndSteel ->
-            flintAndSteel.durability = (flintAndSteel.durability + 5).toShort()
+                val itemMeta = flintAndSteel.itemMeta
+                val damageable = itemMeta as? Damageable ?: error("Did not select flint and steel")
+                damageable.damage = damageable.damage + 5
 
-            // When out of dura, remove it (flint and steel has 64 uses).
-            if (flintAndSteel.durability > 64) {
-                inventory.remove(flintAndSteel)
-                player?.location?.let { playSound(it, Sound.ENTITY_ITEM_BREAK, 10f, 1f) }
+                // When out of dura, remove it (flint and steel has 64 uses).
+                if (damageable.damage > 64) {
+                    inventory.remove(flintAndSteel)
+                    player?.location?.let { playSound(it, Sound.ENTITY_ITEM_BREAK, 10f, 1f) }
+                }
             }
-        }
     }
 
     companion object {
@@ -74,11 +78,11 @@ open class FlintAndBow(plugin: DirtyArrows) : BowAbility(
          * Materials that can be replaced by FlintAndBow's fire.
          */
         private val FIRE_REPLACABLE = EnumSet.of(
-                Material.AIR,
-                Material.SNOW,
-                Material.VINE,
-                Material.DEAD_BUSH,
-                Material.TALL_GRASS
+            Material.AIR,
+            Material.SNOW,
+            Material.VINE,
+            Material.DEAD_BUSH,
+            Material.TALL_GRASS
         )
     }
 }

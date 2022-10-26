@@ -7,6 +7,7 @@ import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.meta.Damageable
 import kotlin.random.Random
 
 /**
@@ -19,18 +20,22 @@ import kotlin.random.Random
 fun ItemStack.subtractDurability(player: Player) {
     if (player.gameMode == GameMode.CREATIVE) return
 
-    // TODO: Items: durability
+    // Beware, this is org.bukkit.inventory.meta.Damageable, not org.bukkit.entity.Damageable
+    val damageable = itemMeta ?: return
+    if (damageable !is Damageable) return
+
     val unbreakingLevel = getEnchantmentLevel(Enchantment.DURABILITY)
     val reductionChance = 1.0 / (unbreakingLevel.toDouble() + 1.0)
     if (Random.nextDouble() < reductionChance) {
-        durability = (durability + 1).toShort()
+        damageable.damage = damageable.damage + 1
     }
 
-    if (durability >= type.maxDurability) {
+    if (damageable.damage >= type.maxDurability) {
         amount = 0
-
         player.playSound(player.location, Sound.ENTITY_ITEM_BREAK, 10f, 1f)
     }
+
+    itemMeta = damageable
 }
 
 /**
