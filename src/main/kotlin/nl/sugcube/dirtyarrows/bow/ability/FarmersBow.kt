@@ -26,12 +26,12 @@ import org.bukkit.material.Crops
  * @author SugarCaney
  */
 open class FarmersBow(plugin: DirtyArrows) : BowAbility(
-        plugin = plugin,
-        type = DefaultBow.FARMERS,
-        canShootInProtectedRegions = false,
-        protectionRange = 10.0,
-        removeArrow = true,
-        description = "Turns soil into farmland."
+    plugin = plugin,
+    type = DefaultBow.FARMERS,
+    canShootInProtectedRegions = false,
+    protectionRange = 10.0,
+    removeArrow = true,
+    description = "Turns soil into farmland."
 ) {
 
     /**
@@ -60,7 +60,7 @@ open class FarmersBow(plugin: DirtyArrows) : BowAbility(
         val hitBlock = event.hitBlock ?: return
 
         // When a block that is hit that is soil, turn it into soil first.
-        // Only create soil when the hit block is not soil! Otherwise you could mess up farm shapes.
+        // Only create soil when the hit block is not soil! Otherwise, you could mess up farm shapes.
         // Planting seeds/harvesting crops could be wanted without modifying the soil.
         if (hitBlock.type != Material.FARMLAND) {
             arrow.location.createSoil(blocks)
@@ -147,12 +147,13 @@ open class FarmersBow(plugin: DirtyArrows) : BowAbility(
             }
 
             when (block.type) {
-                Material.BEETROOT, Material.WHEAT, Material.CARROT, Material.POTATO -> {
+                Material.BEETROOTS, Material.WHEAT, Material.CARROTS, Material.POTATOES -> {
                     val crops = block.state.data as Crops
                     if (crops.state == CropState.RIPE) {
                         block.breakNaturally()
                     }
                 }
+
                 else -> Unit
             }
         }
@@ -164,34 +165,51 @@ open class FarmersBow(plugin: DirtyArrows) : BowAbility(
          * All materials that can be turned into farmland.
          */
         private val APPLICABLE_SOIL_MATERIALS = setOf(
-                Material.DIRT,
-                Material.GRASS,
-                Material.GRASS_PATH
+            Material.DIRT,
+            Material.PODZOL,
+            Material.MYCELIUM,
+            Material.GRASS_BLOCK,
+            Material.GRASS_PATH
         )
 
         /**
          * When these materials are above farmland, they will be removed.
          */
         private val REMOVABLE_CROPS = setOf(
-                Material.TALL_GRASS,
-                Material.LARGE_FERN,
-                Material.SUNFLOWER,
-                Material.PEONY,
-                Material.ROSE_BUSH,
-                Material.LILAC,
-                Material.SNOW
+            Material.TALL_GRASS,
+            Material.LARGE_FERN,
+            Material.SUNFLOWER,
+            Material.PEONY,
+            Material.ROSE_BUSH,
+            Material.LILAC,
+            Material.SNOW,
+            Material.GRASS,
+            Material.FERN,
+            Material.DANDELION,
+            Material.DANDELION_YELLOW,
+            Material.POPPY,
+            Material.BLUE_ORCHID,
+            Material.ALLIUM,
+            Material.AZURE_BLUET,
+            Material.RED_TULIP,
+            Material.ORANGE_TULIP,
+            Material.WHITE_TULIP,
+            Material.PINK_TULIP,
+            Material.OXEYE_DAISY,
+            Material.BROWN_MUSHROOM,
+            Material.RED_MUSHROOM
         )
 
         /**
          * Maps all plantable seeds to their planted material.
          */
         private val SEEDS = mapOf(
-                Material.WHEAT_SEEDS to Material.WHEAT,
-                Material.BEETROOT_SEEDS to Material.BEETROOT,
-                Material.PUMPKIN_SEEDS to Material.PUMPKIN_STEM,
-                Material.MELON_SEEDS to Material.MELON_STEM,
-                Material.CARROT to Material.CARROTS,
-                Material.POTATO to Material.POTATOES
+            Material.WHEAT_SEEDS to Material.WHEAT,
+            Material.BEETROOT_SEEDS to Material.BEETROOTS,
+            Material.PUMPKIN_SEEDS to Material.PUMPKIN_STEM,
+            Material.MELON_SEEDS to Material.MELON_STEM,
+            Material.CARROT to Material.CARROTS,
+            Material.POTATO to Material.POTATOES
         )
     }
 }
