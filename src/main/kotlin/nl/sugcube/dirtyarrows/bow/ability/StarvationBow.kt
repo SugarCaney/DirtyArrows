@@ -27,8 +27,6 @@ open class StarvationBow(plugin: DirtyArrows) : BowAbility(
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
         val target = event.hitEntity as? Player ?: return
-        if (target == player) return
-
         target.foodLevel = max(0, target.foodLevel - hungerPoints)
     }
 }
