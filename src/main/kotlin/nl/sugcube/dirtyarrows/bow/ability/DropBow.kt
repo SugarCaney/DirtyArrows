@@ -29,7 +29,6 @@ open class DropBow(plugin: DirtyArrows) : BowAbility(
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
         val target = event.hitEntity as? LivingEntity ?: return
-        if (target == player) return
 
         val dropLocation = target.location
         for (i in 1..dropHeight) {
