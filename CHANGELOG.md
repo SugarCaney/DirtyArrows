@@ -8,6 +8,13 @@ Changelog
 * **`~`** Tweaked
 * **`-`** Removed feature
 
+## Version 4.3
+* **`i`** Updated for Minecraft 1.14.4
+* **`!`** Fixed arrows that can be shot in protected regions not having their effect applied from protected regions.
+* **`!`** Fixed firework stars not being properly recognised by firework bow.
+* **`~`** Starvation bow can now friendly fire.
+* **`~`** Drop bow can now friendly fire.
+
 ## Version 4.2
 * **`i`** Updated for Minecraft 1.13.2
 * **`~`** Woodman's bow stick/plank drop chances can now be customised.
