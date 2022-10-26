@@ -63,6 +63,7 @@ open class FlintAndBow(plugin: DirtyArrows) : BowAbility(
                 val itemMeta = flintAndSteel.itemMeta
                 val damageable = itemMeta as? Damageable ?: error("Did not select flint and steel")
                 damageable.damage = damageable.damage + 5
+                flintAndSteel.itemMeta = itemMeta
 
                 // When out of dura, remove it (flint and steel has 64 uses).
                 if (damageable.damage > 64) {
