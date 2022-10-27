@@ -125,7 +125,7 @@ abstract class BowAbility(
     /**
      * Maps each entity to the items that were consumed latest by the ability.
      */
-    private val mostRecentItemsConsumed = HashMap<Entity, List<ItemStack>>()
+    protected val mostRecentItemsConsumed = HashMap<Entity, List<ItemStack>>()
 
     /**
      * Get the items that were consumed on last use.
@@ -328,7 +328,7 @@ abstract class BowAbility(
      *          Whether to show an error to the player when they don't meet
      * @return `true` if the player meets the cost requirements, `false` if they don't.
      */
-    protected fun Player.meetsResourceRequirements(showError: Boolean = true): Boolean {
+    protected open fun Player.meetsResourceRequirements(showError: Boolean = true): Boolean {
         val survival = gameMode == GameMode.SURVIVAL || gameMode == GameMode.ADVENTURE
         val meetsRequirements = survival.not() || costRequirements.all {
             inventory.checkForItem(it)
