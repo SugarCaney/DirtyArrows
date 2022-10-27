@@ -8,6 +8,19 @@ Changelog
 * **`~`** Tweaked
 * **`-`** Removed feature
 
+## Version 4.5
+* **`i`** Updated for Minecraft 1.16.5
+* **`+`** Added Crimson bow.
+* **`+`** Added Warped bow.
+* **`+`** Added option to enable/disable sounds when the cooldown runs out.
+* **`~`** Drill and Mining bow now support netherite tools.
+* **`~`** Drill and Mining bow can now properly mine nether gold ore.
+* **`~`** Shear bow now works with nether flora.
+* **`~`** Woodman's bow now supports huge fungi.
+* **`~`** Flint and bow generates soul fire on soul sand.
+* **`~`** Enlightened bow can also shoot soul torches.
+* **`!`** Fixed NPE in Disarming bow.
+
 ## Version 4.4
 * **`i`** Updated for Minecraft 1.15.2
 
