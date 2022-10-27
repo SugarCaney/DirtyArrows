@@ -77,6 +77,15 @@ val Material.isShearable: Boolean
         Material.JUNGLE_LEAVES,
         Material.ACACIA_LEAVES,
         Material.DARK_OAK_LEAVES,
+        Material.NETHER_WART_BLOCK,
+        Material.WARPED_WART_BLOCK,
+        Material.CRIMSON_FUNGUS,
+        Material.WARPED_FUNGUS,
+        Material.CRIMSON_ROOTS,
+        Material.WARPED_ROOTS,
+        Material.NETHER_SPROUTS,
+        Material.TWISTING_VINES,
+        Material.WEEPING_VINES,
         Material.VINE -> true
         else -> false
     }
