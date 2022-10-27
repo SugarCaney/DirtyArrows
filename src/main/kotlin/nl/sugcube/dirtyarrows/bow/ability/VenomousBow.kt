@@ -56,7 +56,7 @@ open class VenomousBow(plugin: DirtyArrows) : BowAbility(
                 PotionEffectType.POISON,
                 poisonTime + Random.nextInt(-poisonTimeFuzzing, poisonTimeFuzzing),
                 poisonLevel - 1
-        ), true)
+        ))
         target.location.showPotionParticle(PotionType.POISON)
     }
 }

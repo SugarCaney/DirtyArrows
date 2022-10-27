@@ -46,7 +46,7 @@ open class DisarmingBow(plugin: DirtyArrows) : BowAbility(
 
         // Chance to drop armour.
         val newArmour = target.equipment?.armorContents?.map { item ->
-            if (item != null && item.type != Material.AIR && Random.nextDouble() <= dropArmourChance) {
+            if (item.type != Material.AIR && Random.nextDouble() <= dropArmourChance) {
                 target.world.dropItem(target.location, item)
                 item.type = Material.AIR
             }

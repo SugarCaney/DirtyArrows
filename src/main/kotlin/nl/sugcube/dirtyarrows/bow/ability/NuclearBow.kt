@@ -155,8 +155,8 @@ open class NuclearBow(plugin: DirtyArrows) : BowAbility(
             )?.asSequence()
                     ?.mapNotNull { it as? LivingEntity }
                     ?.forEach {
-                        it.addPotionEffect(PotionEffect(PotionEffectType.POISON, radiationPoisonDuration, radiationPoisonLevel), true)
-                        it.addPotionEffect(PotionEffect(PotionEffectType.WITHER, radiationPoisonDuration, radiationPoisonLevel), true)
+                        it.addPotionEffect(PotionEffect(PotionEffectType.POISON, radiationPoisonDuration, radiationPoisonLevel))
+                        it.addPotionEffect(PotionEffect(PotionEffectType.WITHER, radiationPoisonDuration, radiationPoisonLevel))
                     }
 
             // Slowly fall down.
