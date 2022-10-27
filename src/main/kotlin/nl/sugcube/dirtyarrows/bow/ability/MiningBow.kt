@@ -159,7 +159,8 @@ open class MiningBow(plugin: DirtyArrows) : BowAbility(
          */
         private val SMELT_ORES = setOf(
                 Material.IRON_ORE,
-                Material.GOLD_ORE
+                Material.GOLD_ORE,
+                Material.NETHER_GOLD_ORE
         )
     }
 }

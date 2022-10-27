@@ -4,18 +4,23 @@ import org.bukkit.Bukkit
 import org.bukkit.DyeColor
 import org.bukkit.Material
 import org.bukkit.block.Block
-import org.bukkit.inventory.FurnaceRecipe
+import org.bukkit.inventory.CookingRecipe
 import org.bukkit.inventory.ItemStack
 import kotlin.math.min
 import kotlin.random.Random
+import kotlin.random.nextInt
 
 /**
  * Maps each material to the item stack obtained when smelting this item.
  */
-private val SMELT_RESULTS: Map<Material, ItemStack> = Bukkit.recipeIterator().asSequence()
-        .mapNotNull { it as? FurnaceRecipe }
-        .map { it.input.type to it.result }
-        .toMap()
+private val SMELT_RESULTS: Map<Material, ItemStack> = HashMap(Bukkit.recipeIterator().asSequence()
+    .mapNotNull { it as? CookingRecipe<*> }
+    .map { it.input.type to it.result }
+    .toMap()
+).apply {
+    // Apparently nether gold ore was not in the default list of cooking recipes, so adding it manually.
+    this[Material.NETHER_GOLD_ORE] = ItemStack(Material.GOLD_INGOT, 1)
+}
 
 /**
  * Maps each DyeColor to a list of (indices in DYE_INDEX_*):
@@ -111,6 +116,7 @@ fun Material.fortuneDrops(level: Int = 0): Collection<ItemStack> {
         Material.DIAMOND_ORE,
         Material.EMERALD_ORE,
         Material.NETHER_QUARTZ_ORE -> oreFortuneCount(fortuneLevel = level, dropAmount = 1..1)
+        Material.NETHER_GOLD_ORE -> netherGoldOreFortuneCount(fortuneLevel = level)
         Material.LAPIS_ORE -> oreFortuneCount(fortuneLevel = level, dropAmount = 4..9)
         Material.REDSTONE_ORE -> redstoneFortuneCount(fortuneLevel = level)
         Material.MELON -> melonFortuneCount(fortuneLevel = level)
@@ -119,7 +125,8 @@ fun Material.fortuneDrops(level: Int = 0): Collection<ItemStack> {
 
     val dropMaterial = when (this) {
         Material.IRON_ORE, Material.GOLD_ORE -> this
-        Material.MELON -> Material.MELON
+        Material.MELON -> Material.MELON_SLICE
+        Material.NETHER_GOLD_ORE -> Material.GOLD_NUGGET
         else -> smeltedItem?.type ?: this
     }
 
@@ -168,3 +175,40 @@ fun redstoneFortuneCount(fortuneLevel: Int = 0) = 4 + Random.nextInt(0, fortuneL
  *          The level of the fortune enchantment to consider (0 for no fortune).
  */
 fun melonFortuneCount(fortuneLevel: Int = 0) = min(9, 3 + Random.nextInt(0, fortuneLevel + 4))
+
+/**
+ * Calculates a random amount of drops for nether gold ore, including the effects of fortune.
+ *
+ * @param fortuneLevel
+ *          The level of the fortune enchantment to consider (0 for no fortune).
+ */
+fun netherGoldOreFortuneCount(fortuneLevel: Int = 0): Int {
+    // No fortune: 2-6 drops
+    var dropCount = Random.nextInt(2..6)
+
+    when (fortuneLevel) {
+        // Fortune 1: 33% chance to double
+        1 -> {
+            if (Random.nextInt(0, 3) == 0) {
+                dropCount *= 2
+            }
+        }
+        // Fortune 2: 25% chance to double, 25% chance to triple
+        2 -> {
+            when (Random.nextInt(0, 4)) {
+                0 -> dropCount *= 2
+                1 -> dropCount *= 3
+            }
+        }
+        // Fortune 3: 20% chance to double, 20% chance to triple, 20% chance to quadruple
+        3 -> {
+            when (Random.nextInt(0, 5)) {
+                0 -> dropCount *= 2
+                1 -> dropCount *= 3
+                2 -> dropCount *= 4
+            }
+        }
+    }
+
+    return dropCount
+}
