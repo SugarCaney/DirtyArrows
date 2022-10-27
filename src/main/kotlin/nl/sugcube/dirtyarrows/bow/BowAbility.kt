@@ -193,7 +193,7 @@ abstract class BowAbility(
 
         cooldownMap.entries.removeIf { (player, usedTime) ->
             val toRemove = now - usedTime >= cooldownTime
-            if (toRemove) {
+            if (toRemove && playSoundWhenRecharged) {
                 player.playSound(player.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10f, 1f)
             }
             toRemove

@@ -48,6 +48,10 @@ blood: false
 # (Int) default: 16
 arrow-recipe-amount: 16
 
+# Play a sound when the cooldown time of bow abilities has expired.
+# (Boolean) default: false
+play-sound-when-charged: false
+
 ##
 ## Headshot settings.
 ##
