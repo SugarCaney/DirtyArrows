@@ -150,7 +150,8 @@ open class MiningBow(plugin: DirtyArrows) : BowAbility(
                 Material.GOLD_ORE to ToolLevel.IRON,
                 Material.DIAMOND_ORE to ToolLevel.IRON,
                 Material.EMERALD_ORE to ToolLevel.IRON,
-                Material.NETHER_QUARTZ_ORE to ToolLevel.WOOD
+                Material.NETHER_QUARTZ_ORE to ToolLevel.WOOD,
+                Material.NETHER_GOLD_ORE to ToolLevel.WOOD
         )
 
         /**

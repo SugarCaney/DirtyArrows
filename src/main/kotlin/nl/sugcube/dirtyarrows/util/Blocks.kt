@@ -11,6 +11,7 @@ import org.bukkit.util.BlockIterator
  * The materials that are tools that can mine blocks.
  */
 val BLOCK_BREAK_TOOLS = setOf(
+        Material.NETHERITE_PICKAXE,
         Material.DIAMOND_PICKAXE,
         Material.GOLDEN_PICKAXE,
         Material.IRON_PICKAXE,
