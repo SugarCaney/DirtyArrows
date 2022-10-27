@@ -129,7 +129,15 @@ open class TreeBow(plugin: DirtyArrows, val tree: Tree) : BowAbility(
 
         DARK_OAK(DefaultBow.DARK_OAK, TreeType.DARK_OAK, Material.DARK_OAK_LOG, Material.DARK_OAK_SAPLING, 4, mapOf(
                 TreeType.DARK_OAK to 1
-        ), "a dark oak");
+        ), "a dark oak"),
+
+        CRIMSON(DefaultBow.CRIMSON, TreeType.CRIMSON_FUNGUS, Material.CRIMSON_STEM, Material.CRIMSON_FUNGUS, 1, mapOf(
+            TreeType.CRIMSON_FUNGUS to 1
+        ), "a huge crimson fungus"),
+
+        WARPED(DefaultBow.WARPED, TreeType.WARPED_FUNGUS, Material.WARPED_STEM, Material.WARPED_FUNGUS, 1, mapOf(
+            TreeType.WARPED_FUNGUS to 1
+        ), "a huge warped fungus");
 
         /**
          * The items required to use a bow of this tree type.

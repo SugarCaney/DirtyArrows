@@ -120,6 +120,8 @@ enum class DefaultBow(
     BOW("bow"),
     MINE("mine"),
     BLASTER("blaster"),
+    CRIMSON("crimson"),
+    WARPED("warped")
     ;
 
     /**
