@@ -39,7 +39,11 @@ open class FlintAndBow(plugin: DirtyArrows) : BowAbility(
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
         arrow.location.crossBlocks().forEach {
             if (it.block.type in FIRE_REPLACABLE) {
-                it.block.type = Material.FIRE
+                it.block.type = if (it.block.getRelative(0, -1, 0).type in BLUE_FIRE) {
+                    Material.SOUL_FIRE
+                }
+                else Material.FIRE
+
                 it.showSmokeParticle()
             }
         }
@@ -84,6 +88,14 @@ open class FlintAndBow(plugin: DirtyArrows) : BowAbility(
             Material.VINE,
             Material.DEAD_BUSH,
             Material.TALL_GRASS
+        )
+
+        /**
+         * Blocks that must have blue fire.
+         */
+        private val BLUE_FIRE = EnumSet.of(
+            Material.SOUL_SAND,
+            Material.SOUL_SOIL
         )
     }
 }
