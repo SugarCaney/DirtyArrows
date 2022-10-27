@@ -8,6 +8,9 @@ Changelog
 * **`~`** Tweaked
 * **`-`** Removed feature
 
+## Version 4.4
+* **`i`** Updated for Minecraft 1.15.2
+
 ## Version 4.3
 * **`i`** Updated for Minecraft 1.14.4
 * **`!`** Fixed arrows that can be shot in protected regions not having their effect applied from protected regions.
