@@ -3111,3 +3111,63 @@ blaster:
   # Whether the explosion can break blocks.
   # (Boolean) default: false
   break-blocks: false
+
+##
+## ABILITY: Burst Bow
+## - Launches a couple of smaller projectiles when the arrow lands.
+##
+burst:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Burst Bow
+  name: 'Burst Bow'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 12
+  levels: 12
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 1.5
+  min-launch-velocity: 1.5
+
+  # The amount of smaller projectiles to launch after impact.
+  # (Int) default: 4
+  burst-count: 4
+
+  # The power of the small projectile explosions. TNT is 4.0 for reference.
+  # (Double) default: 1.9
+  power: 1.9
+
+  # Whether the small projectile explosions can set blocks on fire.
+  # (Boolean) default: false
+  set-on-fire: false
+
+  # Whether the small projectile explosions can break blocks.
+  # (Boolean) default: true
+  break-blocks: false
+
+  # The horizontal velocity the burst pellets must have on burst.
+  # (Double) default: 0.21
+  horizontal-velocity: 0.21
+
+  # The maximum deviation from the horizontal velocity (randomly picked).
+  # (Double) default: 0.04
+  horizontal-velocity-fuzzing: 0.08
+
+  # The vertical veolcity the burst pellets must have on burst.
+  # (Double) default: 0.5
+  vertical-velocity: 0.5
+
+  # The maximum deviation from the vertical velocity (randomly picked).
+  # (Double) default: 0.09
+  vertical-velocity-fuzzing: 0.14
