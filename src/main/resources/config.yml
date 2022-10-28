@@ -138,6 +138,13 @@ exploding:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # The power of the explosion. TNT is 4.0 for reference.
   # Beware: the region protection range stays the same. Largers explosions leave you at a risk of blowing up
   #         otherwise protected blocks.
@@ -173,6 +180,13 @@ lightning:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
 ##
 ## ABILITY: Clucky
 ## - Spawns a chicken.
@@ -198,6 +212,13 @@ clucky:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
 ##
 ## ABILITY: Ender
 ## - Teleports the player to the arrow location on impact.
@@ -220,6 +241,13 @@ ender:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
 ##
 ## ABILITY: Oak
 ## - Spawns an oak tree.
@@ -240,6 +268,13 @@ oak:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
 ##
 ## ABILITY: Spruce
@@ -262,6 +297,13 @@ spruce:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
 ##
 ## ABILITY: Birch
 ## - Spawns a birch tree.
@@ -282,6 +324,13 @@ birch:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
 ##
 ## ABILITY: Jungle
@@ -304,6 +353,13 @@ jungle:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
 ##
 ## ABILITY: Acacia
 ## - Generates an acacia tree.
@@ -324,6 +380,13 @@ acacia:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
 ##
 ## ABILITY: Dark Oak
@@ -346,6 +409,13 @@ darkoak:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
 ##
 ## ABILITY: Crimson Huge Fungus
 ## - Generates a crimson huge fungus.
@@ -366,6 +436,13 @@ crimson:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
 ##
 ## ABILITY: Warped Huge Fungus
@@ -388,6 +465,13 @@ warped:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
 ##
 ## ABILITY: Azalea Tree
 ## - Generates an azalea tree
@@ -408,6 +492,13 @@ azalea:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
 ##
 ## ABILITY: Mangrove Tree
@@ -430,6 +521,13 @@ mangrove:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
 ##
 ## ABILITY: Batty
 ## - Spawns a swarm of bats.
@@ -450,6 +548,13 @@ batty:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # The amount of bats to spawn.
   # (Int) default: 10
@@ -476,6 +581,13 @@ nuclear:
   # How many milliseconds each use must be apart. Has 5 minutes of cooldown by default.
   # (Int) default: 300000
   cooldown: 300000
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # Settings for the explosion.
   explosion:
@@ -577,6 +689,13 @@ enlightened:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
 ##
 ## ABILITY: Ranged
 ## - Shoots arrows that go fast and reach far.
@@ -598,6 +717,13 @@ ranged:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 2.8
+  min-launch-velocity: 2.8
 
   # How much quicker the arrow fires than normal.
   # (Double) default: 5.0
@@ -624,6 +750,13 @@ machine:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # The amount of arrows to fire per click. Must be at least 1.
   # (Int) default: 3
@@ -658,6 +791,13 @@ poisonous:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # How long the target gets poisoned in ticks.
   # (Int) default: 160
   poison-time: 160
@@ -691,6 +831,13 @@ disorienting:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # Maximum change in yaw in degrees.
   # (Double) default: 30.0
   yaw-fuzzing: 30.0
@@ -720,6 +867,13 @@ swap:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
 ##
 ## ABILITY: Draining
 ## - Heals the player when it damages a target.
@@ -740,6 +894,13 @@ draining:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # The amount of health points to heal on every hit. 1 point = half a heart.
   # (Int) default: 2
@@ -766,6 +927,13 @@ flintand:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   #  A particle will spawn from shot arrows every N ticks.
   # (Int) default: 4
   particle-every-n-ticks: 4
@@ -790,6 +958,13 @@ disarming:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # The chance of disarming anything.
   # Chance between 0 and 1.
@@ -820,6 +995,13 @@ wither:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
   # (Int) default: 12
   levels: 12
@@ -849,6 +1031,13 @@ firey:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # Multiplier of the initial arrow velocity.
   # (Double) default: 0.8
   fireball-speed-multiplier: 0.8
@@ -874,6 +1063,13 @@ slow:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # After what time the arrows should despawn, in milliseconds.
   # Prevents arrows to be stored after they despawn. Not recommended to increase the default value.
@@ -909,6 +1105,13 @@ level:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # The amount of levels to steal per hit.
   # (Int) default: 1
   level-change: 1
@@ -933,6 +1136,13 @@ undead:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # The amount of zombies to spawn.
   # (Int) default: 16
@@ -963,6 +1173,13 @@ woodman:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # The chance of sticks dropping instead of logs.
   # Chance between 0 and 1.
   # (Double) default: 0.08
@@ -990,6 +1207,17 @@ starvation:
   # (Int) default: 7
   levels: 7
 
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # How many hunger points the target loses.
   # (Int) default: 3
   hunger-points: 3
@@ -1014,6 +1242,13 @@ multi:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # The amount of arrows to fire at once, must be at least 1.
   # (Int) default: 8
@@ -1043,6 +1278,13 @@ bomb:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # The amount of TNT to spawn.
   # (Int) default: 3
@@ -1077,6 +1319,13 @@ drop:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # How many blocks the target must be teleported upward.
   # (Int) default: 8
   drop-height: 8
@@ -1101,6 +1350,13 @@ airstrike:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # The maximum amount of milliseconds the arrow can spawn TNT.
   # This is mostly a safety measure for when land events are not registered.
@@ -1128,6 +1384,13 @@ magmatic:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # A particle will spawn from shot arrows every N (this amount of) ticks.
   # (Int) default: 3
   particle-every-n-ticks: 3
@@ -1152,6 +1415,13 @@ aquatic:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # A particle will spawn from shot arrows every N (this amount of) ticks.
   # (Int) default: 3
@@ -1178,6 +1448,13 @@ pull:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # How hard to the bow pulls (quite magic value).
   # (Double) default: 7.5
   strength: 7.5
@@ -1202,6 +1479,13 @@ paralyze:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # How long the effects last in ticks.
   # (Int) default: 240
@@ -1242,6 +1526,13 @@ cluster:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # The amount of TNT to spawn.
   # (Int) default: 5
   tnt-count: 5
@@ -1275,6 +1566,13 @@ airship:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # The maximum amount of milliseconds the arrow can boost the player.
   # This is mostly a safety measure for when land events are not registered.
   # (Int) default: 7000
@@ -1305,6 +1603,13 @@ iron:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # Settings for anvils that get near entities during flight.
   flying:
@@ -1356,6 +1661,13 @@ curse:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # The mean duration of the curse in milliseconds.
   # (Int) default: 14000
@@ -1469,6 +1781,13 @@ round:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # How many arrows get fired.
   # (Int) default: 30
   arrow-count: 30
@@ -1496,6 +1815,13 @@ frozen:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # How many blocks along the x/z axis the bow can freeze.
   # (Int) default: 2
@@ -1562,6 +1888,13 @@ drill:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # The (square) diameter of the block slices to break.
   # (Int) default: 3
   diameter: 3
@@ -1588,6 +1921,13 @@ music:
   # (Int) default: 30000
   cooldown: 30000
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
 ##
 ## ABILITY: Homing
 ## - Shoots arrows that home in on the nearest entity.
@@ -1608,6 +1948,13 @@ homing:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # How many milliseconds until the homing effect wears out.
   # (Int) default: 2500
@@ -1663,6 +2010,13 @@ interdimensional:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # Maximum amount of blocks from the player to search for targets.
   # (Int) default: 50
   maximum-search-distance: 50
@@ -1713,6 +2067,13 @@ singularity:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # Settings to the impact location of the arrows:
   impact:
@@ -1774,6 +2135,13 @@ pushy:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # Settings to the impact location of the arrows:
   impact:
     # How far from the impact site entities can be pushed aawy.
@@ -1815,6 +2183,13 @@ rainbow:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # The saturation of the colour particles (range 0.0-1.0).
   # (Double) default: 0.83
   saturation: 0.83
@@ -1855,6 +2230,13 @@ laser:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # The chance that a laser beam crits. Number between 0 and 1.
   # (Double) default: 0.25
@@ -1898,6 +2280,13 @@ grappling:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # How quickly the player travels to the grappling hook location (constant speed).
   # Must be positive.
   # (Double) default: 1.25
@@ -1929,6 +2318,13 @@ bouncy:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # Multiplier for the velocity of the arrow after the bounce.
   # Values greater than or equal to 1 make the arrow bounce perpetually.
@@ -1966,6 +2362,13 @@ mining:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # The maximum amount of blocks in a vein that can be mined.
   # Don't set this too high as it will impact server performance.
   # A warning will show up when setting > 100.
@@ -1992,6 +2395,13 @@ up:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # Y-acceleration of the arrows in blocks per tick.
   # Positive value = going up. Negative value = going down.
@@ -2027,6 +2437,13 @@ shear:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # The range around the location of impact where special blocks/entities (sheep, pumpkins, ...), in blocks.
   # (Double) default: 2.0
   impact-range: 2.0
@@ -2056,6 +2473,13 @@ undying:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
 ##
 ## ABILITY: Firework
 ## - Shoots a slightly rising firework bullet that splits into multiple fireworks.
@@ -2079,6 +2503,13 @@ firework:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # The gravity that is applied to the projectiles every tick.
   # Positive gravity makes projectiles go upward, negative gravity makes them go downward.
@@ -2154,6 +2585,13 @@ bridge:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # What block to use as bridge.
   # (String) default: cobblestone
   material: 'cobblestone'
@@ -2187,6 +2625,13 @@ meteor:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # The power of the explosions of the fireballs on impact. TNT is 4.0 for reference.
   # Beware: the region protection range stays the same. Largers explosions leave you at a risk of blowing up
@@ -2243,6 +2688,13 @@ draggy:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # The maximum amount of milliseconds the drag effect will be active.
   # This is mostly a safety measure for when land events are not registered.
   # (Int) default: 4000
@@ -2275,6 +2727,13 @@ baby:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
 ##
 ## ABILITY: Smoky
 ## - Erects a smokescreen at the location of impact.
@@ -2296,6 +2755,13 @@ smoky:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 2500
   cooldown: 2500
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # Settings for the particle smokescreen cloud spawned.
   particle-cloud:
@@ -2359,6 +2825,13 @@ invincibility:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # Multiplier for the damage dealt by the arrows.
   # (Double) default: 1.5
   damage-multiplier: 1.5
@@ -2392,6 +2865,13 @@ blocky:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
 ##
 ## ABILITY: Accelerating
 ## - Shoots arrows that start slow, but move faster and faster.
@@ -2413,6 +2893,13 @@ accelerating:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # The minimum speed of the arrow in blocks/tick. This is also the start speed.
   # (Double) default: 0.5
@@ -2456,6 +2943,13 @@ farmers:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # How many blocks from the arrow soil will be turned into farmland.
   # (Int) default: 2
   range: 2
@@ -2484,6 +2978,13 @@ bow:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # Arrows shoot an arrow every, this amount of, ticks.
   # (Int) default: 5
@@ -2522,6 +3023,13 @@ mine:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # The power of the mine explosions. TNT is 4.0 for reference.
   # Beware: the region protection range stays the same. Largers explosions leave you at a risk of blowing up
@@ -2574,6 +3082,13 @@ blaster:
   # How many milliseconds each use must be apart. Has no cooldown by default.
   # (Int) default: 0
   cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
 
   # Arrows explode every N, this amount of, ticks.
   # (Int) default: 4

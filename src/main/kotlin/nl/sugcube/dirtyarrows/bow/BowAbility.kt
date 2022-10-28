@@ -71,7 +71,7 @@ abstract class BowAbility(
         val removeArrow: Boolean = true,
 
         /**
-         * Short human readable description of the bow's effects.
+         * Short human-readable description of the bow's effects.
          */
         val description: String = ""
 
@@ -108,6 +108,16 @@ abstract class BowAbility(
      * How many milliseconds of cooldown the ability has.
      */
     private val cooldownTime = config.getInt("$node.cooldown").toLong()
+
+    /**
+     * The minimum velocity the arrow must have in order for the bow ability to kick in.
+     * This can be useful as a natural cooldown without having to use the built-in cooldown mechanic.
+     *
+     * Arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+     * A value of `0.0` means that it can always be launched.
+     * Going above the maximum will render the ability useless.
+     */
+    private val minimumLaunchVelocity: Double = config.getDouble("$node.min-launch-velocity")
 
     /**
      * Whether to play a sound when the recharge time expires.
@@ -233,6 +243,10 @@ abstract class BowAbility(
         if (player.hasBowInHand().not()) return
         if (player.hasPermission().not()) return
         if (player.inCooldownPeriod()) return
+        if (arrow.velocity.length() < minimumLaunchVelocity) {
+            event.isCancelled = true
+            return
+        }
         if (canShootInProtectedRegions.not() && player.location.isInProtectedRegion(player)) return
         if (player.meetsResourceRequirements().not()) return
 
