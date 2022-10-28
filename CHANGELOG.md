@@ -8,6 +8,12 @@ Changelog
 * **`~`** Tweaked
 * **`-`** Removed feature
 
+## Version 4.7
+
+* **`i`** Updated for Minecraft 1.18.2
+* **`~`** Max world height changed to 318 (woodman/undead bows).
+* **`~`** Aquatic/Magmatic bow no longer shoots falling blocks, but just places on impact.
+
 ## Version 4.6
 * **`i`** Updated for Minecraft 1.17.1
 * **`+`** Added Azalea bow.
