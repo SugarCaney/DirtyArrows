@@ -393,20 +393,10 @@ abstract class BowAbility(
         val recentlyRemoved = ArrayList<ItemStack>(costRequirements.size)
 
         costRequirements.forEach { item ->
-            // Find the item with the correct material. removeItem won't work when the item has
-            // item data.
-            val eligibleItem = inventory.asSequence()
-                    .filterNotNull()
-                    .firstOrNull { it.type == item.type && it.amount >= item.amount }
-                    ?: return@forEach
-
-            val toRemove = eligibleItem.clone().apply {
-                amount = item.amount
-            }
             if (gameMode != GameMode.CREATIVE) {
-                inventory.removeIncludingData(toRemove)
+                inventory.removeIncludingData(item)
             }
-            recentlyRemoved.add(toRemove)
+            recentlyRemoved.add(item)
         }
 
         mostRecentItemsConsumed[this] = recentlyRemoved

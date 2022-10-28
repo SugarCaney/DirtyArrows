@@ -99,6 +99,8 @@ fun Inventory.containsAtLeastExcludingData(toCheck: ItemStack): Boolean {
  * It will combine all available stacks.
  */
 fun Inventory.removeIncludingData(toRemove: ItemStack) {
+    val contents = contents
+
     // The total amount of items that must be removed from the inventory.
     val totalToRemove = toRemove.amount
 
@@ -106,25 +108,29 @@ fun Inventory.removeIncludingData(toRemove: ItemStack) {
     var amountRemoved = 0
 
     // Use a regular loop, to prevent modifying the inventory while iterating.
-    for (i in 0 until size) {
+    for (i in contents.indices) {
         // Check if the item is eligible to be removed.
-        val item = getItem(i) ?: continue
-        if (item.type != toRemove.type || item.itemMeta != toRemove.itemMeta) continue
+        val item = contents[i] ?: continue
+        if (item.type != toRemove.type) continue
 
         // The amount of items that are yet to be removed.
         val targetToRemove = totalToRemove - amountRemoved
 
         // All items that need to be removed are removed.
         if (targetToRemove < item.amount) {
-            val newAmount = item.amount - targetToRemove
-            val newItem = ItemStack(item.type, newAmount)
-            newItem.itemMeta = item.itemMeta
-            setItem(i, newItem)
+            contents[i].amount = item.amount - targetToRemove
+            setContents(contents)
             return
         }
 
         // Removal threshold not met yet.
-        amountRemoved = item.amount
-        setItem(i, ItemStack(Material.AIR, 0))
+        amountRemoved += item.amount
+        contents[i] = ItemStack(Material.AIR, 0)
+
+        // Check if done
+        if (amountRemoved >= toRemove.amount) {
+            setContents(contents)
+            return
+        }
     }
 }

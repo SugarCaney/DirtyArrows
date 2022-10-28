@@ -8,6 +8,15 @@ Changelog
 * **`~`** Tweaked
 * **`-`** Removed feature
 
+## Version 4.6
+* **`i`** Updated for Minecraft 1.17.1
+* **`+`** Added Azalea bow.
+* **`!`** Fixed ammo not being properly removed from the inventory when distributed over multiple stacks.
+* **`~`** Shear bow can now shear lush cave flora.
+* **`~`** Mining bow can now mine amethyst clusters, copper ore, and deepslate ores.
+* **`~`** Mining bow drops raw ores instead of the ore block.
+* **`~`** Mining bow with flame auto smelts raw ores (fortune affects drop count).
+
 ## Version 4.5
 * **`i`** Updated for Minecraft 1.16.5
 * **`+`** Added Crimson bow.
