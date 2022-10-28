@@ -31,7 +31,7 @@ How to contact me/ask for support:
 
 ## Downloads
 * **`MC 1.19.2`** Coming soon...
-* **`MC 1.18.2`** Coming soon...
+* **`MC 1.18.2`** [Version 4.7](https://dev.bukkit.org/projects/dirtyarrows/files/4054997/download)
 * **`MC 1.17.1`** [Version 4.6](https://dev.bukkit.org/projects/dirtyarrows/files/4054884/download)
 * **`MC 1.16.5`** [Version 4.5](https://dev.bukkit.org/projects/dirtyarrows/files/4054071/download)
 * **`MC 1.15.2`** [Version 4.3](https://dev.bukkit.org/projects/dirtyarrows/files/4052531/download)
