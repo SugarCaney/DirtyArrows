@@ -82,6 +82,17 @@ val Material.isShearable: Boolean
         Material.NETHER_SPROUTS,
         Material.TWISTING_VINES,
         Material.WEEPING_VINES,
+        Material.AZALEA_LEAVES,
+        Material.FLOWERING_AZALEA_LEAVES,
+        Material.AZALEA,
+        Material.FLOWERING_AZALEA,
+        Material.BIG_DRIPLEAF,
+        Material.SMALL_DRIPLEAF,
+        Material.CAVE_VINES,
+        Material.CAVE_VINES_PLANT,
+        Material.GLOW_LICHEN,
+        Material.HANGING_ROOTS,
+        Material.SPORE_BLOSSOM,
         Material.VINE -> true
         else -> false
     }

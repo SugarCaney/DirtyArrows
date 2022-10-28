@@ -80,8 +80,17 @@ open class ShearBow(plugin: DirtyArrows) : BowAbility(
             val originalType = block.type
 
             if (originalType.isShearable) {
-                val itemDrop = ItemStack(originalType, 1)
-                block.centreLocation.dropItem(itemDrop)
+                // Drop glow berries from cave vines with berries.
+                if (originalType == Material.CAVE_VINES) {
+                    if (block.blockData.hasBerries()) {
+                        block.centreLocation.dropItem(ItemStack(Material.GLOW_BERRIES, 1))
+                    }
+                }
+                // Otherwise just drop the same block.
+                else {
+                    block.centreLocation.dropItem(ItemStack(originalType, 1))
+                }
+
                 block.type = Material.AIR
             }
         }
