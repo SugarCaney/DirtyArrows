@@ -11,7 +11,7 @@ object Worlds {
     /**
      * The maximum Y location where blocks can be placed (inclusive).
      */
-    const val MAX_WORLD_Y = 320
+    const val MAX_WORLD_Y = 319
 }
 
 /**

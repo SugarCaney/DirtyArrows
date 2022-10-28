@@ -7,12 +7,10 @@ import nl.sugcube.dirtyarrows.util.copyOf
 import org.bukkit.Effect
 import org.bukkit.GameMode
 import org.bukkit.Material
+import org.bukkit.Sound
 import org.bukkit.entity.Arrow
-import org.bukkit.entity.FallingBlock
 import org.bukkit.entity.Player
-import org.bukkit.event.EventHandler
-import org.bukkit.event.entity.EntityChangeBlockEvent
-import org.bukkit.event.entity.ProjectileLaunchEvent
+import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.inventory.ItemStack
 
 /**
@@ -34,20 +32,12 @@ open class AquaticBow(plugin: DirtyArrows) : BowAbility(
      */
     val particleEveryNTicks = config.getInt("$node.particle-every-n-ticks")
 
-    /**
-     * Shot falling blocks mapped to their shooter.
-     */
-    private val waterBlocks = HashMap<FallingBlock, Player>()
+    override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
+        val block = arrow.location.block
 
-    override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {
-        val direction = arrow.velocity.copyOf().normalize()
-        // Spawn the lava block slightly in front of the player.
-        val spawnLocation = arrow.location.add(direction.multiply(1.5))
-
-        player.world.spawnFallingBlock(spawnLocation, Material.WATER.createBlockData()).apply {
-            velocity = arrow.velocity
-            dropItem = false
-            waterBlocks[this] = player
+        if (block.type == Material.AIR && block.location.isInProtectedRegion(player).not()) {
+            arrow.location.block.type = Material.WATER
+            player.world.playSound(arrow.location, Sound.ITEM_BUCKET_EMPTY, 1f, 1f)
         }
     }
 
@@ -55,7 +45,7 @@ open class AquaticBow(plugin: DirtyArrows) : BowAbility(
         if (tickNumber % particleEveryNTicks == 0) return
 
         arrows.forEach {
-            it.world.playEffect(it.location.copyOf().add(0.5, 0.5, 0.5), Effect.STEP_SOUND, Material.WATER)
+            it.world.playEffect(it.location.copyOf().add(0.5, 0.5, 0.5), Effect.STEP_SOUND, Material.LAPIS_BLOCK)
         }
     }
 
@@ -65,17 +55,5 @@ open class AquaticBow(plugin: DirtyArrows) : BowAbility(
         // Empty the lava bucket.
         inventory.firstOrNull { it?.type == Material.WATER_BUCKET }
                 ?.let { it.type = Material.BUCKET }
-    }
-
-    @EventHandler
-    fun lavaBlockProtection(event: EntityChangeBlockEvent) {
-        val waterBlock = event.entity as? FallingBlock ?: return
-        val shooter = waterBlocks[waterBlock] ?: return
-
-        if (waterBlock.location.isInProtectedRegion(shooter)) {
-            event.isCancelled = true
-            waterBlocks.remove(waterBlock)
-            waterBlock.remove()
-        }
     }
 }
