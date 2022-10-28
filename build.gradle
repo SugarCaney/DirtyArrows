@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'nl.sugcube.dirtyarrows'
-version '4.6'
+version '4.7'
 
 repositories {
     mavenCentral()
@@ -24,8 +24,8 @@ dependencies {
 //    implementation name: 'bukkit-1.14.4'
 //    implementation name: 'bukkit-1.15.2'
 //    implementation name: 'bukkit-1.16.5'
-    implementation name: 'bukkit-1.17.1'
-//    implementation name: 'bukkit-1.18.2'
+//    implementation name: 'bukkit-1.17.1'
+    implementation name: 'bukkit-1.18.2'
 //    implementation name: 'bukkit-1.19.2'
 }
 
