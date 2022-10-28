@@ -141,7 +141,12 @@ open class TreeBow(plugin: DirtyArrows, val tree: Tree) : BowAbility(
 
         AZALEA(DefaultBow.AZALEA, TreeType.AZALEA, Material.OAK_LOG, Material.AZALEA, 1, mapOf(
             TreeType.AZALEA to 1
-        ), "an azalea tree");
+        ), "an azalea tree"),
+
+        MANGROVE(DefaultBow.MANGROVE, TreeType.MANGROVE, Material.MANGROVE_LOG, Material.MANGROVE_PROPAGULE, 1, mapOf(
+            TreeType.MANGROVE to 5,
+            TreeType.TALL_MANGROVE to 1,
+        ), "a mangrove tree");
 
         /**
          * The items required to use a bow of this tree type.

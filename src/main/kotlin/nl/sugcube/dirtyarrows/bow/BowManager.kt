@@ -69,6 +69,7 @@ open class BowManager(private val plugin: DirtyArrows): Iterable<BowType>, Liste
         TreeBow(plugin, TreeBow.Tree.CRIMSON).load()
         TreeBow(plugin, TreeBow.Tree.WARPED).load()
         TreeBow(plugin, TreeBow.Tree.AZALEA).load()
+        TreeBow(plugin, TreeBow.Tree.MANGROVE).load()
         BattyBow(plugin).load()
         NuclearBow(plugin).load()
         EnlightenedBow(plugin).load()

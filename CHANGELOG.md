@@ -8,6 +8,11 @@ Changelog
 * **`~`** Tweaked
 * **`-`** Removed feature
 
+## Version 5.0
+
+* **`i`** Updated for Minecraft 1.19.2
+* **`+`** Added Mangrove bow.
+
 ## Version 4.7
 
 * **`i`** Updated for Minecraft 1.18.2

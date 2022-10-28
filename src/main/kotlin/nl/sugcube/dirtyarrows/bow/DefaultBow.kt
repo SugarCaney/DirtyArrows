@@ -122,7 +122,8 @@ enum class DefaultBow(
     BLASTER("blaster"),
     CRIMSON("crimson"),
     WARPED("warped"),
-    AZALEA("azalea")
+    AZALEA("azalea"),
+    MANGROVE("mangrove"),
     ;
 
     /**

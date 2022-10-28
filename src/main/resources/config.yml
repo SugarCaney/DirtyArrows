@@ -410,6 +410,27 @@ azalea:
   cooldown: 0
 
 ##
+## ABILITY: Mangrove Tree
+## - Generates a mangrove tree
+##
+mangrove:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default:
+  name: 'Mangrove Bow'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 5
+  levels: 5
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+##
 ## ABILITY: Batty
 ## - Spawns a swarm of bats.
 ##
