@@ -124,14 +124,26 @@ open class MiningBow(plugin: DirtyArrows) : BowAbility(
             return true
         }
 
+        val fortune = player.fortuneLevel()
+
         // On FLAME enchantment, drop the smelted item.
         if (oreMaterial in SMELT_ORES && bow.containsEnchantment(Enchantment.ARROW_FIRE)) {
-            oreMaterial.smeltedItem?.let { world.dropItem(centreLocation, it) }
+
+            // In case of nether gold ore, just drop 1 ingot regardless of the fortune level.
+            // Nether gold ore drops nuggest that do not smelt to bars.
+            if (oreMaterial == Material.NETHER_GOLD_ORE) {
+                world.dropItem(centreLocation, ItemStack(Material.GOLD_INGOT, 1))
+                return true
+            }
+
+            // Smelt the drops.
+            for (i in 0 until oreMaterial.fortuneDropCount(fortune)) {
+                oreMaterial.smeltedItem?.let { world.dropItem(centreLocation, it) }
+            }
             return true
         }
 
         // Otherwise, figure out how many items to drop. Can be influenced by the fortune level of the pickaxe.
-        val fortune = player.fortuneLevel()
         oreMaterial.fortuneDrops(fortune).forEach { world.dropItem(centreLocation, it) }
 
         return true
@@ -144,23 +156,34 @@ open class MiningBow(plugin: DirtyArrows) : BowAbility(
          */
         private val ELIGIBLE_ORES = mapOf(
                 Material.COAL_ORE to ToolLevel.WOOD,
+                Material.DEEPSLATE_COAL_ORE to ToolLevel.WOOD,
+                Material.COPPER_ORE to ToolLevel.STONE,
+                Material.DEEPSLATE_COPPER_ORE to ToolLevel.STONE,
                 Material.IRON_ORE to  ToolLevel.STONE,
+                Material.DEEPSLATE_IRON_ORE to  ToolLevel.STONE,
                 Material.LAPIS_ORE to ToolLevel.STONE,
+                Material.DEEPSLATE_LAPIS_ORE to ToolLevel.STONE,
                 Material.REDSTONE_ORE to ToolLevel.IRON,
+                Material.DEEPSLATE_REDSTONE_ORE to ToolLevel.IRON,
                 Material.GOLD_ORE to ToolLevel.IRON,
+                Material.DEEPSLATE_GOLD_ORE to ToolLevel.IRON,
                 Material.DIAMOND_ORE to ToolLevel.IRON,
+                Material.DEEPSLATE_DIAMOND_ORE to ToolLevel.IRON,
                 Material.EMERALD_ORE to ToolLevel.IRON,
+                Material.DEEPSLATE_EMERALD_ORE to ToolLevel.IRON,
                 Material.NETHER_QUARTZ_ORE to ToolLevel.WOOD,
-                Material.NETHER_GOLD_ORE to ToolLevel.WOOD
+                Material.NETHER_GOLD_ORE to ToolLevel.WOOD,
+                Material.AMETHYST_CLUSTER to ToolLevel.BARE_HANDS
         )
 
         /**
          * All ores that can be smelted.
          */
         private val SMELT_ORES = setOf(
-                Material.IRON_ORE,
-                Material.GOLD_ORE,
-                Material.NETHER_GOLD_ORE
+                Material.IRON_ORE, Material.DEEPSLATE_IRON_ORE,
+                Material.COPPER_ORE, Material.DEEPSLATE_COPPER_ORE,
+                Material.GOLD_ORE, Material.DEEPSLATE_GOLD_ORE,
+                Material.NETHER_GOLD_ORE,
         )
     }
 }

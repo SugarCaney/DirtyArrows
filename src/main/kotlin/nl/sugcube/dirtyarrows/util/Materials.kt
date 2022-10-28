@@ -8,7 +8,6 @@ import org.bukkit.inventory.CookingRecipe
 import org.bukkit.inventory.ItemStack
 import kotlin.math.min
 import kotlin.random.Random
-import kotlin.random.nextInt
 
 /**
  * Maps each material to the item stack obtained when smelting this item.
@@ -136,29 +135,38 @@ fun Block.isLog() = type.isLog()
  * Get the items that should drop from this material, considering the fortune level.
  */
 fun Material.fortuneDrops(level: Int = 0): Collection<ItemStack> {
-    val amount = when (this) {
-        Material.COAL_ORE,
-        Material.DIAMOND_ORE,
-        Material.EMERALD_ORE,
-        Material.NETHER_QUARTZ_ORE -> oreFortuneCount(fortuneLevel = level, dropAmount = 1..1)
-        Material.NETHER_GOLD_ORE -> netherGoldOreFortuneCount(fortuneLevel = level)
-        Material.LAPIS_ORE -> oreFortuneCount(fortuneLevel = level, dropAmount = 4..9)
-        Material.REDSTONE_ORE -> redstoneFortuneCount(fortuneLevel = level)
-        Material.MELON -> melonFortuneCount(fortuneLevel = level)
-        else -> 1
-    }
-
+    val amount = fortuneDropCount(level)
     val dropMaterial = when (this) {
-        Material.IRON_ORE, Material.GOLD_ORE -> this
-        Material.MELON -> Material.MELON_SLICE
+        Material.LAPIS_ORE, Material.DEEPSLATE_LAPIS_ORE -> Material.LAPIS_LAZULI
+        Material.IRON_ORE, Material.DEEPSLATE_IRON_ORE -> Material.RAW_IRON
+        Material.COPPER_ORE, Material.DEEPSLATE_COPPER_ORE -> Material.RAW_COPPER
+        Material.GOLD_ORE, Material.DEEPSLATE_GOLD_ORE -> Material.RAW_GOLD
         Material.NETHER_GOLD_ORE -> Material.GOLD_NUGGET
+        Material.AMETHYST_CLUSTER -> Material.AMETHYST_SHARD
+        Material.MELON -> Material.MELON_SLICE
         else -> smeltedItem?.type ?: this
     }
 
-    return if (this == Material.LAPIS_ORE) {
-        listOf(ItemStack(Material.LAPIS_LAZULI, amount))
-    }
-    else listOf(ItemStack(dropMaterial, amount))
+    return listOf(ItemStack(dropMaterial, amount))
+}
+
+/**
+ * Calculates how many items must be dropped, considering the fortune level.
+ */
+fun Material.fortuneDropCount(level: Int = 0) = when (this) {
+    Material.COAL_ORE, Material.DEEPSLATE_COAL_ORE,
+    Material.DIAMOND_ORE, Material.DEEPSLATE_DIAMOND_ORE,
+    Material.EMERALD_ORE, Material.DEEPSLATE_EMERALD_ORE,
+    Material.IRON_ORE, Material.DEEPSLATE_IRON_ORE,
+    Material.GOLD_ORE, Material.DEEPSLATE_GOLD_ORE,
+    Material.NETHER_QUARTZ_ORE -> oreFortuneCount(fortuneLevel = level, dropAmount = 1..1)
+    Material.COPPER_ORE, Material.DEEPSLATE_COPPER_ORE -> oreFortuneCount(fortuneLevel = level, dropAmount = 2..5)
+    Material.NETHER_GOLD_ORE -> oreFortuneCount(fortuneLevel = level, dropAmount = 2..6)
+    Material.LAPIS_ORE, Material.DEEPSLATE_LAPIS_ORE -> oreFortuneCount(fortuneLevel = level, dropAmount = 4..9)
+    Material.REDSTONE_ORE, Material.DEEPSLATE_REDSTONE_ORE -> redstoneFortuneCount(fortuneLevel = level)
+    Material.AMETHYST_CLUSTER -> oreFortuneCount(fortuneLevel = level, dropAmount = 4..4)
+    Material.MELON -> melonFortuneCount(fortuneLevel = level)
+    else -> 1
 }
 
 /**
@@ -200,40 +208,3 @@ fun redstoneFortuneCount(fortuneLevel: Int = 0) = 4 + Random.nextInt(0, fortuneL
  *          The level of the fortune enchantment to consider (0 for no fortune).
  */
 fun melonFortuneCount(fortuneLevel: Int = 0) = min(9, 3 + Random.nextInt(0, fortuneLevel + 4))
-
-/**
- * Calculates a random amount of drops for nether gold ore, including the effects of fortune.
- *
- * @param fortuneLevel
- *          The level of the fortune enchantment to consider (0 for no fortune).
- */
-fun netherGoldOreFortuneCount(fortuneLevel: Int = 0): Int {
-    // No fortune: 2-6 drops
-    var dropCount = Random.nextInt(2..6)
-
-    when (fortuneLevel) {
-        // Fortune 1: 33% chance to double
-        1 -> {
-            if (Random.nextInt(0, 3) == 0) {
-                dropCount *= 2
-            }
-        }
-        // Fortune 2: 25% chance to double, 25% chance to triple
-        2 -> {
-            when (Random.nextInt(0, 4)) {
-                0 -> dropCount *= 2
-                1 -> dropCount *= 3
-            }
-        }
-        // Fortune 3: 20% chance to double, 20% chance to triple, 20% chance to quadruple
-        3 -> {
-            when (Random.nextInt(0, 5)) {
-                0 -> dropCount *= 2
-                1 -> dropCount *= 3
-                2 -> dropCount *= 4
-            }
-        }
-    }
-
-    return dropCount
-}
