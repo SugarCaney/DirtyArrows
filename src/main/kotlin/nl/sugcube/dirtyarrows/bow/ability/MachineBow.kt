@@ -5,6 +5,7 @@ import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
 import nl.sugcube.dirtyarrows.util.applyBowEnchantments
 import nl.sugcube.dirtyarrows.util.fuzz
+import nl.sugcube.dirtyarrows.util.scheduleRemoval
 import nl.sugcube.dirtyarrows.util.subtractDurability
 import org.bukkit.Effect
 import org.bukkit.GameMode
@@ -56,7 +57,7 @@ open class MachineBow(plugin: DirtyArrows) : BowAbility(
 
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {
         unregisterArrow(arrow)
-        arrow.remove()
+        arrow.scheduleRemoval(plugin)
     }
 
     @EventHandler

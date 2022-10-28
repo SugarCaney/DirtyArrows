@@ -393,9 +393,9 @@ abstract class BowAbility(
         val recentlyRemoved = ArrayList<ItemStack>(costRequirements.size)
 
         costRequirements.forEach { item ->
-            if (gameMode != GameMode.CREATIVE) {
-                inventory.removeIncludingData(item)
-            }
+            // Preview true when gamemode = create, i.e. just check which items will have been removed if they
+            // were in survival mode.
+            recentlyRemoved.addAll(inventory.removeIncludingData(item, preview = gameMode == GameMode.CREATIVE))
             recentlyRemoved.add(item)
         }
 

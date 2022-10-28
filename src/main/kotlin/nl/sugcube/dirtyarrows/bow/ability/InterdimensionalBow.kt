@@ -86,7 +86,7 @@ open class InterdimensionalBow(plugin: DirtyArrows) : BowAbility(
             arrow.showLaunchEffect(player)
 
             unregisterArrow(arrow)
-            arrow.remove()
+            arrow.scheduleRemoval(plugin)
         }
     }
 

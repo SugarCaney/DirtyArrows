@@ -4,6 +4,7 @@ import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
 import nl.sugcube.dirtyarrows.util.copyOf
+import nl.sugcube.dirtyarrows.util.scheduleRemoval
 import org.bukkit.Material
 import org.bukkit.Particle
 import org.bukkit.Sound
@@ -71,7 +72,7 @@ open class IronBow(plugin: DirtyArrows) : BowAbility(
         }
 
         unregisterArrow(arrow)
-        arrow.remove()
+        arrow.scheduleRemoval(plugin)
     }
 
     override fun effect() {

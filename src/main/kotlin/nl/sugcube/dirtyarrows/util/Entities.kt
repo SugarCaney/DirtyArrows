@@ -1,5 +1,6 @@
 package nl.sugcube.dirtyarrows.util
 
+import nl.sugcube.dirtyarrows.DirtyArrows
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.Entity
 import org.bukkit.entity.EntityType
@@ -29,3 +30,12 @@ fun Arrow.respawnArrow(): Arrow {
         createdArrow.shooter = this@respawnArrow.shooter
     } as Arrow
 }
+
+/**
+ * Schedules a task to delete the arrow entity from existence.
+ */
+fun Arrow.scheduleRemoval(plugin: DirtyArrows) = plugin.server.scheduler.scheduleSyncDelayedTask(plugin, {
+    // For some reason this needs to be scheduled when you want to delete an array immediately after a player fired it.
+    // If you don't, you return the arrow to the player's inventory.
+    remove()
+}, 1L)

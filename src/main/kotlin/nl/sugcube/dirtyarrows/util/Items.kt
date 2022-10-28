@@ -97,40 +97,52 @@ fun Inventory.containsAtLeastExcludingData(toCheck: ItemStack): Boolean {
  * Removes the given items from the inventory, also checks for material data.
  * The amount removed is the amount in the ItemStack.
  * It will combine all available stacks.
+ *
+ * @param preview
+ *          Whether to just generate the list of items that will be removed (true).
+ *          When true, it does not remove the actual items.
+ *
+ * @return The removed items.
  */
-fun Inventory.removeIncludingData(toRemove: ItemStack) {
-    val contents = contents
+fun Inventory.removeIncludingData(toRemove: ItemStack, preview: Boolean = false): Iterable<ItemStack> {
+    val removedItemStacks = ArrayList<ItemStack>(2)
+
+    val inventory: Array<ItemStack?> = if (preview) Array(contents.size) {
+        contents[it]?.clone() ?: ItemStack(Material.AIR, 1)
+    }
+    else contents
 
     // The total amount of items that must be removed from the inventory.
-    val totalToRemove = toRemove.amount
+    val totalAmountOfItemsToRemove = toRemove.amount
 
     // The amount of items that have been removed until 'now'.
-    var amountRemoved = 0
+    var amountOfRemovedItems = 0
 
-    // Use a regular loop, to prevent modifying the inventory while iterating.
-    for (i in contents.indices) {
-        // Check if the item is eligible to be removed.
-        val item = contents[i] ?: continue
-        if (item.type != toRemove.type) continue
+    inventory.forEachIndexed { index, itemSlot ->
+        // Only remove items of the requested type.
+        if (itemSlot?.type != toRemove.type) return@forEachIndexed
 
         // The amount of items that are yet to be removed.
-        val targetToRemove = totalToRemove - amountRemoved
+        val amountYetToBeRemoved = totalAmountOfItemsToRemove - amountOfRemovedItems
 
-        // All items that need to be removed are removed.
-        if (targetToRemove < item.amount) {
-            contents[i].amount = item.amount - targetToRemove
-            setContents(contents)
-            return
+        // All items that need to be removed are removed, whilst there is a surplus of items in the inventory.
+        if (amountYetToBeRemoved < itemSlot.amount) {
+            removedItemStacks += itemSlot.clone()
+            itemSlot.amount = itemSlot.amount - amountYetToBeRemoved
+            return removedItemStacks
         }
 
         // Removal threshold not met yet.
-        amountRemoved += item.amount
-        contents[i] = ItemStack(Material.AIR, 0)
+        removedItemStacks += itemSlot.clone()
+        amountOfRemovedItems += itemSlot.amount
+        if (preview.not()) {
+            setItem(index, ItemStack(Material.AIR))
+        }
 
         // Check if done
-        if (amountRemoved >= toRemove.amount) {
-            setContents(contents)
-            return
+        if (amountOfRemovedItems >= toRemove.amount) {
+            return removedItemStacks
         }
     }
+    return removedItemStacks
 }

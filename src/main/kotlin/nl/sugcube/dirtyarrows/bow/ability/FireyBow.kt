@@ -3,6 +3,7 @@ package nl.sugcube.dirtyarrows.bow.ability
 import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
+import nl.sugcube.dirtyarrows.util.scheduleRemoval
 import org.bukkit.Material
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.Fireball
@@ -32,6 +33,6 @@ open class FireyBow(plugin: DirtyArrows) : BowAbility(
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {
         player.launchProjectile(Fireball::class.java, arrow.velocity.multiply(fireballSpeedMultiplier))
         unregisterArrow(arrow)
-        arrow.remove()
+        arrow.scheduleRemoval(plugin)
     }
 }

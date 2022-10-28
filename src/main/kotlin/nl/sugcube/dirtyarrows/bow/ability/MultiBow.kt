@@ -25,7 +25,7 @@ open class MultiBow(plugin: DirtyArrows) : BowAbility(
         type = DefaultBow.MULTI,
         canShootInProtectedRegions = true,
         removeArrow = false,
-        costRequirements = listOf(ItemStack(Material.ARROW, 12)),
+        costRequirements = listOf(ItemStack(Material.ARROW, 8)),
         description = "Shoots multiple arrows simultaneously."
 ) {
 

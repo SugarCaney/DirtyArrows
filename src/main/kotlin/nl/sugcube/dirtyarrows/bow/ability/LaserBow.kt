@@ -89,7 +89,7 @@ open class LaserBow(plugin: DirtyArrows) : BowAbility(
 
         // Only launch the laser beam.
         unregisterArrow(arrow)
-        arrow.remove()
+        arrow.scheduleRemoval(plugin)
     }
 
     /**
