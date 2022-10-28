@@ -32,7 +32,7 @@ How to contact me/ask for support:
 ## Downloads
 * **`MC 1.19.2`** Coming soon...
 * **`MC 1.18.2`** Coming soon...
-* **`MC 1.17.1`** Coming soon...
+* **`MC 1.17.1`** [Version 4.6](https://dev.bukkit.org/projects/dirtyarrows/files/4054884/download)
 * **`MC 1.16.5`** [Version 4.5](https://dev.bukkit.org/projects/dirtyarrows/files/4054071/download)
 * **`MC 1.15.2`** [Version 4.3](https://dev.bukkit.org/projects/dirtyarrows/files/4052531/download)
 * **`MC 1.14.4`** [Version 4.3](https://dev.bukkit.org/projects/dirtyarrows/files/4052531/download)
@@ -70,6 +70,7 @@ The listed names are the default names, you can change the names in the configur
 | airship | Airship Bow | Fly behind your arrows. | 2 feathers |
 | airstrike | Airstrike Bow | Arrow drops TNT during flight. | At least 1 TNT |
 | aquatic | Aquatic Bow | Shoot water blocks. | 1 water bucket |
+| azalea | Azalea Bow | Spawns an azalea tree. | 1 azalea, 1 bone meal |
 | baby | Baby Bow | Turns baby mobs into adult mobs, and adults into babies. | - |
 | batty | Batty Bow | Spawns a swarm of bats on impact. | 6 rotten flesh |
 | birch | Birch Bow | Spawns a birch tree. | 1 birch sapling, 1 bone meal |
