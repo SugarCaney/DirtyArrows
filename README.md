@@ -33,7 +33,7 @@ How to contact me/ask for support:
 * **`MC 1.19.2`** Coming soon...
 * **`MC 1.18.2`** Coming soon...
 * **`MC 1.17.1`** Coming soon...
-* **`MC 1.16.5`** Coming soon...
+* **`MC 1.16.5`** [Version 4.5](https://dev.bukkit.org/projects/dirtyarrows/files/4054071/download)
 * **`MC 1.15.2`** [Version 4.3](https://dev.bukkit.org/projects/dirtyarrows/files/4052531/download)
 * **`MC 1.14.4`** [Version 4.3](https://dev.bukkit.org/projects/dirtyarrows/files/4052531/download)
 * **`MC 1.13.2`** [Version 4.2](https://dev.bukkit.org/projects/dirtyarrows/files/4052085/download)
@@ -81,6 +81,7 @@ The listed names are the default names, you can change the names in the configur
 | bridge | Bridge Bow | Creates a temporary bridge out of blocks (configurable). | At least 1 cobblestone |
 | clucky | Clucky Bow | Spawns chickens. | 1 egg |
 | cluster | Cluster Bow | Ignite clusters of TNT. | 5 TNT |
+| crimson | Crimson Bow | Spawns a huge crimson fungus. | 1 crimson fungus, 1 bone meal |
 | curse | Curse Bow | Curses the target (weird effects over time). | 1 fermented spider eye |
 | darkoak | Dark Oak Bow | Spawns a dark oak tree. | 4 dark oak saplings, 1 bone meal |
 | disarming | Disarming Bow | Targets have a chance to drop their hand item/armour. | - |
@@ -132,6 +133,7 @@ The listed names are the default names, you can change the names in the configur
 | undead | Undead Bow | Spawns a circle of zombies. | 64 rotten flesh |
 | undying | Bow of Undying | Saves you from death when held. | - |
 | up | UP Bow | Arrows have reversed gravity. | - |
+| warped | Warped Bow | Spawns a huge warped fungus. | 1 warped fungus, 1 bone meal |
 | wither | Wither Bow | Shoots wither skulls. | 3 soul sand |
 | woodman | Woodman's Bow | Tears down trees quickly. | - |
 
@@ -183,6 +185,7 @@ You can reload the configuration file in-game using the `/da reload` command.
 | show-particles | Boolean | `true` | Whether the plugin should display particles (true) or not (false). |
 | blood | Boolean | `false` | Whether entities should show blood particles when damaged. |
 | arrow-recipe-amount | Integer | `16` | How many arrows must be crafted with the default arrow recipe. |
+| play-sound-when-charged | Boolean | `false` | Whether a sound must be played (true) or not (false) when a cooldown timer ends. |
 | **updates** |
 | check-for-updates | Boolean | `true` | Whether to check for updates. |
 | show-admin | Boolean | `true` | If admins (with the dirtyarrows.admin permission) must be notified when a new updates is ready. |
