@@ -1,6 +1,8 @@
 DirtyArrows
 ==================
 
+![rKXH9Qv](https://user-images.githubusercontent.com/3883950/198655115-4d5b4ec2-a5a7-4a7b-84e6-197f8b30f5fd.png)
+
 DirtyArrows is a plugin which allows you to release the powers of your Bows.
 When you rename a bow in an anvil to a specific name (possibilities will be shown further down in this post), the bow becomes a real 'Bastard'.
 With the plugin enabled, the special bows allow you to use their specific powers.
