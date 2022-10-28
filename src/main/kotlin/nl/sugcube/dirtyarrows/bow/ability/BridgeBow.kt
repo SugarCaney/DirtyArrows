@@ -107,8 +107,10 @@ open class BridgeBow(plugin: DirtyArrows) : BowAbility(
 
         if (System.currentTimeMillis() - birthTime >= duration) {
             block.world.playEffect(block.centreLocation, Effect.STEP_SOUND, block.type)
+            if (block.type == material) {
+                player.reimburseBowItems()
+            }
             block.type = Material.AIR
-            player.reimburseBowItems()
             return@removeIf true
         }
 

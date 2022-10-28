@@ -12,6 +12,7 @@ Changelog
 * **`i`** Updated for Minecraft 1.17.1
 * **`+`** Added Azalea bow.
 * **`!`** Fixed ammo not being properly removed from the inventory when distributed over multiple stacks.
+* **`!`** Bridge bow no longer reimburses blocks that are broken before the timer runs out.
 * **`~`** Shear bow can now shear lush cave flora.
 * **`~`** Mining bow can now mine amethyst clusters, copper ore, and deepslate ores.
 * **`~`** Mining bow drops raw ores instead of the ore block.
