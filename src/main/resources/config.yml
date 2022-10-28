@@ -3171,3 +3171,40 @@ burst:
   # The maximum deviation from the vertical velocity (randomly picked).
   # (Double) default: 0.09
   vertical-velocity-fuzzing: 0.14
+
+##
+## ABILITY: Chain Bow
+## - Arrows that hit entities get redirected to the closest other entity.
+##
+chain:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Burst Bow
+  name: 'Chain Bow'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 12
+  levels: 12
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
+  # How far away to look for entities to chain toward.
+  # (Double) default: 32.0
+  search-range: 32.0
+
+  # By how much to multiply the velocity of the arrow after each bounce.
+  # Values below 1 make sure that the chain fades away.
+  # (Double) default: 0.85
+  velocity-multiplier: 0.85

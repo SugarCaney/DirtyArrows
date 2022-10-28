@@ -17,17 +17,17 @@ import kotlin.math.sin
 import kotlin.random.Random
 
 /**
- * Pulls the target toward you.
+ * Launches a couple of smaller projectiles when the arrow lands.
  *
  * @author SugarCaney
  */
 open class BurstBow(plugin: DirtyArrows) : BowAbility(
-        plugin = plugin,
-        type = DefaultBow.BURST,
-        canShootInProtectedRegions = false,
-        removeArrow = false,
-        costRequirements = listOf(ItemStack(Material.GUNPOWDER, 2)),
-        description = "Bursts into projectiles on hit."
+    plugin = plugin,
+    type = DefaultBow.BURST,
+    canShootInProtectedRegions = false,
+    removeArrow = false,
+    costRequirements = listOf(ItemStack(Material.GUNPOWDER, 2)),
+    description = "Bursts into projectiles on hit."
 ) {
 
     /**

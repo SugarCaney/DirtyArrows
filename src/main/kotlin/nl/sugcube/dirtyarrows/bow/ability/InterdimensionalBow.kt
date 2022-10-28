@@ -4,11 +4,12 @@ import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
 import nl.sugcube.dirtyarrows.util.*
-import org.bukkit.GameMode
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.Sound
-import org.bukkit.entity.*
+import org.bukkit.entity.Arrow
+import org.bukkit.entity.LivingEntity
+import org.bukkit.entity.Player
 import org.bukkit.event.entity.ProjectileLaunchEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.util.Vector
@@ -160,23 +161,8 @@ open class InterdimensionalBow(plugin: DirtyArrows) : BowAbility(
         spawnLocation.copyOf(y = spawnLocation.y - 0.5).showFlameParticle()
         spawnLocation.world?.playSound(spawnLocation, Sound.ENTITY_ARROW_SHOOT, 10f, 1f)
 
-        // Launch arrow.
-        val direction = target.location.copyOf().subtract(spawnLocation)
-        val speed = velocity.length()
-        val arrowVelocity = direction.toVector().normalize().multiply(speed).add(Vector(0.0, 0.25, 0.0))
-
-        spawnLocation.world?.spawnEntity(spawnLocation, EntityType.ARROW)?.apply {
-            val arrow = this as Arrow
-            val player = this@shootArrow.shooter
-            arrow.shooter = player
-            arrow.velocity = arrowVelocity
-            arrow.applyBowEnchantments(bow)
-
-            if (player is Player && player.gameMode == GameMode.CREATIVE) {
-                arrow.pickupStatus = AbstractArrow.PickupStatus.CREATIVE_ONLY
-            }
-
-            registerArrow(arrow)
+        spawnLocation.launchArrowAt(target.location, velocity.length(), shooter, bow)?.let {
+            registerArrow(it)
         }
     }
 

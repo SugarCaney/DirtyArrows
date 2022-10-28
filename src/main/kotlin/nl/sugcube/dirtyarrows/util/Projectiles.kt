@@ -1,13 +1,13 @@
 package nl.sugcube.dirtyarrows.util
 
 import org.bukkit.GameMode
+import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
-import org.bukkit.entity.AbstractArrow
-import org.bukkit.entity.Arrow
-import org.bukkit.entity.Player
+import org.bukkit.entity.*
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
+import org.bukkit.util.Vector
 
 /**
  * Applies effects for the bow enchantments to this arrow.
@@ -60,4 +60,37 @@ fun Player.removeArrow(bowItem: ItemStack?) {
     if (bowItem?.containsEnchantment(Enchantment.ARROW_INFINITE) == false) {
         player?.inventory?.removeItem(ItemStack(Material.ARROW, 1))
     }
+}
+
+/**
+ * Launches an arrow from `this` location to the `target` location.
+ *
+ * @param target
+ *          The target location to shoot at.
+ * @param velocity
+ *          The speed (Vector length of the velocity) to shoot at.
+ * @param shooter
+ *          Who shoots the arrow, `null` for no shooter.
+ * @param bow
+ *          The bow to shoot the arrow with, `null` for no bow.
+ */
+fun Location.launchArrowAt(
+        target: Location,
+        velocity: Double,
+        shooter: LivingEntity? = null,
+        bow: ItemStack? = null
+) : Arrow? {
+    val direction = target.copyOf().subtract(this)
+    val arrowVelocity = direction.toVector().normalize().multiply(velocity).add(Vector(0.0, 0.25, 0.0))
+
+    return world?.spawnEntity(this, EntityType.ARROW)?.apply {
+        val arrow = this as Arrow
+        arrow.shooter = shooter
+        arrow.velocity = arrowVelocity
+        arrow.applyBowEnchantments(bow)
+
+        if (shooter is Player && shooter.gameMode == GameMode.CREATIVE) {
+            arrow.pickupStatus = AbstractArrow.PickupStatus.CREATIVE_ONLY
+        }
+    } as? Arrow
 }
