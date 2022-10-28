@@ -13,14 +13,10 @@ import kotlin.random.nextInt
 /**
  * Maps each material to the item stack obtained when smelting this item.
  */
-private val SMELT_RESULTS: Map<Material, ItemStack> = HashMap(Bukkit.recipeIterator().asSequence()
+private val SMELT_RESULTS: Map<Material, ItemStack> = Bukkit.recipeIterator().asSequence()
     .mapNotNull { it as? CookingRecipe<*> }
     .map { it.input.type to it.result }
     .toMap()
-).apply {
-    // Apparently nether gold ore was not in the default list of cooking recipes, so adding it manually.
-    this[Material.NETHER_GOLD_ORE] = ItemStack(Material.GOLD_INGOT, 1)
-}
 
 /**
  * Maps each DyeColor to a list of (indices in DYE_INDEX_*):
