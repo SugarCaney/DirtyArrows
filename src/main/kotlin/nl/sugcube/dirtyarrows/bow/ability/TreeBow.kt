@@ -137,7 +137,11 @@ open class TreeBow(plugin: DirtyArrows, val tree: Tree) : BowAbility(
 
         WARPED(DefaultBow.WARPED, TreeType.WARPED_FUNGUS, Material.WARPED_STEM, Material.WARPED_FUNGUS, 1, mapOf(
             TreeType.WARPED_FUNGUS to 1
-        ), "a huge warped fungus");
+        ), "a huge warped fungus"),
+
+        AZALEA(DefaultBow.AZALEA, TreeType.AZALEA, Material.OAK_LOG, Material.AZALEA, 1, mapOf(
+            TreeType.AZALEA to 1
+        ), "an azalea tree");
 
         /**
          * The items required to use a bow of this tree type.
