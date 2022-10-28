@@ -92,6 +92,7 @@ val Material.isShearable: Boolean
         Material.GLOW_LICHEN,
         Material.HANGING_ROOTS,
         Material.SPORE_BLOSSOM,
+        Material.MANGROVE_LEAVES,
         Material.VINE -> true
         else -> false
     }
@@ -107,7 +108,8 @@ fun Material.isLog(): Boolean = when (this) {
     Material.ACACIA_LOG,
     Material.DARK_OAK_LOG,
     Material.CRIMSON_STEM,
-    Material.WARPED_STEM -> true
+    Material.WARPED_STEM,
+    Material.MANGROVE_LOG -> true
     else -> false
 }
 
@@ -123,6 +125,7 @@ fun Material.plankOfLog(): Material = when (this) {
     Material.DARK_OAK_LOG -> Material.DARK_OAK_PLANKS
     Material.CRIMSON_STEM -> Material.CRIMSON_PLANKS
     Material.WARPED_STEM -> Material.WARPED_PLANKS
+    Material.MANGROVE_LOG -> Material.MANGROVE_PLANKS
     else -> error("Material <$this> is not a supported log material.")
 }
 
