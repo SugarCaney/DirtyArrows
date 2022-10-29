@@ -13,6 +13,7 @@ Changelog
 * **`i`** Updated for Minecraft 1.19.2
 * **`+`** Added Burst bow.
 * **`+`** Added Chain bow.
+* **`+`** Added Cutting bow.
 * **`+`** Added Mangrove bow.
 * **`+`** Added minimum launch velocity configuration option to only shoot when the bow has been drawn long enough.
 * **`~`** Ranged bow can no longer be shot in quick succession by default.

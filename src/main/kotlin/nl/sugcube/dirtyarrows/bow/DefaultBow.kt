@@ -126,6 +126,7 @@ enum class DefaultBow(
     MANGROVE("mangrove"),
     BURST("burst"),
     CHAIN("chain"),
+    CUTTING("cutting"),
     ;
 
     /**

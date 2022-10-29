@@ -1,9 +1,11 @@
 package nl.sugcube.dirtyarrows.util
 
 import nl.sugcube.dirtyarrows.DirtyArrows
+import org.bukkit.Location
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.Entity
 import org.bukkit.entity.EntityType
+import org.bukkit.util.Vector
 import kotlin.math.sqrt
 
 /**
@@ -11,6 +13,12 @@ import kotlin.math.sqrt
  */
 val Entity.diameter: Double
     get() = sqrt(width * width + height * height)
+
+/**
+ * The centre location of the entity.
+ */
+val Entity.centre: Location
+    get() = location.clone().add(Vector(0.0, height / 2.0, 0.0))
 
 /**
  * Respawns an arrow in the same direction as this arrow.
