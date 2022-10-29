@@ -394,7 +394,7 @@ acacia:
 ##
 darkoak:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default:
+  # (String) default: Dark Oak Bow
   name: 'Dark Oak Bow'
 
   # Whether the bow can be used (true).
@@ -422,7 +422,7 @@ darkoak:
 ##
 crimson:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default:
+  # (String) default: Crimson Bow
   name: 'Crimson Bow'
 
   # Whether the bow can be used (true).
@@ -450,7 +450,7 @@ crimson:
 ##
 warped:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default:
+  # (String) default: Warped Bow
   name: 'Warped Bow'
 
   # Whether the bow can be used (true).
@@ -478,7 +478,7 @@ warped:
 ##
 azalea:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default:
+  # (String) default: Azalea Bow
   name: 'Azalea Bow'
 
   # Whether the bow can be used (true).
@@ -3178,7 +3178,7 @@ burst:
 ##
 chain:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Burst Bow
+  # (String) default: Chain Bow
   name: 'Chain Bow'
 
   # Whether the bow can be used (true).
@@ -3215,7 +3215,7 @@ chain:
 ##
 cutting:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
-  # (String) default: Burst Bow
+  # (String) default: Cutting Bow
   name: 'Cutting Bow'
 
   # Whether the bow can be used (true).
@@ -3282,3 +3282,36 @@ cutting:
   # The hex representation of the colour of the beam when shot with a Flame bow.
   # (String) default: #EA7633 (orange)
   beam-colour-flame: '#EA7633'
+
+##
+## ABILITY: Bane Bow
+## - Does more damage, at the cost of playing annoying sounds and making you walk slowly.
+##
+bane:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Bane Bow
+  name: 'Bane Bow'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 7
+  levels: 7
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # The highest pitch value the played sounds can have.
+  # (Float) default: 0.85
+  maximum-pitch: 0.85
+
+  # The level of slowness to apply (level I starts with value 0).
+  # (Int) default: 3
+  slowness-level: 3
+
+  # Multiplier for damage inflicted by arrows shot by the Bane.
+  # (Double) default: 1.75
+  damage-multiplier: 1.75
