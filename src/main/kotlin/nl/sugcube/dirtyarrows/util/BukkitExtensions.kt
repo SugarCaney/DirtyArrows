@@ -1,6 +1,5 @@
 package nl.sugcube.dirtyarrows.util
 
-import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.World
 import org.bukkit.configuration.MemorySection
@@ -21,7 +20,10 @@ import kotlin.reflect.KClass
  *          The task to execute.
  */
 fun JavaPlugin.scheduleDelayed(delayTicks: Long, task: Runnable) {
-    Bukkit.getScheduler().scheduleSyncDelayedTask(this, task, delayTicks)
+    if (delayTicks <= 0) {
+        server.scheduler.scheduleSyncDelayedTask(this, task)
+    }
+    else server.scheduler.scheduleSyncDelayedTask(this, task, delayTicks)
 }
 
 /**

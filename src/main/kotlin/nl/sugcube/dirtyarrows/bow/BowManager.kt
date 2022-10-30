@@ -133,6 +133,7 @@ open class BowManager(private val plugin: DirtyArrows): Iterable<BowType>, Liste
         ChainBow(plugin).load()
         CuttingBow(plugin).load()
         BaneBow(plugin).load()
+        FlakBow(plugin).load()
     }
 
     /**

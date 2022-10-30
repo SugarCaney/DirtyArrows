@@ -3304,8 +3304,15 @@ bane:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # The highest pitch value the played sounds can have.
-  # (Float) default: 0.85
+  # (Double) default: 0.85
   maximum-pitch: 0.85
 
   # The level of slowness to apply (level I starts with value 0).
@@ -3315,3 +3322,104 @@ bane:
   # Multiplier for damage inflicted by arrows shot by the Bane.
   # (Double) default: 1.75
   damage-multiplier: 1.75
+
+##
+## ABILITY: Flak Bow
+## - Shoots slow invisible projectiles that burst into smaller explosions.
+##
+flak:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Flak Bow
+  name: 'Flak Bow'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 18
+  levels: 18
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 2.9
+  min-launch-velocity: 2.9
+
+  # How strongly the primary projectiles must spread.
+  # Higher = more spread, 0.0 = no spread.
+  # (Double) default: 0.39
+  spread: 0.30
+
+  # Properties of the primary projectiles.
+  primary:
+    # How many projectiles to spawn on bow launch.
+    # (Int) default: 3
+    projectile-count: 3
+
+    # How many blocks the primary projectiles travel per second.
+    # (Double) default: 10.0
+    projectile-speed: 10.0
+
+    # The maximum (random) deviation from the primary projectile speed.
+    # (Double) default: 1.2
+    projectile-speed-fuzzing: 1.2
+
+    # How many game ticks after launch before the primary projectiles explode.
+    # (Int) default: 20
+    ticks-before-explosion: 20
+
+    # The maximum (random) deviation from ticks-before-explosion.
+    # (Int) default: 3
+    ticks-before-explosion-fuzzing: 3
+
+    # The power of the primary explosions. TNT is 4.0 for reference.
+    # (Double) default: 3.8
+    power: 3.8
+
+    # Whether primary explosions can break blocks or not.
+    # (Boolean) default: false
+    break-blocks: false
+
+    # Whether primary explosions can set blocks on fire or not.
+    # (Boolean) default: false
+    set-on-fire: false
+
+  # Properties of the secondary projectiles.
+  secondary:
+    # How many secondary projectiles to spawn when a primary projectile bursts.
+    # (Int) default: 4
+    projectile-count: 4
+
+    # How many blocks the secondary projectiles travel per second.
+    # (Double) default: 3.7
+    projectile-speed: 3.7
+
+    # The maximum (random) deviation from the secondary projectile speed.
+    # (Double) default: 0.4
+    projectile-speed-fuzzing: 0.4
+
+    # How many game ticks after launch before the secondary projectiles explode.
+    # (Int) default: 20
+    ticks-before-explosion: 20
+
+    # The maximum (random) deviation from ticks-before-explosion.
+    # (Int) default: 4
+    ticks-before-explosion-fuzzing: 4
+
+    # The power of the secondary explosions. TNT is 4.0 for reference.
+    # (Double) default: 2.3
+    power: 2.3
+
+    # Whether secondary explosions can break blocks or not.
+    # (Boolean) default: false
+    break-blocks: false
+
+    # Whether secondary explosions can set blocks on fire or not.
+    # (Boolean) default: false
+    set-on-fire: false
