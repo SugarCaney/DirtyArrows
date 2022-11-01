@@ -248,7 +248,7 @@ abstract class BowAbility(
             return
         }
         if (canShootInProtectedRegions.not() && player.location.isInProtectedRegion(player)) return
-        if (player.meetsResourceRequirements().not()) return
+        if (meetsResourceRequirements(player).not()) return
 
         // Set cooldown.
         if (cooldownTime > 0) {
@@ -342,14 +342,14 @@ abstract class BowAbility(
      *          Whether to show an error to the player when they don't meet
      * @return `true` if the player meets the cost requirements, `false` if they don't.
      */
-    protected open fun Player.meetsResourceRequirements(showError: Boolean = true): Boolean {
-        val survival = gameMode == GameMode.SURVIVAL || gameMode == GameMode.ADVENTURE
+    protected open fun meetsResourceRequirements(player: Player, showError: Boolean = true): Boolean {
+        val survival = player.gameMode == GameMode.SURVIVAL || player.gameMode == GameMode.ADVENTURE
         val meetsRequirements = survival.not() || costRequirements.all {
-            inventory.checkForItem(it)
+            player.inventory.checkForItem(it)
         }
 
         if (showError && meetsRequirements.not()) {
-            sendMessage(Broadcast.NOT_ENOUGH_RESOURCES.format(costRequirements.joinToString(", ") {
+            player.sendMessage(Broadcast.NOT_ENOUGH_RESOURCES.format(this.costRequirements.joinToString(", ") {
                 "${it.type.name.toLowerCase()} (x${it.amount})"
             }))
         }

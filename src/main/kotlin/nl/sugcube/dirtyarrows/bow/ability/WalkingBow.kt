@@ -276,8 +276,10 @@ open class WalkingBow(plugin: DirtyArrows) : BowAbility(
             if (isDone) return
             isDone = true
 
-            explosionData?.let {
-                zombie.location.createExplosion(it.power, it.setOnFire, it.breakBlocks)
+            if (zombie.location.isInProtectedRegion(shooter).not()) {
+                explosionData?.let {
+                    zombie.location.createExplosion(it.power, it.setOnFire, it.breakBlocks)
+                }
             }
 
             zombie.remove()

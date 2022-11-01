@@ -54,7 +54,7 @@ open class AirstrikeBow(plugin: DirtyArrows) : BowAbility(
     override fun effect() {
         active.forEach { (arrow, player) ->
             if (plugin.regionManager.isWithinARegionXZMargin(arrow.location, protectionRange) != null) return@forEach
-            if (player.meetsResourceRequirements(showError = false).not()) return@forEach
+            if (meetsResourceRequirements(player = player, showError = false).not()) return@forEach
 
             player.world.spawnEntity(arrow.location.add(0.0, 2.0, 0.0), EntityType.PRIMED_TNT)
             player.consumeBowItems()

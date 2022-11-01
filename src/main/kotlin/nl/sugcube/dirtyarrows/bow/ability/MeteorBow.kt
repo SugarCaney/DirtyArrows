@@ -84,7 +84,7 @@ open class MeteorBow(plugin: DirtyArrows) : BowAbility(
             val cost = costRequirements.first()
 
             repeat(player.powerLevel()) {
-                if (it != 0 && player.meetsResourceRequirements(showError = false) && player.gameMode != GameMode.CREATIVE) return@repeat
+                if (it != 0 && meetsResourceRequirements(player = player, showError = false) && player.gameMode != GameMode.CREATIVE) return@repeat
 
                 arrow.spawnMeteor(deviation)
 

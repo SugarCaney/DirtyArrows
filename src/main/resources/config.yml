@@ -3482,3 +3482,80 @@ walking:
   # There are 20 game ticks in 1 second.
   # (Int) default: 480
   lifespan: 480
+
+##
+## ABILITY: Down Bow
+## - Shoots arrows that crash down once they reached their apex.
+##
+down:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Down Bow
+  name: 'Down Bow'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 7
+  levels: 7
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
+  # How fast the arrows will crash down in blocks/second.
+  # An arrow fired with maximum speed from the bow travels at around 3.0 blocks/second.
+  # (Double) default: 4.0
+  crash-velocity: 4.0
+
+##
+## ABILITY: Rain Bow
+## - Creates a shower of arrows at the arrows' apex.
+##
+rain:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Rain Bow
+  name: 'Rain Bow'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 7
+  levels: 7
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
+  # How many arrows to spawn.
+  # (Int) default: 8
+  arrow-count: 64
+
+  # Spread of the rain arrows on the x/z-axis.
+  # (Double) default: 0.35
+  spread: 1.2
+
+  # Spread of the rain arrows on the y-axis.
+  # (Double) default: 0.3
+  vertical-spread: 0.8
+
+  # Multiplier for damage inflicted by arrows shot by the Rain bow.
+  # (Double) default: 4.1
+  damage-multiplier: 4.1

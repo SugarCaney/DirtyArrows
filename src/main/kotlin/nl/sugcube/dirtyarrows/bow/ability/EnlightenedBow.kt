@@ -103,17 +103,17 @@ open class EnlightenedBow(plugin: DirtyArrows) : BowAbility(
         lastTorchType = player.firstHeldTorchType()
     }
 
-    override fun Player.meetsResourceRequirements(showError: Boolean): Boolean {
+    override fun meetsResourceRequirements(player: Player, showError: Boolean): Boolean {
         // Make sure to match online one item (torch or soul torch) instead of all items from the
         // cost requirements.
 
-        val survival = gameMode == GameMode.SURVIVAL || gameMode == GameMode.ADVENTURE
+        val survival = player.gameMode == GameMode.SURVIVAL || player.gameMode == GameMode.ADVENTURE
         val meetsRequirements = survival.not() || costRequirements.any {
-            inventory.checkForItem(it)
+            player.inventory.checkForItem(it)
         }
 
         if (showError && meetsRequirements.not()) {
-            sendMessage(Broadcast.NOT_ENOUGH_RESOURCES.format(costRequirements.joinToString(", or ") {
+            player.sendMessage(Broadcast.NOT_ENOUGH_RESOURCES.format(this.costRequirements.joinToString(", or ") {
                 "${it.type.name.toLowerCase()} (x${it.amount})"
             }))
         }

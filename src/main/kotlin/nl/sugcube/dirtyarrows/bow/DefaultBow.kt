@@ -130,6 +130,8 @@ enum class DefaultBow(
     BANE("bane"),
     FLAK("flak"),
     WALKING("walking"),
+    DOWN("down"),
+    RAIN("rain"),
     ;
 
     /**
