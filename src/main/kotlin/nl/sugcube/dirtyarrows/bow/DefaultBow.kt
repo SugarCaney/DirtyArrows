@@ -129,6 +129,7 @@ enum class DefaultBow(
     CUTTING("cutting"),
     BANE("bane"),
     FLAK("flak"),
+    WALKING("walking"),
     ;
 
     /**

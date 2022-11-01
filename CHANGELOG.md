@@ -17,6 +17,7 @@ Changelog
 * **`+`** Added Cutting bow.
 * **`+`** Added Flak bow.
 * **`+`** Added Mangrove bow.
+* **`+`** Added Walking bow.
 * **`+`** Added minimum launch velocity configuration option to only shoot when the bow has been drawn long enough.
 * **`~`** Ranged bow can no longer be shot in quick succession by default.
 
