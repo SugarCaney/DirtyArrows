@@ -3559,3 +3559,52 @@ rain:
   # Multiplier for damage inflicted by arrows shot by the Rain bow.
   # (Double) default: 4.1
   damage-multiplier: 4.1
+
+##
+## ABILITY: Rainstorm Bow
+## - Creates a huge shower of arrows at the arrows' apex.
+##
+rainstorm:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Rainstorm Bow
+  name: 'Rainstorm Bow'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 15
+  levels: 15
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 10000
+  cooldown: 10000
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
+  # How many arrows to spawn.
+  # (Int) default: 64
+  arrow-count: 64
+
+  # Spread of the rain arrows on the x/z-axis.
+  # (Double) default: 0.82
+  spread: 0.82
+
+  # Spread of the rain arrows on the y-axis.
+  # (Double) default: 0.8
+  vertical-spread: 0.8
+
+  # Multiplier for damage inflicted by arrows shot by the Rain bow.
+  # (Double) default: 1.75
+  damage-multiplier: 1.75
+
+  # The maximum amount of ticks the rainstorm can last.
+  # There are 20 game ticks in 1 second.
+  # (Double) default: 200
+  max-duration: 200
