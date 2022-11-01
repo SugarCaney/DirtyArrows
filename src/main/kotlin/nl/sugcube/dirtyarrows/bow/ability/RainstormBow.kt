@@ -98,6 +98,13 @@ open class RainstormBow(plugin: DirtyArrows) : BowAbility(
         }
     }
 
+    override fun meetsResourceRequirements(player: Player, showError: Boolean): Boolean {
+        if (player.bowItem()?.containsEnchantment(Enchantment.ARROW_INFINITE) == true) {
+            return true
+        }
+        return super.meetsResourceRequirements(player, showError)
+    }
+
     private fun Arrow.spawnRain() {
         val spawnLocation = location.clone()
         val spawnShooter = shooter
