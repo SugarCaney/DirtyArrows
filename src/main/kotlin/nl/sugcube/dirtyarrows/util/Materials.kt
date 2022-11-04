@@ -12,7 +12,7 @@ import kotlin.random.Random
 /**
  * Maps each material to the item stack obtained when smelting this item.
  */
-private val SMELT_RESULTS: Map<Material, ItemStack> = Bukkit.recipeIterator().asSequence()
+val SMELT_RESULTS: Map<Material, ItemStack> = Bukkit.recipeIterator().asSequence()
     .mapNotNull { it as? CookingRecipe<*> }
     .map { it.input.type to it.result }
     .toMap()

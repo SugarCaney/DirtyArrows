@@ -137,6 +137,7 @@ enum class DefaultBow(
     CRAFTING("crafting"),
     PIERCING("piercing"),
     BACKWARDS("backwards"),
+    CHEFS("chefs"),
     ;
 
     /**

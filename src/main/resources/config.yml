@@ -3725,3 +3725,43 @@ backwards:
   # 0.0 means that there is no minimum launch velocity.
   # (Double) default: 0.0
   min-launch-velocity: 0.0
+
+##
+## ABILITY: Chef's Bow
+## - Cooks items on the ground.
+##
+chefs:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Chef's Bow
+  name: "Chef's Bow"
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 7
+  levels: 7
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
+  # How close to the landing site items can be cooked.
+  # (Double) default: 1.0
+  cooking-range: 1.0
+
+  # How long it takes for an item to cook in seconds.
+  # (Int) default: 7
+  cooking-time: 7
+
+  # The maximum amount of item stacks that can be cooked at once.
+  # (Int) default: 2
+  max-items: 2

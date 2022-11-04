@@ -6,13 +6,22 @@ import org.bukkit.Location
 import org.bukkit.Particle
 import org.bukkit.Particle.DustOptions
 import org.bukkit.entity.Entity
+import org.bukkit.entity.Item
 import org.bukkit.potion.PotionType
+import org.bukkit.util.Vector
 
 /**
  * Shows a smoke particle on the location of the entity.
  */
-fun Entity.showSmokeParticle() = location.clone().add(0.5, 0.5, 0.5).let {
-    location.world?.playEffect(it, Effect.SMOKE, 0)
+fun Entity.showSmokeParticle() {
+    val locationModifier = when (this) {
+        is Item -> Vector()
+        else -> Vector(0.5, 0.5, 0.5)
+    }
+
+    location.clone().add(locationModifier).let {
+        location.world?.playEffect(it, Effect.SMOKE, 0)
+    }
 }
 
 /**
