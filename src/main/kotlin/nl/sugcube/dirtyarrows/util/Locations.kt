@@ -79,7 +79,7 @@ fun Location.nearbyEntities(range: Double): Collection<Entity> = world?.getNearb
  * Get all living entities within a certain range of this location.
  */
 fun Location.nearbyLivingEntities(range: Double) = nearbyEntities(range).asSequence()
-        .filter { distance(it.location) <= range }
+        .filter { distance(it.centre) <= range }
         .mapNotNull { it as? LivingEntity }
         .toList()
 

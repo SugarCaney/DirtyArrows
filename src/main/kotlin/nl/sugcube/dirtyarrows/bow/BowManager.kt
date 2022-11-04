@@ -144,6 +144,7 @@ open class BowManager(private val plugin: DirtyArrows): Iterable<BowType>, Liste
         BackwardsBow(plugin).load()
         ChefsBow(plugin).load()
         ShockwaveBow(plugin).load()
+        InvisibilityBow(plugin).load()
     }
 
     /**

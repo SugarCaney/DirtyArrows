@@ -12,6 +12,11 @@ object Worlds {
      * The maximum Y location where blocks can be placed (inclusive).
      */
     const val MAX_WORLD_Y = 319
+
+    /**
+     * Gravity in m/s^2.
+     */
+    const val GRAVITY = 1.0
 }
 
 /**

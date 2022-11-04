@@ -3814,3 +3814,31 @@ shockwave:
   # Show the shockwave particles every N ticks.
   # (Int) default: 2
   ticks-per-particle: 2
+
+##
+## ABILITY: Shockwave Bow
+## - Arrows create a shockwave on impact dealing damage to all entities that hit it.
+##
+invisibility:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Invisibility Bow
+  name: 'Invisibility Bow'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 12
+  levels: 12
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
