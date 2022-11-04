@@ -25,6 +25,7 @@ Changelog
 * **`+`** Added Piercing bow.
 * **`+`** Added Rain bow.
 * **`+`** Added Rainstorm bow.
+* **`+`** Added Shockwave bow.
 * **`+`** Added Walking bow.
 * **`+`** Added minimum launch velocity configuration option to only shoot when the bow has been drawn long enough.
 * **`~`** Ranged bow can no longer be shot in quick succession by default.

@@ -138,6 +138,7 @@ enum class DefaultBow(
     PIERCING("piercing"),
     BACKWARDS("backwards"),
     CHEFS("chefs"),
+    SHOCKWAVE("shockwave"),
     ;
 
     /**
