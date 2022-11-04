@@ -136,6 +136,7 @@ enum class DefaultBow(
     DELAY("delay"),
     CRAFTING("crafting"),
     PIERCING("piercing"),
+    BACKWARDS("backwards"),
     ;
 
     /**

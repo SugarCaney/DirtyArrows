@@ -11,6 +11,7 @@ Changelog
 ## Version 5.0
 
 * **`i`** Updated for Minecraft 1.19.2
+* **`+`** Added Backwards bow.
 * **`+`** Added Bane bow.
 * **`+`** Added Burst bow.
 * **`+`** Added Chain bow.
