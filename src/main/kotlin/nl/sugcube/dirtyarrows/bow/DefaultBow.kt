@@ -133,6 +133,7 @@ enum class DefaultBow(
     DOWN("down"),
     RAIN("rain"),
     RAINSTORM("rainstorm"),
+    DELAY("delay"),
     ;
 
     /**

@@ -15,6 +15,7 @@ Changelog
 * **`+`** Added Burst bow.
 * **`+`** Added Chain bow.
 * **`+`** Added Cutting bow.
+* **`+`** Added Delay bow.
 * **`+`** Added Down bow.
 * **`+`** Added Flak bow.
 * **`+`** Added Mangrove bow.

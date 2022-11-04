@@ -138,6 +138,7 @@ open class BowManager(private val plugin: DirtyArrows): Iterable<BowType>, Liste
         DownBow(plugin).load()
         RainBow(plugin).load()
         RainstormBow(plugin).load()
+        DelayBow(plugin).load()
     }
 
     /**

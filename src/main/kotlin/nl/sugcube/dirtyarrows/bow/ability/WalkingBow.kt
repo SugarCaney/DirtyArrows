@@ -70,6 +70,12 @@ open class WalkingBow(plugin: DirtyArrows) : BowAbility(
      */
     private val sentientBows = ArrayList<SentientBow>()
 
+    init {
+        check(arrowCount >= 1) { "$node.arrow-count must be greater than or equal to 1, got <$arrowCount>" }
+        check(lifespan >= 10) { "$node.lifespan must be greater than or equal to 1, got <$lifespan>" }
+        check(explosionPower >= 0.0) { "$node.explosion-power cannot be negative, got <$explosionPower>" }
+    }
+
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
         val bow = player.bowItem() ?: error("Invalid bow item for walking bow.")
         if (player.checkAndRemoveAmmo(bow).not()) return
