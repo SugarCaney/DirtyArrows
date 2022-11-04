@@ -3842,3 +3842,46 @@ invisibility:
   # 0.0 means that there is no minimum launch velocity.
   # (Double) default: 0.0
   min-launch-velocity: 0.0
+
+##
+## ABILITY: Mole Bow
+## - Arrows burrow underground and home in on targets.
+##
+mole:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Mole Bow
+  name: 'Mole Bow'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 7
+  levels: 7
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 1.2
+  min-launch-velocity: 1.2
+
+  # How many blocks/second underground arrows travel.
+  # (Double) default: 4.0
+  underground-speed: 4.0
+
+  # How many ticks to continue straight underground before surfacing.
+  # There are 20 game ticks in one second.
+  # (Double) default: 30
+  burrow-time: 30
+
+  # The maximum amount of ticks the arrow can dig before it destroys itself.
+  # This is mostly a safety measure for when land events are not registered.
+  # There are 20 game ticks in 1 second.
+  # (Int) default: 600
+  max-lifespan: 600

@@ -23,6 +23,7 @@ Changelog
 * **`+`** Added Flak bow.
 * **`+`** Added Invisibility bow.
 * **`+`** Added Mangrove bow.
+* **`+`** Added Mole bow.
 * **`+`** Added Piercing bow.
 * **`+`** Added Rain bow.
 * **`+`** Added Rainstorm bow.

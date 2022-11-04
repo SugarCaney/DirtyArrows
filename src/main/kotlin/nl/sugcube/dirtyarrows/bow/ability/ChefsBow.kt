@@ -73,6 +73,12 @@ open class ChefsBow(plugin: DirtyArrows) : BowAbility(
             cookingMap[item] = timeLeft
             item.showSmokeParticle()
         }
+
+        cleanInvalidItems()
+    }
+
+    private fun cleanInvalidItems() = cookingMap.entries.removeIf { (item, _) ->
+        item.isDead
     }
 
     private fun Item.cook() {

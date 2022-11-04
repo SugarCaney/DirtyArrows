@@ -139,7 +139,8 @@ enum class DefaultBow(
     BACKWARDS("backwards"),
     CHEFS("chefs"),
     SHOCKWAVE("shockwave"),
-    INVISIBILITY("invisibility")
+    INVISIBILITY("invisibility"),
+    MOLE("mole"),
     ;
 
     /**
