@@ -20,6 +20,7 @@ Changelog
 * **`+`** Added Down bow.
 * **`+`** Added Flak bow.
 * **`+`** Added Mangrove bow.
+* **`+`** Added Piercing bow.
 * **`+`** Added Rain bow.
 * **`+`** Added Rainstorm bow.
 * **`+`** Added Walking bow.
