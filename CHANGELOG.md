@@ -14,6 +14,7 @@ Changelog
 * **`+`** Added Bane bow.
 * **`+`** Added Burst bow.
 * **`+`** Added Chain bow.
+* **`+`** Added Crafting bow.
 * **`+`** Added Cutting bow.
 * **`+`** Added Delay bow.
 * **`+`** Added Down bow.

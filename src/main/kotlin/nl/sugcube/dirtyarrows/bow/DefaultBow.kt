@@ -134,6 +134,7 @@ enum class DefaultBow(
     RAIN("rain"),
     RAINSTORM("rainstorm"),
     DELAY("delay"),
+    CRAFTING("crafting"),
     ;
 
     /**
