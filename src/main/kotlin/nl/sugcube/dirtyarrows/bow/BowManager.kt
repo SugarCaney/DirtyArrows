@@ -148,6 +148,7 @@ open class BowManager(private val plugin: DirtyArrows): Iterable<BowType>, Liste
         MoleBow(plugin).load()
         RampagerBow(plugin).load()
         FloatyBow(plugin).load()
+        KamikazeBow(plugin).load()
     }
 
     /**
