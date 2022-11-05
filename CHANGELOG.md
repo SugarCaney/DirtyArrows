@@ -21,6 +21,7 @@ Changelog
 * **`+`** Added Delay bow.
 * **`+`** Added Down bow.
 * **`+`** Added Flak bow.
+* **`+`** Added Floaty bow.
 * **`+`** Added Invisibility bow.
 * **`+`** Added Mangrove bow.
 * **`+`** Added Mole bow.

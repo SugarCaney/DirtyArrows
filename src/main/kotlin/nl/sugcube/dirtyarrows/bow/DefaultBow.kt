@@ -142,6 +142,7 @@ enum class DefaultBow(
     INVISIBILITY("invisibility"),
     MOLE("mole"),
     RAMPAGER("rampager"),
+    FLOATY("floaty"),
     ;
 
     /**

@@ -3908,6 +3908,13 @@ rampager:
   # (Int) default: 0
   cooldown: 0
 
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
   # Whether to show the amount of stacks as title to the players.
   # (Boolean) default: true
   show-stack-count-as-title: true
@@ -3916,13 +3923,6 @@ rampager:
   # Low Damage = Green, High Damage = Dark red.
   # (Boolean) default: true
   colours-in-title: true
-
-  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
-  # In other words: how much does the bow have to be drawn.
-  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
-  # 0.0 means that there is no minimum launch velocity.
-  # (Double) default: 0.0
-  min-launch-velocity: 0.0
 
   # The maximum amount of rampager stacks.
   # You gain a rampager stack for every hit with this bow.
@@ -3943,3 +3943,41 @@ rampager:
   # There are 20 game ticks in 1 second.
   # (Int) default: 8
   decay-ticks: 8
+
+##
+## ABILITY: Floaty Bow
+## - Gives slow falling to the wielder when falling to fast.
+## - Arrows have reduced gravity.
+##
+floaty:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Floaty Bow
+  name: 'Floaty Bow'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 7
+  levels: 7
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 0.0
+  min-launch-velocity: 0.0
+
+  # Vertical player velocity When the slow falling effects kicks in.
+  # (Double) default: -0.6
+  vertical-velocity-threshold: -0.6
+
+  # How many percent of the gravity should be reversed.
+  # 1.0 => no gravity, 0.0 => normal gravity.
+  # (Double) default: 0.67
+  gravity-compensation: 0.67
