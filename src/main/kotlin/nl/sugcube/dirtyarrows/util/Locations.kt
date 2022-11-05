@@ -89,3 +89,10 @@ fun Location.nearbyLivingEntities(range: Double) = nearbyEntities(range).asSeque
 fun Location.distanceToVector(vector: Vector) = sqrt(
         (x - vector.x) * (x - vector.x) + (y - vector.y) * (y - vector.y) + (z - vector.z) * (z - vector.z)
 )
+
+/**
+ * Calculates the distance on the XZ plane from this location to the other location.
+ */
+fun Location.horizontalDistance(to: Location) = sqrt(
+        (x - to.x) * (x - to.x) + (z - to.z) * (z - to.z)
+)

@@ -3,7 +3,9 @@ package nl.sugcube.dirtyarrows.bow.ability
 import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
+import nl.sugcube.dirtyarrows.util.centre
 import nl.sugcube.dirtyarrows.util.copyOf
+import nl.sugcube.dirtyarrows.util.horizontalDistance
 import nl.sugcube.dirtyarrows.util.showColoredDust
 import org.bukkit.Color
 import org.bukkit.Location
@@ -11,6 +13,7 @@ import org.bukkit.entity.Arrow
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.ProjectileHitEvent
+import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.max
 import kotlin.math.sin
@@ -131,7 +134,10 @@ open class ShockwaveBow(plugin: DirtyArrows) : BowAbility(
 
         fun damageEntities() {
             epicentre.world!!.livingEntities.asSequence()
-                .filter { it.location.distance(epicentre) - currentRadius <= 0.1 }
+                .filter {
+                    (it.location.horizontalDistance(epicentre) - currentRadius <= 0.1) &&
+                            (abs(it.centre.y - epicentre.y) <= 1.2)
+                }
                 .forEach {
                     it.damage(damage, shooter)
 

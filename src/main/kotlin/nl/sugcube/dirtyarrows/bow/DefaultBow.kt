@@ -141,6 +141,7 @@ enum class DefaultBow(
     SHOCKWAVE("shockwave"),
     INVISIBILITY("invisibility"),
     MOLE("mole"),
+    RAMPAGER("rampager"),
     ;
 
     /**
