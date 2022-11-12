@@ -149,6 +149,7 @@ enum class DefaultBow(
     LAUNCH("launch"),
     ROULETTE("roulette"),
     FORCEFIELD("forcefield"),
+    SUCKY("sucky"),
     ;
 
     /**

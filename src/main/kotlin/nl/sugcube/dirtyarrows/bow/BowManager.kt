@@ -154,6 +154,7 @@ open class BowManager(private val plugin: DirtyArrows): Iterable<BowType>, Liste
         LaunchBow(plugin).load()
         RouletteBow(plugin).load()
         ForceFieldBow(plugin).load()
+        SuckyBow(plugin).load()
     }
 
     /**
