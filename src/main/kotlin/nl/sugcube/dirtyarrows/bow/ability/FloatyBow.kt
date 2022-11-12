@@ -47,7 +47,7 @@ open class FloatyBow(plugin: DirtyArrows) : BowAbility(
     @EventHandler
     fun fallProtection(event: PlayerMoveEvent) {
         val player = event.player
-        player.bowItem() ?: return
+        if (player.hasBowInHand().not()) return
 
         if (player.velocity.y < verticalVelocityThreshold) {
             player.addPotionEffect(PotionEffect(PotionEffectType.SLOW_FALLING, 60, 0, false, false, false))
