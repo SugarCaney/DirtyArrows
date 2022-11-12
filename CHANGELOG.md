@@ -22,6 +22,7 @@ Changelog
 * **`+`** Added Down bow.
 * **`+`** Added Flak bow.
 * **`+`** Added Floaty bow.
+* **`+`** Added Force Field bow.
 * **`+`** Added Invisibility bow.
 * **`+`** Added Kamikaze bow.
 * **`+`** Added Launch bow.

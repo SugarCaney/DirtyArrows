@@ -148,6 +148,7 @@ enum class DefaultBow(
     LEAD("lead"),
     LAUNCH("launch"),
     ROULETTE("roulette"),
+    FORCEFIELD("forcefield"),
     ;
 
     /**

@@ -4164,3 +4164,49 @@ roulette:
   # How much damage to inflict to the yielder when out of luck.
   # (Double) default: 20.0
   self-damage-amount: 20.0
+
+##
+## ABILITY: Force Field Bow
+## - Creates a temporary force field at the landing spot pushing entities outwards.
+##
+forcefield:
+  # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
+  # (String) default: Force Field Bow
+  name: 'Force Field Bow'
+
+  # Whether the bow can be used (true).
+  # (Boolean) default: true
+  enabled: true
+
+  # How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).
+  # (Int) default: 15
+  levels: 15
+
+  # How many milliseconds each use must be apart. Has no cooldown by default.
+  # (Int) default: 0
+  cooldown: 0
+
+  # The minimum velocity shot arrows must have in order for the bow ability to kick in.
+  # In other words: how much does the bow have to be drawn.
+  # Regular arrows get launched at a minimum of `0.3179888` and a maximum of `3.0212799` velocity.
+  # 0.0 means that there is no minimum launch velocity.
+  # (Double) default: 2.9
+  min-launch-velocity: 2.9
+
+  # How many game ticks the force field stays active.
+  # There are 20 game ticks in 1 second.
+  # (Int) default: 140
+  duration: 140
+
+  # How many game ticks to add to the duration of the force field per level of unbreaking on the bow.
+  # There are 20 game ticks in 1 second.
+  # (Int) default: 30
+  extra-duration-per-unbreaking-level: 30
+
+  # How many blocks from the centre of the force field to the edge.
+  # (Double) default: 5.2
+  radius: 5.2
+
+  # The push velocity outward at the centre.
+  # (Double) default: 1.3
+  push-power: 1.3
