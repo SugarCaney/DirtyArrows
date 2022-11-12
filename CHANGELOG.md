@@ -24,6 +24,7 @@ Changelog
 * **`+`** Added Floaty bow.
 * **`+`** Added Invisibility bow.
 * **`+`** Added Kamikaze bow.
+* **`+`** Added Launch bow.
 * **`+`** Added Lead bow.
 * **`+`** Added Mangrove bow.
 * **`+`** Added Mole bow.

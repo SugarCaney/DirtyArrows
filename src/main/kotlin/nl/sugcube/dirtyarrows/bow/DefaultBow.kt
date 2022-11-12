@@ -146,6 +146,7 @@ enum class DefaultBow(
     KAMIKAZE("kamikaze"),
     TAMING("taming"),
     LEAD("lead"),
+    LAUNCH("launch"),
     ;
 
     /**
