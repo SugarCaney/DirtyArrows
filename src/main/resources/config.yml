@@ -3611,7 +3611,7 @@ rainstorm:
 
 ##
 ## ABILITY: Delay Bow
-## - Creates a huge shower of arrows at the arrows' apex.
+## - Arrow shots are delayed for a certain time.
 ##
 delay:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).
@@ -3817,7 +3817,7 @@ shockwave:
 
 ##
 ## ABILITY: Shockwave Bow
-## - Arrows create a shockwave on impact dealing damage to all entities that hit it.
+## - Shoots invisible arrows.
 ##
 invisibility:
   # Bows with this item name have the ability applied. Supports formatting codes (&0, &1, ...).

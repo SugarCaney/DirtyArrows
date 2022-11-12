@@ -3,6 +3,8 @@ DirtyArrows
 
 ![rKXH9Qv](https://user-images.githubusercontent.com/3883950/198655115-4d5b4ec2-a5a7-4a7b-84e6-197f8b30f5fd.png)
 
+**100 new unique bow gimmicks for your Minecraft server!**
+
 DirtyArrows is a plugin which allows you to release the powers of your Bows.
 When you rename a bow in an anvil to a specific name (possibilities will be shown further down in this post), the bow becomes a real 'Bastard'.
 With the plugin enabled, the special bows allow you to use their specific powers.
@@ -56,7 +58,7 @@ How to contact me/ask for support:
 * Plugin showcase (v3.0 and earlier) by [BrokenBukkit (German/Deutsch)](https://www.youtube.com/watch?v=LjOTILxRlJE).
 
 ## Bows
-All 69 nice bow types will be listed here.
+All 100 nice bow types will be listed here.
 Have you forgotten what all the names are in-game?
 Use `/da help` (from page #2) to get the possible bows with a short description.
 All bow names are also present in the autocompletion of commands.
@@ -65,114 +67,141 @@ Use `/da` to enable or disable the plugin for yourself.
 If you do not like a feature, you could always disable it in the configuration file.
 The listed names are the default names, you can change the names in the configuration file.
 
-| ID | Bow Name (default) | Description | Ammo |
-| --- | --- | --- | --- |
-| acacia | Acacia Bow | Spawns an acacia tree. | 1 acacia sapling, 1 bone meal |
-| accelerating | Accelerating Bow | Arrows accelerate during flight. | - |
-| airship | Airship Bow | Fly behind your arrows. | 2 feathers |
-| airstrike | Airstrike Bow | Arrow drops TNT during flight. | At least 1 TNT |
-| aquatic | Aquatic Bow | Shoot water blocks. | 1 water bucket |
-| azalea | Azalea Bow | Spawns an azalea tree. | 1 azalea, 1 bone meal |
-| baby | Baby Bow | Turns baby mobs into adult mobs, and adults into babies. | - |
-| batty | Batty Bow | Spawns a swarm of bats on impact. | 6 rotten flesh |
-| birch | Birch Bow | Spawns a birch tree. | 1 birch sapling, 1 bone meal |
-| blaster | Blaster Bow | Arrows keep exploding during flight. | 3 gunpowder |
-| blocky | Blocky Bow | Places blocks from your off hand. | - |
-| bomb | Bomb Bow | Summons a TNT drop at this place. | 5 TNT |
-| bouncy | Bouncy Bow | Arrows bounce off blocks surfaces. | - |
-| bow | Bow Bow | Shoots arrows that shoot arrows. | - |
-| bridge | Bridge Bow | Creates a temporary bridge out of blocks (configurable). | At least 1 cobblestone |
-| clucky | Clucky Bow | Spawns chickens. | 1 egg |
-| cluster | Cluster Bow | Ignite clusters of TNT. | 5 TNT |
-| crimson | Crimson Bow | Spawns a huge crimson fungus. | 1 crimson fungus, 1 bone meal |
-| curse | Curse Bow | Curses the target (weird effects over time). | 1 fermented spider eye |
-| darkoak | Dark Oak Bow | Spawns a dark oak tree. | 4 dark oak saplings, 1 bone meal |
-| disarming | Disarming Bow | Targets have a chance to drop their hand item/armour. | - |
-| disorienting | Disorienting Bow | Manipulates the target's pitch/yaw. | - |
-| draggy | Draggy Bow | Arrows drag close entities to the landing spot. | - |
-| draining | Draining Bow | Gain health back every hit. | - |
-| drill | Drill Bow | Create beautiful tunnels. Requires a pickaxe, quality affected. | - |
-| drop | Drop Bow | Teleports the target into the air. | - |
-| ender | Ender Bow | Teleport to the location of impact. | 1 ender pearl |
-| enlightened | Enlightened Bow | Places torches. | 1 torch |
-| exploding | Exploding Bow | Explosive arrows. | 1 TNT |
-| farmers | Farmer's Bow | Creates farmland, harvests crops, and plants crops. | seeds (in off hand) |
-| firework | Firework Bow | Splits into deadly fireworks (firework customizable). | 2 firework charges |
-| firey | Firey Bow | Shoot fireballs. | 1 fire charge |
-| flintand | Flint and Bow | Sets blocks on fire. | flint and steel |
-| frozen | Frozen Bow | Spawns snow/ice and freezes targets. | 1 snow ball |
-| grappling | Grappling Bow | Acts as a grappling hook. | 1 tripwire hook |
-| homing | Homing Bow | Shoot mini homing rockets. | 1 gunpowder |
-| interdimensional | Interdimensional Bow | Warps arrows to targets. | - |
-| invincibility | Invincibility Bow | Powerful shots, but they make targets briefly invincible. | - |
-| iron | Iron Bow | Shoots deadly anvils. | 1 anvil |
-| jungle | Jungle Bow | Spawns a jungle tree/bush. | 1 jungle sapling, 1 bone meal |
-| laser | Laser Bow | Fast beams that can travel through non-opaque blocks, but do less damage. | 1 redstone |
-| level | Level Bow | Steals levels from the target. | - |
-| lightning | Lightning Bow | Spawns lightning. | 1 glowstone dust |
-| machine | Machine Bow | Shoots very quickly, and slightly inaccurate. | - |
-| magmatic | Magmatic Bow | Shoots lava. | 1 lava bucket |
-| meteor | Meteor Bow | Meteors will strike on impact depending on Power level. | 3 fire charges |
-| mine | Mine Bow | Arrows that land turn into landmines. | 3 gunpowder, 1 redstone |
-| mining | Mining Bow | Mines ore veins instantly. Flame auto-smelts ores. Requires pickaxe. | - |
-| multi | Multi Bow | Shoots multiple arrows simultaneously. | 12 arrows |
-| music | Music Bow | Plays a music disc at the location of impact. | music disc (not consumed) |
-| nuclear | Nuclear Bow | Huge boom. Radiation included. | 64 TNT |
-| oak | Oak Bow | Spawns an oak tree. | 1 oak sapling, 1 bone meal |
-| paralyze | Paralyze Bow | Paralyzes the target (nausea/slowness/blindness/weakness). | 1 nether wart |
-| poisonous | Poisonous Bow | Poisons the target. | 1 spider eye |
-| pull | Pull Bow | Pulls the target toward you. | - |
-| pushy | Pushy Bow | Pushes away entities with great force. | 3 feathers |
-| rainbow | Rainbow | So pretty. | - |
-| ranged | Ranged Bow | Shoot powerful, far-reaching arrows. | - |
-| round | 360 Bow | Shoots arrows all around you. | - |
-| shear | Shear Bow | Breaks all shearable blocks, and shears all shearable entities. | - |
-| singularity | Singularity Bow | Pulls in entities, suffocates them, and explodes. | 3 redstone |
-| slow | Slow Bow | Shoots extremely powerful, but extremely slow arrows. | - |
-| smoky | Smoky Bow | Creates a smokescreen and blinds entities. | 1 bone meal |
-| spruce | Spruce Bow | Spawns a spruce tree. | 1 spruce sapling, 1 bone meal |
-| starvation | Bow of Starvation | Target loses hunger points. | - |
-| swap | Swap Bow | Swap locations with the target. | - |
-| undead | Undead Bow | Spawns a circle of zombies. | 64 rotten flesh |
-| undying | Bow of Undying | Saves you from death when held. | - |
-| up | UP Bow | Arrows have reversed gravity. | - |
-| warped | Warped Bow | Spawns a huge warped fungus. | 1 warped fungus, 1 bone meal |
-| wither | Wither Bow | Shoots wither skulls. | 3 soul sand |
-| woodman | Woodman's Bow | Tears down trees quickly. | - |
+| ID               | Bow Name (default)   | Description                                                                                   | Ammo                             |
+|------------------|----------------------|-----------------------------------------------------------------------------------------------|----------------------------------|
+| acacia           | Acacia Bow           | Spawns an acacia tree.                                                                        | 1 acacia sapling, 1 bone meal    |
+| accelerating     | Accelerating Bow     | Arrows accelerate during flight.                                                              | -                                |
+| airship          | Airship Bow          | Fly behind your arrows.                                                                       | 2 feathers                       |
+| airstrike        | Airstrike Bow        | Arrow drops TNT during flight.                                                                | At least 1 TNT                   |
+| aquatic          | Aquatic Bow          | Shoot water blocks.                                                                           | 1 water bucket                   |
+| azalea           | Azalea Bow           | Spawns an azalea tree.                                                                        | 1 azalea, 1 bone meal            |
+| baby             | Baby Bow             | Turns baby mobs into adult mobs, and adults into babies.                                      | -                                |
+| backwards        | Backwards Bow        | Arrows shoot backward.                                                                        | -                                |
+| bane             | Bane Bow             | Does more damage, at the cost of insanity.                                                    | -                                |
+| batty            | Batty Bow            | Spawns a swarm of bats on impact.                                                             | 6 rotten flesh                   |
+| birch            | Birch Bow            | Spawns a birch tree.                                                                          | 1 birch sapling, 1 bone meal     |
+| blaster          | Blaster Bow          | Arrows keep exploding during flight.                                                          | 3 gunpowder                      |
+| blocky           | Blocky Bow           | Places blocks from your off hand.                                                             | -                                |
+| bomb             | Bomb Bow             | Summons a TNT drop at this place.                                                             | 5 TNT                            |
+| bouncy           | Bouncy Bow           | Arrows bounce off blocks surfaces.                                                            | -                                |
+| bow              | Bow Bow              | Shoots arrows that shoot arrows.                                                              | -                                |
+| bridge           | Bridge Bow           | Creates a temporary bridge out of blocks (configurable).                                      | At least 1 cobblestone           |
+| burst            | Burst Bow            | Launches a couple of smaller projectiles when the arrow lands.                                | -                                |
+| chain            | Chain Bow            | Arrows that hit entities get redirected to the closest other entity.                          | -                                |
+| chefs            | Chef's Bow           | Cooks items on the ground.                                                                    | 1 coal                           |
+| clucky           | Clucky Bow           | Spawns chickens.                                                                              | 1 egg                            |
+| cluster          | Cluster Bow          | Ignite clusters of TNT.                                                                       | 5 TNT                            |
+| crafting         | Crafting Bow         | Opens a workbench.                                                                            | -                                |
+| crimson          | Crimson Bow          | Spawns a huge crimson fungus.                                                                 | 1 crimson fungus, 1 bone meal    |
+| curse            | Curse Bow            | Curses the target (weird effects over time).                                                  | 1 fermented spider eye           |
+| cutting          | Cutting Bow          | Shoots two projectiles that connect by a damaging laser beam.                                 | 3 redstone                       |
+| darkoak          | Dark Oak Bow         | Spawns a dark oak tree.                                                                       | 4 dark oak saplings, 1 bone meal |
+| delay            | Delay Bow            | Arrow shots are delayed for a certain time.                                                   | -                                |
+| disarming        | Disarming Bow        | Targets have a chance to drop their hand item/armour.                                         | -                                |
+| disorienting     | Disorienting Bow     | Manipulates the target's pitch/yaw.                                                           | -                                |
+| down             | Down Bow             | Shoots arrows that crash down once they reached their apex.                                   | -                                |
+| draggy           | Draggy Bow           | Arrows drag close entities to the landing spot.                                               | -                                |
+| draining         | Draining Bow         | Gain health back every hit.                                                                   | -                                |
+| drill            | Drill Bow            | Create beautiful tunnels. Requires a pickaxe, quality affected.                               | -                                |
+| drop             | Drop Bow             | Teleports the target into the air.                                                            | -                                |
+| ender            | Ender Bow            | Teleport to the location of impact.                                                           | 1 ender pearl                    |
+| enlightened      | Enlightened Bow      | Places torches.                                                                               | 1 torch                          |
+| exploding        | Exploding Bow        | Explosive arrows.                                                                             | 1 TNT                            |
+| farmers          | Farmer's Bow         | Creates farmland, harvests crops, and plants crops.                                           | seeds (in off hand)              |
+| firework         | Firework Bow         | Splits into deadly fireworks (firework customizable).                                         | 2 firework charges               |
+| firey            | Firey Bow            | Shoot fireballs.                                                                              | 1 fire charge                    |
+| flak             | Flak Bow             | Shoots slow invisible projectiles that burst into smaller explosions.                         | 15 gunpowder                     |
+| flintand         | Flint and Bow        | Sets blocks on fire.                                                                          | flint and steel                  |
+| floaty           | Floaty Bow           | The holder gets slow falling when falling too fast. Arrows have reduced gravity.              | -                                |
+| forcefield       | Force Field Bow      | Creates a force field that pushes away all entities except you and your pets.                 | 5 redstone, 3 feathers           |
+| frozen           | Frozen Bow           | Spawns snow/ice and freezes targets.                                                          | 1 snow ball                      |
+| grappling        | Grappling Bow        | Acts as a grappling hook.                                                                     | 1 tripwire hook                  |
+| homing           | Homing Bow           | Shoot mini homing rockets.                                                                    | 1 gunpowder                      |
+| interdimensional | Interdimensional Bow | Warps arrows to targets.                                                                      | -                                |
+| invincibility    | Invincibility Bow    | Powerful shots, but they make targets briefly invincible.                                     | -                                |
+| invisibility     | Invisibility Bow     | Shoots invisible arrows.                                                                      | -                                |
+| iron             | Iron Bow             | Shoots deadly anvils.                                                                         | 1 anvil                          |
+| jungle           | Jungle Bow           | Spawns a jungle tree/bush.                                                                    | 1 jungle sapling, 1 bone meal    |
+| kamikaze         | Kamikaze Bow         | Target dies, you die.                                                                         | -                                |
+| laser            | Laser Bow            | Fast beams that can travel through non-opaque blocks, but do less damage.                     | 1 redstone                       |
+| launch           | Launch Bow           | Launches the target into the air, who slowly drops down.                                      | 3 popped chorus fruit            |
+| lead             | Lead Bow             | Leashes the target mob.                                                                       | 1 lead                           |
+| level            | Level Bow            | Steals levels from the target.                                                                | -                                |
+| lightning        | Lightning Bow        | Spawns lightning.                                                                             | 1 glowstone dust                 |
+| machine          | Machine Bow          | Shoots very quickly, and slightly inaccurate.                                                 | -                                |
+| magmatic         | Magmatic Bow         | Shoots lava.                                                                                  | 1 lava bucket                    |
+| meteor           | Meteor Bow           | Meteors will strike on impact depending on Power level.                                       | 3 fire charges                   |
+| mine             | Mine Bow             | Arrows that land turn into landmines.                                                         | 3 gunpowder, 1 redstone          |
+| mining           | Mining Bow           | Mines ore veins instantly. Flame auto-smelts ores. Requires pickaxe.                          | -                                |
+| mole             | Mole Bow             | Arrows burrow underground and home in on targets.                                             | -                                |
+| multi            | Multi Bow            | Shoots multiple arrows simultaneously.                                                        | 12 arrows                        |
+| music            | Music Bow            | Plays a music disc at the location of impact.                                                 | music disc (not consumed)        |
+| nuclear          | Nuclear Bow          | Huge boom. Radiation included.                                                                | 64 TNT                           |
+| oak              | Oak Bow              | Spawns an oak tree.                                                                           | 1 oak sapling, 1 bone meal       |
+| paralyze         | Paralyze Bow         | Paralyzes the target (nausea/slowness/blindness/weakness).                                    | 1 nether wart                    |
+| piercing         | Piercing Bow         | Arrows pierce through entities, increasing the damage dealt per pierced entity.               | -                                |
+| poisonous        | Poisonous Bow        | Poisons the target.                                                                           | 1 spider eye                     |
+| pull             | Pull Bow             | Pulls the target toward you.                                                                  | -                                |
+| pushy            | Pushy Bow            | Pushes away entities with great force.                                                        | 3 feathers                       |
+| rain             | Rain Bow             | Creates a shower of arrows at the arrow's apex.                                               | 8 arrows                         |
+| rainbow          | Rainbow              | So pretty.                                                                                    | -                                |
+| rainstorm        | Rainstorm Bow        | Creates a huge shower of arrows at the arrow's apex.                                          | 64 arrows                        |
+| ramapager        | Rampager Bow         | Each hit increases the damage output. Not hitting for a certain time removes the damage buff. | -                                |
+| ranged           | Ranged Bow           | Shoot powerful, far-reaching arrows.                                                          | -                                |
+| remotecontrol    | Remote Control Bow   | Change the direction of the arrows mid-air by changing your view direction.                   | -                                |
+| roulette         | Roulette Bow         | Has extremely powerful arrows, but also has a chance to massively damage the yielder.         | -                                |
+| round            | 360 Bow              | Shoots arrows all around you.                                                                 | -                                |
+| shear            | Shear Bow            | Breaks all shearable blocks, and shears all shearable entities.                               | -                                |
+| shockwave        | Shockwave Bow        | Arrows create a damage dealing shockwave on impact.                                           | -                                |
+| singularity      | Singularity Bow      | Pulls in entities, suffocates them, and explodes.                                             | 3 redstone                       |
+| slow             | Slow Bow             | Shoots extremely powerful, but extremely slow arrows.                                         | -                                |
+| smoky            | Smoky Bow            | Creates a smokescreen and blinds entities.                                                    | 1 bone meal                      |
+| spruce           | Spruce Bow           | Spawns a spruce tree.                                                                         | 1 spruce sapling, 1 bone meal    |
+| starvation       | Bow of Starvation    | Target loses hunger points.                                                                   | -                                |
+| sucky            | Sucky Bow            | Sucks in items and adds them to your inventory.                                               | -                                |
+| swap             | Swap Bow             | Swap locations with the target.                                                               | -                                |
+| taming           | Taming Bow           | Tames the target mob.                                                                         | -                                |
+| undead           | Undead Bow           | Spawns a circle of zombies.                                                                   | 64 rotten flesh                  |
+| undying          | Bow of Undying       | Saves you from death when held.                                                               | -                                |
+| up               | UP Bow               | Arrows have reversed gravity.                                                                 | -                                |
+| walking          | Walking Bow          | Shoots bows that walk around and shoot living entities.                                       | -                                |
+| warped           | Warped Bow           | Spawns a huge warped fungus.                                                                  | 1 warped fungus, 1 bone meal     |
+| wither           | Wither Bow           | Shoots wither skulls.                                                                         | 3 soul sand                      |
+| woodman          | Woodman's Bow        | Tears down trees quickly.                                                                     | -                                |
 
 ## Other features
 
-| Feature | Description |
-| --- | --- |
-| Protection regions | Protect certain regions from being harmed by the bow abilities. |
-| New crafting recipe for arrows | This feature helps you getting arrows easier than normal. Increases the amount of arrows crafted to 16 (instead of 4). |
-| Sustainable Flint | Zombies have a 13% chance of dropping 1-2 flint. |
-| Headshots | Damage multiplier for shooting somebody in the head. |
-| Looting | Allows for enchanting bows with looting. Also increases the xp dropped. |
-| Custom names | You can customize the name of the bows in the configuration ('bastard' might be too much). E.g. you can rename your Exploding Bastard to "Rocket Launcher".
-| Blood particles | Show red particles on impact. |
-| Coloured names | Give your bows coloured names. If you do, the bows cannot be crafted regularly. |
-| Anvil cost control | Control the amount of levels each bow costs. |
+| Feature                        | Description                                                                                                                                                 |
+|--------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Protection regions             | Protect certain regions from being harmed by the bow abilities.                                                                                             |
+| New crafting recipe for arrows | This feature helps you getting arrows easier than normal. Increases the amount of arrows crafted to 16 (instead of 4).                                      |
+| Sustainable Flint              | Zombies have a 13% chance of dropping 1-2 flint.                                                                                                            |
+| Headshots                      | Damage multiplier for shooting somebody in the head.                                                                                                        |
+| Looting                        | Allows for enchanting bows with looting. Also increases the xp dropped.                                                                                     |
+| Custom names                   | You can customize the name of the bows in the configuration ('bastard' might be too much). E.g. you can rename your Exploding Bastard to "Rocket Launcher". |
+| Blood particles                | Show red particles on impact.                                                                                                                               |
+| Coloured names                 | Give your bows coloured names. If you do, the bows cannot be crafted regularly.                                                                             |
+| Anvil cost control             | Control the amount of levels each bow costs.                                                                                                                |
 
 ## Commands
 
 All commands have <kbd>tab</kbd> completion where applicable.
 
-| Command | Description |
-| --- | --- |
-| `\da` | Toggle bow abilities (on/off). |
-| `\da reload` | Reloads the configuration file. |
-| `\da help <page>` | Shows the help pages, where `page` is the page number. |
-| `\da give <player> <bow> [ench]` | Gives the player a special bow. `player` is either the player name, @a for all, or @r for a random player. `bow` is either the ID number or the name. Append `ench` to get an unbreaking 10 infinity 1 bow. |
-| `\da ammo <player> <bow> [amount]` | Gives the player the ammunition required for a certain bow. |
-| `\da list` | Lists all regions |
-| `\da pos1` | Sets the first position (at your feet). |
-| `\da pos2` | Sets the second position (at your feet). |
-| `\da register <name>` | Registers a region by the given name. The set positions are used for the outer 2 corners. |
-| `\da remove <name>` | Unregisters the region with the given name. |
-| `\da visualize <name>` | Briefly highlights the corners of the given region. |
-| `\da tp <name>` | Teleports you to the centre of the given region. |
-| `\da check` | Check in which region you are currently in. |
+| Command                            | Description                                                                                                                                                                                                 |
+|------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `\da`                              | Toggle bow abilities (on/off).                                                                                                                                                                              |
+| `\da reload`                       | Reloads the configuration file.                                                                                                                                                                             |
+| `\da help <page>`                  | Shows the help pages, where `page` is the page number.                                                                                                                                                      |
+| `\da give <player> <bow> [ench]`   | Gives the player a special bow. `player` is either the player name, @a for all, or @r for a random player. `bow` is either the ID number or the name. Append `ench` to get an unbreaking 10 infinity 1 bow. |
+| `\da ammo <player> <bow> [amount]` | Gives the player the ammunition required for a certain bow.                                                                                                                                                 |
+| `\da list`                         | Lists all regions                                                                                                                                                                                           |
+| `\da pos1`                         | Sets the first position (at your feet).                                                                                                                                                                     |
+| `\da pos2`                         | Sets the second position (at your feet).                                                                                                                                                                    |
+| `\da register <name>`              | Registers a region by the given name. The set positions are used for the outer 2 corners.                                                                                                                   |
+| `\da remove <name>`                | Unregisters the region with the given name.                                                                                                                                                                 |
+| `\da visualize <name>`             | Briefly highlights the corners of the given region.                                                                                                                                                         |
+| `\da tp <name>`                    | Teleports you to the centre of the given region.                                                                                                                                                            |
+| `\da check`                        | Check in which region you are currently in.                                                                                                                                                                 |
 
 ## Configuration
 
@@ -180,37 +209,38 @@ The config.yml allows you to enable or disable certain bows.
 You can also change the amount of arrows gain by crafting them.
 You can reload the configuration file in-game using the `/da reload` command.
 
-| Node | Type | Default | Description | 
-| --- | --- | --- | --- |
-| minigame-mode | Boolean | `false` | Whether to run in minigame mode. Plugin messages are more subtle and less branded. Also hides enabled/disabled messages. Does not do much yet. |
-| auto-enable | Boolean | `false` | Whether dirty arrow abilities must be enabled automatically. Normally you need to enable DirtyArrows manually using /da. Settings this to true will enable DirtyArrows automatically when a player joins. |
-| show-enable-message | Boolean | `true` | Whether to show a message to the player when DirtyArrows got enabled/disabled for them. |
-| show-particles | Boolean | `true` | Whether the plugin should display particles (true) or not (false). |
-| blood | Boolean | `false` | Whether entities should show blood particles when damaged. |
-| arrow-recipe-amount | Integer | `16` | How many arrows must be crafted with the default arrow recipe. |
-| play-sound-when-charged | Boolean | `false` | Whether a sound must be played (true) or not (false) when a cooldown timer ends. |
-| **updates** |
-| check-for-updates | Boolean | `true` | Whether to check for updates. |
-| show-admin | Boolean | `true` | If admins (with the dirtyarrows.admin permission) must be notified when a new updates is ready. |
-| **headshot** |
-| enabled | Boolean | `true` | Whether headshots are enabled. |
-| damage-multiplier | Double | `1.5` | With what number to multiply the damage dealt when a headshot was made. |
-| **zombie-flint** |
-| enabled | Boolean | `true` | Whether zombies should drop flint or not on death. |
-| drop-chance | Double | `0.1` | The chance for flint to drop on death of a zombie in range [0,1] inclusive. 0 means no chance of dropping, 1 means dropping always. |
-| maximum-drop-count | Integer | `2` | The maximum amount of flint that can drop at once. The actual amount will be a value between 1 and this value (inclusive). |
-| **looting** |
-| appearance-chance | Double | `0.125` | The chance of Looting to appear on the bow in range [0,1]. A value of 0 means that it's disabled, 1 means it will always add looting. |
-| only-looting-chance | Double | `0.35` | The chance that Looting is the only enchantment when enchanting in range [0,1]. A value of 0 means that looting will never be the only enchantment, 1 means that it always be. |
-| minimum-xp-level-1 | Integer | `11` | The minimum amount of levels required to get a level 1 looting enchantment. |
-| minimum-xp-level-2 | Integer | `20` | The minimum amount of levels required to get a level 2 looting enchantment. |
-| minimum-xp-level-3 | Integer | `28` | The minimum amount of levels required to get a level 3 looting enchantment. |
-| **<bow-id>** |
-| name | String | - | Bows with this item name will have the effects applied. Supports colour codes. |
-| enabled | Boolean | `true` | When disabled (set to `false`), the bow effects will not be applied. The bow ability also won't be loaded by the plugin. |
-| levels | Integer | - | How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost). |
-| cooldown | Integer | `0` | How many milliseconds each use must be apart. Has no cooldown by default. |
-| _bow settings_ | - | - | Most bows also have specific settings. These are documented in the default `config.yml` file. |
+| Node                    | Type    | Default | Description                                                                                                                                                                                               | 
+|-------------------------|---------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| minigame-mode           | Boolean | `false` | Whether to run in minigame mode. Plugin messages are more subtle and less branded. Also hides enabled/disabled messages. Does not do much yet.                                                            |
+| auto-enable             | Boolean | `false` | Whether dirty arrow abilities must be enabled automatically. Normally you need to enable DirtyArrows manually using /da. Settings this to true will enable DirtyArrows automatically when a player joins. |
+| show-enable-message     | Boolean | `true`  | Whether to show a message to the player when DirtyArrows got enabled/disabled for them.                                                                                                                   |
+| show-particles          | Boolean | `true`  | Whether the plugin should display particles (true) or not (false).                                                                                                                                        |
+| blood                   | Boolean | `false` | Whether entities should show blood particles when damaged.                                                                                                                                                |
+| arrow-recipe-amount     | Integer | `16`    | How many arrows must be crafted with the default arrow recipe.                                                                                                                                            |
+| play-sound-when-charged | Boolean | `false` | Whether a sound must be played (true) or not (false) when a cooldown timer ends.                                                                                                                          |
+| **updates**             |
+| check-for-updates       | Boolean | `true`  | Whether to check for updates.                                                                                                                                                                             |
+| show-admin              | Boolean | `true`  | If admins (with the dirtyarrows.admin permission) must be notified when a new updates is ready.                                                                                                           |
+| **headshot**            |
+| enabled                 | Boolean | `true`  | Whether headshots are enabled.                                                                                                                                                                            |
+| damage-multiplier       | Double  | `1.5`   | With what number to multiply the damage dealt when a headshot was made.                                                                                                                                   |
+| **zombie-flint**        |
+| enabled                 | Boolean | `true`  | Whether zombies should drop flint or not on death.                                                                                                                                                        |
+| drop-chance             | Double  | `0.1`   | The chance for flint to drop on death of a zombie in range [0,1] inclusive. 0 means no chance of dropping, 1 means dropping always.                                                                       |
+| maximum-drop-count      | Integer | `2`     | The maximum amount of flint that can drop at once. The actual amount will be a value between 1 and this value (inclusive).                                                                                |
+| **looting**             |
+| appearance-chance       | Double  | `0.125` | The chance of Looting to appear on the bow in range [0,1]. A value of 0 means that it's disabled, 1 means it will always add looting.                                                                     |
+| only-looting-chance     | Double  | `0.35`  | The chance that Looting is the only enchantment when enchanting in range [0,1]. A value of 0 means that looting will never be the only enchantment, 1 means that it always be.                            |
+| minimum-xp-level-1      | Integer | `11`    | The minimum amount of levels required to get a level 1 looting enchantment.                                                                                                                               |
+| minimum-xp-level-2      | Integer | `20`    | The minimum amount of levels required to get a level 2 looting enchantment.                                                                                                                               |
+| minimum-xp-level-3      | Integer | `28`    | The minimum amount of levels required to get a level 3 looting enchantment.                                                                                                                               |
+| **<bow-id>**            |
+| name                    | String  | -       | Bows with this item name will have the effects applied. Supports colour codes.                                                                                                                            |
+| enabled                 | Boolean | `true`  | When disabled (set to `false`), the bow effects will not be applied. The bow ability also won't be loaded by the plugin.                                                                                  |
+| levels                  | Integer | -       | How many levels it costs for this bow to be renamed in the anvil (i.e. creation cost).                                                                                                                    |
+| cooldown                | Integer | `0`     | How many milliseconds each use must be apart. Has no cooldown by default.                                                                                                                                 |
+| min-launch-velocity     | Double  | `0.0`   | The minimum velocity shot arrows must have in order for the bow to fire them. 0.0 is no minimum, 2.9 is maximum draw time.                                                                                |
+| _bow settings_          | -       | -       | Most bows also have specific settings. These are documented in the default `config.yml` file.                                                                                                             |
 
 ### Colour codes
 
@@ -244,12 +274,12 @@ The following codes are supported:
 
 ## Permissions
 
-| Permission |	Description |
-| --- | --- |
-| dirtyarrows  | Without this node, you can't use the plugin. |
-| dirtyarrows.admin  | Access to `/da give`, `/da reload` and the region commands (`/da help admin`). |
-| dirtyarrows.*  | Access to all bows. |
-| dirtyarrows._bow-id_  | Access to the bow with the given id. |
+| Permission           | 	Description                                                                   |
+|----------------------|--------------------------------------------------------------------------------|
+| dirtyarrows          | Without this node, you can't use the plugin.                                   |
+| dirtyarrows.admin    | Access to `/da give`, `/da reload` and the region commands (`/da help admin`). |
+| dirtyarrows.*        | Access to all bows.                                                            |
+| dirtyarrows._bow-id_ | Access to the bow with the given id.                                           |
 
 ## Changelog
 
