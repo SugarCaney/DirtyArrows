@@ -150,6 +150,7 @@ enum class DefaultBow(
     ROULETTE("roulette"),
     FORCEFIELD("forcefield"),
     SUCKY("sucky"),
+    REMOTECONTROL("remotecontrol"),
     ;
 
     /**

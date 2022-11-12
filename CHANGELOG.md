@@ -33,6 +33,7 @@ Changelog
 * **`+`** Added Rain bow.
 * **`+`** Added Rainstorm bow.
 * **`+`** Added Rampager bow.
+* **`+`** Added Remote Control bow.
 * **`+`** Added Roulette bow.
 * **`+`** Added Shockwave bow.
 * **`+`** Added Sucky bow.
