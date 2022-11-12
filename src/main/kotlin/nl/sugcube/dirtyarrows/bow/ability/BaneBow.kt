@@ -9,7 +9,6 @@ import org.bukkit.Sound
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
-import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.event.entity.ProjectileLaunchEvent
 import org.bukkit.event.player.PlayerMoveEvent
@@ -52,6 +51,7 @@ open class BaneBow(plugin: DirtyArrows) : BowAbility(
 
     override fun launch(player: Player, arrow: Arrow, event: ProjectileLaunchEvent) {
         player.annoy()
+        arrow.damage = arrow.damage * damageMultiplier
 
         repeat(Random.nextInt(0, 3)) {
             plugin.scheduleDelayed(it * 4 * Random.nextLong(3L..12L)) {
@@ -74,14 +74,5 @@ open class BaneBow(plugin: DirtyArrows) : BowAbility(
         if (player.hasBowInHand().not()) return
 
         player.addPotionEffect(PotionEffect(PotionEffectType.SLOW, 40, slownessLevel, false, false, false))
-    }
-
-    @EventHandler
-    fun increaseDamage(event: EntityDamageByEntityEvent) {
-        val arrow = event.damager as? Arrow ?: return
-        if (arrow !in baneHits) return
-
-        baneHits.remove(arrow)
-        event.damage = event.damage * damageMultiplier
     }
 }
