@@ -32,6 +32,7 @@ Changelog
 * **`+`** Added Rain bow.
 * **`+`** Added Rainstorm bow.
 * **`+`** Added Rampager bow.
+* **`+`** Added Roulette bow.
 * **`+`** Added Shockwave bow.
 * **`+`** Added Taming bow.
 * **`+`** Added Walking bow.
