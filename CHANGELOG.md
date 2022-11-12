@@ -24,6 +24,7 @@ Changelog
 * **`+`** Added Floaty bow.
 * **`+`** Added Invisibility bow.
 * **`+`** Added Kamikaze bow.
+* **`+`** Added Lead bow.
 * **`+`** Added Mangrove bow.
 * **`+`** Added Mole bow.
 * **`+`** Added Piercing bow.
@@ -31,6 +32,7 @@ Changelog
 * **`+`** Added Rainstorm bow.
 * **`+`** Added Rampager bow.
 * **`+`** Added Shockwave bow.
+* **`+`** Added Taming bow.
 * **`+`** Added Walking bow.
 * **`+`** Added minimum launch velocity configuration option to only shoot when the bow has been drawn long enough.
 * **`~`** Ranged bow can no longer be shot in quick succession by default.

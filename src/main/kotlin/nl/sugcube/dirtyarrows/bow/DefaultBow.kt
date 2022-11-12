@@ -145,6 +145,7 @@ enum class DefaultBow(
     FLOATY("floaty"),
     KAMIKAZE("kamikaze"),
     TAMING("taming"),
+    LEAD("lead"),
     ;
 
     /**
