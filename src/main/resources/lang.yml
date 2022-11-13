@@ -130,7 +130,7 @@ info:
 
   # Cannot use the bow in a protected region.
   # %s = Name of the bow.
-  disabled-in-protected-region: "$TagE$ $C1$%s$E1$ is disabled in protected regions."
+  disabled-in-protected-region: "$TagE$ $E2$%s$E1$ is disabled in protected regions."
 
   # Message to list all required resources.
   # %s = List of required resources.
