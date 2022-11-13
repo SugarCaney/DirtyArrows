@@ -130,6 +130,7 @@ The listed names are the default names, you can change the names in the configur
 | lightning        | Lightning Bow        | Spawns lightning.                                                                             | 1 glowstone dust                 |
 | machine          | Machine Bow          | Shoots very quickly, and slightly inaccurate.                                                 | -                                |
 | magmatic         | Magmatic Bow         | Shoots lava.                                                                                  | 1 lava bucket                    |
+| mangrove         | Mangrove Bow         | Spawns a mangrove tree.                                                                       | 1 propagule, 1 bone meal         |
 | meteor           | Meteor Bow           | Meteors will strike on impact depending on Power level.                                       | 3 fire charges                   |
 | mine             | Mine Bow             | Arrows that land turn into landmines.                                                         | 3 gunpowder, 1 redstone          |
 | mining           | Mining Bow           | Mines ore veins instantly. Flame auto-smelts ores. Requires pickaxe.                          | -                                |
