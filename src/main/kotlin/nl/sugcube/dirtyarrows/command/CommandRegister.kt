@@ -1,16 +1,14 @@
 package nl.sugcube.dirtyarrows.command
 
-import nl.sugcube.dirtyarrows.Broadcast
 import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.region.Region
-import nl.sugcube.dirtyarrows.util.sendError
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
 /**
  * @author SugarCaney
  */
-open class CommandRegister : SubCommand<DirtyArrows>(
+open class CommandRegister : SubCommand(
         name = "register",
         usage = "/da register <region>",
         argumentCount = 1,
@@ -27,20 +25,20 @@ open class CommandRegister : SubCommand<DirtyArrows>(
         val regionName = arguments.first()
 
         if (regionName.matches(Region.NAME_REGEX).not()) {
-            sender.sendError("Region must only contain letters, numbers or underscores ('$regionName')")
+            sender.sendMessage(plugin.broadcast.regionInvalidCharacters(regionName))
             return
         }
 
         if (plugin.regionManager.regionByName(regionName) != null) {
-            sender.sendError("Region '$regionName' already exists.")
+            sender.sendMessage(plugin.broadcast.regionExists(regionName))
             return
         }
 
         val region = plugin.regionManager.createRegion(regionName) ?: run {
-            sender.sendError("Could not create region '$regionName', check if positions 1 & 2 are set.")
+            sender.sendMessage(plugin.broadcast.couldNotCreateRegion(regionName))
             return
         }
-        sender.sendMessage(Broadcast.REGION_CREATED.format(region.name))
+        sender.sendMessage(plugin.broadcast.regionCreated(region.name))
     }
 
     override fun assertSender(sender: CommandSender) = sender is Player

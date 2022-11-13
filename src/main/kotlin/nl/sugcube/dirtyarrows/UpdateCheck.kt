@@ -22,7 +22,7 @@ open class UpdateCheck(private val plugin: DirtyArrows) : Listener {
 
         val updateChecker = Update(DirtyArrows.BUKKIT_DEV_PROJECT_ID, plugin.description.version)
         if (updateChecker.query()) {
-            player.sendMessage(Broadcast.NEW_VERSION_AVAILABLE.format(updateChecker.latestVersion))
+            player.sendMessage(plugin.broadcast.newVersionAvailable(updateChecker.latestVersion ?: "???"))
         }
     }
 }

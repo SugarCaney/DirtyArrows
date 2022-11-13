@@ -1,6 +1,5 @@
 package nl.sugcube.dirtyarrows.effect
 
-import nl.sugcube.dirtyarrows.Broadcast
 import nl.sugcube.dirtyarrows.DirtyArrows
 import org.bukkit.entity.Player
 import org.bukkit.entity.Projectile
@@ -44,7 +43,7 @@ open class Headshot(private val plugin: DirtyArrows) : Listener {
 
         event.damage = event.damage * damageMultiplier
 
-        target.sendMessage(Broadcast.headshot(damager, HeadshotType.BY, plugin))
-        damager.sendMessage(Broadcast.headshot(target, HeadshotType.ON, plugin))
+        target.sendMessage(plugin.broadcast.headshotBy(damager.displayName))
+        damager.sendMessage(plugin.broadcast.headshotOn(target.displayName))
     }
 }

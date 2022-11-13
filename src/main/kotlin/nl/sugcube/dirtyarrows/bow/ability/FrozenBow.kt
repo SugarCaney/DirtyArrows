@@ -1,6 +1,5 @@
 package nl.sugcube.dirtyarrows.bow.ability
 
-import nl.sugcube.dirtyarrows.Broadcast
 import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
@@ -163,7 +162,7 @@ open class FrozenBow(plugin: DirtyArrows) : BowAbility(
         entity.world.playEffect(entity.location.copyOf().add(0.5, 0.5, 0.5), Effect.STEP_SOUND, Material.SNOW_BLOCK)
 
         if (entity is Player) {
-            entity.sendMessage(Broadcast.FROZEN)
+            entity.sendMessage(plugin.broadcast.frozen())
         }
         else entity.addPotionEffect(PotionEffect(PotionEffectType.SLOW, 900000, 7, true, true))
     }
@@ -175,7 +174,7 @@ open class FrozenBow(plugin: DirtyArrows) : BowAbility(
             val isDone = elapsed >= freezeTime
             if (isDone) {
                 when (entity) {
-                    is Player -> entity.sendMessage(Broadcast.DEFROSTED)
+                    is Player -> entity.sendMessage(plugin.broadcast.defrosted())
                     is LivingEntity -> entity.removePotionEffect(PotionEffectType.SLOW)
                 }
             }

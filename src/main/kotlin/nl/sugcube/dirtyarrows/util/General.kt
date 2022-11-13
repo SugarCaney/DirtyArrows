@@ -2,7 +2,6 @@
 
 package nl.sugcube.dirtyarrows.util
 
-import nl.sugcube.dirtyarrows.Broadcast
 import nl.sugcube.dirtyarrows.bow.ability.AwtColor
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
@@ -103,11 +102,6 @@ fun String?.toColour(sourceInfo: String = ""): Color {
  * Sends a message to the given command sender where all colour codes (&1, &2, ...) are applied.
  */
 fun CommandSender.sendFormattedMessage(message: String) = sendMessage(message.applyColours())
-
-/**
- * Sends a message with the error tag. Supports colour codes (&1, &2, ...).
- */
-fun CommandSender.sendError(message: String) = sendFormattedMessage(Broadcast.TAG_ERROR + " $message")
 
 /**
  * Get the online player with the given name.

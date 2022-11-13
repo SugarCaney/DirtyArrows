@@ -1,15 +1,10 @@
 package nl.sugcube.dirtyarrows.command
 
-import nl.sugcube.dirtyarrows.Broadcast
-import nl.sugcube.dirtyarrows.Broadcast.Colour.PRIMARY
-import nl.sugcube.dirtyarrows.Broadcast.Colour.SECONDARY
-import nl.sugcube.dirtyarrows.Broadcast.Colour.TERTIARY
 import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowType
 import nl.sugcube.dirtyarrows.bow.DefaultBow
 import nl.sugcube.dirtyarrows.util.applyColours
 import nl.sugcube.dirtyarrows.util.onlinePlayer
-import nl.sugcube.dirtyarrows.util.sendError
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
@@ -18,7 +13,7 @@ import kotlin.math.max
 /**
  * @author SugarCaney
  */
-open class CommandAmmo : SubCommand<DirtyArrows>(
+open class CommandAmmo : SubCommand(
         name = "ammo",
         usage = "/da ammo <player> <bow> [amount]",
         argumentCount = 2,
@@ -35,22 +30,22 @@ open class CommandAmmo : SubCommand<DirtyArrows>(
 
     override fun executeImpl(plugin: DirtyArrows, sender: CommandSender, vararg arguments: String) {
         // All players to give the resulting bow.
-        val players = parsePlayers(sender, arguments.firstOrNull()) ?: return
+        val players = parsePlayers(plugin, sender, arguments.firstOrNull()) ?: return
 
         // Which bow to give ammo for.
-        val bow = parseBow(sender, arguments.getOrNull(1)) ?: return
+        val bow = parseBow(plugin, sender, arguments.getOrNull(1)) ?: return
         val bowName = plugin.config.getString(bow.nameNode)?.applyColours()
 
         // Find the corresponding ability from the bow manager as the cost requirements are needed.
         val ability = plugin.bowManager[bow] ?: run {
-            sender.sendError("$bowName is not enabled.")
+            sender.sendMessage(plugin.broadcast.bowNotEnabled(bowName ?: "???"))
             return
         }
 
         // When there are no items required: don't do anyting. All is sorted.
         val items = ability.costRequirements.toTypedArray()
         if (items.isEmpty()) {
-            sender.sendMessage(Broadcast.NO_AMMO_REQUIRED.format(bowName))
+            sender.sendMessage(plugin.broadcast.noAmmoRequired(bowName ?: "???"))
             return
         }
 
@@ -65,35 +60,41 @@ open class CommandAmmo : SubCommand<DirtyArrows>(
         }
 
         // Send confirmation message.
-        val ammoString = items.joinToString("$PRIMARY, ") {
-            "$TERTIARY${it.amount * ammoCount}x ${it.type.name.toLowerCase()}"
+        val primary = plugin.broadcast.colourPrimary
+        val secondary = plugin.broadcast.colourSecondary
+        val tertiary = plugin.broadcast.colourTertiary
+
+        val ammoString = items.joinToString("$primary, ") {
+            "$tertiary${it.amount * ammoCount}x ${it.type.name.toLowerCase()}"
         }
-        val playerString = players.joinToString("$PRIMARY, ") {
-            "$SECONDARY${it.displayName}"
+        val playerString = players.joinToString("$primary, ") {
+            "$secondary${it.displayName}"
         }
-        sender.sendMessage(Broadcast.GAVE_AMMO.format(ammoString, playerString))
+        sender.sendMessage(plugin.broadcast.gaveAmmo(ammoString, playerString))
     }
 
     /**
      * Parses the player argument.
      * Sends an error to the sender when there is something wrong.
      *
+     * @param plugin
+     *          The DirtyArrows plugin.
      * @param sender
      *          The command sender.
      * @param argument
      *          The argument representing the players.
      * @return `null` when an error occured.
      */
-    private fun parsePlayers(sender: CommandSender, argument: String?): Iterable<Player>? {
+    private fun parsePlayers(plugin: DirtyArrows, sender: CommandSender, argument: String?): Iterable<Player>? {
         val playerName = argument ?: run {
-            sender.sendError("No player name specified.")
+            sender.sendMessage(plugin.broadcast.noPlayerSpecified())
             return null
         }
         return if (playerName == "@a") {
             Bukkit.getOnlinePlayers()
         }
         else listOfNotNull(onlinePlayer(playerName) ?: run {
-            sender.sendError("No online player '$playerName'")
+            sender.sendMessage(plugin.broadcast.noOnlinePlayer(playerName))
             null
         })
     }
@@ -102,19 +103,21 @@ open class CommandAmmo : SubCommand<DirtyArrows>(
      * Turns the bow argument into the correct bow.
      * Sends an error to the sender when there is something wrong.
      *
+     * @param plugin
+     *          The DirtyArrows plugin.
      * @param sender
      *          The command sender.
      * @param argument
      *          The argument specifying the bow.
      * @return `null` when an error occured.
      */
-    private fun parseBow(sender: CommandSender, argument: String?): BowType? {
+    private fun parseBow(plugin: DirtyArrows, sender: CommandSender, argument: String?): BowType? {
         val bowNode = argument ?: run {
-            sender.sendError("No bow specified.")
+            sender.sendMessage(plugin.broadcast.noBowSpecified())
             return null
         }
         return DefaultBow.parseBow(bowNode) ?: run {
-            sender.sendError("Unknown bow '$bowNode'.")
+            sender.sendMessage(plugin.broadcast.unknownBow(bowNode))
             null
         }
     }

@@ -2,13 +2,12 @@ package nl.sugcube.dirtyarrows.command
 
 import nl.sugcube.dirtyarrows.Broadcast
 import nl.sugcube.dirtyarrows.DirtyArrows
-import nl.sugcube.dirtyarrows.util.sendError
 import org.bukkit.command.CommandSender
 
 /**
  * @author SugarCaney
  */
-open class CommandReload : SubCommand<DirtyArrows>(
+open class CommandReload : SubCommand(
         name = "reload",
         usage = "/da reload",
         argumentCount = 0,
@@ -25,11 +24,13 @@ open class CommandReload : SubCommand<DirtyArrows>(
             configurationManager.loadLang()
             recipeManager.reloadConfig()
             bowManager.reload()
+            plugin.broadcast = Broadcast(plugin)
 
-            sender.sendMessage(Broadcast.RELOADED_CONFIG)
+            sender.sendMessage(plugin.broadcast.reloadedConfig())
+
         } catch (e: Exception) {
             e.printStackTrace()
-            sender.sendError("Failed to load config.yml and lang.yml: ${e.message}")
+            sender.sendMessage(plugin.broadcast.reloadFailed(e.message ?: "???"))
         }
     }
 

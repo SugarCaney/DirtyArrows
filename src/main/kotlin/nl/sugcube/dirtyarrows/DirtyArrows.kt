@@ -69,6 +69,11 @@ class DirtyArrows : JavaPlugin() {
     val activationManager = ActivationManager(this::isMinigameVersion)
 
     /**
+     * Handles all messages sent to the users.
+     */
+    var broadcast = Broadcast(this)
+
+    /**
      * Shows the help menu messages.
      */
     val help = Help(this)
@@ -130,7 +135,7 @@ class DirtyArrows : JavaPlugin() {
 
         activationManager.activateFor(player)
         if (config.getBoolean("show-enable-message")) {
-            player.sendMessage(Broadcast.enabledMessage(this, enabled = true))
+            player.sendMessage(broadcast.enabled())
         }
     }
 

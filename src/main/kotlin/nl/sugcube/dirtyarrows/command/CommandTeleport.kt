@@ -1,8 +1,6 @@
 package nl.sugcube.dirtyarrows.command
 
-import nl.sugcube.dirtyarrows.Broadcast
 import nl.sugcube.dirtyarrows.DirtyArrows
-import nl.sugcube.dirtyarrows.util.sendError
 import org.bukkit.Location
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
@@ -10,7 +8,7 @@ import org.bukkit.entity.Player
 /**
  * @author SugarCaney
  */
-open class CommandTeleport : SubCommand<DirtyArrows>(
+open class CommandTeleport : SubCommand(
         name = "tp",
         usage = "/da tp <region>",
         argumentCount = 1,
@@ -28,7 +26,7 @@ open class CommandTeleport : SubCommand<DirtyArrows>(
 
         val region = plugin.regionManager.regionByName(regionName)
         if (region == null) {
-            sender.sendError("There is no region with name '$regionName'.")
+            sender.sendMessage(plugin.broadcast.noRegion(regionName))
             return
         }
 
@@ -45,7 +43,7 @@ open class CommandTeleport : SubCommand<DirtyArrows>(
         val regionLocation = Location(location1.world, middleX, middleY, middleZ, player.location.yaw, player.location.pitch)
         player.teleport(regionLocation)
 
-        sender.sendMessage(Broadcast.REGION_TELEPORTED.format(region.name))
+        sender.sendMessage(plugin.broadcast.regionTeleported(region.name))
     }
 
     override fun assertSender(sender: CommandSender) = sender is Player

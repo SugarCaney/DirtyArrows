@@ -1,8 +1,6 @@
 package nl.sugcube.dirtyarrows.command
 
-import nl.sugcube.dirtyarrows.Broadcast
 import nl.sugcube.dirtyarrows.DirtyArrows
-import nl.sugcube.dirtyarrows.util.sendError
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -17,7 +15,7 @@ open class DirtyArrowsCommandManager(private val plugin: DirtyArrows) : CommandE
     /**
      * All available \da commands.
      */
-    val commands: List<SubCommand<DirtyArrows>> = listOf(
+    val commands: List<SubCommand> = listOf(
             CommandReload(),
             CommandGive(),
             CommandAmmo(),
@@ -38,12 +36,12 @@ open class DirtyArrowsCommandManager(private val plugin: DirtyArrows) : CommandE
     private fun toggleDirtyArrows(sender: CommandSender) {
         if (sender !is Player) return
         if (sender.hasPermission("dirtyarrows").not()) {
-            sender.sendError("You don't have permission to perform this command!")
+            sender.sendMessage(plugin.broadcast.noCommandPermission())
         }
 
         val isActivated = plugin.activationManager.toggleActivation(sender.uniqueId)
         if (plugin.config.getBoolean("show-enable-message")) {
-            sender.sendMessage(Broadcast.enabledMessage(plugin, isActivated))
+            sender.sendMessage(plugin.broadcast.enabledMessage(isActivated))
         }
     }
     override fun onCommand(

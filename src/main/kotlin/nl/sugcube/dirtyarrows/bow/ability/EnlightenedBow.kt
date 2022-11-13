@@ -1,6 +1,5 @@
 package nl.sugcube.dirtyarrows.bow.ability
 
-import nl.sugcube.dirtyarrows.Broadcast
 import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
@@ -113,7 +112,7 @@ open class EnlightenedBow(plugin: DirtyArrows) : BowAbility(
         }
 
         if (showError && meetsRequirements.not()) {
-            player.sendMessage(Broadcast.NOT_ENOUGH_RESOURCES.format(this.costRequirements.joinToString(", or ") {
+            player.sendMessage(plugin.broadcast.notEnoughResources(this.costRequirements.joinToString(", or ") {
                 "${it.type.name.toLowerCase()} (x${it.amount})"
             }))
         }

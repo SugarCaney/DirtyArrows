@@ -1,6 +1,5 @@
 package nl.sugcube.dirtyarrows.bow.ability
 
-import nl.sugcube.dirtyarrows.Broadcast
 import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
@@ -153,7 +152,7 @@ open class CurseBow(plugin: DirtyArrows) : BowAbility(
         cursed[target] = System.currentTimeMillis().fuzz(curseDurationFuzzing.toLong())
 
         if (target is Player) {
-            target.sendMessage(Broadcast.CURSED)
+            target.sendMessage(plugin.broadcast.cursed())
             target.playSound(target.location, Sound.BLOCK_PORTAL_TRAVEL, 4f, 1f)
         }
     }
@@ -169,7 +168,7 @@ open class CurseBow(plugin: DirtyArrows) : BowAbility(
             val mustDie = System.currentTimeMillis() - (cursed[it] ?: System.currentTimeMillis()) >= curseDurationMillis
             mustDie.apply {
                 if (this && it is Player) {
-                    it.sendMessage(Broadcast.CURSE_LIFTED)
+                    it.sendMessage(plugin.broadcast.curseLifted())
                 }
             }
         }

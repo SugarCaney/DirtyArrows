@@ -1,6 +1,5 @@
 package nl.sugcube.dirtyarrows.bow
 
-import nl.sugcube.dirtyarrows.Broadcast
 import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.util.*
 import org.bukkit.GameMode
@@ -291,7 +290,7 @@ abstract class BowAbility(
         val hasPermission = hasPermission(this@BowAbility.type.permission)
 
         if (showError && hasPermission.not()) {
-            player?.sendMessage(Broadcast.NO_BOW_PERMISSION.format(bowName()))
+            player?.sendMessage(plugin.broadcast.noBowPermission(bowName()))
         }
 
         return hasPermission
@@ -310,7 +309,7 @@ abstract class BowAbility(
         if (cooldown && showError) {
             val timeLeft = cooldownTimeLeft() / 1000.0
             val bowName = config.getString(this@BowAbility.type.nameNode)?.applyColours()
-            player?.sendMessage(Broadcast.COOLDOWN.format(timeLeft, bowName))
+            player?.sendMessage(plugin.broadcast.cooldown(timeLeft, bowName ?: "???"))
         }
 
         return cooldown
@@ -329,7 +328,7 @@ abstract class BowAbility(
         val inRegion = plugin.regionManager.isWithinARegionMargin(this, protectionRange) != null
 
         if (showError && inRegion && canShootInProtectedRegions.not()) {
-            entity?.sendMessage(Broadcast.DISABLED_IN_PROTECTED_REGION.format(bowName()))
+            entity?.sendMessage(plugin.broadcast.disabledInProtectedRegion(bowName()))
         }
 
         return inRegion
@@ -349,7 +348,7 @@ abstract class BowAbility(
         }
 
         if (showError && meetsRequirements.not()) {
-            player.sendMessage(Broadcast.NOT_ENOUGH_RESOURCES.format(this.costRequirements.joinToString(", ") {
+            player.sendMessage(plugin.broadcast.notEnoughResources(this.costRequirements.joinToString(", ") {
                 "${it.type.name.toLowerCase()} (x${it.amount})"
             }))
         }

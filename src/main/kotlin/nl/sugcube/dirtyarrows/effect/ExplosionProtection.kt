@@ -3,7 +3,6 @@ package nl.sugcube.dirtyarrows.effect
 import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
-import nl.sugcube.dirtyarrows.util.sendError
 import org.bukkit.Location
 import org.bukkit.entity.Fireball
 import org.bukkit.entity.Player
@@ -49,7 +48,7 @@ open class ExplosionProtection(private val plugin: DirtyArrows) : Listener {
 
         val skull = entity as WitherSkull
         val shooter = skull.shooter as? Player ?: return
-        shooter.sendError("Wither skulls cannot explode near protected regions.")
+        shooter.sendMessage(plugin.broadcast.witherSkulls())
     }
 
     /**
@@ -63,7 +62,7 @@ open class ExplosionProtection(private val plugin: DirtyArrows) : Listener {
 
         val fireball = entity as Fireball
         val shooter = fireball.shooter as? Player ?: return
-        shooter.sendError("Fireballs cannot explode near protected regions.")
+        shooter.sendMessage(plugin.broadcast.fireballs())
     }
 
     /**

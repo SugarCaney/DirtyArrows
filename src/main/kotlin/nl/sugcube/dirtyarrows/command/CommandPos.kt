@@ -1,6 +1,5 @@
 package nl.sugcube.dirtyarrows.command
 
-import nl.sugcube.dirtyarrows.Broadcast
 import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.util.sendFormattedMessage
 import nl.sugcube.dirtyarrows.util.toCoordinateString
@@ -10,7 +9,7 @@ import org.bukkit.entity.Player
 /**
  * @author SugarCaney
  */
-open class CommandPos(val id: Int) : SubCommand<DirtyArrows>(
+open class CommandPos(val id: Int) : SubCommand(
         name = "pos$id",
         usage = "/da pos$id",
         argumentCount = 0,
@@ -25,7 +24,7 @@ open class CommandPos(val id: Int) : SubCommand<DirtyArrows>(
         val player = sender as? Player ?: error("Sender is not a player.")
         val location = player.location
         plugin.regionManager.setSelection(id, location)
-        sender.sendFormattedMessage(Broadcast.POSITION_SET.format(id, location.toCoordinateString()))
+        sender.sendFormattedMessage(plugin.broadcast.positionSet(id, location.toCoordinateString()))
     }
 
     override fun assertSender(sender: CommandSender) = sender is Player

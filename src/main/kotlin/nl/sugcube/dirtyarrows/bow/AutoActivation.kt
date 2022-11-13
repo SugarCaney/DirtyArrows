@@ -1,6 +1,5 @@
 package nl.sugcube.dirtyarrows.bow
 
-import nl.sugcube.dirtyarrows.Broadcast
 import nl.sugcube.dirtyarrows.DirtyArrows
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -23,7 +22,7 @@ open class AutoActivation(private val plugin: DirtyArrows) : Listener {
 
         plugin.activationManager.activateFor(player)
         if (plugin.config.getBoolean("show-enable-message")) {
-            player.sendMessage(Broadcast.enabledMessage(plugin, enabled = true))
+            player.sendMessage(plugin.broadcast.enabled())
         }
     }
 

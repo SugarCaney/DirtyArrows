@@ -1,6 +1,5 @@
 package nl.sugcube.dirtyarrows.bow.ability
 
-import nl.sugcube.dirtyarrows.Broadcast
 import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
@@ -29,7 +28,7 @@ open class MusicBow(plugin: DirtyArrows) : BowAbility(
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
         val record = player.record() ?: run {
-            player.sendMessage(Broadcast.NO_RECORD)
+            player.sendMessage(plugin.broadcast.noRecord())
             return
         }
 

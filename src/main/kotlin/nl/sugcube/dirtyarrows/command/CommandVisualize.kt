@@ -3,13 +3,12 @@ package nl.sugcube.dirtyarrows.command
 import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.region.showPositionMarkers
 import nl.sugcube.dirtyarrows.region.showRegionMarkers
-import nl.sugcube.dirtyarrows.util.sendError
 import org.bukkit.command.CommandSender
 
 /**
  * @author SugarCaney
  */
-open class CommandVisualize : SubCommand<DirtyArrows>(
+open class CommandVisualize : SubCommand(
         name = "visualize",
         usage = "/da visualize [region]",
         argumentCount = 0,
@@ -34,7 +33,7 @@ open class CommandVisualize : SubCommand<DirtyArrows>(
         // Region specified
         val region = plugin.regionManager.regionByName(regionName)
         if (region == null) {
-            sender.sendError("There is no region with name '$regionName'")
+            sender.sendMessage(plugin.broadcast.noRegion(regionName))
             return
         }
 

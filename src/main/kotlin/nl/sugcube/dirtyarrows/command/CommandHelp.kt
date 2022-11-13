@@ -7,7 +7,7 @@ import org.bukkit.entity.Player
 /**
  * @author SugarCaney
  */
-open class CommandHelp : SubCommand<DirtyArrows>(
+open class CommandHelp : SubCommand(
         name = "help",
         usage = "/da help [page]",
         argumentCount = 0,

@@ -1,8 +1,8 @@
 package nl.sugcube.dirtyarrows.command
 
+import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.util.sendFormattedMessage
 import org.bukkit.command.CommandSender
-import org.bukkit.plugin.java.JavaPlugin
 
 /**
  * A subcommand is a command after the base (\da in DirtyArrow's case).
@@ -11,7 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin
  *
  * @author SugarCaney
  */
-abstract class SubCommand<Plugin : JavaPlugin>(
+abstract class SubCommand(
 
     /**
      * The name of the command as it appears after the base command.
@@ -31,7 +31,7 @@ abstract class SubCommand<Plugin : JavaPlugin>(
     val argumentCount: Int,
 
     /**
-     * Human readable information string for the command.
+     * Human-readable information string for the command.
      */
     val description: String = ""
 ) {
@@ -63,22 +63,22 @@ abstract class SubCommand<Plugin : JavaPlugin>(
      * @param arguments
      *      The arguments that appear after `\baseCommand [name]`.
      */
-    fun execute(plugin: Plugin, sender: CommandSender, vararg arguments: String) {
+    fun execute(plugin: DirtyArrows, sender: CommandSender, vararg arguments: String) {
         // Check permissions.
         if (!hasPermission(sender)) {
-            sender.sendFormattedMessage("&c[!!] You don't have permission to perform this command!")
+            sender.sendMessage(plugin.broadcast.noCommandPermission())
             return
         }
 
         // Check sender.
         if (!assertSender(sender)) {
-            sender.sendMessage("Only in-game players can perform this command!")
+            sender.sendMessage(plugin.broadcast.onlyInGame())
             return
         }
 
         // Check argument count.
         if (arguments.size < argumentCount) {
-            sender.sendFormattedMessage("&c[!!] Usage: $usage")
+            sender.sendFormattedMessage(plugin.broadcast.usage(usage))
             return
         }
 
@@ -106,7 +106,7 @@ abstract class SubCommand<Plugin : JavaPlugin>(
      * @param arguments
      *          The arguments that appear after `/baseCommand name`.
      */
-    protected abstract fun executeImpl(plugin: Plugin, sender: CommandSender, vararg arguments: String)
+    protected abstract fun executeImpl(plugin: DirtyArrows, sender: CommandSender, vararg arguments: String)
 
     /**
      * Checks whether the given CommandSender may execute the command or not.

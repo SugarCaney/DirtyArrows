@@ -9,4 +9,208 @@
 ### You can reload the configuration using the /da reload command.
 ##############################################################################################
 
-test: "Hurray"
+# The colour scheme of all messages sent by DirtyArrows.
+# - Primary/secondary/tertiary for regular messages.
+# - Error primary/secondary for error messages.
+# Colours are prefixed by '&'.
+# These colours can be used as templates in other messages, see their repsective comments for the template tag.
+# See https://github.com/SugarCaney/DirtyArrows#colour-codes for all colour codes.
+colour:
+  # Referred to as '$C1$'
+  primary: "&e"
+
+  # Referred to as '$C2$'
+  secondary: "&a"
+
+  # Referred to as '$C3$'
+  tertiary: "&f"
+
+  # Referred to as '$E1$'
+  error-primary: "&c"
+
+  # Referred to as '$E2$'
+  error-secondary: "&7"
+
+# Messages that show up before all messages.
+# These tags can be used as templates in other messages, see their respective comments for the template tag.
+tags:
+  # Regular message prefix.
+  # Referred to as '$Tag$'
+  regular: "$C1$DA$C3$>$C1$"
+
+  # Help screen prefix.
+  # Referred to as '$TagH$'
+  help: "$C2$DA-?$C3$>$C1$"
+
+  # Error message prefix.
+  # Referred to as '$TagE$'
+  error: "$E1$!!>"
+
+  # Minigame message prefix.
+  # Referred to as '$TagM$'
+  minigame: "$C3$[$C2$->$C3$]$C1$"
+
+# Plugin related messages.
+plugin:
+  # New version notification message.
+  # %s = New version number.
+  new-version-available: "$Tag$ A new version of $C2$DirtyArrows$C1$ is available: $C2$v%s"
+
+  # Shows that the configuration has been reloaded.
+  reloaded-config: "$Tag$ Reloaded $C2$config.yml$C1$ and $C2$lang.yml"
+
+  # Confirmation message for giving a bow to someone.
+  # %s = Bow name.
+  # %s = Receiver name.
+  gave-bow: "$Tag$ Gave $C2$%s$C1$ to $C2$%s$C1$."
+
+  # No permission to use the bow.
+  # %s = Name of the bow.
+  no-bow-permission: "$TagE$ You do not have permission to use $E2$%s$E1$."
+
+  # The bow does not require ammonution.
+  # %s = bow name.
+  no-ammo-required: "$Tag$ $C2$%s$C1$ does not require ammunition."
+
+  # Give ammo confirmation.
+  # %s = Item list.
+  # %s = Target player.
+  gave-ammo: "$Tag$ Gave $C3$%s$C1$ to $C2$%s$C1$."
+
+# Messages related to region management commands.
+region:
+  # Set position # to coordinate.
+  # %d = Position number.
+  # %s = Set coordinate.
+  position-set: "$Tag$ Set position $C2$%d$C1$ to $C2$%s$C1$."
+
+  # List all region names.
+  # %d = Amount of regions.
+  # %s = List of region names.
+  regions-list: "$Tag$ Regions [%d]: $C2$%s$C1$."
+
+  # Show in which region the player is.
+  # %s = Region name.
+  in-region: "$Tag$ You are in region: $C2$%s$C1$"
+
+  # You are not in a region.
+  not-in-region: "$Tag$ You are not in a DirtyArrows region."
+
+  # Removed a region.
+  # %s = Removed region name.
+  region-removed: "$Tag$ Removed region $C2$%s$C1$."
+
+  # Created a region.
+  # %s = Created region name.
+  region-created: "$Tag$ Created region $C2$%s$C1$."
+
+  # Teleported to a certain region.
+  # %s = Region name.
+  region-teleported: "$Tag$ Teleported you to region $C2$%s$C1$."
+
+# Messages related to plugin usage.
+info:
+  # DirtyArrows enable message for players.
+  enabled: "$Tag$ &aEnabled$C1$!"
+
+  # DirtyArrows disable message for players.
+  disabled: "$Tag$ &cDisabled$C1$!"
+
+  # Error when not enough xp levels are available.
+  # %d = Amount of levels required.
+  levels-required: "$TagE$ You need $E2$%d$E1$ levels to craft this bow!"
+
+  # Got impacted by a headshot from a different player.
+  # %s = Name of player who made the headshot.
+  headshot-by: "$Tag$ Headshot by $C2$%s$C1$."
+
+  # Made a headshot on a different player.
+  # %s = Name of the target player.
+  headshot-on: "$Tag$ You made a headshot on $C2$%s$C1$."
+
+  # Cannot use the bow in a protected region.
+  # %s = Name of the bow.
+  disabled-in-protected-region: "$TagE$ $C1$%s$E1$ is disabled in protected regions."
+
+  # Message to list all required resources.
+  # %s = List of required resources.
+  not-enough-resources: "$TagE$ You don't have enough resources, required: $E2$%s$E1$."
+
+  # Message to let the player know they defrosted.
+  defrosted: "$Tag$ You defrosted."
+
+  # Message to let the player know they are frozen.
+  frozen: "$Tag$ You have been frozen."
+
+  # Message to let the player know they were cursed.
+  cursed: "$Tag$ You have been cursed."
+
+  # Let know that the curse was lifted.
+  curse-lifted: "$Tag$ The curse has been lifted."
+
+  # You have to wait N seconds to use the bow again.
+  # %.1f = The amount of seconds left with 1 decimal precision.
+  # %s = Bow name.
+  cooldown: "$TagE$ Wait $E2$%.1fs$E1$ before you can use $E2$%s$E1$ again."
+
+  # Notifies that they player misses a music disc in their inventory.
+  no-record: "$TagE$ You need a $E2$music disc$E1$ in your inventory to play music."
+
+# Various error messages.
+error:
+  # You do not have permission to perform this command.
+  no-command-permission: "$TagE$ You do not have permission to perform this command."
+
+  # Only in-game players can perform this command.
+  only-in-game: "$TagE$ Only in-game players can perform this command!"
+
+  # Usage: <example>
+  # %s = Intended usage.
+  usage: "$TagE$ Usage: $E2$'%s'"
+
+  # The bow ability is not enabled.
+  # %s = Bow name.
+  not-enabled: "$TagE$ $E2$%s$E1$ is not enabled."
+
+  # No bow has been specified.
+  no-bow-specified: "$TagE$ No bow specified."
+
+  # Unknown bow X.
+  # %s = Bow name.
+  unknown-bow: "$TagE$ Unknown bow $E2$'%s'$E1$."
+
+  # No player has been specified.
+  no-player-specified: "$TagE$ No player specified."
+
+  # No online player X.
+  # %s = Player name.
+  no-online-player: "$TagE$ No online player $E2$'%s'$E1$"
+
+  # Invalid region name message.
+  # %s = Entered region name.
+  region-invalid-characters: "$TagE$ Region must only contain letters, numbers, or underscores (got $E2$'%s'$E1$)"
+
+  # Region already exists.
+  # %s = Name of region.
+  region-exists: "$TagE$ Region $E2$'%s'$E1$ already exists."
+
+  # Could not create region.
+  # %s = Name of region.
+  could-not-create-region: "$TagE$ Could not create region $E2$'%s'$E1$, check if positions 1 & 2 are set."
+
+  # Failed to reload config and localisation file.
+  # %s = Error message.
+  reload-failed: "$TagE$ Failed to load $E2$config.yml$E1$ and $E2$lang.yml$E1$: $E2$'%s'"
+
+  # No region has been specified.
+  no-region-specified: "$TagE$ No region specified."
+
+  # No region X.
+  # %s = Region name.
+  no-region: "$TagE$ No region with name $E2$'%s'$E1$ found"
+
+  # Fireballs cannot explode near protected regions.
+  fireballs: "$TagE$ Fireballs cannot explode near protected regions."
+
+  # Wither skulls cannot explode near protected regions.
+  wither-skulls: "$TagE$ Wither skulls cannot explode near protected regions."

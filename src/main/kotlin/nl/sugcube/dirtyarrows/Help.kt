@@ -1,9 +1,5 @@
 package nl.sugcube.dirtyarrows
 
-import nl.sugcube.dirtyarrows.Broadcast.Colour.PRIMARY
-import nl.sugcube.dirtyarrows.Broadcast.Colour.SECONDARY
-import nl.sugcube.dirtyarrows.Broadcast.Colour.TERTIARY
-import nl.sugcube.dirtyarrows.Broadcast.TAG_HELP
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.util.sendFormattedMessage
 import org.bukkit.command.CommandSender
@@ -15,6 +11,18 @@ import kotlin.math.min
  */
 class Help(val plugin: DirtyArrows) {
 
+    private val primary: String
+        get() = plugin.broadcast.colourPrimary
+
+    private val secondary: String
+        get() = plugin.broadcast.colourSecondary
+
+    private val tertiary: String
+        get() = plugin.broadcast.colourTertiary
+
+    private val helpTag: String
+        get() = plugin.broadcast.tagHelp
+
     /**
      * Header to show above each help message.
      *
@@ -23,7 +31,7 @@ class Help(val plugin: DirtyArrows) {
      * %d = The total amount of pages.
      */
     private val helpHeader: String
-        get() = "$TERTIARY>>$SECONDARY-----$TERTIARY>$TERTIARY DirtyArrows %s${SECONDARY}Page %d/%d$TERTIARY <$SECONDARY-----$TERTIARY<<"
+        get() = "$tertiary>>$secondary-----$tertiary>$tertiary DirtyArrows %s${secondary}Page %d/%d$tertiary <$secondary-----$tertiary<<"
 
     /**
      * How many bows to show per help page.
@@ -69,15 +77,15 @@ class Help(val plugin: DirtyArrows) {
 
         // Enable/disable command is not part of the regular list of commands.
         if (sender.hasPermission("dirtyarrows")) {
-            sender.sendFormattedMessage("$TAG_HELP $SECONDARY/da $TERTIARY-$PRIMARY Enables/disables Dirty Arrows.")
+            sender.sendFormattedMessage("$helpTag $secondary/da $tertiary-$primary Enables/disables Dirty Arrows.")
         }
 
         // List all available commands.
         commands.forEach {
-            sender.sendFormattedMessage("$TAG_HELP $SECONDARY${it.usage} $TERTIARY- $PRIMARY${it.description}")
+            sender.sendFormattedMessage("$helpTag $secondary${it.usage} $tertiary- $primary${it.description}")
         }
 
-        sender.sendFormattedMessage("$TAG_HELP$PRIMARY Use $SECONDARY/da help [2-$pageCount]$PRIMARY to see an overview of all bows.")
+        sender.sendFormattedMessage("$helpTag$primary Use $secondary/da help [2-$pageCount]$primary to see an overview of all bows.")
     }
 
     /**
@@ -102,10 +110,10 @@ class Help(val plugin: DirtyArrows) {
             val description = bow.description
 
             val space = if (costs.isEmpty()) "" else " "
-            sender.sendFormattedMessage("$TAG_HELP $SECONDARY$name $PRIMARY($id) $TERTIARY$costs$space- $PRIMARY$description")
+            sender.sendFormattedMessage("$helpTag $secondary$name $primary($id) $tertiary$costs$space- $primary$description")
         }
 
-        sender.sendFormattedMessage("$TAG_HELP$PRIMARY Use $SECONDARY/da help$PRIMARY to see an overview of all commands.")
+        sender.sendFormattedMessage("$helpTag$primary Use $secondary/da help$primary to see an overview of all commands.")
     }
 
     /**

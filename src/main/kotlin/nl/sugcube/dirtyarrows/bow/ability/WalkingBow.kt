@@ -1,6 +1,5 @@
 package nl.sugcube.dirtyarrows.bow.ability
 
-import nl.sugcube.dirtyarrows.Broadcast
 import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
@@ -125,7 +124,7 @@ open class WalkingBow(plugin: DirtyArrows) : BowAbility(
         val hasEnough = inventory.containsAtLeast(ItemStack(Material.ARROW), itemCount)
 
         if (hasEnough.not()) {
-            sendMessage(Broadcast.NOT_ENOUGH_RESOURCES.format("${Material.ARROW.name.toLowerCase()} (x${itemCount})"))
+            sendMessage(plugin.broadcast.notEnoughResources("${Material.ARROW.name.toLowerCase()} (x${itemCount})"))
             return false
         }
 
