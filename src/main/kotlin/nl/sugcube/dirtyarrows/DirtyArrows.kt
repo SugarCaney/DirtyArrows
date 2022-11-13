@@ -37,6 +37,12 @@ class DirtyArrows : JavaPlugin() {
         get() = configurationManager.data
 
     /**
+     * The localisation file configuration.
+     */
+    val lang: FileConfiguration
+        get() = configurationManager.lang
+
+    /**
      * Manages all DA commands.
      */
     val commandManager = DirtyArrowsCommandManager(this)

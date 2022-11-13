@@ -22,13 +22,14 @@ open class CommandReload : SubCommand<DirtyArrows>(
     override fun executeImpl(plugin: DirtyArrows, sender: CommandSender, vararg arguments: String) = with(plugin) {
         try {
             configurationManager.loadConfig()
+            configurationManager.loadLang()
             recipeManager.reloadConfig()
             bowManager.reload()
 
             sender.sendMessage(Broadcast.RELOADED_CONFIG)
         } catch (e: Exception) {
             e.printStackTrace()
-            sender.sendError("Failed to load config.yml: ${e.message}")
+            sender.sendError("Failed to load config.yml and lang.yml: ${e.message}")
         }
     }
 

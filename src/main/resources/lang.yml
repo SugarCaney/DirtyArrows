@@ -1,0 +1,12 @@
+##############################################################################################
+### DirtyArrows localisation file
+### Version: 5.0
+### Author: SugarCaney
+### GitHub: https://github.com/SugarCaney/DirtyArrows
+###
+### You can modify almost any magic value in this plugin to customize it to your wishes.
+### For indentation use SPACES, -not- tabs.
+### You can reload the configuration using the /da reload command.
+##############################################################################################
+
+test: "Hurray"
