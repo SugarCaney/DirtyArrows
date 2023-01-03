@@ -3698,6 +3698,10 @@ piercing:
   # (Double) default: 0.0
   min-launch-velocity: 0.0
 
+  # With how much to multiply the damage after piercing through each target.
+  # (Double) default: 1.2
+  damage-multiplier: 1.2
+
 ##
 ## ABILITY: Backwards Bow
 ## - Arrows shoot backward.
@@ -3765,7 +3769,6 @@ chefs:
   # The maximum amount of item stacks that can be cooked at once.
   # (Int) default: 2
   max-items: 2
-
 
 ##
 ## ABILITY: Shockwave Bow
