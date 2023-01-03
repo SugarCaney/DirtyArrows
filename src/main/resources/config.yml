@@ -3546,15 +3546,15 @@ rain:
 
   # How many arrows to spawn.
   # (Int) default: 8
-  arrow-count: 64
+  arrow-count: 8
 
   # Spread of the rain arrows on the x/z-axis.
   # (Double) default: 0.35
-  spread: 1.2
+  spread: 0.35
 
   # Spread of the rain arrows on the y-axis.
   # (Double) default: 0.3
-  vertical-spread: 0.8
+  vertical-spread: 0.3
 
   # Multiplier for damage inflicted by arrows shot by the Rain bow.
   # (Double) default: 4.1
