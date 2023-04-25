@@ -42,6 +42,8 @@ Changelog
 * **`+`** Added minimum launch velocity configuration option to only shoot when the bow has been drawn long enough.
 * **`!`** Fixed Blaster bow arrows getting launched upward by the explosions.
 * **`~`** Ranged bow can no longer be shot in quick succession by default.
+* **`~`** Increased default meteor speed to counteract new world height.
+* **`~`** Lowered default meteor spread to counteract new world height.
 
 ## Version 4.7
 
