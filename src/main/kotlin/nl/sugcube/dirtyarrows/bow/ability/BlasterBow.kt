@@ -3,6 +3,7 @@ package nl.sugcube.dirtyarrows.bow.ability
 import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.DefaultBow
+import nl.sugcube.dirtyarrows.util.copyOf
 import nl.sugcube.dirtyarrows.util.createExplosion
 import nl.sugcube.dirtyarrows.util.getFloat
 import nl.sugcube.dirtyarrows.util.showSmokeParticle
@@ -90,7 +91,12 @@ open class BlasterBow(plugin: DirtyArrows) : BowAbility(
     private fun Arrow.explode() {
         if (location.isInProtectedRegion(shooter as? LivingEntity, showError = false)) return
 
+        val velocityBefore = velocity.copyOf()
+
         location.createExplosion(power = power, setFire = setOnFire, breakBlocks = breakBlocks)
         showSmokeParticle()
+
+        // Reset y velocity to not make the arrow move upward due to the explosion.
+        velocity = velocityBefore
     }
 }

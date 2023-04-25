@@ -40,6 +40,7 @@ Changelog
 * **`+`** Added Taming bow.
 * **`+`** Added Walking bow.
 * **`+`** Added minimum launch velocity configuration option to only shoot when the bow has been drawn long enough.
+* **`!`** Fixed Blaster bow arrows getting launched upward by the explosions.
 * **`~`** Ranged bow can no longer be shot in quick succession by default.
 
 ## Version 4.7
