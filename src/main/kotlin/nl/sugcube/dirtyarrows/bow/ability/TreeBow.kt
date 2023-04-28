@@ -4,6 +4,7 @@ import nl.sugcube.dirtyarrows.DirtyArrows
 import nl.sugcube.dirtyarrows.bow.BowAbility
 import nl.sugcube.dirtyarrows.bow.BowType
 import nl.sugcube.dirtyarrows.bow.DefaultBow
+import nl.sugcube.dirtyarrows.util.isSoil
 import nl.sugcube.dirtyarrows.util.isWater
 import nl.sugcube.dirtyarrows.util.showGrowthParticle
 import org.bukkit.Material
@@ -29,27 +30,30 @@ open class TreeBow(plugin: DirtyArrows, val tree: Tree) : BowAbility(
 ) {
 
     override fun land(arrow: Arrow, player: Player, event: ProjectileHitEvent) {
+        val hitLocation = arrow.location.clone().add(arrow.velocity.clone().multiply(0.2))
+        val onSoil = hitLocation.clone().add(0.0, -0.7, 0.0).block.isSoil()
+
         // Try a random tree type.
-        val variant = if (arrow.location.block.isWater()) TreeType.SWAMP else tree.randomTreeType()
-        if (arrow.world.generateTree(arrow.location, variant)) {
+        val variant = if (arrow.location.block.isWater() && tree.defaultType != TreeType.MANGROVE) TreeType.SWAMP else tree.randomTreeType()
+        if (onSoil && arrow.world.generateTree(arrow.location, variant)) {
             arrow.location.showGrowthParticle()
             return
         }
 
         // Try a block lower.
-        if (arrow.world.generateTree(arrow.location.clone().add(0.0, -1.0, 0.0), variant)) {
+        if (onSoil && arrow.world.generateTree(arrow.location.clone().add(0.0, -1.0, 0.0), variant)) {
             arrow.location.showGrowthParticle()
             return
         }
 
         // If it didn't work, fallback on the default.
-        if (arrow.world.generateTree(arrow.location, tree.defaultType)) {
+        if (onSoil && arrow.world.generateTree(arrow.location, tree.defaultType)) {
             arrow.location.showGrowthParticle()
             return
         }
 
         // Try a block lower.
-        if (arrow.world.generateTree(arrow.location.clone().add(0.0, -1.0, 0.0), tree.defaultType)) {
+        if (onSoil && arrow.world.generateTree(arrow.location.clone().add(0.0, -1.0, 0.0), tree.defaultType)) {
             arrow.location.showGrowthParticle()
             return
         }

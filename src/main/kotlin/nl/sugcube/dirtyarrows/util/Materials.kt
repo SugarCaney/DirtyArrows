@@ -94,6 +94,7 @@ val Material.isShearable: Boolean
         Material.SPORE_BLOSSOM,
         Material.MANGROVE_LEAVES,
         Material.VINE -> true
+
         else -> false
     }
 
@@ -110,6 +111,7 @@ fun Material.isLog(): Boolean = when (this) {
     Material.CRIMSON_STEM,
     Material.WARPED_STEM,
     Material.MANGROVE_LOG -> true
+
     else -> false
 }
 
@@ -133,6 +135,29 @@ fun Material.plankOfLog(): Material = when (this) {
  * Checks if this block is a log.
  */
 fun Block.isLog() = type.isLog()
+
+/**
+ * Checks if this material is a type of dirt.
+ */
+fun Material.isSoil(): Boolean = when (this) {
+    Material.DIRT,
+    Material.GRASS_BLOCK,
+    Material.PODZOL,
+    Material.MYCELIUM,
+    Material.COARSE_DIRT,
+    Material.ROOTED_DIRT,
+    Material.CRIMSON_NYLIUM,
+    Material.WARPED_NYLIUM,
+    Material.MOSS_BLOCK,
+    Material.MUD -> true
+
+    else -> false
+}
+
+/**
+ * Checks if this material is a type of dirt.
+ */
+fun Block.isSoil() = type.isSoil()
 
 /**
  * Get the items that should drop from this material, considering the fortune level.
@@ -163,6 +188,7 @@ fun Material.fortuneDropCount(level: Int = 0) = when (this) {
     Material.IRON_ORE, Material.DEEPSLATE_IRON_ORE,
     Material.GOLD_ORE, Material.DEEPSLATE_GOLD_ORE,
     Material.NETHER_QUARTZ_ORE -> oreFortuneCount(fortuneLevel = level, dropAmount = 1..1)
+
     Material.COPPER_ORE, Material.DEEPSLATE_COPPER_ORE -> oreFortuneCount(fortuneLevel = level, dropAmount = 2..5)
     Material.NETHER_GOLD_ORE -> oreFortuneCount(fortuneLevel = level, dropAmount = 2..6)
     Material.LAPIS_ORE, Material.DEEPSLATE_LAPIS_ORE -> oreFortuneCount(fortuneLevel = level, dropAmount = 4..9)
